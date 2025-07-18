@@ -297,7 +297,7 @@ body::after {
 
 .scroll-window {
   width: 80%;
-  max-width: 1000px;
+  max-width: 2000px;
   height:675px;
   margin: 20px auto;
   padding: 10px;
