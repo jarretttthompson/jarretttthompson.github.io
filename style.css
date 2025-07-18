@@ -175,6 +175,19 @@ body::after {
   animation: flickerLight 3s infinite;
 }
 
+@media (max-width: 768px){
+  .header-box{
+    max-height: 50px;
+    height:100%;
+  }
+}
+
+@media (max-width: 768px){
+  .header-box h1{
+    font-size: 4vw;
+  }
+}
+
 @keyframes flickerLight {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     opacity: 1;
@@ -420,3 +433,8 @@ color:#ffffff;
   }
 }
 
+/*    
+
+git add .
+git commit -m "describe update herer"
+git push
