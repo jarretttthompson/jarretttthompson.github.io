@@ -151,11 +151,11 @@ body::after {
 /* ========= TEXT BOXES ========= */
 .header-box{
     background: rgba(100, 52, 150, 0.8);  
-    padding: 3px;
+    padding: 1px;
     border-radius: 8px;
     max-width: 600px;
     text-align: center;
-    margin: 15px auto 16px auto;
+    margin: 10px auto 10px auto;
     font-family: Vulf Sans;
     font-weight: bolder;
     align-items: center;
@@ -224,17 +224,17 @@ body::after {
   }
 
   .header-box {
-    margin-top: 4px;
+    margin-top: 2px;
   }
 }
 
 
 .nav-boxes{
-    display: flex;           /* ✅ side by side */
+    display: flex;           /* side by side */
     align-items: flex-start; 
     justify-content: center;/* align tops */
     gap: 8px; 
-    margin: 8px auto;
+    margin: 4px auto;
 }
 
 .nav-boxes a {
@@ -265,7 +265,7 @@ body::after {
 .about-box{
     flex: 1;
     background: rgba(100, 52, 150, 0.8);
-    padding: 6px;
+    padding: 4px;
     border-radius: 8px;
     max-width: 600px;
     text-align: center;
@@ -298,7 +298,7 @@ body::after {
 .scroll-window {
   width: 80%;
   max-width: 2000px;
-  height:675px;
+  height:650px;
   margin: 20px auto;
   padding: 10px;
   overflow-y: scroll;      /* vertical scrollbar */
@@ -353,7 +353,7 @@ color:#ffffff;
 
 @media (max-width: 768px) {
 .scroll-window{
-  margin: 4px auto;
+  margin: 2px auto;
   width: 100%;
   max-width: 95%;
   height: 510px;
