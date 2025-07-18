@@ -299,7 +299,7 @@ body::after {
   width: 80%;
   max-width: 2000px;
   height:650px;
-  margin: 20px auto;
+  margin: 8px auto;
   padding: 10px;
   overflow-y: scroll;      /* vertical scrollbar */
   background: rgba(100, 52, 150, 0.8);
