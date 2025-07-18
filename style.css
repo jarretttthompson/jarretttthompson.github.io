@@ -54,7 +54,7 @@ html, body {
 body {
   position: relative;
   overflow: hidden;
-
+  padding-bottom: 50pxgit ;
   text-align: center;
   font-family: 'Vulf Mono', monospace;
   margin: 0px;
