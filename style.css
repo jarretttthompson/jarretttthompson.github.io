@@ -1,0 +1,422 @@
+/* ========= VARIABLES ========= */
+:root {
+  /* CRT Scanlines */
+  --crt-scanline-opacity: 0.4;   /* scanline brightness */
+  --crt-scanline-thickness: 2px;  /* line thickness */
+  --crt-scanline-spacing: 1px;    /* spacing between lines */
+
+  /* Flicker effect */
+  --crt-flicker-speed: .3s;
+  --crt-flicker-opacity-min: 4;
+  --crt-flicker-opacity-max: 15;
+
+  /* Vignette corners */
+  --crt-vignette-opacity: 1.2;
+  --crt-vignette-size: 60%;
+
+  /* Overall screen glow/color pop */
+  --crt-glow-contrast: 1.2;
+  --crt-glow-brightness: 1.3;
+  --crt-glow-saturation: 1.7;
+
+  /* Slight wobble distortion */
+  --crt-distort-strength: .4deg;
+  --crt-rotate-speed: 300s;   /* rotating background speed */
+}
+
+
+/* ========= FONT ========= */
+@font-face {
+  font-family: 'Vulf Mono';
+  src: url('fonts/VulfMono-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Vulf Sans';
+  src: url('fonts/VulfSans-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* ========= BASE BODY ========= */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+body {
+  position: relative;
+  overflow: hidden;
+
+  text-align: center;
+  font-family: 'Vulf Mono', monospace;
+  margin: 0px;
+  min-height: 100%;
+
+  filter: contrast(var(--crt-glow-contrast))
+          brightness(var(--crt-glow-brightness))
+          saturate(var(--crt-glow-saturation));
+
+  animation: crtWobble 9s ease-in-out infinite alternate;
+}
+
+
+/* ========= ROTATING BACKGROUND ========= */
+body {
+  background-color: black; 
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 75%;
+  width: 200%;
+  height: 300%;
+  background-image: url('images/background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+  animation: rotateBg var(--crt-rotate-speed) linear infinite;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    width: 300%;
+    height: 200%;
+  }
+}
+
+@keyframes rotateBg {
+  from {
+    transform: translate(-50%, -55%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+
+/* ========= CRT EFFECT OVERLAY ========= */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+
+  background: 
+    radial-gradient(circle, rgba(0,0,0,var(--crt-vignette-opacity)) 0%, transparent var(--crt-vignette-size)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,var(--crt-scanline-opacity)),
+      rgba(255,255,255,var(--crt-scanline-opacity)) var(--crt-scanline-thickness),
+      transparent var(--crt-scanline-thickness),
+      transparent calc(var(--crt-scanline-thickness) + var(--crt-scanline-spacing))
+    );
+
+  mix-blend-mode: screen;
+  animation: flicker var(--crt-flicker-speed) infinite;
+}
+
+
+
+
+@keyframes flicker {
+  0%   { opacity: var(--crt-flicker-opacity-min); }
+  50%  { opacity: var(--crt-flicker-opacity-max); }
+  100% { opacity: var(--crt-flicker-opacity-min); }
+}
+
+@keyframes crtWobble {
+  from { transform: rotate(-var(--crt-distort-strength)); }
+  to   { transform: rotate(var(--crt-distort-strength)); }
+}
+
+
+/* ========= TEXT BOXES ========= */
+.header-box{
+    background: rgba(100, 52, 150, 0.8);  
+    padding: 3px;
+    border-radius: 8px;
+    max-width: 600px;
+    text-align: center;
+    margin: 15px auto 16px auto;
+    font-family: Vulf Sans;
+    font-weight: bolder;
+    align-items: center;
+    color:#e06fea;
+     text-shadow:
+    -1px -1px 0 #000,  /* top left */
+     1px -1px 0 #000,  /* top right */
+    -3px  3px 0 #000,  /* bottom left */
+     0px  0px 0 #000;  /* bottom right */
+    outline: #000000;
+}
+
+.header-box h1 {
+  color:#e06fea;
+  text-align: center;
+  text-shadow: 0 0 8px #000000, 0 0 12px rgb(0, 0, 0), 0 0 16px rgb(255, 255, 255);
+  animation: flickerLight 3s infinite;
+}
+
+@keyframes flickerLight {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px #000000,
+      0 0 10px rgb(234, 7, 237),
+      0 0 15px rgb(130, 8, 8),
+      0 0 20px rgb(255, 0, 208);
+    transform: translate(0, 0);
+  }
+
+  20%, 24%, 55% {
+    opacity: 0.4;
+    text-shadow: none;
+    transform: translate(1px, -1px);
+  }
+
+  22%, 26%, 53% {
+    opacity: 0.1;
+    text-shadow: 0 0 2px rgb(0, 255, 26);
+    transform: translate(-1px, 1px);
+  }
+
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px rgb(211, 26, 26);
+  }
+}
+
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 0;
+  }
+
+  .header-box {
+    margin-top: 4px;
+  }
+}
+
+
+.nav-boxes{
+    display: flex;           /* ✅ side by side */
+    align-items: flex-start; 
+    justify-content: center;/* align tops */
+    gap: 8px; 
+    margin: 8px auto;
+}
+
+.nav-boxes a {
+  color: rgb(0, 247, 255);
+  text-decoration: none;
+  text-shadow: 0 0 5px rgb(255, 0, 208), 0 0 10px #0ff;
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+.nav-boxes a:hover {
+  color: rgb(255, 0, 217);
+  text-shadow: 0 0 8px #0ff, 0 0 16px #0ff, 0 0 24px #0ff;
+}
+
+
+.nav-box{
+    
+    flex: 1;                       /* ✅ equal width for each box */
+    max-width: 300px;              /* ✅ limit box width so it doesn't stretch too wide */
+    background: rgba(100, 52, 150, 0.8);
+    color: #fff;
+    padding: 2px;
+    border-radius: 20px;
+    text-align: center;  
+    font-size: larger;
+
+}
+
+.about-box{
+    flex: 1;
+    background: rgba(100, 52, 150, 0.8);
+    padding: 6px;
+    border-radius: 8px;
+    max-width: 600px;
+    text-align: center;
+    margin: 16px auto;
+    font-family: Vulf Mono;
+    font-weight: lighter;
+    align-items: center;
+}
+
+.about-box h2{
+    font-family: Vulf Sans;
+    font-weight: bolder;
+       color:#e06fea;
+      text-shadow:
+    -1px -1px 0 #000,  /* top left */
+     1px -1px 0 #000,  /* top right */
+    -3px  3px 0 #000,  /* bottom left */
+     0px  0px 0 #000;  /* bottom right */
+    outline: #000000;
+}
+
+
+.about-box p{
+    font-size: smaller;
+    color:#ffffff;
+
+}
+/* ========= SRCOLL WINDOWS ========= */
+
+.scroll-window {
+  width: 80%;
+  max-width: 1000px;
+  height:675px;
+  margin: 20px auto;
+  padding: 10px;
+  overflow-y: scroll;      /* vertical scrollbar */
+  background: rgba(100, 52, 150, 0.8);
+  border-radius: 8px;
+  color: rgb(193, 193, 193);
+  font-family: 'Vulf Mono', monospace;
+  font-size: small;
+  border: 1px solid #999;
+}
+
+.scroll-window h1{
+  font-size: large;
+  font-family: Vulf Sans;
+       color:#e06fea;
+      text-shadow:
+    -1px -1px 0 #000,  /* top left */
+     1px -1px 0 #000,  /* top right */
+    -3px  3px 0 #000,  /* bottom left */
+     0px  0px 0 #000;  /* bottom right */
+    outline: #000000;
+
+}
+
+.scroll-window p{
+  font-family: Vulf Sans;
+  font-size: medium;
+  text-align: left;
+   text-shadow:
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+.scroll-window p2{
+  text-align: left;
+}
+
+.job-title{
+  font-family: Vulf Sans;
+  font-size: large;
+text-align: left;
+color:#ffffff;
+ text-shadow:
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+
+}
+
+@media (max-width: 768px) {
+.scroll-window{
+  margin: 4px auto;
+  width: 100%;
+  max-width: 95%;
+  height: 460px;
+}
+}
+
+/* ========= EMBEDS ========= */
+.spotify-embed {
+  margin: 4px auto;
+  border-radius: 12px;
+  width: 100%;
+  height: 200px;
+}
+.spotify-embed {
+  margin: 2px 0; /* Controls spacing around iframes */
+}
+
+.youtube-embed{
+  width: 500px;
+  height:300px;
+}
+
+@media (max-width: 768px){
+  .youtube-embed{
+    width: 400px;
+    max-width: 100%;
+    height: 250px;
+
+  }
+}
+
+/* ========= SLIDESHOW ========= */
+.slideshow {
+  display: flex;              /* ✅ Make it a flex container */
+  justify-content: center;    /* ✅ Center its children horizontally */
+  align-items: center;        /* ✅ Center its children vertically */
+  width: 600px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin: 16px auto;         /* ✅ Center the slideshow itself horizontally */
+  border-radius: 20px;
+  position: relative;         /* ✅ Relative position for absolutely positioned slides inside */
+}
+
+.slideshow img {
+  width: 100%;   /* or 100% to fill the container */
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  border-radius: 8px;
+}
+
+
+.slideshow img.visible {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .slideshow {
+    width: 100%;         /* or a fixed size like 300px */
+    max-width: 100%;    /* prevent overflow */
+    aspect-ratio: 5/3;
+    border-radius: 0px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .header-box,
+  .nav-boxes,
+  .about-box,
+  .slideshow {
+    margin: 4px auto;   /* tighter spacing on mobile */
+  }
+}
+
