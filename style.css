@@ -229,13 +229,7 @@ body::after {
 }
 
 
-.nav-boxes{
-    display: flex;           /* side by side */
-    align-items: flex-start; 
-    justify-content: center;/* align tops */
-    gap: 8px; 
-    margin: 4px auto;
-}
+
 
 .nav-boxes a {
   color: rgb(0, 247, 255);
@@ -249,18 +243,28 @@ body::after {
 }
 
 
-.nav-box{
-    
-    flex: 1;                       /* ✅ equal width for each box */
-    max-width: 300px;              /* ✅ limit box width so it doesn't stretch too wide */
-    background: rgba(100, 52, 150, 0.8);
-    color: #fff;
-    padding: 2px;
-    border-radius: 20px;
-    text-align: center;  
-    font-size: larger;
 
+.nav-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
+
+.nav-box {
+  flex: 0 1 300px;           /* Don’t grow too much */
+  max-width: 300px;          /* Stay within size */
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background: rgba(100, 52, 150, 0.8);
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+
 
 .about-box{
     flex: 1;
@@ -293,6 +297,8 @@ body::after {
     color:#ffffff;
 
 }
+
+
 /* ========= SRCOLL WINDOWS ========= */
 
 
@@ -464,6 +470,8 @@ color:#ffffff;
   border-radius: 20px;
   object-fit: cover;
 }
+
+
 
 
 
