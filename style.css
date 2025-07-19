@@ -54,7 +54,7 @@ html, body {
 body {
   position: relative;
   overflow: hidden;
-  padding-bottom: 50pxgit ;
+  padding-bottom: 50px;
   text-align: center;
   font-family: 'Vulf Mono', monospace;
   margin: 0px;
@@ -361,6 +361,8 @@ color:#ffffff;
 }
 
 /* ========= EMBEDS ========= */
+
+
 .spotify-embed {
   margin: 4px auto;
   border-radius: 12px;
@@ -432,6 +434,35 @@ color:#ffffff;
     margin: 4px auto;   /* tighter spacing on mobile */
   }
 }
+
+.friend-boxes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  gap: 16px;
+  justify-content: center;
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+
+.friend-container {
+
+  border-radius: 20px;
+  text-align: center;
+  font-size: larger;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.friend-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+
 
 /*    
 
