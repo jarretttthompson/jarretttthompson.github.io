@@ -295,13 +295,15 @@ body::after {
 }
 /* ========= SRCOLL WINDOWS ========= */
 
+
+
 .scroll-window {
   width: 80%;
   max-width: 2000px;
-  height:650px;
+  max-height: 70vh;
   margin: 8px auto;
   padding: 10px;
-  overflow-y: scroll;      /* vertical scrollbar */
+  overflow-y: auto;      /* vertical scrollbar */
   background: rgba(100, 52, 150, 0.8);
   border-radius: 8px;
   color: rgb(193, 193, 193);
