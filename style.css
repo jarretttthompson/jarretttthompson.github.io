@@ -471,6 +471,135 @@ color:#ffffff;
   object-fit: cover;
 }
 
+/* ========= PHOTO ALBUM STYLES ========= */
+.photo-gallery {
+  columns: 3;
+  column-gap: 30px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .photo-gallery {
+    columns: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .photo-gallery {
+    columns: 1;
+  }
+}
+
+.framed-photo {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  break-inside: avoid;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.framed-photo:hover {
+  transform: scale(1.05) rotate(0deg) !important;
+}
+
+.framed-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Random variations for each photo */
+.framed-photo:nth-child(1) {
+  transform: scale(0.9) rotate(-2deg);
+}
+
+.framed-photo:nth-child(2) {
+  transform: scale(1.1) rotate(1deg);
+}
+
+.framed-photo:nth-child(3) {
+  transform: scale(0.85) rotate(3deg);
+}
+
+.framed-photo:nth-child(4) {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.framed-photo:nth-child(5) {
+  transform: scale(0.95) rotate(2deg);
+}
+
+.framed-photo:nth-child(6) {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+.framed-photo:nth-child(7) {
+  transform: scale(0.8) rotate(1deg);
+}
+
+.framed-photo:nth-child(8) {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.framed-photo:nth-child(9) {
+  transform: scale(0.92) rotate(2deg);
+}
+
+.framed-photo:nth-child(10) {
+  transform: scale(1.12) rotate(-1deg);
+}
+
+.framed-photo:nth-child(11) {
+  transform: scale(0.88) rotate(3deg);
+}
+
+.framed-photo:nth-child(12) {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.framed-photo:nth-child(13) {
+  transform: scale(0.94) rotate(1deg);
+}
+
+.framed-photo:nth-child(14) {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.framed-photo:nth-child(15) {
+  transform: scale(0.86) rotate(2deg);
+}
+
+/* Continue pattern for more photos */
+.framed-photo:nth-child(n+16) {
+  transform: scale(0.9) rotate(1deg);
+}
+
+/* Frame effect using actual frame.png image */
+.framed-photo::after {
+  content: '';
+  position: absolute;
+  /* FRAME PADDING: Adjust these values to change how far the frame extends around the photo */
+  top: -45px;        /* Increase this number (e.g. -20px) to extend frame more at top */
+  left: -30px;       /* Increase this number (e.g. -20px) to extend frame more at left */
+  right: -30px;      /* Increase this number (e.g. -20px) to extend frame more at right */
+  bottom: -45px;     /* Increase this number (e.g. -20px) to extend frame more at bottom */
+  background-image: url('images/frame.png');
+  /* FRAME SIZE: This should match the padding values above (32px = 16px + 16px) */
+  background-size: calc(100% + 32px) calc(100% + 32px);
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: none;
+  z-index: 1;
+  /* FRAME COLOR: Adjust these filter values to change the frame color */
+  /* sepia(100%) = converts to sepia tone, hue-rotate() = shifts color (try 0deg-360deg), */
+  /* saturate() = color intensity, brightness() = how bright/dark */
+  filter: sepia(100%) hue-rotate(320deg) saturate(300%) brightness(.7);
+}
+
 
 
 
