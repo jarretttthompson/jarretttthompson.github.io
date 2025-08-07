@@ -22,6 +22,14 @@
   /* Slight wobble distortion */
   --crt-distort-strength: .4deg;
   --crt-rotate-speed: 300s;   /* rotating background speed */
+
+  /* Frame overlay color settings */
+  --frame-overlay-color: magenta;    /* Change this to any color you want */
+  --frame-overlay-opacity: 0.6;      /* Adjust opacity (0.0 = invisible, 1.0 = fully opaque) */
+  
+  /* Metallic properties for frame overlay */
+  --metallic-shine-intensity: 0.4;   /* How shiny the metallic effect is (0.0 - 1.0) */
+  --metallic-gradient-angle: 45deg;  /* Angle of the metallic shine gradient */
 }
 
 
@@ -87,13 +95,6 @@ body::before {
   transform: translate(-50%, -50%);
   z-index: -2;
   animation: rotateBg var(--crt-rotate-speed) linear infinite;
-}
-
-@media (max-width: 768px) {
-  body::before {
-    width: 300%;
-    height: 200%;
-  }
 }
 
 @keyframes rotateBg {
@@ -175,19 +176,6 @@ body::after {
   animation: flickerLight 3s infinite;
 }
 
-@media (max-width: 768px){
-  .header-box{
-    max-height: 50px;
-    height:100%;
-  }
-}
-
-@media (max-width: 768px){
-  .header-box h1{
-    font-size: 4vw;
-  }
-}
-
 @keyframes flickerLight {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     opacity: 1;
@@ -214,17 +202,6 @@ body::after {
   50% {
     opacity: 0.8;
     text-shadow: 0 0 10px rgb(211, 26, 26);
-  }
-}
-
-
-@media (max-width: 768px) {
-  body {
-    padding-top: 0;
-  }
-
-  .header-box {
-    margin-top: 2px;
   }
 }
 
@@ -359,15 +336,6 @@ color:#ffffff;
 
 }
 
-@media (max-width: 768px) {
-.scroll-window{
-  margin: 2px auto;
-  width: 100%;
-  max-width: 95%;
-  height: 510px;
-}
-}
-
 /* ========= EMBEDS ========= */
 
 
@@ -385,15 +353,6 @@ color:#ffffff;
   border-radius: 10px;
   width: 500px;
   height:300px;
-}
-
-@media (max-width: 768px){
-  .youtube-embed{
-    width: 400px;
-    max-width: 100%;
-    height: 250px;
-
-  }
 }
 
 /* ========= SLIDESHOW ========= */
@@ -426,24 +385,6 @@ color:#ffffff;
   opacity: 1;
 }
 
-@media (max-width: 768px) {
-  .slideshow {
-    width: 100%;         /* or a fixed size like 300px */
-    max-width: 100%;    /* prevent overflow */
-    aspect-ratio: 5/3;
-    border-radius: 0px; 
-  }
-}
-
-@media (max-width: 768px) {
-  .header-box,
-  .nav-boxes,
-  .about-box,
-  .slideshow {
-    margin: 4px auto;   /* tighter spacing on mobile */
-  }
-}
-
 .friend-boxes {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
@@ -467,7 +408,7 @@ color:#ffffff;
   max-width: 100%;
   height: auto;
   max-height: 150px;
-  border-radius: 20px;
+  border-radius: 3px;
   object-fit: cover;
 }
 
@@ -479,18 +420,6 @@ color:#ffffff;
   margin-top: 20px;
 }
 
-@media (max-width: 1024px) {
-  .photo-gallery {
-    columns: 2;
-  }
-}
-
-@media (max-width: 600px) {
-  .photo-gallery {
-    columns: 1;
-  }
-}
-
 .framed-photo {
   position: relative;
   display: inline-block;
@@ -498,6 +427,7 @@ color:#ffffff;
   break-inside: avoid;
   transition: transform 0.3s ease;
   width: 100%;
+  overflow: hidden;
 }
 
 .framed-photo:hover {
@@ -510,98 +440,187 @@ color:#ffffff;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 4; /* Above the colored overlay so photos show on top */
+  /* Clip the photo to show only in the center area where the frame is transparent */
+  clip-path: inset(15% 15% 15% 15%);
 }
 
-/* Random variations for each photo */
-.framed-photo:nth-child(1) {
-  transform: scale(0.9) rotate(-2deg);
-}
-
-.framed-photo:nth-child(2) {
-  transform: scale(1.1) rotate(1deg);
-}
-
-.framed-photo:nth-child(3) {
-  transform: scale(0.85) rotate(3deg);
-}
-
-.framed-photo:nth-child(4) {
-  transform: scale(1.05) rotate(-1deg);
-}
-
-.framed-photo:nth-child(5) {
-  transform: scale(0.95) rotate(2deg);
-}
-
-.framed-photo:nth-child(6) {
-  transform: scale(1.15) rotate(-3deg);
-}
-
-.framed-photo:nth-child(7) {
-  transform: scale(0.8) rotate(1deg);
-}
-
-.framed-photo:nth-child(8) {
-  transform: scale(1.08) rotate(-2deg);
-}
-
-.framed-photo:nth-child(9) {
-  transform: scale(0.92) rotate(2deg);
-}
-
-.framed-photo:nth-child(10) {
-  transform: scale(1.12) rotate(-1deg);
-}
-
-.framed-photo:nth-child(11) {
-  transform: scale(0.88) rotate(3deg);
-}
-
-.framed-photo:nth-child(12) {
-  transform: scale(1.06) rotate(-2deg);
-}
-
-.framed-photo:nth-child(13) {
-  transform: scale(0.94) rotate(1deg);
-}
-
-.framed-photo:nth-child(14) {
-  transform: scale(1.1) rotate(-3deg);
-}
-
-.framed-photo:nth-child(15) {
-  transform: scale(0.86) rotate(2deg);
-}
-
-/* Continue pattern for more photos */
-.framed-photo:nth-child(n+16) {
-  transform: scale(0.9) rotate(1deg);
-}
-
-/* Frame effect using actual frame.png image */
-.framed-photo::after {
+/* Frame overlay showing the actual frame design */
+.framed-photo::before {
   content: '';
   position: absolute;
-  /* FRAME PADDING: Adjust these values to change how far the frame extends around the photo */
-  top: -45px;        /* Increase this number (e.g. -20px) to extend frame more at top */
-  left: -30px;       /* Increase this number (e.g. -20px) to extend frame more at left */
-  right: -30px;      /* Increase this number (e.g. -20px) to extend frame more at right */
-  bottom: -45px;     /* Increase this number (e.g. -20px) to extend frame more at bottom */
-  background-image: url('images/frame.png');
-  /* FRAME SIZE: This should match the padding values above (32px = 16px + 16px) */
-  background-size: calc(100% + 32px) calc(100% + 32px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/frame.jpeg');
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
   pointer-events: none;
-  z-index: 1;
-  /* FRAME COLOR: Adjust these filter values to change the frame color */
-  /* sepia(100%) = converts to sepia tone, hue-rotate() = shifts color (try 0deg-360deg), */
-  /* saturate() = color intensity, brightness() = how bright/dark */
-  filter: sepia(100%) hue-rotate(320deg) saturate(300%) brightness(.7);
+  z-index: 0; /* Behind the photo so frame doesn't cover the image */
 }
 
+/* Colored overlay on top of the frame */
+.framed-photo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Metallic shine gradient overlay */
+    linear-gradient(
+      var(--metallic-gradient-angle),
+      transparent 20%,
+      rgba(255, 255, 255, var(--metallic-shine-intensity)) 40%,
+      rgba(255, 255, 255, calc(var(--metallic-shine-intensity) * 0.6)) 45%,
+      rgba(255, 255, 255, calc(var(--metallic-shine-intensity) * 0.3)) 50%,
+      rgba(255, 255, 255, calc(var(--metallic-shine-intensity) * 0.6)) 55%,
+      rgba(255, 255, 255, var(--metallic-shine-intensity)) 60%,
+      transparent 80%
+    ),
+    /* Base color layer */
+    var(--frame-overlay-color);
+  opacity: var(--frame-overlay-opacity);
+  pointer-events: none;
+  z-index: 3; /* Above everything to overlay the color */
+  mix-blend-mode: multiply; /* Blends nicely with the frame underneath */
+  filter: 
+    contrast(1.2) 
+    brightness(1.1) 
+    saturate(1.3);
+  /* Subtle animation for living metallic effect */
+  animation: metallicShimmer 4s ease-in-out infinite alternate;
+}
+
+@keyframes metallicShimmer {
+  0% {
+    filter: 
+      contrast(1.2) 
+      brightness(1.1) 
+      saturate(1.3) 
+      hue-rotate(0deg);
+  }
+  100% {
+    filter: 
+      contrast(1.3) 
+      brightness(1.2) 
+      saturate(1.4) 
+      hue-rotate(5deg);
+  }
+}
+
+/* Automatic random variations for all photos using pseudo-random calculations */
+.framed-photo:nth-child(3n+1) {
+  transform: scale(calc(0.85 + (0.3 * var(--photo-variation, 0.5)))) rotate(calc(-3deg + (6deg * var(--photo-rotation, 0.5))));
+}
+
+.framed-photo:nth-child(3n+2) {
+  transform: scale(calc(0.9 + (0.25 * var(--photo-variation, 0.7)))) rotate(calc(-2deg + (4deg * var(--photo-rotation, 0.3))));
+}
+
+.framed-photo:nth-child(3n+3) {
+  transform: scale(calc(0.88 + (0.27 * var(--photo-variation, 0.6)))) rotate(calc(-1deg + (2deg * var(--photo-rotation, 0.8))));
+}
+
+/* More specific variations using prime number patterns for better randomness */
+.framed-photo:nth-child(5n+1) { --photo-variation: 0.2; --photo-rotation: 0.8; }
+.framed-photo:nth-child(5n+2) { --photo-variation: 0.9; --photo-rotation: 0.1; }
+.framed-photo:nth-child(5n+3) { --photo-variation: 0.6; --photo-rotation: 0.9; }
+.framed-photo:nth-child(5n+4) { --photo-variation: 0.3; --photo-rotation: 0.4; }
+.framed-photo:nth-child(5n+5) { --photo-variation: 0.8; --photo-rotation: 0.7; }
+
+.framed-photo:nth-child(7n+1) { --photo-variation: 0.4; --photo-rotation: 0.2; }
+.framed-photo:nth-child(7n+2) { --photo-variation: 0.7; --photo-rotation: 0.8; }
+.framed-photo:nth-child(7n+3) { --photo-variation: 0.1; --photo-rotation: 0.5; }
+.framed-photo:nth-child(7n+4) { --photo-variation: 0.9; --photo-rotation: 0.3; }
+.framed-photo:nth-child(7n+5) { --photo-variation: 0.5; --photo-rotation: 0.9; }
+.framed-photo:nth-child(7n+6) { --photo-variation: 0.2; --photo-rotation: 0.1; }
+.framed-photo:nth-child(7n+7) { --photo-variation: 0.8; --photo-rotation: 0.6; }
+
+/* Photos now use frame.jpeg with masking effect */
 
 
+
+
+
+/* ========= MOBILE STYLES ========= */
+@media (max-width: 768px) {
+  /* Body adjustments */
+  body {
+    padding-top: 0;
+  }
+
+  /* Header box mobile */
+  .header-box {
+    max-width: 95%;
+    padding: 8px;
+    margin: 5px auto 2px auto;
+  }
+  
+  .header-box h1 {
+    font-size: 6vw;
+    margin: 8px 0;
+  }
+
+  /* Navigation mobile */
+  .nav-boxes {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 10px;
+    margin: 4px auto;
+  }
+  
+  .nav-box {
+    max-width: 95%;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* Content sections mobile */
+  .about-box,
+  .slideshow {
+    margin: 4px auto;
+  }
+
+  /* Scroll windows mobile */
+  .scroll-window {
+    margin: 2px auto;
+    width: 100%;
+    max-width: 95%;
+    height: 510px;
+  }
+
+  /* YouTube embeds mobile */
+  .youtube-embed {
+    width: 400px;
+    max-width: 100%;
+    height: 250px;
+  }
+
+  /* Slideshow mobile */
+  .slideshow {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 5/3;
+    border-radius: 0px;
+  }
+
+  /* Photo gallery mobile */
+  .photo-gallery {
+    columns: 1;
+  }
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .photo-gallery {
+    columns: 2;
+  }
+}
 
 
 /*    
