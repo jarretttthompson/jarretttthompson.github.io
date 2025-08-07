@@ -7,8 +7,37 @@
 
   /* Flicker effect */
   --crt-flicker-speed: .3s;
-  --crt-flicker-opacity-min: 4;
-  --crt-flicker-opacity-max: 15;
+  --crt-flicker-opac.nav-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: nowrap;  /* Force nav boxes to stay side-by-side */
+  overflow-x: auto;   /* Allow horizontal scrolling if needed */
+  padding: 0 10px;    /* Add some padding to prevent edge cutoff */
+}
+
+.nav-box {
+  flex: 0 0 auto;            /* Don't grow or shrink, maintain natural size */
+  min-width: 200px;          /* Minimum width to keep readable */
+  max-width: 300px;          /* Maximum width to prevent oversizing */
+  width: auto;               /* Let content determine width within min/max */
+  padding: 1rem;
+  font-size: 1rem;
+  background: rgba(100, 52, 150, 0.8);
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;       /* Prevent text wrapping within boxes */
+  /* ✨ Animated glowing border matching header text ✨ */
+  border: 2px solid #e06fea;
+  box-shadow: 
+      0 0 5px #000000,
+      0 0 10px rgb(234, 7, 237),
+      0 0 15px rgb(130, 8, 8),
+      0 0 20px rgb(255, 0, 208);
+  animation: flickerBorder 3s infinite;
+}rt-flicker-opacity-max: 15;
 
   /* Vignette corners */
   --crt-vignette-opacity: 1.2;
@@ -30,6 +59,61 @@
   /* Metallic properties for frame overlay */
   --metallic-shine-intensity: 0.4;   /* How shiny the metallic effect is (0.0 - 1.0) */
   --metallic-gradient-angle: 45deg;  /* Angle of the metallic shine gradient */
+  /* View toggle system */
+  --force-mobile-view: 0; /* 0 = auto responsive, 1 = force mobile view */
+}
+
+/* ========= VIEW TOGGLE BUTTON ========= */
+.view-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  background: rgba(100, 52, 150, 0.9);
+  color: rgb(0, 247, 255);
+  border: 2px solid rgba(224, 111, 234, 0.7);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Vulf Sans', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgb(255, 0, 208);
+}
+
+.view-toggle:hover {
+  background: rgba(150, 52, 200, 1);
+  box-shadow: 0 0 15px rgba(224, 111, 234, 0.6);
+  transform: scale(1.05);
+}
+
+/* Simple mobile view toggle - just scales things down */
+body.force-mobile .nav-boxes {
+  gap: 0.5rem !important;
+  padding: 5px !important;
+  overflow-x: auto !important;  /* Ensure horizontal scroll on mobile toggle */
+}
+
+body.force-mobile .nav-box {
+  min-width: 150px !important;  /* Smaller minimum width for mobile */
+  max-width: 250px !important;  /* Smaller maximum width for mobile */
+  padding: 0.8rem !important;
+  font-size: 0.85rem !important;
+  flex-shrink: 0 !important;    /* Prevent shrinking */
+}
+
+body.force-mobile .scroll-window {
+  width: 95% !important;
+  font-size: small !important;
+  
+  /* ✨ MOBILE TOGGLE BOTTOM MARGIN CONTROLS ✨ */
+  /* These control spacing when the mobile view toggle button is used */
+  height: 600px !important;              /* 🔄 FIXED HEIGHT: Simple 600px height for mobile toggle */
+  max-height: 600px !important;          /* 🔄 FIXED MAX HEIGHT: Simple 600px max height */
+  margin: 2px auto 30px auto !important; /* 🔄 EXTRA MARGIN: 30px additional space */
+  /* End of mobile toggle bottom margin controls */
+  
+  min-height: 200px !important;          /* Reduced minimum for mobile */
 }
 
 
@@ -154,19 +238,28 @@ body::after {
     background: rgba(100, 52, 150, 0.8);  
     padding: 1px;
     border-radius: 8px;
-    max-width: 600px;
+    max-width: calc(100% - 20px);  /* Match nav-boxes padding (10px each side) */
+    width: fit-content;            /* Shrink to content width */
     text-align: center;
     margin: 10px auto 10px auto;
     font-family: Vulf Sans;
     font-weight: bolder;
     align-items: center;
     color:#e06fea;
-     text-shadow:
+    text-shadow:
     -1px -1px 0 #000,  /* top left */
      1px -1px 0 #000,  /* top right */
     -3px  3px 0 #000,  /* bottom left */
      0px  0px 0 #000;  /* bottom right */
     outline: #000000;
+    /* ✨ Animated glowing border matching header text ✨ */
+    border: 2px solid #e06fea;
+    box-shadow: 
+        0 0 5px #000000,
+        0 0 10px rgb(234, 7, 237),
+        0 0 15px rgb(130, 8, 8),
+        0 0 20px rgb(255, 0, 208);
+    animation: flickerBorder 3s infinite;
 }
 
 .header-box h1 {
@@ -202,6 +295,33 @@ body::after {
   50% {
     opacity: 0.8;
     text-shadow: 0 0 10px rgb(211, 26, 26);
+  }
+}
+
+/* ✨ Matching border animation for boxes ✨ */
+@keyframes flickerBorder {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    border-color: #e06fea;
+    box-shadow: 
+      0 0 5px #000000,
+      0 0 10px rgb(234, 7, 237),
+      0 0 15px rgb(130, 8, 8),
+      0 0 20px rgb(255, 0, 208);
+  }
+
+  20%, 24%, 55% {
+    border-color: rgba(224, 111, 234, 0.4);
+    box-shadow: 0 0 2px rgba(224, 111, 234, 0.3);
+  }
+
+  22%, 26%, 53% {
+    border-color: rgba(224, 111, 234, 0.1);
+    box-shadow: 0 0 2px rgb(0, 255, 26);
+  }
+
+  50% {
+    border-color: rgba(224, 111, 234, 0.8);
+    box-shadow: 0 0 10px rgb(211, 26, 26);
   }
 }
 
@@ -283,16 +403,31 @@ body::after {
 .scroll-window {
   width: 80%;
   max-width: 2000px;
-  max-height: 70vh;
-  margin: 8px auto;
+  
+  /* ✨ DESKTOP BOTTOM MARGIN CONTROLS ✨ */
+  /* Change these values to adjust how far the scroll box sits from the bottom of the screen */
+  height: 700px;                     /* 📏 FIXED HEIGHT: Simple 300px height for testing */
+  max-height: 700px;                 /* 📏 FIXED MAX HEIGHT: Simple 300px max height */
+  margin: 8px auto 50px auto;        /* 📏 EXTRA MARGIN: 50px additional space from screen edge */
+  /* End of desktop bottom margin controls */
+  
+  min-height: 200px;             /* Reduced minimum height */
   padding: 10px;
-  overflow-y: auto;      /* vertical scrollbar */
+  overflow-y: auto;              /* vertical scrollbar */
   background: rgba(100, 52, 150, 0.8);
   border-radius: 8px;
   color: rgb(193, 193, 193);
   font-family: 'Vulf Mono', monospace;
   font-size: small;
-  border: 1px solid #999;
+  box-sizing: border-box;        /* Include padding in height calculation */
+  /* ✨ Animated glowing border matching header text ✨ */
+  border: 2px solid #e06fea;
+  box-shadow: 
+      0 0 5px #000000,
+      0 0 10px rgb(234, 7, 237),
+      0 0 15px rgb(130, 8, 8),
+      0 0 20px rgb(255, 0, 208);
+  animation: flickerBorder 3s infinite;
 }
 
 .scroll-window h1{
@@ -387,21 +522,52 @@ color:#ffffff;
 
 .friend-boxes {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  grid-template-columns: repeat(4, 1fr); /* Four equal-width columns on desktop */
   gap: 16px;
   justify-content: center;
   padding: 20px;
-  max-width: 700px;
+  max-width: 1000px; /* Increased max-width to accommodate 4 columns */
   margin: auto;
 }
 
-.friend-container {
+.friend-link {
+  text-decoration: none; /* Remove underline from links */
+  display: block; /* Make the entire container clickable */
+  transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+}
 
+.friend-link:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  opacity: 0.9;
+  filter: drop-shadow(0 0 15px rgba(224, 111, 234, 0.8)) brightness(1.1);
+}
+
+.friend-container {
   border-radius: 20px;
   text-align: center;
   font-size: larger;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: rgba(100, 52, 150, 0.8);
+  transition: box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.friend-link:hover .friend-container {
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.2),
+    0 0 20px rgba(224, 111, 234, 0.6),
+    inset 0 0 20px rgba(224, 111, 234, 0.1);
+  background: rgba(150, 52, 200, 0.9);
+  border: 2px solid rgba(224, 111, 234, 0.7);
+}
+
+.friend-name {
+  color: rgb(0, 247, 255);
+  text-shadow: 0 0 5px rgb(255, 0, 208), 0 0 10px #0ff;
+  font-family: 'Vulf Sans', sans-serif;
+  font-weight: bold;
+  margin-top: 8px;
 }
 
 .friend-image {
@@ -568,16 +734,21 @@ color:#ffffff;
 
   /* Navigation mobile */
   .nav-boxes {
-    flex-direction: column;
+    flex-direction: row;       /* Keep horizontal layout */
     gap: 0.5rem;
     padding: 0 10px;
     margin: 4px auto;
+    overflow-x: auto;          /* Allow horizontal scrolling */
+    flex-wrap: nowrap;         /* Ensure no wrapping on mobile */
   }
   
   .nav-box {
-    max-width: 95%;
+    flex: 0 0 auto;            /* Prevent shrinking/growing */
+    min-width: 120px;          /* Smaller minimum for mobile */
+    max-width: 200px;          /* Smaller maximum for mobile */
     padding: 0.8rem;
     font-size: 0.9rem;
+    white-space: nowrap;       /* Prevent text wrapping */
   }
 
   /* Content sections mobile */
@@ -588,10 +759,16 @@ color:#ffffff;
 
   /* Scroll windows mobile */
   .scroll-window {
-    margin: 2px auto;
+    /* ✨ MOBILE BOTTOM MARGIN CONTROLS ✨ */
+    /* Change these values to adjust how far the scroll box sits from the bottom on mobile */
+    height: 600px;                     /* 📱 FIXED HEIGHT: Simple 600px height for mobile */
+    max-height: 600px;                 /* 📱 FIXED MAX HEIGHT: Simple 600px max height */
+    margin: 2px auto 30px auto;        /* 📱 EXTRA MARGIN: 30px additional space from screen edge */
+    /* End of mobile bottom margin controls */
+    
     width: 100%;
     max-width: 95%;
-    height: 510px;
+    min-height: 600px;              /* Reduced minimum for mobile */
   }
 
   /* YouTube embeds mobile */
@@ -612,6 +789,23 @@ color:#ffffff;
   /* Photo gallery mobile */
   .photo-gallery {
     columns: 1;
+  }
+
+  /* Friend boxes mobile - 2 columns instead of 4 */
+  .friend-boxes {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 500px;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .friend-container {
+    padding: 8px;
+    font-size: medium;
+  }
+
+  .friend-image {
+    max-height: 120px;
   }
 }
 

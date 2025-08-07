@@ -18,6 +18,8 @@
 
 <body>
 
+<button class="view-toggle" id="viewToggle" onclick="toggleView()">📱 Mobile View</button>
+
 <div class="nav-boxes">
 
     <div class="nav-box box-left">
@@ -75,7 +77,22 @@
 
 <!-- index.html -->
 
-
+<script>
+function toggleView() {
+  const body = document.body;
+  const button = document.getElementById('viewToggle');
+  
+  if (body.classList.contains('force-mobile')) {
+    body.classList.remove('force-mobile');
+    button.textContent = '📱 Mobile View';
+    button.title = 'Switch to mobile layout';
+  } else {
+    body.classList.add('force-mobile');
+    button.textContent = '🖥️ Desktop View';
+    button.title = 'Switch to desktop layout';
+  }
+}
+</script>
 
 <script src="script.js"></script>
 
