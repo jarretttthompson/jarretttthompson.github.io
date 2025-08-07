@@ -1,5 +1,8 @@
 /* ========= VARIABLES ========= */
 :root {
+  /* Animation control - Adjust this to control border pulse frequency */
+  --pulse-frequency: 2s;          /* Lower = faster pulse, Higher = slower pulse */
+  
   /* CRT Scanlines */
   --crt-scanline-opacity: 0.4;   /* scanline brightness */
   --crt-scanline-thickness: 2px;  /* line thickness */
@@ -7,8 +10,34 @@
 
   /* Flicker effect */
   --crt-flicker-speed: .3s;
-  --crt-flicker-opac.nav-boxes {
-  display: flex;.nav-boxes {
+  
+  /* CRT effect variables */
+  --crt-flicker-opacity-min: 8;
+  --crt-flicker-opacity-max: 15;
+
+  /* Vignette corners */
+  --crt-vignette-opacity: 1.2;
+  --crt-vignette-size: 60%;
+
+  /* Overall screen glow/color pop */
+  --crt-glow-contrast: 1.2;
+  --crt-glow-brightness: 1.3;
+  --crt-glow-saturation: 1.7;
+
+  /* Slight wobble distortion */
+  --crt-distort-strength: 0.4deg;
+  --crt-rotate-speed: 300s;   /* rotating background speed */
+  
+  /* Frame overlay color settings */
+  --frame-overlay-color: magenta;    /* Change this to any color you want */
+  --frame-overlay-opacity: 0.6;      /* Adjust opacity (0.0 = invisible, 1.0 = fully opaque) */
+  
+  /* Metallic properties for frame overlay */
+  --metallic-shine-intensity: 0.4;   /* How shiny the metallic effect is (0.0 - 1.0) */
+  --metallic-gradient-angle: 45deg;  /* Angle of the metallic shine gradient */
+}
+
+.nav-boxes {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -19,7 +48,7 @@
   flex: 0 1 300px;           /* Don't grow too much */
   max-width: 300px;          /* Stay within size */
   width: 100%;
-  padding: 0.5rem;           /* Reduced from 1rem */
+  padding: 0.3rem;           /* Reduced from 0.5rem to 0.3rem for tighter edges */
   font-size: 1rem;
   background: rgba(100, 52, 150, 0.4);  /* More transparent background since links have their own boxes */
   color: #fff;
@@ -40,7 +69,7 @@
   min-width: 200px;          /* Minimum width to keep readable */
   max-width: 300px;          /* Maximum width to prevent oversizing */
   width: auto;               /* Let content determine width within min/max */
-  padding: 1rem;
+  padding: 0.3rem;           /* Reduced from 1rem to 0.3rem for tighter edges */
   font-size: 1rem;
   background: rgba(100, 52, 150, 0.8);
   color: #fff;
@@ -55,8 +84,34 @@
       0 0 10px rgb(234, 7, 237),
       0 0 15px rgb(130, 8, 8),
       0 0 20px rgb(255, 0, 208);
-  animation: flickerBorder 3s infinite;
-}crt-flicker-opacity-max: 15;
+  animation: flickerBorder var(--pulse-frequency) infinite;
+}
+
+/* CRT scanlines effect */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+:root {
+  /* Animation control */
+  --pulse-frequency: 2s;
+  
+  /* CRT effect variables */
+  --crt-flicker-opacity-min: 8;
+  --crt-flicker-opacity-max: 15;
 
   /* Vignette corners */
   --crt-vignette-opacity: 1.2;
@@ -70,6 +125,7 @@
   /* Slight wobble distortion */
   --crt-distort-strength: 0.4deg;
   --crt-rotate-speed: 300s;   /* rotating background speed */
+}
 
   /* Frame overlay color settings */
   --frame-overlay-color: magenta;    /* Change this to any color you want */
@@ -78,61 +134,6 @@
   /* Metallic properties for frame overlay */
   --metallic-shine-intensity: 0.4;   /* How shiny the metallic effect is (0.0 - 1.0) */
   --metallic-gradient-angle: 45deg;  /* Angle of the metallic shine gradient */
-  /* View toggle system */
-  --force-mobile-view: 0; /* 0 = auto responsive, 1 = force mobile view */
-}
-
-/* ========= VIEW TOGGLE BUTTON ========= */
-.view-toggle {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 10000;
-  background: rgba(100, 52, 150, 0.9);
-  color: rgb(0, 247, 255);
-  border: 2px solid rgba(224, 111, 234, 0.7);
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-family: 'Vulf Sans', sans-serif;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 5px rgb(255, 0, 208);
-}
-
-.view-toggle:hover {
-  background: rgba(150, 52, 200, 1);
-  box-shadow: 0 0 15px rgba(224, 111, 234, 0.6);
-  transform: scale(1.05);
-}
-
-/* Simple mobile view toggle - just scales things down */
-body.force-mobile .nav-boxes {
-  gap: 0.5rem !important;
-  padding: 5px !important;
-  overflow-x: auto !important;  /* Ensure horizontal scroll on mobile toggle */
-}
-
-body.force-mobile .nav-box {
-  min-width: 150px !important;  /* Smaller minimum width for mobile */
-  max-width: 250px !important;  /* Smaller maximum width for mobile */
-  padding: 0.8rem !important;
-  font-size: 0.85rem !important;
-  flex-shrink: 0 !important;    /* Prevent shrinking */
-}
-
-body.force-mobile .scroll-window {
-  width: 95% !important;
-  font-size: small !important;
-  
-  /* ✨ MOBILE TOGGLE BOTTOM MARGIN CONTROLS ✨ */
-  /* These control spacing when the mobile view toggle button is used */
-  height: 550px !important;              /* 🔄 FIXED HEIGHT: Simple 550px height for mobile toggle */
-  max-height: 550px !important;          /* 🔄 FIXED MAX HEIGHT: Simple 550px max height */
-  margin: 2px auto 30px auto !important; /* 🔄 EXTRA MARGIN: 30px additional space */
-  /* End of mobile toggle bottom margin controls */
-  
-  min-height: 200px !important;          /* Reduced minimum for mobile */
 }
 
 
@@ -260,7 +261,7 @@ body::after {
     max-width: calc(100% - 20px);  /* Match nav-boxes padding (10px each side) */
     width: fit-content;            /* Shrink to content width */
     text-align: center;
-    margin: 10px auto 10px auto;
+    margin: 25px auto 10px auto;       /* Increased top margin from 10px to 25px */
     font-family: Vulf Sans;
     font-weight: bolder;
     align-items: center;
@@ -278,7 +279,7 @@ body::after {
         0 0 10px rgb(234, 7, 237),
         0 0 15px rgb(130, 8, 8),
         0 0 20px rgb(255, 0, 208);
-    animation: flickerBorder 3s infinite;
+    animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 .header-box h1 {
@@ -286,6 +287,7 @@ body::after {
   text-align: center;
   text-shadow: 0 0 8px #000000, 0 0 12px rgb(0, 0, 0), 0 0 16px rgb(255, 255, 255);
   animation: flickerLight 3s infinite;
+  margin: 4px 0;  /* Reduced from browser default ~16px to 4px top/bottom */
 }
 
 @keyframes flickerLight {
@@ -317,9 +319,9 @@ body::after {
   }
 }
 
-/* ✨ Matching border animation for boxes ✨ */
+/* ✨ Smooth sine wave pulse for borders ✨ */
 @keyframes flickerBorder {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+  0% {
     border-color: #e06fea;
     box-shadow: 
       0 0 5px #000000,
@@ -328,19 +330,40 @@ body::after {
       0 0 20px rgb(255, 0, 208);
   }
 
-  20%, 24%, 55% {
-    border-color: rgba(224, 111, 234, 0.4);
-    box-shadow: 0 0 2px rgba(224, 111, 234, 0.3);
-  }
-
-  22%, 26%, 53% {
-    border-color: rgba(224, 111, 234, 0.1);
-    box-shadow: 0 0 2px rgb(0, 255, 26);
+  25% {
+    border-color: rgba(224, 111, 234, 0.9);
+    box-shadow: 
+      0 0 8px #000000,
+      0 0 16px rgb(234, 7, 237),
+      0 0 24px rgb(130, 8, 8),
+      0 0 32px rgb(255, 0, 208);
   }
 
   50% {
-    border-color: rgba(224, 111, 234, 0.8);
-    box-shadow: 0 0 10px rgb(211, 26, 26);
+    border-color: rgba(224, 111, 234, 0.7);
+    box-shadow: 
+      0 0 12px #000000,
+      0 0 24px rgb(234, 7, 237),
+      0 0 36px rgb(130, 8, 8),
+      0 0 48px rgb(255, 0, 208);
+  }
+
+  75% {
+    border-color: rgba(224, 111, 234, 0.9);
+    box-shadow: 
+      0 0 8px #000000,
+      0 0 16px rgb(234, 7, 237),
+      0 0 24px rgb(130, 8, 8),
+      0 0 32px rgb(255, 0, 208);
+  }
+
+  100% {
+    border-color: #e06fea;
+    box-shadow: 
+      0 0 5px #000000,
+      0 0 10px rgb(234, 7, 237),
+      0 0 15px rgb(130, 8, 8),
+      0 0 20px rgb(255, 0, 208);
   }
 }
 
@@ -356,7 +379,7 @@ body::after {
   /* Individual button styling for each nav link */
   display: inline-block;
   padding: 4px 8px;          /* Reduced from 8px 16px */
-  margin: 2px;               /* Reduced from 4px */
+  margin: 1px;               /* Reduced from 2px to 1px for tighter spacing */
   background: rgba(100, 52, 150, 0.8);
   border: 2px solid transparent;
   border-radius: 8px;        /* Reduced from 12px to match smaller size */
@@ -393,7 +416,7 @@ body::after {
   flex: 0 1 300px;           /* Don’t grow too much */
   max-width: 300px;          /* Stay within size */
   width: 100%;
-  padding: 1rem;
+  padding: 0.3rem;           /* Reduced from 1rem to 0.3rem for tighter edges */
   font-size: 1rem;
   background: rgba(100, 52, 150, 0.8);
   color: #fff;
@@ -468,7 +491,7 @@ body::after {
       0 0 10px rgb(234, 7, 237),
       0 0 15px rgb(130, 8, 8),
       0 0 20px rgb(255, 0, 208);
-  animation: flickerBorder 3s infinite;
+  animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 .scroll-window h1{
@@ -596,7 +619,7 @@ color:#ffffff;
       0 0 10px rgb(234, 7, 237),
       0 0 15px rgb(130, 8, 8),
       0 0 20px rgb(255, 0, 208);
-  animation: flickerBorder 3s infinite;
+  animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 .about-text-box {
@@ -619,7 +642,7 @@ color:#ffffff;
       0 0 10px rgb(234, 7, 237),
       0 0 15px rgb(130, 8, 8),
       0 0 20px rgb(255, 0, 208);
-  animation: flickerBorder 3s infinite;
+  animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 .about-text-box p {
@@ -912,13 +935,13 @@ color:#ffffff;
   /* Header box mobile */
   .header-box {
     max-width: 95%;
-    padding: 8px;
-    margin: 5px auto 2px auto;
+    padding: 1px 12px;         /* Match desktop ratios: 1px vertical, slightly less horizontal for mobile */
+    margin: 20px auto 8px auto; /* Scaled down from desktop 25px to 20px top margin */
   }
   
   .header-box h1 {
     font-size: 6vw;
-    margin: 8px 0;
+    margin: 3px 0;             /* Scaled down from desktop 4px to 3px */
   }
 
   /* Navigation mobile */
@@ -935,9 +958,55 @@ color:#ffffff;
     flex: 0 0 auto;            /* Prevent shrinking/growing */
     min-width: 120px;          /* Smaller minimum for mobile */
     max-width: 200px;          /* Smaller maximum for mobile */
-    padding: 0.8rem;
+    padding: 0.25rem;          /* Scaled down from desktop 0.3rem to 0.25rem */
     font-size: 0.9rem;
     white-space: nowrap;       /* Prevent text wrapping */
+  }
+
+  /* Content sections mobile - Force vertical stacking */
+  .content-container {
+    flex-direction: column;    /* Stack vertically instead of horizontally */
+    align-items: center;       /* Center everything */
+    gap: 15px;                 /* Slightly smaller gap for mobile */
+  }
+
+  .slideshow {
+    order: 1;                  /* Slideshow first */
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 5/3;
+    border-radius: 0px;
+  }
+
+  /* Create a horizontal container for bio and social links */
+  .mobile-bottom-container {
+    order: 2;                  /* Below slideshow */
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .about-text-box {
+    order: 2;                  /* Bio text second, below slideshow */
+    flex: 1;                   /* Equal width - 1 of 2 columns */
+    max-width: none;           /* Remove width restrictions for mobile */
+    min-width: 0;              /* Allow shrinking */
+    height: auto;              /* Let height be determined by content */
+    margin: 0;
+  }
+
+  .social-links-vertical {
+    order: 3;                  /* Social links third, next to bio */
+    flex: 1;                   /* Equal width - 1 of 2 columns */
+    height: auto;              /* Match bio height */
+    width: auto;               /* Let flex handle the width */
+  }
+
+  .social-links-vertical a {
+    padding: 8px 6px;          /* Smaller padding for mobile */
+    margin: 2px 0;             /* Tighter spacing */
+    font-size: 0.85rem;        /* Smaller text */
   }
 
   /* Content sections mobile */
@@ -965,14 +1034,6 @@ color:#ffffff;
     width: 400px;
     max-width: 100%;
     height: 250px;
-  }
-
-  /* Slideshow mobile */
-  .slideshow {
-    width: 100%;
-    max-width: 100%;
-    aspect-ratio: 5/3;
-    border-radius: 0px;
   }
 
   /* Photo gallery mobile */
