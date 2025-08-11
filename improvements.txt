@@ -1,0 +1,77 @@
+Key fixes (correctness)
+1. HTML structure: Move everything inside <body>. Your header div sits before <body>.  
+2. Extra closing tag: Remove the second </p> inside the right nav-box.  
+3. Semantics: Replace <p> wrapping nav links + <br> with <nav><ul><li>. Use <main>, <section>, <footer>.  
+4. Accessibility: Add alt="" to every <img>. Decorative images: alt="". Content images: meaningful text.  
+5. External links: Add rel="noopener noreferrer" to every target="_blank".  
+6. Inline style: Replace <p style="text-align:center;"> with a CSS class.  
+7. Duplicate CSS: You have multiple .nav-box and :root blocks; consolidate to one each.  
+8. Orphaned CSS tokens: Fix stray "} center;" and orphan variable lines.
+
+CSS consolidation
+9. Create a design tokens section: colors, spacings, radii, shadows, animation durations (already partly there). Use them everywhere (e.g. reuse one box-shadow via a variable).  
+10. Merge identical animation assignments (flickerBorder) into a utility class like .glow-pulse instead of repeating border + box-shadow each block.  
+11. Keyframes: Only one @keyframes flickerBorder and one for metallicShimmer; ensure no duplicates.  
+12. Remove unused / duplicated properties (re-declared --pulse-frequency, duplicate nav-box definitions).
+
+Performance
+13. Heavy animated box-shadows on many elements are expensive (layout + paint). Offload glow by:
+   - Using a ::before pseudo-element with a blurred background (filter: blur) and animating opacity.
+   - Reducing shadow layers or radii.
+   - Reduce animation duration or pause on user inactivity / prefers-reduced-motion.
+15. Large images: Serve appropriately sized versions (e.g. 600px wide for slideshow) + WebP/AVIF sources with <picture>.  
+16. Add loading="lazy" to non‑above‑the‑fold <img>.  
+17. Preload critical fonts (link rel="preload" as="font" type="font/otf" crossorigin) and add font-display: swap to @font-face.  
+18. Combine and compress images that are tiny decorative (sprites) if many.  
+19. Use prefers-reduced-motion media query to disable pulsing/rotation for accessibility.
+
+HTML cleanup pattern (example nav)
+<nav class="site-nav">
+  <ul>
+    <li><a href="index.html">home</a></li>
+    <li><a href="page2.html">cv</a></li>
+    <li><a href="page5.html">compositions</a></li>
+    <li><a href="friends.html" aria-current="page">friends</a></li>
+  </ul>
+</nav>
+
+Code reuse
+20. Extract nav into a shared snippet (Server Side Includes, PHP include, templating, or fetch + inject via JS) to avoid drift between pages.  
+21. Make a reusable .panel class for shared box styling; extend with modifier classes.  
+22. Replace <br> layout hacks with flex or grid gap.  
+23. Replace <p2> (invalid) with <p class="muted"> or similar.
+
+Animations
+24. Let --pulse-frequency drive only animation-duration; set animation-timing-function: linear and adjust keyframes for true sine feel (or use steps with filter).  
+25. Pause animations on hover for readability if desired (animation-play-state: paused).  
+26. Provide .no-anim class toggled by JS for visitors who opt out.
+
+Color & contrast
+27. Verify contrast for accessibility (WCAG AA). Light magenta on purple may be low—adjust luminance or add stronger text-shadow only if it improves contrast, not reduces.
+
+Structure & semantics
+28. Wrap main content: <main> … </main>.  
+29. Friend cards: Use <figure> with <figcaption> (name) for richer semantics.  
+30. Use heading hierarchy (h1 page title, h2 “Friends”, h3 friend names inside captions).
+
+Misc
+31. Remove commented git commands at bottom of CSS (keep a CONTRIBUTING.md).  
+32. Minify CSS for production (build step or simple minifier).  
+33. Add a favicon + meta description for SEO.  
+34. Set a coherent title pattern (e.g. "Jarrett Thompson – Friends").  
+35. Validate HTML (W3C validator) after structural fixes.
+
+Security
+36. Ensure no user input yet—when forms added, sanitize & use HTTPS only external embeds.
+
+Incremental implementation order (low risk to higher)
+A. Fix HTML structure + duplicates + alt tags.  
+B. Consolidate CSS variables and remove duplicate selectors.  
+C. Refactor nav to semantic list (no visual change).  
+D. Introduce utility classes (.glow-pulse, .panel).  
+E. Optimize images (resize, convert, lazy).  
+F. Performance tune animations & background.  
+G. Accessibility (reduced motion, contrast).  
+H. Add build/minification (optional).
+
+Need example refactors or want me to apply step A now? Just say.

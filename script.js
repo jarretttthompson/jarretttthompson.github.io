@@ -1,6 +1,25 @@
 // ---- Setup ----
 let slideImages = [];
 let currentIndex = 0;
+let idleTimer = null;
+const IDLE_TIMEOUT = 15000; // 15s then pause animations
+
+function setIdleWatchers() {
+  const body = document.body;
+  const resetIdle = () => {
+    body.classList.remove('no-anim');
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => body.classList.add('no-anim'), IDLE_TIMEOUT);
+  };
+  ['mousemove','keydown','touchstart','scroll','click'].forEach(evt =>
+    window.addEventListener(evt, resetIdle, { passive: true })
+  );
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) body.classList.add('no-anim');
+    else resetIdle();
+  });
+  resetIdle();
+}
 
 // Get slide image elements
 const slide1 = document.getElementById('slide1');
@@ -45,6 +64,7 @@ function showNextSlide() {
 
 function randomFlicker() {
   const h1 = document.getElementById('lightbulb');
+  if (!h1) return;
   const opacity = Math.random() > 0.9 ? 0.1 : 1;
   const blur = Math.floor(Math.random() * 15) + 5;
   const x = Math.floor(Math.random() * 3) - 1;
@@ -56,6 +76,9 @@ function randomFlicker() {
 }
 
 setInterval(randomFlicker, 120); // Every 120ms
+
+// start idle watchers
+setIdleWatchers();
 
 
 

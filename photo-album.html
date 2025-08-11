@@ -4,50 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>photo album</title>
+  <link rel="preload" href="fonts/VulfMono-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/VulfSans-Regular.otf" as="font" type="font/otf" crossorigin>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
-
-
-<div class="text-box header-box">
-     <h1>photo album</h1>
-</div>
-
-<div class="nav-boxes">
-
-    <div class="nav-box box-left">
-        <p> 
-            <a href="index.html">home</a>
-            <a href="page2.html">cv</a><br>
-
-
-            <a href="page5.html">compositions</a><br>
-            <a href="friends.html">friends</a>
-        </p>
-    </div>
-
-
-    <div class="nav-box box-right">
-
-   
-        <p>
-             <a href="photo-album.html">photo album</a><br>
-            <a href="music.html">music</a>
-            <a href="page3.html">artwork</a><br>
-            <a href="page4.html">playlists</a><br>
-
-
-
-
-
-        </p>
-        </p>
-
-    </div>
-</div>
 <body>
+  <header class="text-box header-box glow-pulse">
+     <h1>photo album</h1>
+  </header>
 
-<div class="scroll-window">
+  <nav class="nav-boxes" aria-label="Main navigation">
+    <div class="nav-box box-left glow-pulse">
+      <ul class="nav-list">
+        <li><a href="index.html">home</a></li>
+        <li><a href="page2.html">cv</a></li>
+        <li><a href="page5.html">compositions</a></li>
+        <li><a href="friends.html">friends</a></li>
+      </ul>
+    </div>
+    <div class="nav-box box-right glow-pulse">
+      <ul class="nav-list">
+        <li><a href="photo-album.html" aria-current="page">photo album</a></li>
+        <li><a href="music.html">music</a></li>
+        <li><a href="page3.html">artwork</a></li>
+        <li><a href="page4.html">playlists</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="scroll-window glow-pulse">
 
     <p> This page is like that one wall in your nana's house that's got all the pictures of you and your siblings/cousins except I don't have any kids or 
         grandkids and it's just random pictures that I took of my loved ones, my many animals, some trash on the ground, etc.
@@ -55,55 +41,54 @@
 
     <div class="photo-gallery">
         <div class="framed-photo">
-            <img src="images/justin1.jpg" alt="Artie">
+            <img src="images/justin1.jpg" alt="Justin" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/bri1.jpg" alt="Artie">
+            <img src="images/bri1.jpg" alt="Bri" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/statueINeedToFind.jpeg" alt="Bass face">
+            <img src="images/statueINeedToFind.jpeg" alt="Statue" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/finley1.jpg" alt="Cyril">
+            <img src="images/finley1.jpg" alt="Finley" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/recordHaul.jpg" alt="Cyril">
+            <img src="images/recordHaul.jpg" alt="Record haul" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/za.jpg" alt="Fran">
+            <img src="images/za.jpg" alt="Pizza" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/hipOhShow2.jpg" alt="Fran">
+            <img src="images/hipOhShow2.jpg" alt="Show" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/431.jpg" alt="Fran">
+            <img src="images/431.jpg" alt="431" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/dramaticJarrett2.jpg" >
+            <img src="images/dramaticJarrett2.jpg" alt="Jarrett" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/jarrettFranRyan.jpg" >
+            <img src="images/jarrettFranRyan.jpg" alt="Jarrett, Fran, and Ryan" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/briRam.jpg" >
+            <img src="images/briRam.jpg" alt="Bri and Ram" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/millie1.jpg" >
+            <img src="images/millie1.jpg" alt="Millie" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/leroy1.jpg" >
+            <img src="images/leroy1.jpg" alt="Leroy" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/nana1.JPG" >
+            <img src="images/nana1.JPG" alt="Nana" loading="lazy">
         </div>
         <div class="framed-photo">
-            <img src="images/guitarJarrett.jpg" >
+            <img src="images/guitarJarrett.jpg" alt="Guitar Jarrett" loading="lazy">
         </div>
         </div>
 
     </div>
-</div>
-
+  </div>
 
 
 
