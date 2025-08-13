@@ -1059,8 +1059,76 @@ color:#ffffff;
 .panel--pad-md { padding: var(--space-3); }
 .panel--pad-lg { padding: var(--space-5); }
 
-/*    
+/* ========= POSTER CAROUSEL (page3 Graphic Design) ========= */
+/* Default: 6 per view on large screens */
+.carousel-slide { flex: 0 0 calc(100% / 6); }
 
-git add .
-git commit -m "describe update herer"
-git push
+/* 5 per view on medium-large screens */
+@media (max-width: 1400px) {
+  .carousel-slide { flex-basis: calc(100% / 5); }
+}
+
+/* 4 per view */
+@media (max-width: 1100px) {
+  .carousel-slide { flex-basis: calc(100% / 4); }
+}
+
+/* 3 per view */
+@media (max-width: 900px) {
+  .carousel-slide { flex-basis: calc(100% / 3); }
+}
+
+/* 2 per view */
+@media (max-width: 600px) {
+  .carousel-slide { flex-basis: calc(100% / 2); }
+}
+
+/* 1 per view */
+@media (max-width: 400px) {
+  .carousel-slide { flex-basis: 100%; }
+}
+
+.carousel-viewport { position: relative; overflow: hidden; width: 100%; }
+.carousel-track {
+  display: flex;
+  gap: 0; /* remove spacing so edges touch */
+  align-items: stretch;
+  will-change: transform;
+  animation: posterAutoScroll var(--poster-duration, 30s) linear infinite;
+  animation-play-state: running !important; /* always scroll */
+}
+.carousel-slide {
+  flex: 0 0 calc(100% / 3); /* 3 visible */
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0; margin: 0; border: 0;
+  transition: none;
+}
+/* Edge-to-edge images */
+.carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;        /* no rounded corners */
+  box-shadow: none;        /* no shadow gutter */
+}
+/* Uniform size */
+.carousel-slide { transform: none !important; filter: none !important; }
+.carousel-slide.is-center { transform: none !important; filter: none !important; }
+
+/* Remove hover pause entirely (kept commented for reference) */
+/* .carousel-viewport:hover .carousel-track { animation-play-state: paused; } */
+
+@keyframes posterAutoScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--poster-loop, -50%)); }
+}
+
+@media (max-width: 768px) {
+  .carousel-slide { flex: 0 0 80%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track { animation: none !important; }
+}

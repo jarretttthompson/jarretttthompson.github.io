@@ -159,6 +159,54 @@ setIdleWatchers();
   });
 })();
 
+// ---- Poster portfolio carousel (page3) ----
+(function posterCarousel(){
+  const viewport = document.getElementById('posterViewport');
+  const track = document.getElementById('posterTrack');
+  if (!viewport || !track) return; // only on page3
+
+  // Load poster list (cache-busted)
+  fetch('posters.json?ts=' + Date.now())
+    .then(r => r.json())
+    .then(list => {
+      if (!Array.isArray(list) || list.length === 0) return;
+      // Create slides
+      list.forEach(name => {
+        const div = document.createElement('div');
+        div.className = 'carousel-slide';
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.alt = name.replace(/[-_]/g,' ').replace(/\.[a-zA-Z0-9]+$/, '');
+        img.src = `posterPortfolio/${name}`;
+        div.appendChild(img);
+        track.appendChild(div);
+      });
+
+      // Duplicate for seamless loop
+      track.querySelectorAll('.carousel-slide').forEach(slide => {
+        track.appendChild(slide.cloneNode(true));
+      });
+
+      // Compute loop distance and duration from slide width
+      function setDuration(){
+        const slides = track.querySelectorAll('.carousel-slide');
+        if (slides.length === 0) return;
+        const half = Math.floor(slides.length/2);
+        let width = 0;
+        for (let i=0; i<half; i++) width += slides[i].getBoundingClientRect().width + 16; // include gap
+        const pxPerSec = 60;
+        const dur = Math.max(15, Math.round(width / pxPerSec));
+        track.style.setProperty('--poster-loop', `-${width}px`);
+        track.style.setProperty('--poster-duration', `${dur}s`);
+      }
+
+      window.addEventListener('resize', setDuration);
+      window.addEventListener('load', setDuration);
+      setDuration();
+    })
+    .catch(()=>{});
+})();
+
 
 
 
