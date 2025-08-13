@@ -878,25 +878,8 @@ color:#ffffff;
 
 /* Photos now use frame.jpeg with masking effect */
 
-/* Vertical marquee conveyor (photo album) */
-.marquee-viewport { height: 80vh; overflow: hidden; position: relative; }
-/* Removed flex override to keep the existing column layout of .photo-gallery */
-.marquee-track { will-change: transform; animation: marquee-up var(--marquee-duration, 60s) linear infinite; }
-.marquee-viewport:hover .marquee-track { animation-play-state: paused; }
-@keyframes marquee-up {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none !important; }
-}
-
-/* Marquee speed controls */
-.marquee-controls { display:flex; align-items:center; gap: 10px; justify-content: flex-end; margin: 8px 0 12px; }
-.marquee-controls label { font-family: 'Vulf Sans', sans-serif; color: var(--color-text); font-size: 0.9rem; }
-.marquee-controls input[type="range"] { width: 220px; accent-color: var(--color-accent); }
-.marquee-controls .value { min-width: 3ch; text-align: right; color: var(--color-text); font-variant-numeric: tabular-nums; }
+/* Removed marquee styles for photo album now static */
+.marquee-viewport, .marquee-track { display: none !important; }
 
 /* ========= MOBILE STYLES ========= */
 @media (max-width: 768px) {
@@ -1059,76 +1042,57 @@ color:#ffffff;
 .panel--pad-md { padding: var(--space-3); }
 .panel--pad-lg { padding: var(--space-5); }
 
-/* ========= POSTER CAROUSEL (page3 Graphic Design) ========= */
-/* Default: 6 per view on large screens */
-.carousel-slide { flex: 0 0 calc(100% / 6); }
-
-/* 5 per view on medium-large screens */
-@media (max-width: 1400px) {
-  .carousel-slide { flex-basis: calc(100% / 5); }
-}
-
-/* 4 per view */
-@media (max-width: 1100px) {
-  .carousel-slide { flex-basis: calc(100% / 4); }
-}
-
-/* 3 per view */
-@media (max-width: 900px) {
-  .carousel-slide { flex-basis: calc(100% / 3); }
-}
-
-/* 2 per view */
-@media (max-width: 600px) {
-  .carousel-slide { flex-basis: calc(100% / 2); }
-}
-
-/* 1 per view */
-@media (max-width: 400px) {
-  .carousel-slide { flex-basis: 100%; }
-}
-
-.carousel-viewport { position: relative; overflow: hidden; width: 100%; }
-.carousel-track {
-  display: flex;
-  gap: 0; /* remove spacing so edges touch */
-  align-items: stretch;
-  will-change: transform;
-  animation: posterAutoScroll var(--poster-duration, 30s) linear infinite;
-  animation-play-state: running !important; /* always scroll */
-}
-.carousel-slide {
-  flex: 0 0 calc(100% / 3); /* 3 visible */
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  padding: 0; margin: 0; border: 0;
-  transition: none;
-}
-/* Edge-to-edge images */
-.carousel-slide img {
-  display: block;
+/* ========= POSTER RIBBON (two-row collage) ========= */
+.poster-ribbon {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(160px, 1fr);
+  gap: 0; /* edges touching */
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 0;        /* no rounded corners */
-  box-shadow: none;        /* no shadow gutter */
+  overflow-x: auto;
+  scrollbar-width: none;
 }
-/* Uniform size */
-.carousel-slide { transform: none !important; filter: none !important; }
-.carousel-slide.is-center { transform: none !important; filter: none !important; }
-
-/* Remove hover pause entirely (kept commented for reference) */
-/* .carousel-viewport:hover .carousel-track { animation-play-state: paused; } */
-
-@keyframes posterAutoScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(var(--poster-loop, -50%)); }
+.poster-ribbon::-webkit-scrollbar { display: none; }
+.poster-ribbon-item { position: relative; width: 100%; height: 100%; }
+.poster-ribbon-item img { display:block; width:100%; height:100%; object-fit:cover; }
+@media (max-width: 800px){
+  .poster-ribbon { grid-auto-columns: minmax(120px, 1fr); }
 }
 
-@media (max-width: 768px) {
-  .carousel-slide { flex: 0 0 80%; }
+/* Disable hover enlargement on photo album framed photos */
+body[data-page="photo-album"] .photo-gallery .framed-photo,
+body[data-page="photo-album"] .photo-gallery .framed-photo:hover,
+body[data-page="photo-album"] .photo-gallery .framed-photo:hover img {
+  transform: none !important;
+  clip-path: inset(15% 15% 15% 15%) !important; /* retain original mask */
+  box-shadow: none !important;
+  z-index: auto !important;
+  filter: none !important;
 }
-@media (prefers-reduced-motion: reduce) {
-  .carousel-track { animation: none !important; }
+
+/* Poster ribbon hover effect (scale & lift) */
+.poster-ribbon { position: relative; }
+.poster-ribbon-item { transition: transform .35s ease, box-shadow .35s ease; }
+.poster-ribbon-item:hover { 
+  transform: scale(1.35); 
+  z-index: 20; 
+  box-shadow: 0 8px 18px rgba(0,0,0,0.55), 0 0 10px rgba(224,111,234,0.5);
 }
+
+/* Poster ribbon hover refinement: show full image (no crop) */
+.poster-ribbon-item { overflow: visible; }
+.poster-ribbon-item img { transition: transform .35s ease, box-shadow .35s ease, filter .35s ease, object-fit .35s ease; }
+.poster-ribbon-item:hover { transform: none; } /* remove parent scale to avoid clipping logic */
+.poster-ribbon-item:hover img {
+  transform: scale(1.35);
+  object-fit: contain; /* show entire poster */
+  background: rgba(0,0,0,0.85); /* optional backdrop around differing aspect */
+  box-shadow: 0 10px 28px rgba(0,0,0,0.65), 0 0 14px rgba(224,111,234,0.55);
+  border-radius: var(--radius-sm);
+  z-index: 25;
+  position: relative;
+}
+
+/* Ensure scaled image can extend beyond grid cell */
+.poster-ribbon { overflow: visible; }
