@@ -876,10 +876,18 @@ color:#ffffff;
 .framed-photo:nth-child(7n+6) { --photo-variation: 0.2; --photo-rotation: 0.1; }
 .framed-photo:nth-child(7n+7) { --photo-variation: 0.8; --photo-rotation: 0.6; }
 
-/* Photos now use frame.jpeg with masking effect */
+/* REVERT: Remove previous photo-album specific hover/disable overrides to restore frames */
+body[data-page="photo-album"] .photo-gallery { /* revert to default overflow from global styles */ }
+/* Restore photo album frame behavior */
+body[data-page="photo-album"] .photo-gallery .framed-photo { position: relative; overflow: visible; }
+body[data-page="photo-album"] .photo-gallery .framed-photo img { clip-path: inset(15% 15% 15% 15%); z-index:4; }
+/* Ensure frame pseudo stays below image */
+body[data-page="photo-album"] .photo-gallery .framed-photo::before { z-index:3; }
+/* Remove any previous force resets */
+body[data-page="photo-album"] .photo-gallery .framed-photo:hover { transform: none; }
 
-/* Removed marquee styles for photo album now static */
-.marquee-viewport, .marquee-track { display: none !important; }
+/* Neutralize hover on framed photos for photo album page only */
+body[data-page="photo-album"] .framed-photo:hover { transform: none !important; }
 
 /* ========= MOBILE STYLES ========= */
 @media (max-width: 768px) {
@@ -1058,17 +1066,6 @@ color:#ffffff;
 .poster-ribbon-item img { display:block; width:100%; height:100%; object-fit:cover; }
 @media (max-width: 800px){
   .poster-ribbon { grid-auto-columns: minmax(120px, 1fr); }
-}
-
-/* Disable hover enlargement on photo album framed photos */
-body[data-page="photo-album"] .photo-gallery .framed-photo,
-body[data-page="photo-album"] .photo-gallery .framed-photo:hover,
-body[data-page="photo-album"] .photo-gallery .framed-photo:hover img {
-  transform: none !important;
-  clip-path: inset(15% 15% 15% 15%) !important; /* retain original mask */
-  box-shadow: none !important;
-  z-index: auto !important;
-  filter: none !important;
 }
 
 /* Poster ribbon hover effect (scale & lift) */
