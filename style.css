@@ -1029,6 +1029,12 @@ color:#ffffff;
   .friend-image {
     max-height: 120px;
   }
+
+  /* Disable colored overlay on mobile to prevent magenta tint */
+  .framed-photo::after {
+    opacity: 0 !important;
+    animation: none !important;
+  }
 }
 
 /* Tablet styles */
