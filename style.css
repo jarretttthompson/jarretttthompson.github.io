@@ -144,7 +144,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 4px; /* replaces <br> spacing */
 }
 .nav-list li a { display: inline-block; }
 
@@ -1024,6 +1024,18 @@ color:#ffffff;
 
 /* Helper class: disable animations programmatically */
 .no-anim *, .no-anim *::before, .no-anim *::after { animation: none !important; transition: none !important; }
+
+/* Reusable panel class */
+.panel {
+  background: var(--color-bg-panel);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+.panel--lg { border-radius: var(--radius-lg); }
+.panel--md { border-radius: var(--radius-md); }
+.panel--pad-sm { padding: var(--space-1); }
+.panel--pad-md { padding: var(--space-3); }
+.panel--pad-lg { padding: var(--space-5); }
 
 /*    
 

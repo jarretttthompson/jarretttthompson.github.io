@@ -1,3 +1,23 @@
+// ---- Shared nav injection ----
+(function injectNav(){
+  const container = document.querySelector('.nav-boxes');
+  if (!container) return;
+  fetch('partials/nav.html')
+    .then(r => r.text())
+    .then(html => {
+      container.outerHTML = html; // replace existing nav markup
+      const current = document.body.getAttribute('data-page');
+      if (current) {
+        document
+          .querySelectorAll(`nav a[data-page]`)
+          .forEach(a => {
+            if (a.dataset.page === current) a.setAttribute('aria-current','page');
+          });
+      }
+    })
+    .catch(()=>{});
+})();
+
 // ---- Setup ----
 let slideImages = [];
 let currentIndex = 0;
@@ -47,8 +67,9 @@ fetch('slides.json')  // ✅ updated to match root folder
 
 // ---- Swap slides ----
 function showNextSlide() {
-  const visibleSlide = slide1.classList.contains('visible') ? slide1 : slide2;
+  const visibleSlide = slide1?.classList.contains('visible') ? slide1 : slide2;
   const hiddenSlide = visibleSlide === slide1 ? slide2 : slide1;
+  if (!visibleSlide || !hiddenSlide) return;
 
   currentIndex = (currentIndex + 1) % slideImages.length;
   hiddenSlide.src = slideImages[currentIndex];
@@ -59,9 +80,7 @@ function showNextSlide() {
   }, 100);
 }
 
-
 // ---- flickering effect ----
-
 function randomFlicker() {
   const h1 = document.getElementById('lightbulb');
   if (!h1) return;
