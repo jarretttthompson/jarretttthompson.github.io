@@ -878,9 +878,25 @@ color:#ffffff;
 
 /* Photos now use frame.jpeg with masking effect */
 
+/* Vertical marquee conveyor (photo album) */
+.marquee-viewport { height: 80vh; overflow: hidden; position: relative; }
+/* Removed flex override to keep the existing column layout of .photo-gallery */
+.marquee-track { will-change: transform; animation: marquee-up var(--marquee-duration, 60s) linear infinite; }
+.marquee-viewport:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-up {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
 
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+}
 
-
+/* Marquee speed controls */
+.marquee-controls { display:flex; align-items:center; gap: 10px; justify-content: flex-end; margin: 8px 0 12px; }
+.marquee-controls label { font-family: 'Vulf Sans', sans-serif; color: var(--color-text); font-size: 0.9rem; }
+.marquee-controls input[type="range"] { width: 220px; accent-color: var(--color-accent); }
+.marquee-controls .value { min-width: 3ch; text-align: right; color: var(--color-text); font-variant-numeric: tabular-nums; }
 
 /* ========= MOBILE STYLES ========= */
 @media (max-width: 768px) {
