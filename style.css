@@ -587,11 +587,27 @@ color:#ffffff;
 /* ========= SLIDESHOW ========= */
 .content-container {
   display: flex;
-  gap: 20px;
+  gap: 60px;
   align-items: flex-start;
   justify-content: center;
   margin: 16px auto;
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.bio-weather-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  max-width: 350px;
+}
+
+.slideshow-social-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
 .slideshow {
@@ -606,9 +622,8 @@ color:#ffffff;
 }
 
 .about-text-box {
-  flex: 1;
+  width: 100%;
   max-width: 350px;
-  min-width: 280px;
   background: var(--color-bg-panel);
   padding: 15px;
   border-radius: var(--radius-md);
@@ -877,7 +892,7 @@ color:#ffffff;
 .framed-photo:nth-child(7n+7) { --photo-variation: 0.8; --photo-rotation: 0.6; }
 
 /* REVERT: Remove previous photo-album specific hover/disable overrides to restore frames */
-body[data-page="photo-album"] .photo-gallery { /* revert to default overflow from global styles */ }
+/* Removed empty ruleset for photo-gallery revert */
 /* Restore photo album frame behavior */
 body[data-page="photo-album"] .photo-gallery .framed-photo { position: relative; overflow: visible; }
 body[data-page="photo-album"] .photo-gallery .framed-photo img { clip-path: inset(15% 15% 15% 15%); z-index:4; }
@@ -888,6 +903,68 @@ body[data-page="photo-album"] .photo-gallery .framed-photo:hover { transform: no
 
 /* Neutralize hover on framed photos for photo album page only */
 body[data-page="photo-album"] .framed-photo:hover { transform: none !important; }
+
+/* ========= WEATHER WIDGET ========= */
+.weather-widget {
+  width: 100%;
+  max-width: 350px;
+  margin: 0;
+  padding: var(--space-3);
+  text-align: center;
+  font-family: 'Vulf Sans', sans-serif;
+  background: var(--color-bg-panel);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 8px rgba(224,111,234,0.35);
+  animation: flickerBorder var(--pulse-frequency) infinite;
+}
+
+.weather-widget:hover { animation-play-state: paused; }
+
+.weather-loading {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.weather-location {
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: var(--space-1);
+  text-shadow: 0 0 4px rgba(224,111,234,0.6);
+}
+
+.weather-temp {
+  color: var(--color-text);
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: var(--space-1) 0;
+  text-shadow: 0 0 6px rgba(255,255,255,0.4);
+  font-family: 'Vulf Mono', monospace;
+}
+
+.weather-desc {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-1);
+  text-transform: capitalize;
+}
+
+.weather-feels-like {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .weather-widget { 
+    width: 100%; 
+    max-width: 100%; 
+    font-size: 0.9rem; 
+  }
+  .weather-temp { font-size: 1.8rem; }
+}
 
 /* ========= MOBILE STYLES ========= */
 @media (max-width: 768px) {
@@ -933,37 +1010,34 @@ body[data-page="photo-album"] .framed-photo:hover { transform: none !important; 
     gap: 15px;                 /* Slightly smaller gap for mobile */
   }
 
+  .slideshow-social-container {
+    order: 1;                  /* Slideshow container first */
+    width: 100%;
+  }
+
+  .bio-weather-container {
+    order: 2;                  /* Bio and weather container second */
+    width: 100%;
+    max-width: 100%;
+  }
+
   .slideshow {
-    order: 1;                  /* Slideshow first */
     width: 100%;
     max-width: 100%;
     aspect-ratio: 5/3;
     border-radius: 0px;
   }
 
-  /* Create a horizontal container for bio and social links */
-  .mobile-bottom-container {
-    order: 2;                  /* Below slideshow */
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    align-items: flex-start;
-  }
-
   .about-text-box {
-    order: 2;                  /* Bio text second, below slideshow */
-    flex: 1;                   /* Equal width - 1 of 2 columns */
-    max-width: none;           /* Remove width restrictions for mobile */
-    min-width: 0;              /* Allow shrinking */
+    width: 100%;               /* Full width on mobile */
+    max-width: 100%;           /* Remove width restrictions for mobile */
     height: auto;              /* Let height be determined by content */
     margin: 0;
   }
 
   .social-links-vertical {
-    order: 3;                  /* Social links third, next to bio */
-    flex: 1;                   /* Equal width - 1 of 2 columns */
+    width: 100%;               /* Full width on mobile */
     height: auto;              /* Match bio height */
-    width: auto;               /* Let flex handle the width */
   }
 
   .social-links-vertical a {

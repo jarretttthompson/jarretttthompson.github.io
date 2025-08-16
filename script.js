@@ -99,6 +99,46 @@ setInterval(randomFlicker, 120); // Every 120ms
 // start idle watchers
 setIdleWatchers();
 
+// ---- Weather Widget ----
+(function weatherWidget(){
+  const widget = document.getElementById('weatherWidget');
+  if (!widget) return; // only on index
+  
+  async function fetchWeather() {
+    const loading = widget.querySelector('.weather-loading');
+    const content = widget.querySelector('.weather-content');
+    
+    try {
+      // Using free wttr.in service - no API key needed
+      const response = await fetch('https://wttr.in/Statesboro,GA?format=j1');
+      const data = await response.json();
+      
+      if (data.current_condition && data.current_condition.length > 0) {
+        const current = data.current_condition[0];
+        const tempF = current.temp_F;
+        const feelsLikeF = current.FeelsLikeF;
+        const desc = current.weatherDesc[0].value;
+        
+        widget.querySelector('.weather-location').textContent = 'Statesboro, GA';
+        widget.querySelector('.weather-temp').textContent = tempF + '°F';
+        widget.querySelector('.weather-desc').textContent = desc.toLowerCase();
+        widget.querySelector('.weather-feels-like').textContent = `Feels like ${feelsLikeF}°F`;
+        
+        loading.style.display = 'none';
+        content.style.display = 'block';
+      } else {
+        loading.textContent = 'Weather unavailable';
+      }
+    } catch (error) {
+      loading.textContent = 'Weather offline';
+    }
+  }
+  
+  fetchWeather();
+  // Refresh every 15 minutes
+  setInterval(fetchWeather, 900000);
+})();
+
 // ---- Poster portfolio ribbon (page3) ----
 (function posterRibbon(){
   const ribbon = document.getElementById('posterRibbon');
