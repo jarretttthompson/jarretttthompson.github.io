@@ -18,7 +18,7 @@
     <div class="nav-box box-left glow-pulse">
       <ul class="nav-list">
         <li><a href="index.html">home</a></li>
-        <li><a href="page2.html">cv</a></li>
+        <li><a href="page2.html">resume/cv</a></li>
         <li><a href="page5.html">compositions</a></li>
         <li><a href="friends.html">friends</a></li>
       </ul>
@@ -39,8 +39,22 @@
     <h1>Graphic Design</h1>
     <p> This is a collection of posters/artwork that I designed for Hip-Oh! or Space Gator using either Procreate or Adobe Fresco.
     </p>
-    <!-- Two-row ribbon collage -->
-    <div class="poster-ribbon" id="posterRibbon" aria-label="Poster collage"></div>
+    <section class="poster-gallery" aria-label="Featured poster designs">
+      <h2 class="visually-hidden">Poster showreel</h2>
+
+      <div class="poster-carousel poster-carousel--manual">
+        <button class="poster-carousel__control poster-carousel__control--prev" type="button" aria-label="Show previous posters">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="poster-carousel__viewport" data-carousel="manual">
+          <div class="poster-carousel__track" id="posterCarouselManual"></div>
+        </div>
+        <button class="poster-carousel__control poster-carousel__control--next" type="button" aria-label="Show next posters">
+          <span aria-hidden="true">›</span>
+        </button>
+        <div class="poster-carousel__dots" id="posterCarouselDots" aria-label="Select poster group"></div>
+      </div>
+    </section>
 
     <h1>Little Fish - Animated Music/Lyric Video</h1>
      <p>This was my first (and really, only successful) attempt at creating an animation of sorts. I spent weeks in Adobe After Effects attempting to make something that was far above what my computer skills were capable of at the time. <br>
@@ -53,4 +67,3 @@
   </div>
 </body>
 </html>
-

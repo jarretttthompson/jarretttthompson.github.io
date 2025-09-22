@@ -139,29 +139,113 @@ setIdleWatchers();
   setInterval(fetchWeather, 900000);
 })();
 
-// ---- Poster portfolio ribbon (page3) ----
-(function posterRibbon(){
-  const ribbon = document.getElementById('posterRibbon');
-  if (!ribbon) return;
+// ---- Poster carousels (page3) ----
+(function posterCarousels(){
+  const manualTrack = document.getElementById('posterCarouselManual');
+  if (!manualTrack) return;
+
+  const dotsContainer = document.getElementById('posterCarouselDots');
+  const manualViewport = manualTrack.closest('[data-carousel="manual"]');
+  const prevBtn = document.querySelector('.poster-carousel__control--prev');
+  const nextBtn = document.querySelector('.poster-carousel__control--next');
+
   fetch('posters.json?ts=' + Date.now())
     .then(r=>r.json())
     .then(list => {
       if(!Array.isArray(list) || list.length===0) return;
+
       list.forEach(name => {
-        const div = document.createElement('div');
-        div.className = 'poster-ribbon-item';
-        const img = document.createElement('img');
-        img.loading = 'lazy';
-        img.alt = name.replace(/[-_]/g,' ').replace(/\.[a-zA-Z0-9]+$/, '');
-        img.src = `posterPortfolio/${name}`;
-        div.appendChild(img);
-        ribbon.appendChild(div);
+        manualTrack.appendChild(createPosterCard(name));
+      });
+      initManualCarousel({
+        viewport: manualViewport,
+        track: manualTrack,
+        dotsContainer,
+        prevBtn,
+        nextBtn
       });
     })
     .catch(()=>{});
+
+  function createPosterCard(filename){
+    const card = document.createElement('div');
+    card.className = 'poster-card';
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.alt = filename.replace(/[-_]/g,' ').replace(/\.[a-zA-Z0-9]+$/, '');
+    img.src = `posterPortfolio/${filename}`;
+    card.appendChild(img);
+    return card;
+  }
+
+  function initManualCarousel({ viewport, track, dotsContainer, prevBtn, nextBtn }){
+    if (!viewport || !track) return;
+
+    const carouselRoot = viewport.closest('.poster-carousel--manual');
+    let gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0');
+
+    const getVisibleCount = () => {
+      const value = parseFloat(getComputedStyle(carouselRoot).getPropertyValue('--poster-cards-visible'));
+      return Number.isFinite(value) && value > 0 ? value : 1;
+    };
+
+    let visibleCount = getVisibleCount();
+    let pageCount = Math.max(1, Math.ceil(track.children.length / visibleCount));
+    let currentPage = 0;
+
+    function buildDots(){
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < pageCount; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'poster-carousel__dot';
+        dot.setAttribute('aria-label', `Go to poster group ${i + 1}`);
+        if (i === currentPage) dot.setAttribute('aria-current', 'true');
+        dot.addEventListener('click', () => goToPage(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateDots(){
+      if (!dotsContainer) return;
+      [...dotsContainer.children].forEach((dot, index) => {
+        if (index === currentPage) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    function goToPage(index){
+      if (!viewport) return;
+      currentPage = (index + pageCount) % pageCount;
+      const target = currentPage * viewport.clientWidth;
+      viewport.scrollTo({ left: target, behavior: 'smooth' });
+      updateDots();
+    }
+
+    prevBtn?.addEventListener('click', () => goToPage(currentPage - 1));
+    nextBtn?.addEventListener('click', () => goToPage(currentPage + 1));
+
+    let scrollTimeout;
+    viewport.addEventListener('scroll', () => {
+      if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+      scrollTimeout = requestAnimationFrame(() => {
+        const ratio = viewport.scrollLeft / viewport.clientWidth;
+        currentPage = Math.round(ratio);
+        updateDots();
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0');
+      visibleCount = getVisibleCount();
+      pageCount = Math.max(1, Math.ceil(track.children.length / visibleCount));
+      currentPage = Math.min(currentPage, pageCount - 1);
+      buildDots();
+      goToPage(currentPage);
+    });
+
+    buildDots();
+    goToPage(0);
+  }
 })();
-
-
-
-
-
