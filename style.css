@@ -121,6 +121,21 @@
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
+/* Prevent scroll conflicts - ensure only html element scrolls */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure smooth scrolling and prevent competing scrollbars */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent any nested elements from creating competing scrollbars */
+.crt-shell {
+  overflow: visible;
+}
+
 /* Primary nav-box style with glow */
 .nav-box {
   flex: 0 0 auto;
@@ -181,14 +196,14 @@ html, body {
 
 html {
   overflow-x: hidden;
+  height: 100%;
+  scroll-behavior: smooth; /* Smooth scrolling for better UX */
 }
-
-
 
 body {
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow-x: hidden; /* Only hide horizontal scrollbar */
+  overflow-y: auto; /* Allow vertical scrolling */
   padding-bottom: 50px;
   text-align: center;
   font-family: 'Vulf Mono', monospace;
@@ -467,7 +482,7 @@ html::after {
   max-height: none;
   margin: 8px auto 50px auto;
   padding: 10px;
-  overflow: hidden;
+  overflow: visible; /* Allow content to flow naturally */
   background: var(--color-bg-panel);
   border-radius: var(--radius-sm);
   color: rgb(193, 193, 193);
@@ -673,6 +688,9 @@ color:#ffffff;
   text-align: left;
   overflow-y: auto;
   max-height: clamp(280px, 60vh, 450px);
+  /* Ensure this scrollbar doesn't interfere with main page scroll */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(224, 111, 234, 0.5) transparent;
 }
 
 .about-text-box p {
