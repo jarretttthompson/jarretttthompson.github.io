@@ -10,7 +10,7 @@
 
   /* Flicker effect */
   --crt-flicker-speed: 10s;
-  --crt-flicker-opacity-min: 0.65;
+  --crt-flicker-opacity-min: 0.95;
   --crt-flicker-opacity-max: 0.85;
 
   /* Vignette corners */
@@ -23,7 +23,7 @@
   --crt-glow-saturation: 1.7;
 
   /* Slight wobble distortion */
-  --crt-distort-strength: 0.4deg;
+  --crt-distort-strength: 0.02deg;
   --crt-rotate-speed: 300s;   /* rotating background speed */
   
   /* Frame overlay color settings */
@@ -206,7 +206,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  animation: crtWobble 9s ease-in-out infinite;
+  animation: crtWobble 9s ease-in-out infinite alternate;
 }
 
 .no-anim .crt-shell {
