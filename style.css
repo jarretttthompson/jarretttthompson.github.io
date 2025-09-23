@@ -4,7 +4,7 @@
   --pulse-frequency: 2s;          /* Lower = faster pulse, Higher = slower pulse */
   
   /* CRT Scanlines */
-  --crt-scanline-opacity: 0.4;   /* scanline brightness */
+  --crt-scanline-opacity: 0.25;   /* scanline brightness */
   --crt-scanline-thickness: 2px;  /* line thickness */
   --crt-scanline-spacing: 1px;    /* spacing between lines */
 
@@ -75,6 +75,7 @@
 /* Utility: shared glowing border with pulse */
 .glow-pulse {
   position: relative;
+  will-change: transform; /* GPU acceleration hint */
 }
 .glow-pulse::before {
   content: "";
@@ -88,6 +89,7 @@
   pointer-events: none;
   z-index: -1;
   animation: glowOpacity var(--duration-pulse) ease-in-out infinite;
+  will-change: opacity; /* GPU acceleration for animation */
 }
 @keyframes glowOpacity {
   0%, 100% { opacity: 0.55; }
@@ -98,8 +100,7 @@
 .header-box,
 .scroll-window,
 .slideshow,
-.about-text-box,
-.nav-box {
+.about-text-box {
   border: 2px solid var(--color-accent);
   /* Replace heavy multi-layer shadows with offloaded glow */
   box-shadow: 0 0 8px rgba(224,111,234,0.35);
@@ -133,6 +134,9 @@
   text-align: center;
   box-sizing: border-box;
   white-space: nowrap;
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 8px rgba(224,111,234,0.35);
+  animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 /* Nav list semantics */
@@ -207,6 +211,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   animation: crtWobble 9s ease-in-out infinite alternate;
+  will-change: transform; /* GPU acceleration for smooth rotation */
 }
 
 .no-anim .crt-shell {
@@ -230,6 +235,7 @@ html::before {
   animation: rotateBg var(--crt-rotate-speed) linear infinite;
   filter: blur(5px);
   box-shadow: inset 0 0 180px 120px rgba(0, 0, 0, 0.85);
+  will-change: transform; /* GPU acceleration for smooth rotation */
 }
 
 @keyframes rotateBg {
@@ -321,6 +327,7 @@ html::after {
   text-shadow: 0 0 8px #000000, 0 0 12px rgb(0, 0, 0), 0 0 16px rgb(255, 255, 255);
   animation: flickerLight 3s infinite;
   margin: 4px 0;  /* Reduced from browser default ~16px to 4px top/bottom */
+  will-change: opacity, transform, text-shadow; /* GPU acceleration for flicker effects */
 }
 
 @keyframes flickerLight {
@@ -469,7 +476,8 @@ html::after {
   box-sizing: border-box;
 }
 
-.scroll-window h1{
+.scroll-window h1,
+.scroll-window h2{
   font-size: x-large;        /* Increased from large to x-large */
   font-family: Vulf Sans;
        color:#e06fea;
@@ -557,10 +565,12 @@ color:#ffffff;
   min-height: 0;
 }
 
+.social-links-vertical h1,
+.social-links-vertical h2,
 .social-links-vertical h3 {
   color: var(--color-accent);
   font-family: 'Vulf Sans', sans-serif;
-  font-size: medium;
+  font-size: 20px;
   margin: 0 0 10px 0;
   padding: 8px;
   text-align: center;
@@ -648,6 +658,7 @@ color:#ffffff;
   overflow: hidden;
   border-radius: var(--radius-lg);
   position: relative;
+  contain: layout style paint; /* CSS containment for better performance */
 }
 
 .about-text-box {
@@ -756,6 +767,7 @@ color:#ffffff;
   column-gap: 30px;
   padding: 20px;
   margin-top: 20px;
+  contain: layout style; /* CSS containment for better performance */
 }
 
 .framed-photo {
@@ -901,10 +913,7 @@ body[data-page="photo-album"] .framed-photo:hover { transform: none !important; 
   text-align: center;
   font-family: 'Vulf Sans', sans-serif;
   background: var(--color-bg-panel);
-  border: 2px solid var(--color-accent);
   border-radius: var(--radius-md);
-  box-shadow: 0 0 8px rgba(224,111,234,0.35);
-  animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 .weather-widget:hover { animation-play-state: paused; }

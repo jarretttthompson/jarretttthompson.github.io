@@ -91,10 +91,13 @@ function showNextSlide() {
   currentIndex = (currentIndex + 1) % slideImages.length;
   hiddenSlide.src = slideImages[currentIndex];
 
-  setTimeout(() => {
-    visibleSlide.classList.remove('visible');
-    hiddenSlide.classList.add('visible');
-  }, 100);
+  // Use requestAnimationFrame for smoother transitions
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      visibleSlide.classList.remove('visible');
+      hiddenSlide.classList.add('visible');
+    }, 100);
+  });
 }
 
 // ---- flickering effect ----
@@ -106,12 +109,23 @@ function randomFlicker() {
   const x = Math.floor(Math.random() * 3) - 1;
   const y = Math.floor(Math.random() * 3) - 1;
 
-  h1.style.opacity = opacity;
-  h1.style.transform = `translate(${x}px, ${y}px)`;
-  h1.style.textShadow = `0 0 ${blur}px #0ff, 0 0 ${blur * 2}px #fff`;
+  // Use requestAnimationFrame for smoother animations
+  requestAnimationFrame(() => {
+    h1.style.opacity = opacity;
+    h1.style.transform = `translate(${x}px, ${y}px)`;
+    h1.style.textShadow = `0 0 ${blur}px #0ff, 0 0 ${blur * 2}px #fff`;
+  });
 }
 
-setInterval(randomFlicker, 120); // Every 120ms
+// Use requestAnimationFrame for smoother flicker timing
+let flickerTimeout;
+function scheduleFlicker() {
+  flickerTimeout = setTimeout(() => {
+    randomFlicker();
+    scheduleFlicker();
+  }, 120);
+}
+scheduleFlicker();
 
 // start idle watchers
 setIdleWatchers();
