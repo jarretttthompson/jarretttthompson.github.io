@@ -281,6 +281,37 @@ setIdleWatchers();
   }
 })();
 
+// ---- Random Photo Order (photo-album) ----
+(function randomPhotoOrder(){
+  if (document.body.getAttribute('data-page') !== 'photo-album') return;
+  
+  const gallery = document.querySelector('.photo-gallery');
+  if (!gallery) return;
+  
+  // Get all photos
+  const photos = Array.from(gallery.querySelectorAll('.framed-photo'));
+  if (photos.length === 0) return;
+  
+  // Simple shuffle function
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  // Shuffle the photos
+  const shuffledPhotos = shuffleArray(photos);
+  
+  // Clear the gallery and re-append in new order
+  gallery.innerHTML = '';
+  shuffledPhotos.forEach(photo => {
+    gallery.appendChild(photo);
+  });
+})();
+
 // ---- Projects gallery (page4) ----
 (function projectsGallery(){
   if (document.body.getAttribute('data-page') !== 'page4') return;

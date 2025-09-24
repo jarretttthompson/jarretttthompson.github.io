@@ -28,10 +28,10 @@
   
   /* Frame overlay color settings */
   --frame-overlay-color: magenta;    /* Change this to any color you want */
-  --frame-overlay-opacity: 0.6;      /* Adjust opacity (0.0 = invisible, 1.0 = fully opaque) */
+  --frame-overlay-opacity: 0.3;      /* Adjust opacity (0.0 = invisible, 1.0 = fully opaque) */
   
   /* Metallic properties for frame overlay */
-  --metallic-shine-intensity: 0.4;   /* How shiny the metallic effect is (0.0 - 1.0) */
+  --metallic-shine-intensity: 0.2;   /* How shiny the metallic effect is (0.0 - 1.0) */
   --metallic-gradient-angle: 45deg;  /* Angle of the metallic shine gradient */
 
   /* ========= DESIGN TOKENS ========= */
@@ -788,6 +788,7 @@ color:#ffffff;
   contain: layout style; /* CSS containment for better performance */
 }
 
+
 .framed-photo {
   position: relative;
   display: inline-block;
@@ -854,7 +855,7 @@ color:#ffffff;
     var(--frame-overlay-color);
   opacity: var(--frame-overlay-opacity);
   pointer-events: none;
-  z-index: 3; /* Above everything to overlay the color */
+  z-index: 2; /* Above frame but below image */
   mix-blend-mode: multiply; /* Blends nicely with the frame underneath */
   filter: 
     contrast(1.2) 
@@ -913,7 +914,7 @@ color:#ffffff;
 /* Removed empty ruleset for photo-gallery revert */
 /* Restore photo album frame behavior */
 body[data-page="photo-album"] .photo-gallery .framed-photo { position: relative; overflow: visible; }
-body[data-page="photo-album"] .photo-gallery .framed-photo img { clip-path: inset(15% 15% 15% 15%); z-index:4; }
+body[data-page="photo-album"] .photo-gallery .framed-photo img { clip-path: inset(5% 5% 5% 5%); z-index:4; }
 /* Ensure frame pseudo stays below image */
 body[data-page="photo-album"] .photo-gallery .framed-photo::before { z-index:3; }
 /* Remove any previous force resets */
