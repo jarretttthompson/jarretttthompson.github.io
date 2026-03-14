@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>thejrummer</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- Preload critical images for better performance -->
-  <link rel="preload" as="image" href="slideshow/slide1.jpg">
-  <link rel="preload" as="image" href="images/background.png">
+  <link rel="preload" as="image" href="optimized/slideshow/slide2-desktop.webp" type="image/webp">
 </head>
 <body data-page="index">
   <header class="text-box header-box glow-pulse">
@@ -65,7 +63,7 @@
 
       <div class="slideshow-social-container">
         <div class="slideshow">
-            <img id="slide1" class="slide visible" src="slideshow/slide1.jpg" alt="Slide 1" loading="eager">
+            <img id="slide1" class="slide visible" src="" alt="Slide 1" loading="eager">
             <img id="slide2" class="slide" src="" alt="Slide 2" loading="lazy">
         </div>
 
@@ -80,6 +78,6 @@
     </div>
   </main>
 
-  <script src="script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

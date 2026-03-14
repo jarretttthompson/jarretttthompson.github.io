@@ -1,32 +1,25 @@
 #!/usr/bin/env python3
-"""
-Photo Album Updater Script
-Automatically adds new images from the images/ folder to the photo-album.html page.
+"""Photo Album Updater Script.
+
+Synchronizes `photo-album.json` with files found in `images/photo album/`.
 """
 
 import os
-import re
+import json
 from pathlib import Path
 
-def get_existing_images(html_file):
-    """Extract existing image sources from the photo album HTML."""
-    existing_images = set()
-    
+def load_existing_manifest(manifest_file):
+    """Load existing photo-album JSON items."""
     try:
-        with open(html_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-            
-        # Find all img src attributes in the photo gallery
-        pattern = r'<img src="images/photo album/([^"]+)"'
-        matches = re.findall(pattern, content)
-        existing_images = set(matches)
-        
+        with open(manifest_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                return data
     except FileNotFoundError:
-        print(f"Warning: {html_file} not found")
+        print(f"Warning: {manifest_file} not found, creating a new manifest")
     except Exception as e:
-        print(f"Error reading {html_file}: {e}")
-    
-    return existing_images
+        print(f"Error reading {manifest_file}: {e}")
+    return []
 
 def get_image_files(images_dir):
     """Get all image files from the images directory."""
@@ -46,80 +39,58 @@ def get_image_files(images_dir):
 
 def generate_alt_text(filename):
     """Generate alt text from filename."""
-    # Remove extension and replace common separators
     name = Path(filename).stem
-    name = re.sub(r'[_-]', ' ', name)
-    name = re.sub(r'\d+', '', name)  # Remove numbers
+    name = name.replace("_", " ").replace("-", " ")
     name = name.strip()
-    
-    # Capitalize first letter
+
     if name:
         name = name[0].upper() + name[1:]
-    
+
     return name or "Photo"
 
 def update_photo_album():
-    """Update the photo album with new images."""
-    # File paths
-    html_file = "photo-album.html"
+    """Update the photo album manifest with new images."""
+    manifest_file = "photo-album.json"
     images_dir = "images/photo album"
-    
+
     print("🖼️  Photo Album Updater")
     print("=" * 40)
-    
-    # Get existing and new images
-    existing_images = get_existing_images(html_file)
+
+    existing_items = load_existing_manifest(manifest_file)
+    existing_by_name = {
+        Path(item.get("src", "")).name: item
+        for item in existing_items
+        if isinstance(item, dict) and item.get("src")
+    }
+    existing_images = set(existing_by_name.keys())
+
     all_images = get_image_files(images_dir)
     new_images = [img for img in all_images if img not in existing_images]
-    
+
     print(f"📁 Images directory: {images_dir}")
-    print(f"📄 HTML file: {html_file}")
+    print(f"📄 Manifest file: {manifest_file}")
     print(f"🔍 Found {len(all_images)} total images")
     print(f"✅ {len(existing_images)} already in album")
     print(f"🆕 {len(new_images)} new images to add")
-    
-    if not new_images:
-        print("\n✨ No new images to add!")
-        return
-    
-    print(f"\n📋 New images to add:")
-    for img in new_images:
-        print(f"   • {img}")
-    
-    # Read current HTML
+
+    merged = []
+    for filename in all_images:
+        if filename in existing_by_name:
+            merged.append(existing_by_name[filename])
+        else:
+            merged.append({
+                "src": f"images/photo album/{filename}",
+                "alt": generate_alt_text(filename)
+            })
+
     try:
-        with open(html_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-    except Exception as e:
-        print(f"❌ Error reading {html_file}: {e}")
-        return
-    
-    # Find the insertion point (after the last existing photo)
-    insertion_point = content.rfind('<!-- original gallery items end -->')
-    
-    if insertion_point == -1:
-        print("❌ Could not find insertion point in HTML file")
-        return
-    
-    # Generate HTML for new photos
-    new_photos_html = ""
-    for img in new_images:
-        alt_text = generate_alt_text(img)
-        new_photos_html += f'      <div class="framed-photo">\n'
-        new_photos_html += f'          <img src="images/photo album/{img}" alt="{alt_text}" loading="lazy">\n'
-        new_photos_html += f'      </div>\n'
-    
-    # Insert new photos before the end comment
-    new_content = content[:insertion_point] + new_photos_html + "      " + content[insertion_point:]
-    
-    # Write updated HTML
-    try:
-        with open(html_file, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"\n✅ Successfully updated {html_file}")
+        with open(manifest_file, "w", encoding="utf-8") as f:
+            json.dump(merged, f, indent=2)
+            f.write("\n")
+        print(f"\n✅ Successfully updated {manifest_file}")
         print(f"➕ Added {len(new_images)} new photos to the album")
     except Exception as e:
-        print(f"❌ Error writing {html_file}: {e}")
+        print(f"❌ Error writing {manifest_file}: {e}")
 
 def main():
     """Main function."""

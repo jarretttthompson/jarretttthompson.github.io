@@ -1,0 +1,882 @@
+[
+  {
+    "name": "slide11.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide11-desktop.webp",
+      "fallback": "optimized/slideshow/slide11-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide11-mobile.webp",
+      "fallback": "optimized/slideshow/slide11-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide12.png",
+    "desktop": {
+      "webp": "optimized/slideshow/slide12-desktop.webp",
+      "fallback": "optimized/slideshow/slide12-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide12-mobile.webp",
+      "fallback": "optimized/slideshow/slide12-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide13.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide13-desktop.webp",
+      "fallback": "optimized/slideshow/slide13-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide13-mobile.webp",
+      "fallback": "optimized/slideshow/slide13-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide14.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide14-desktop.webp",
+      "fallback": "optimized/slideshow/slide14-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide14-mobile.webp",
+      "fallback": "optimized/slideshow/slide14-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide15.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide15-desktop.webp",
+      "fallback": "optimized/slideshow/slide15-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide15-mobile.webp",
+      "fallback": "optimized/slideshow/slide15-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide16.jpeg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide16-desktop.webp",
+      "fallback": "optimized/slideshow/slide16-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide16-mobile.webp",
+      "fallback": "optimized/slideshow/slide16-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide16.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide16-desktop.webp",
+      "fallback": "optimized/slideshow/slide16-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide16-mobile.webp",
+      "fallback": "optimized/slideshow/slide16-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide17.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide17-desktop.webp",
+      "fallback": "optimized/slideshow/slide17-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide17-mobile.webp",
+      "fallback": "optimized/slideshow/slide17-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide18.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide18-desktop.webp",
+      "fallback": "optimized/slideshow/slide18-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide18-mobile.webp",
+      "fallback": "optimized/slideshow/slide18-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide19.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide19-desktop.webp",
+      "fallback": "optimized/slideshow/slide19-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide19-mobile.webp",
+      "fallback": "optimized/slideshow/slide19-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide2.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide2-desktop.webp",
+      "fallback": "optimized/slideshow/slide2-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide2-mobile.webp",
+      "fallback": "optimized/slideshow/slide2-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide20.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide20-desktop.webp",
+      "fallback": "optimized/slideshow/slide20-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide20-mobile.webp",
+      "fallback": "optimized/slideshow/slide20-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide21.png",
+    "desktop": {
+      "webp": "optimized/slideshow/slide21-desktop.webp",
+      "fallback": "optimized/slideshow/slide21-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide21-mobile.webp",
+      "fallback": "optimized/slideshow/slide21-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide22.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide22-desktop.webp",
+      "fallback": "optimized/slideshow/slide22-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide22-mobile.webp",
+      "fallback": "optimized/slideshow/slide22-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide23.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide23-desktop.webp",
+      "fallback": "optimized/slideshow/slide23-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide23-mobile.webp",
+      "fallback": "optimized/slideshow/slide23-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide24.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide24-desktop.webp",
+      "fallback": "optimized/slideshow/slide24-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide24-mobile.webp",
+      "fallback": "optimized/slideshow/slide24-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide25.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide25-desktop.webp",
+      "fallback": "optimized/slideshow/slide25-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide25-mobile.webp",
+      "fallback": "optimized/slideshow/slide25-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide26.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide26-desktop.webp",
+      "fallback": "optimized/slideshow/slide26-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide26-mobile.webp",
+      "fallback": "optimized/slideshow/slide26-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide27.jpeg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide27-desktop.webp",
+      "fallback": "optimized/slideshow/slide27-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide27-mobile.webp",
+      "fallback": "optimized/slideshow/slide27-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide28.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide28-desktop.webp",
+      "fallback": "optimized/slideshow/slide28-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide28-mobile.webp",
+      "fallback": "optimized/slideshow/slide28-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide29.jpeg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide29-desktop.webp",
+      "fallback": "optimized/slideshow/slide29-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide29-mobile.webp",
+      "fallback": "optimized/slideshow/slide29-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide30.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide30-desktop.webp",
+      "fallback": "optimized/slideshow/slide30-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide30-mobile.webp",
+      "fallback": "optimized/slideshow/slide30-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide6.jpeg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide6-desktop.webp",
+      "fallback": "optimized/slideshow/slide6-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide6-mobile.webp",
+      "fallback": "optimized/slideshow/slide6-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide7.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide7-desktop.webp",
+      "fallback": "optimized/slideshow/slide7-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide7-mobile.webp",
+      "fallback": "optimized/slideshow/slide7-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide8.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide8-desktop.webp",
+      "fallback": "optimized/slideshow/slide8-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide8-mobile.webp",
+      "fallback": "optimized/slideshow/slide8-mobile.jpg"
+    }
+  },
+  {
+    "name": "slide9.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/slide9-desktop.webp",
+      "fallback": "optimized/slideshow/slide9-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/slide9-mobile.webp",
+      "fallback": "optimized/slideshow/slide9-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/150185918_135302328450918_3263072764452098043_n_17879234117142506.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/150185918_135302328450918_3263072764452098043_n_17879234117142506-desktop.webp",
+      "fallback": "optimized/slideshow/150185918_135302328450918_3263072764452098043_n_17879234117142506-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/150185918_135302328450918_3263072764452098043_n_17879234117142506-mobile.webp",
+      "fallback": "optimized/slideshow/150185918_135302328450918_3263072764452098043_n_17879234117142506-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/337187855_589254859812671_7209962560409493021_n_18212195584208009.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/337187855_589254859812671_7209962560409493021_n_18212195584208009-desktop.webp",
+      "fallback": "optimized/slideshow/337187855_589254859812671_7209962560409493021_n_18212195584208009-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/337187855_589254859812671_7209962560409493021_n_18212195584208009-mobile.webp",
+      "fallback": "optimized/slideshow/337187855_589254859812671_7209962560409493021_n_18212195584208009-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/431.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/431-desktop.webp",
+      "fallback": "optimized/slideshow/431-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/431-mobile.webp",
+      "fallback": "optimized/slideshow/431-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/464367237_18462699658030832_2682471997050053221_n_18471548149042399.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/464367237_18462699658030832_2682471997050053221_n_18471548149042399-desktop.webp",
+      "fallback": "optimized/slideshow/464367237_18462699658030832_2682471997050053221_n_18471548149042399-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/464367237_18462699658030832_2682471997050053221_n_18471548149042399-mobile.webp",
+      "fallback": "optimized/slideshow/464367237_18462699658030832_2682471997050053221_n_18471548149042399-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/464674011_1987323838452233_5217859038598876090_n_17947370966763420.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/464674011_1987323838452233_5217859038598876090_n_17947370966763420-desktop.webp",
+      "fallback": "optimized/slideshow/464674011_1987323838452233_5217859038598876090_n_17947370966763420-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/464674011_1987323838452233_5217859038598876090_n_17947370966763420-mobile.webp",
+      "fallback": "optimized/slideshow/464674011_1987323838452233_5217859038598876090_n_17947370966763420-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/468236486_1589399221970249_2082032115620254466_n_17938837427812906.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/468236486_1589399221970249_2082032115620254466_n_17938837427812906-desktop.webp",
+      "fallback": "optimized/slideshow/468236486_1589399221970249_2082032115620254466_n_17938837427812906-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/468236486_1589399221970249_2082032115620254466_n_17938837427812906-mobile.webp",
+      "fallback": "optimized/slideshow/468236486_1589399221970249_2082032115620254466_n_17938837427812906-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/468249415_1718834418908789_3791884855084274677_n_17991619439723371.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/468249415_1718834418908789_3791884855084274677_n_17991619439723371-desktop.webp",
+      "fallback": "optimized/slideshow/468249415_1718834418908789_3791884855084274677_n_17991619439723371-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/468249415_1718834418908789_3791884855084274677_n_17991619439723371-mobile.webp",
+      "fallback": "optimized/slideshow/468249415_1718834418908789_3791884855084274677_n_17991619439723371-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/468295293_625132063174538_7313151508601965150_n_18234497245304434.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/468295293_625132063174538_7313151508601965150_n_18234497245304434-desktop.webp",
+      "fallback": "optimized/slideshow/468295293_625132063174538_7313151508601965150_n_18234497245304434-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/468295293_625132063174538_7313151508601965150_n_18234497245304434-mobile.webp",
+      "fallback": "optimized/slideshow/468295293_625132063174538_7313151508601965150_n_18234497245304434-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/468343830_985027976976806_119882867404015954_n_18049176182082258.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/468343830_985027976976806_119882867404015954_n_18049176182082258-desktop.webp",
+      "fallback": "optimized/slideshow/468343830_985027976976806_119882867404015954_n_18049176182082258-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/468343830_985027976976806_119882867404015954_n_18049176182082258-mobile.webp",
+      "fallback": "optimized/slideshow/468343830_985027976976806_119882867404015954_n_18049176182082258-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/468421717_2050077025466251_3570311456751115769_n_17928866405859700.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/468421717_2050077025466251_3570311456751115769_n_17928866405859700-desktop.webp",
+      "fallback": "optimized/slideshow/468421717_2050077025466251_3570311456751115769_n_17928866405859700-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/468421717_2050077025466251_3570311456751115769_n_17928866405859700-mobile.webp",
+      "fallback": "optimized/slideshow/468421717_2050077025466251_3570311456751115769_n_17928866405859700-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/491449523_18499269598030832_9165198573385995041_n_18075198037867554.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/491449523_18499269598030832_9165198573385995041_n_18075198037867554-desktop.webp",
+      "fallback": "optimized/slideshow/491449523_18499269598030832_9165198573385995041_n_18075198037867554-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/491449523_18499269598030832_9165198573385995041_n_18075198037867554-mobile.webp",
+      "fallback": "optimized/slideshow/491449523_18499269598030832_9165198573385995041_n_18075198037867554-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/84632797_1033541030345216_5354888459683123281_n_17883068404498166.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/84632797_1033541030345216_5354888459683123281_n_17883068404498166-desktop.webp",
+      "fallback": "optimized/slideshow/84632797_1033541030345216_5354888459683123281_n_17883068404498166-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/84632797_1033541030345216_5354888459683123281_n_17883068404498166-mobile.webp",
+      "fallback": "optimized/slideshow/84632797_1033541030345216_5354888459683123281_n_17883068404498166-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/84691680_179273823488241_3890823956599191657_n_18124259854066927.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/84691680_179273823488241_3890823956599191657_n_18124259854066927-desktop.webp",
+      "fallback": "optimized/slideshow/84691680_179273823488241_3890823956599191657_n_18124259854066927-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/84691680_179273823488241_3890823956599191657_n_18124259854066927-mobile.webp",
+      "fallback": "optimized/slideshow/84691680_179273823488241_3890823956599191657_n_18124259854066927-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/88134990_644974156338287_2358342646169798240_n_17886440734489559.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/88134990_644974156338287_2358342646169798240_n_17886440734489559-desktop.webp",
+      "fallback": "optimized/slideshow/88134990_644974156338287_2358342646169798240_n_17886440734489559-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/88134990_644974156338287_2358342646169798240_n_17886440734489559-mobile.webp",
+      "fallback": "optimized/slideshow/88134990_644974156338287_2358342646169798240_n_17886440734489559-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/89960075_215106399688151_2901268830662731214_n_18134971687014498.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/89960075_215106399688151_2901268830662731214_n_18134971687014498-desktop.webp",
+      "fallback": "optimized/slideshow/89960075_215106399688151_2901268830662731214_n_18134971687014498-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/89960075_215106399688151_2901268830662731214_n_18134971687014498-mobile.webp",
+      "fallback": "optimized/slideshow/89960075_215106399688151_2901268830662731214_n_18134971687014498-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/90333839_416183185895275_4662454101193344480_n_17871650389623920.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/90333839_416183185895275_4662454101193344480_n_17871650389623920-desktop.webp",
+      "fallback": "optimized/slideshow/90333839_416183185895275_4662454101193344480_n_17871650389623920-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/90333839_416183185895275_4662454101193344480_n_17871650389623920-mobile.webp",
+      "fallback": "optimized/slideshow/90333839_416183185895275_4662454101193344480_n_17871650389623920-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/bri1.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/bri1-desktop.webp",
+      "fallback": "optimized/slideshow/bri1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/bri1-mobile.webp",
+      "fallback": "optimized/slideshow/bri1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/bri2.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/bri2-desktop.webp",
+      "fallback": "optimized/slideshow/bri2-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/bri2-mobile.webp",
+      "fallback": "optimized/slideshow/bri2-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/bri3.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/bri3-desktop.webp",
+      "fallback": "optimized/slideshow/bri3-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/bri3-mobile.webp",
+      "fallback": "optimized/slideshow/bri3-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/bri4.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/bri4-desktop.webp",
+      "fallback": "optimized/slideshow/bri4-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/bri4-mobile.webp",
+      "fallback": "optimized/slideshow/bri4-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/briRam.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/briRam-desktop.webp",
+      "fallback": "optimized/slideshow/briRam-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/briRam-mobile.webp",
+      "fallback": "optimized/slideshow/briRam-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/bugMode.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/bugMode-desktop.webp",
+      "fallback": "optimized/slideshow/bugMode-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/bugMode-mobile.webp",
+      "fallback": "optimized/slideshow/bugMode-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/carol1.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/carol1-desktop.webp",
+      "fallback": "optimized/slideshow/carol1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/carol1-mobile.webp",
+      "fallback": "optimized/slideshow/carol1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/daniel1.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/daniel1-desktop.webp",
+      "fallback": "optimized/slideshow/daniel1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/daniel1-mobile.webp",
+      "fallback": "optimized/slideshow/daniel1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/dramaticJarrett.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/dramaticJarrett-desktop.webp",
+      "fallback": "optimized/slideshow/dramaticJarrett-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/dramaticJarrett-mobile.webp",
+      "fallback": "optimized/slideshow/dramaticJarrett-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/dramaticJarrett2.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/dramaticJarrett2-desktop.webp",
+      "fallback": "optimized/slideshow/dramaticJarrett2-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/dramaticJarrett2-mobile.webp",
+      "fallback": "optimized/slideshow/dramaticJarrett2-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/electricJarrett.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/electricJarrett-desktop.webp",
+      "fallback": "optimized/slideshow/electricJarrett-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/electricJarrett-mobile.webp",
+      "fallback": "optimized/slideshow/electricJarrett-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/finley1.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/finley1-desktop.webp",
+      "fallback": "optimized/slideshow/finley1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/finley1-mobile.webp",
+      "fallback": "optimized/slideshow/finley1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/fredAndTerrence.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/fredAndTerrence-desktop.webp",
+      "fallback": "optimized/slideshow/fredAndTerrence-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/fredAndTerrence-mobile.webp",
+      "fallback": "optimized/slideshow/fredAndTerrence-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/ghostBustin.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/ghostBustin-desktop.webp",
+      "fallback": "optimized/slideshow/ghostBustin-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/ghostBustin-mobile.webp",
+      "fallback": "optimized/slideshow/ghostBustin-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/goldenEra.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/goldenEra-desktop.webp",
+      "fallback": "optimized/slideshow/goldenEra-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/goldenEra-mobile.webp",
+      "fallback": "optimized/slideshow/goldenEra-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/gradRecital.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/gradRecital-desktop.webp",
+      "fallback": "optimized/slideshow/gradRecital-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/gradRecital-mobile.webp",
+      "fallback": "optimized/slideshow/gradRecital-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/guitarJarrett.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/guitarJarrett-desktop.webp",
+      "fallback": "optimized/slideshow/guitarJarrett-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/guitarJarrett-mobile.webp",
+      "fallback": "optimized/slideshow/guitarJarrett-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/hipOhShow1.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/hipOhShow1-desktop.webp",
+      "fallback": "optimized/slideshow/hipOhShow1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/hipOhShow1-mobile.webp",
+      "fallback": "optimized/slideshow/hipOhShow1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/hipOhShow2.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/hipOhShow2-desktop.webp",
+      "fallback": "optimized/slideshow/hipOhShow2-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/hipOhShow2-mobile.webp",
+      "fallback": "optimized/slideshow/hipOhShow2-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/hugo1.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/hugo1-desktop.webp",
+      "fallback": "optimized/slideshow/hugo1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/hugo1-mobile.webp",
+      "fallback": "optimized/slideshow/hugo1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/install1.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/install1-desktop.webp",
+      "fallback": "optimized/slideshow/install1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/install1-mobile.webp",
+      "fallback": "optimized/slideshow/install1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/jarrettFranRyan.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/jarrettFranRyan-desktop.webp",
+      "fallback": "optimized/slideshow/jarrettFranRyan-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/jarrettFranRyan-mobile.webp",
+      "fallback": "optimized/slideshow/jarrettFranRyan-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/justin1.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/justin1-desktop.webp",
+      "fallback": "optimized/slideshow/justin1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/justin1-mobile.webp",
+      "fallback": "optimized/slideshow/justin1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/justin2.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/justin2-desktop.webp",
+      "fallback": "optimized/slideshow/justin2-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/justin2-mobile.webp",
+      "fallback": "optimized/slideshow/justin2-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/leroyPrime.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/leroyPrime-desktop.webp",
+      "fallback": "optimized/slideshow/leroyPrime-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/leroyPrime-mobile.webp",
+      "fallback": "optimized/slideshow/leroyPrime-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/meAndFran.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/meAndFran-desktop.webp",
+      "fallback": "optimized/slideshow/meAndFran-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/meAndFran-mobile.webp",
+      "fallback": "optimized/slideshow/meAndFran-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/millie1.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/millie1-desktop.webp",
+      "fallback": "optimized/slideshow/millie1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/millie1-mobile.webp",
+      "fallback": "optimized/slideshow/millie1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/nana1.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/nana1-desktop.webp",
+      "fallback": "optimized/slideshow/nana1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/nana1-mobile.webp",
+      "fallback": "optimized/slideshow/nana1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/peakDolans.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/peakDolans-desktop.webp",
+      "fallback": "optimized/slideshow/peakDolans-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/peakDolans-mobile.webp",
+      "fallback": "optimized/slideshow/peakDolans-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/recordHaul.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/recordHaul-desktop.webp",
+      "fallback": "optimized/slideshow/recordHaul-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/recordHaul-mobile.webp",
+      "fallback": "optimized/slideshow/recordHaul-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/samAndClara.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/samAndClara-desktop.webp",
+      "fallback": "optimized/slideshow/samAndClara-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/samAndClara-mobile.webp",
+      "fallback": "optimized/slideshow/samAndClara-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/sketch1.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/sketch1-desktop.webp",
+      "fallback": "optimized/slideshow/sketch1-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/sketch1-mobile.webp",
+      "fallback": "optimized/slideshow/sketch1-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/sloopAndCarol.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/sloopAndCarol-desktop.webp",
+      "fallback": "optimized/slideshow/sloopAndCarol-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/sloopAndCarol-mobile.webp",
+      "fallback": "optimized/slideshow/sloopAndCarol-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/spaceGator.JPEG",
+    "desktop": {
+      "webp": "optimized/slideshow/spaceGator-desktop.webp",
+      "fallback": "optimized/slideshow/spaceGator-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/spaceGator-mobile.webp",
+      "fallback": "optimized/slideshow/spaceGator-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/statueINeedToFind.jpeg",
+    "desktop": {
+      "webp": "optimized/slideshow/statueINeedToFind-desktop.webp",
+      "fallback": "optimized/slideshow/statueINeedToFind-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/statueINeedToFind-mobile.webp",
+      "fallback": "optimized/slideshow/statueINeedToFind-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/theLine.JPG",
+    "desktop": {
+      "webp": "optimized/slideshow/theLine-desktop.webp",
+      "fallback": "optimized/slideshow/theLine-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/theLine-mobile.webp",
+      "fallback": "optimized/slideshow/theLine-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/weddingPosse.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/weddingPosse-desktop.webp",
+      "fallback": "optimized/slideshow/weddingPosse-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/weddingPosse-mobile.webp",
+      "fallback": "optimized/slideshow/weddingPosse-mobile.jpg"
+    }
+  },
+  {
+    "name": "../images/photo album/za.jpg",
+    "desktop": {
+      "webp": "optimized/slideshow/za-desktop.webp",
+      "fallback": "optimized/slideshow/za-desktop.jpg"
+    },
+    "mobile": {
+      "webp": "optimized/slideshow/za-mobile.webp",
+      "fallback": "optimized/slideshow/za-mobile.jpg"
+    }
+  }
+]
