@@ -781,19 +781,28 @@ color:#ffffff;
 
 /* ========= PHOTO ALBUM STYLES ========= */
 .photo-gallery {
-  columns: 3;
-  column-gap: 30px;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  padding: 16px 0 0;
   margin-top: 20px;
-  contain: layout style; /* CSS containment for better performance */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.photo-gallery__loading {
+  font-family: 'Vulf Sans', sans-serif;
+  color: rgba(224, 111, 234, 0.9);
+  text-shadow: 0 0 6px rgba(0, 247, 255, 0.5);
 }
 
 
 .framed-photo {
   position: relative;
-  display: inline-block;
-  margin-bottom: 30px;
-  break-inside: avoid;
+  display: block;
+  margin-bottom: 0;
   transition: transform 0.3s ease;
   width: 100%;
   overflow: hidden;
@@ -813,6 +822,31 @@ color:#ffffff;
   z-index: 4; /* Above the colored overlay so photos show on top */
   /* Clip the photo to show only in the center area where the frame is transparent */
   clip-path: inset(15% 15% 15% 15%);
+  cursor: pointer;
+}
+
+.photo-caption {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 8%;
+  z-index: 5;
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.55);
+  font-family: 'Vulf Sans', sans-serif;
+  font-size: 0.82rem;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 4px rgba(0,0,0,0.9);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.framed-photo:hover .photo-caption {
+  opacity: 1;
 }
 
 /* Frame overlay showing the actual frame design */
@@ -910,18 +944,136 @@ color:#ffffff;
 .framed-photo:nth-child(7n+6) { --photo-variation: 0.2; --photo-rotation: 0.1; }
 .framed-photo:nth-child(7n+7) { --photo-variation: 0.8; --photo-rotation: 0.6; }
 
-/* REVERT: Remove previous photo-album specific hover/disable overrides to restore frames */
-/* Removed empty ruleset for photo-gallery revert */
-/* Restore photo album frame behavior */
 body[data-page="photo-album"] .photo-gallery .framed-photo { position: relative; overflow: visible; }
 body[data-page="photo-album"] .photo-gallery .framed-photo img { clip-path: inset(5% 5% 5% 5%); z-index:4; }
-/* Ensure frame pseudo stays below image */
 body[data-page="photo-album"] .photo-gallery .framed-photo::before { z-index:3; }
-/* Remove any previous force resets */
-body[data-page="photo-album"] .photo-gallery .framed-photo:hover { transform: none; }
+body[data-page="photo-album"] .photo-gallery .framed-photo:hover {
+  transform: none !important;
+  filter: drop-shadow(0 0 14px rgba(224, 111, 234, 0.55));
+}
+body[data-page="photo-album"] .scroll-window {
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  padding-left: 12px;
+  padding-right: 12px;
+  scrollbar-width: none;
+}
+body[data-page="photo-album"] .scroll-window::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 
-/* Neutralize hover on framed photos for photo album page only */
-body[data-page="photo-album"] .framed-photo:hover { transform: none !important; }
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+/* Keep disabled until we reintroduce modal safely */
+.photo-lightbox {
+  display: none !important;
+}
+
+.photo-lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.86);
+}
+
+html.lightbox-open::after {
+  opacity: 0 !important;
+}
+
+html.lightbox-open::before {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+body.lightbox-open {
+  filter: none !important;
+}
+
+.photo-lightbox__figure {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.photo-lightbox__figure img {
+  max-width: min(94vw, 1300px);
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.45);
+}
+
+.photo-lightbox__figure figcaption {
+  margin-top: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-family: 'Vulf Sans', sans-serif;
+  text-align: center;
+}
+
+.photo-lightbox__status {
+  margin-top: 12px;
+  margin-bottom: 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-family: 'Vulf Sans', sans-serif;
+}
+
+.photo-lightbox__close,
+.photo-lightbox__nav {
+  position: relative;
+  z-index: 2;
+  border: 2px solid rgba(224, 111, 234, 0.8);
+  background: rgba(100, 52, 150, 0.6);
+  color: rgb(0, 247, 255);
+  font-family: 'Vulf Sans', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+.photo-lightbox__close {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.photo-lightbox__nav {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  font-size: 2rem;
+  line-height: 1;
+}
 
 /* ========= WEATHER WIDGET ========= */
 .weather-widget {
@@ -1091,7 +1243,24 @@ body[data-page="photo-album"] .framed-photo:hover { transform: none !important; 
 
   /* Photo gallery mobile */
   .photo-gallery {
-    columns: 1;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .photo-caption {
+    opacity: 1;
+    font-size: 0.78rem;
+  }
+  .photo-lightbox {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px;
+  }
+  .photo-lightbox__nav {
+    display: none;
+  }
+  .photo-lightbox__figure img {
+    max-width: 94vw;
+    max-height: 74vh;
   }
 
   /* Friend boxes mobile - 2 columns instead of 4 */
@@ -1121,7 +1290,7 @@ body[data-page="photo-album"] .framed-photo:hover { transform: none !important; 
 /* Tablet styles */
 @media (max-width: 1024px) and (min-width: 769px) {
   .photo-gallery {
-    columns: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1351,4 +1520,120 @@ body[data-page="photo-album"] .framed-photo:hover { transform: none !important; 
   color: rgb(0, 247, 255);
   text-transform: lowercase;
   margin: 0;
+}
+
+/* ========= PHOTO ALBUM REDESIGN ========= */
+body.photo-album-page .album-main {
+  width: min(1400px, 96%);
+  margin: 8px auto 48px;
+}
+
+body.photo-album-page .album-wall {
+  background: var(--color-bg-panel);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 14px rgba(224, 111, 234, 0.35);
+  padding: 14px;
+  overflow: hidden;
+}
+
+body.photo-album-page .album-intro {
+  margin: 8px 8px 14px;
+  color: var(--color-text);
+  font-family: 'Vulf Sans', sans-serif;
+  text-align: left;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+body.photo-album-page .album-grid {
+  --album-column-gap: 10px;   /* base distance between columns */
+  --album-gap-jitter: 8px;    /* max randomized vertical offset */
+  columns: 4;
+  column-gap: var(--album-column-gap);
+  width: 100%;
+}
+
+body.photo-album-page .album-link {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 calc(var(--album-column-gap) + var(--album-gap-extra, 0px));
+  text-decoration: none;
+  break-inside: avoid;
+  vertical-align: top;
+}
+
+body.photo-album-page .album-card {
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  transform: translate(var(--album-shift-x, 0px), var(--album-shift-y, 0px))
+             rotate(var(--album-tilt, 0deg))
+             scale(var(--album-scale, 1));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+body.photo-album-page .album-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  clip-path: inset(6% 6% 6% 6%);
+  cursor: pointer;
+}
+
+body.photo-album-page .album-card::before {
+  z-index: 3;
+}
+
+body.photo-album-page .album-card::after {
+  z-index: 2;
+}
+
+body.photo-album-page .album-card:hover {
+  transform: translate(var(--album-shift-x, 0px), var(--album-shift-y, 0px))
+             rotate(var(--album-tilt, 0deg))
+             scale(calc(var(--album-scale, 1) + 0.02));
+  filter: drop-shadow(0 0 14px rgba(224, 111, 234, 0.45));
+}
+
+body.photo-album-page .photo-lightbox {
+  display: none !important;
+}
+
+/* Vary card scale/tilt + spacing jitter (tight but irregular) */
+body.photo-album-page .album-link:nth-child(9n + 1) { --album-tilt: -1.2deg; --album-scale: 1.03; --album-gap-extra: 4px; --album-shift-x: -1px; --album-shift-y: -2px; }
+body.photo-album-page .album-link:nth-child(9n + 2) { --album-tilt: 1.1deg; --album-scale: 0.94; --album-gap-extra: 1px; --album-shift-x: 2px; --album-shift-y: 1px; }
+body.photo-album-page .album-link:nth-child(9n + 3) { --album-tilt: -0.6deg; --album-scale: 1.06; --album-gap-extra: 6px; --album-shift-x: -2px; --album-shift-y: 2px; }
+body.photo-album-page .album-link:nth-child(9n + 4) { --album-tilt: 0.8deg; --album-scale: 0.98; --album-gap-extra: 2px; --album-shift-x: 1px; --album-shift-y: -1px; }
+body.photo-album-page .album-link:nth-child(9n + 5) { --album-tilt: -0.9deg; --album-scale: 1.01; --album-gap-extra: 7px; --album-shift-x: -1px; --album-shift-y: 3px; }
+body.photo-album-page .album-link:nth-child(9n + 6) { --album-tilt: 1.5deg; --album-scale: 0.92; --album-gap-extra: 0px; --album-shift-x: 2px; --album-shift-y: -2px; }
+body.photo-album-page .album-link:nth-child(9n + 7) { --album-tilt: -1.4deg; --album-scale: 1.04; --album-gap-extra: 5px; --album-shift-x: -3px; --album-shift-y: 2px; }
+body.photo-album-page .album-link:nth-child(9n + 8) { --album-tilt: 0.4deg; --album-scale: 0.96; --album-gap-extra: 3px; --album-shift-x: 1px; --album-shift-y: 1px; }
+body.photo-album-page .album-link:nth-child(9n + 9) { --album-tilt: -0.3deg; --album-scale: 1.00; --album-gap-extra: 2px; --album-shift-x: 0px; --album-shift-y: -1px; }
+
+@media (max-width: 768px) {
+  body.photo-album-page .album-main {
+    width: 96%;
+    margin-bottom: 30px;
+  }
+  body.photo-album-page .album-grid {
+    columns: 2;
+    column-gap: 8px;
+  }
+  body.photo-album-page .album-link {
+    --album-tilt: 0deg;
+    --album-scale: 1;
+    --album-gap-extra: 2px;
+    --album-shift-x: 0px;
+    --album-shift-y: 0px;
+  }
+}
+
+@media (max-width: 520px) {
+  body.photo-album-page .album-grid {
+    columns: 1;
+  }
 }

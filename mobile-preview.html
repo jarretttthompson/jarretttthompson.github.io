@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mobile preview</title>
+  <style>
+    :root {
+      --bg: #0b0b10;
+      --panel: rgba(100, 52, 150, 0.65);
+      --accent: #e06fea;
+      --text: #f5f5ff;
+      --frame: #1e2028;
+      --frame-edge: #323544;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(224,111,234,0.2), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(0,247,255,0.15), transparent 40%),
+        var(--bg);
+      padding: 16px;
+    }
+
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      border: 2px solid var(--accent);
+      border-radius: 14px;
+      background: var(--panel);
+      box-shadow: 0 0 18px rgba(224,111,234,0.4);
+      padding: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .toolbar label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .toolbar select,
+    .toolbar input,
+    .toolbar button {
+      background: #151825;
+      color: var(--text);
+      border: 1px solid #3c4056;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 0.9rem;
+    }
+
+    .toolbar button {
+      border-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .toolbar button:hover {
+      background: #20253a;
+    }
+
+    .sim-wrap {
+      display: grid;
+      place-items: center;
+      min-height: 70vh;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.28);
+      padding: 16px;
+    }
+
+    .device {
+      background: var(--frame);
+      border: 2px solid var(--frame-edge);
+      border-radius: 30px;
+      padding: 10px;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.45);
+      transition: width 0.2s ease, height 0.2s ease;
+      overflow: hidden;
+    }
+
+    .device iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #000;
+      border-radius: 20px;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="toolbar">
+      <label for="pagePath">Page</label>
+      <select id="pagePath">
+        <option value="photo-album.html">photo album</option>
+        <option value="index.html">home</option>
+        <option value="page2.html">resume/cv</option>
+        <option value="page3.html">artwork</option>
+        <option value="page4.html">projects</option>
+        <option value="page5.html">compositions</option>
+      </select>
+
+      <label for="preset">Device</label>
+      <select id="preset">
+        <option value="390x844">iPhone 13/14 (390x844)</option>
+        <option value="393x852">iPhone 15 (393x852)</option>
+        <option value="375x667">iPhone SE (375x667)</option>
+        <option value="412x915">Pixel 7/8 (412x915)</option>
+        <option value="768x1024">iPad (768x1024)</option>
+        <option value="custom">Custom</option>
+      </select>
+
+      <label for="width">W</label>
+      <input id="width" type="number" min="280" max="1400" value="390" />
+      <label for="height">H</label>
+      <input id="height" type="number" min="400" max="2000" value="844" />
+
+      <button id="rotateBtn" type="button">Rotate</button>
+      <button id="reloadBtn" type="button">Reload Frame</button>
+    </div>
+
+    <div class="sim-wrap">
+      <div class="device" id="device" style="width:390px;height:844px;">
+        <iframe id="previewFrame" src="photo-album.html" title="Mobile preview"></iframe>
+      </div>
+    </div>
+    <p class="hint">This is a viewport simulation of your local dev branch.</p>
+  </main>
+
+  <script>
+    (function () {
+      const pagePath = document.getElementById('pagePath');
+      const preset = document.getElementById('preset');
+      const widthInput = document.getElementById('width');
+      const heightInput = document.getElementById('height');
+      const rotateBtn = document.getElementById('rotateBtn');
+      const reloadBtn = document.getElementById('reloadBtn');
+      const device = document.getElementById('device');
+      const frame = document.getElementById('previewFrame');
+
+      function applySize(w, h) {
+        const width = Math.max(280, Math.min(1400, Number(w) || 390));
+        const height = Math.max(400, Math.min(2000, Number(h) || 844));
+        widthInput.value = width;
+        heightInput.value = height;
+        device.style.width = width + 'px';
+        device.style.height = height + 'px';
+      }
+
+      function refreshFrame() {
+        const selected = pagePath.value || 'photo-album.html';
+        const url = selected + (selected.includes('?') ? '&' : '?') + 'v=' + Date.now();
+        frame.src = url;
+      }
+
+      preset.addEventListener('change', () => {
+        if (preset.value === 'custom') return;
+        const [w, h] = preset.value.split('x');
+        applySize(w, h);
+      });
+
+      widthInput.addEventListener('input', () => {
+        preset.value = 'custom';
+        applySize(widthInput.value, heightInput.value);
+      });
+
+      heightInput.addEventListener('input', () => {
+        preset.value = 'custom';
+        applySize(widthInput.value, heightInput.value);
+      });
+
+      rotateBtn.addEventListener('click', () => {
+        const w = widthInput.value;
+        widthInput.value = heightInput.value;
+        heightInput.value = w;
+        preset.value = 'custom';
+        applySize(widthInput.value, heightInput.value);
+      });
+
+      pagePath.addEventListener('change', refreshFrame);
+      reloadBtn.addEventListener('click', refreshFrame);
+    })();
+  </script>
+</body>
+</html>

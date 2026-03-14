@@ -318,35 +318,83 @@ initSlideshow();
   }
 })();
 
-// ---- Random Photo Order (photo-album) ----
-(function randomPhotoOrder(){
+// ---- Photo Album (photo-album) ----
+(function photoAlbum(){
   if (document.body.getAttribute('data-page') !== 'photo-album') return;
-  
-  const gallery = document.querySelector('.photo-gallery');
+
+  const gallery = document.getElementById('photoGallery');
   if (!gallery) return;
-  
-  // Get all photos
-  const photos = Array.from(gallery.querySelectorAll('.framed-photo'));
-  if (photos.length === 0) return;
-  
-  // Simple shuffle function
-  function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
+
+  let photos = [];
+
+  function deriveAltFromSrc(src) {
+    const file = src.split('/').pop() || '';
+    return file
+      .replace(/\.[a-z0-9]+$/i, '')
+      .replace(/[_-]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim() || 'Photo';
   }
-  
-  // Shuffle the photos
-  const shuffledPhotos = shuffleArray(photos);
-  
-  // Clear the gallery and re-append in new order
-  gallery.innerHTML = '';
-  shuffledPhotos.forEach(photo => {
-    gallery.appendChild(photo);
-  });
+
+  function normalizePhoto(item) {
+    if (!item || !item.src) return null;
+    const alt = item.alt && item.alt !== 'N' ? item.alt : deriveAltFromSrc(item.src);
+    return {
+      src: item.src,
+      alt,
+      caption: item.caption || alt
+    };
+  }
+
+  function safeSrc(src) {
+    return encodeURI(src);
+  }
+
+  function renderGallery(items) {
+    gallery.innerHTML = '';
+
+    const frag = document.createDocumentFragment();
+    items.forEach((photo, index) => {
+      const link = document.createElement('a');
+      link.className = 'album-link';
+      link.href = safeSrc(photo.src);
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', `Open full image: ${photo.alt}`);
+
+      const card = document.createElement('figure');
+      card.className = 'framed-photo album-card';
+
+      const img = document.createElement('img');
+      img.src = safeSrc(photo.src);
+      img.alt = photo.alt;
+      img.loading = index < 6 ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = index < 3 ? 'high' : 'low';
+
+      card.appendChild(img);
+      link.appendChild(card);
+      frag.appendChild(link);
+    });
+
+    gallery.appendChild(frag);
+  }
+
+  fetch('photo-album.json')
+    .then((response) => {
+      if (!response.ok) throw new Error('Unable to load photo manifest');
+      return response.json();
+    })
+    .then((data) => {
+      if (!Array.isArray(data)) throw new Error('Invalid photo manifest');
+      photos = data.map(normalizePhoto).filter(Boolean);
+      if (!photos.length) throw new Error('No photos found');
+
+      renderGallery(photos);
+    })
+    .catch(() => {
+      gallery.innerHTML = '<p class="photo-gallery__loading">Unable to load photos right now.</p>';
+    });
 })();
 
 // ---- Projects gallery (page4) ----
