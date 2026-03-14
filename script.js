@@ -62,25 +62,27 @@ function setIdleWatchers() {
 const slide1 = document.getElementById('slide1');
 const slide2 = document.getElementById('slide2');
 
-// ---- Fetch the JSON file ----
-fetch('slides.json')  // ✅ updated to match root folder
-  .then(response => response.json())
-  .then(data => {
-    // Prepend the folder path to each filename
-    slideImages = data.map(filename => `slideshow/${filename}`);
-    if (slideImages.length < 2) return; // Need at least 2 images
+function initSlideshow() {
+  if (!slide1 || !slide2) return;
 
-    // Set initial images
-    slide1.src = slideImages[0];
-    slide2.src = slideImages[1];
-    slide1.classList.add('visible');
+  fetch('slides.json')
+    .then(response => response.json())
+    .then(data => {
+      slideImages = data.map(filename => `slideshow/${filename}`);
+      if (slideImages.length < 2) return;
 
-    // Start the loop
-    setInterval(showNextSlide, 3000);
-  })
-  .catch(err => {
-    console.error('Failed to load slides.json:', err);
-  });
+      slide1.src = slideImages[0];
+      slide2.src = slideImages[1];
+      slide1.classList.add('visible');
+
+      setInterval(() => {
+        if (!document.hidden) showNextSlide();
+      }, 3000);
+    })
+    .catch(err => {
+      console.error('Failed to load slides.json:', err);
+    });
+}
 
 // ---- Swap slides ----
 function showNextSlide() {
@@ -125,38 +127,73 @@ function scheduleFlicker() {
     scheduleFlicker();
   }, 120);
 }
-scheduleFlicker();
+if (document.getElementById('lightbulb')) {
+  scheduleFlicker();
+}
 
 // start idle watchers
 setIdleWatchers();
+initSlideshow();
 
 // ---- Weather Widget ----
 (function weatherWidget(){
   const widget = document.getElementById('weatherWidget');
   if (!widget) return; // only on index
+  const CACHE_KEY = 'weatherStatesboroGA';
+  const MAX_AGE_MS = 15 * 60 * 1000;
   
   async function fetchWeather() {
     const loading = widget.querySelector('.weather-loading');
     const content = widget.querySelector('.weather-content');
+
+    const readCached = () => {
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed?.savedAt || !parsed?.payload) return null;
+        if (Date.now() - parsed.savedAt > MAX_AGE_MS) return null;
+        return parsed.payload;
+      } catch {
+        return null;
+      }
+    };
+
+    const render = (current) => {
+      const tempF = current.temp_F;
+      const feelsLikeF = current.FeelsLikeF;
+      const desc = current.weatherDesc?.[0]?.value || 'Weather unavailable';
+
+      widget.querySelector('.weather-location').textContent = 'Statesboro, GA';
+      widget.querySelector('.weather-temp').textContent = tempF + '°F';
+      widget.querySelector('.weather-desc').textContent = desc.toLowerCase();
+      widget.querySelector('.weather-feels-like').textContent = `Feels like ${feelsLikeF}°F`;
+      loading.style.display = 'none';
+      content.style.display = 'block';
+    };
     
     try {
-      // Using free wttr.in service - no API key needed
-      const response = await fetch('https://wttr.in/Statesboro,GA?format=j1');
+      const cached = readCached();
+      if (cached?.current_condition?.[0]) {
+        render(cached.current_condition[0]);
+        return;
+      }
+
+      const response = await fetch('https://wttr.in/Statesboro,GA?format=j1', {
+        cache: 'force-cache'
+      });
       const data = await response.json();
       
       if (data.current_condition && data.current_condition.length > 0) {
-        const current = data.current_condition[0];
-        const tempF = current.temp_F;
-        const feelsLikeF = current.FeelsLikeF;
-        const desc = current.weatherDesc[0].value;
-        
-        widget.querySelector('.weather-location').textContent = 'Statesboro, GA';
-        widget.querySelector('.weather-temp').textContent = tempF + '°F';
-        widget.querySelector('.weather-desc').textContent = desc.toLowerCase();
-        widget.querySelector('.weather-feels-like').textContent = `Feels like ${feelsLikeF}°F`;
-        
-        loading.style.display = 'none';
-        content.style.display = 'block';
+        render(data.current_condition[0]);
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            savedAt: Date.now(),
+            payload: data
+          }));
+        } catch {
+          // Ignore storage failures in private browsing modes.
+        }
       } else {
         loading.textContent = 'Weather unavailable';
       }
@@ -180,7 +217,7 @@ setIdleWatchers();
   const prevBtn = document.querySelector('.poster-carousel__control--prev');
   const nextBtn = document.querySelector('.poster-carousel__control--next');
 
-  fetch('posters.json?ts=' + Date.now())
+  fetch('posters.json')
     .then(r=>r.json())
     .then(list => {
       if(!Array.isArray(list) || list.length===0) return;
@@ -319,7 +356,7 @@ setIdleWatchers();
   const host = document.getElementById('projectsGallery');
   if (!host) return;
 
-  const dataUrl = 'projects/projects.json?ts=' + Date.now();
+  const dataUrl = 'projects/projects.json';
 
   fetch(dataUrl)
     .then(response => {
