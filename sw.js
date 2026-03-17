@@ -31,6 +31,15 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   if (new URL(req.url).origin !== self.location.origin) return;
 
+  const isLocalhost =
+    self.location.hostname === "localhost" ||
+    self.location.hostname === "127.0.0.1";
+
+  if (isLocalhost) {
+    event.respondWith(fetch(req).catch(() => caches.match(req)));
+    return;
+  }
+
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) return cached;

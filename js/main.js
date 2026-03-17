@@ -20,6 +20,9 @@ weatherWidget();
 lazyHydrateEmbeds();
 registerServiceWorker();
 
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
+  import("./dev-toolbar.js");
+
 const page = document.body?.getAttribute("data-page");
 if (page === "index") initHomeSlideshow();
 if (page === "page3") initPosterCarousel();

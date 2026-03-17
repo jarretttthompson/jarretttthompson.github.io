@@ -1525,3 +1525,13 @@ body.lightbox-open {
   text-transform: lowercase;
   margin: 0;
 }
+
+a.project-link {
+  color: rgb(0, 247, 255);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+a.project-link:hover {
+  color: #e06fea;
+  text-shadow: 0 0 10px rgba(224, 111, 234, 0.6);
+}

@@ -1,0 +1,5 @@
+# Files that must NEVER be merged to the main branch.
+# Used by git hooks (pre-commit, pre-push) and merge-to-main.sh.
+js/dev-toolbar.js
+.dev-only
+merge-to-main.sh

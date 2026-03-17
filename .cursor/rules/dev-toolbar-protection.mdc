@@ -1,0 +1,36 @@
+---
+description: CRITICAL - Dev toolbar must never reach the main branch
+alwaysApply: true
+---
+
+# Dev Toolbar Branch Protection
+
+## Rule
+
+The dev toolbar and all dev-only files must NEVER be merged, committed, cherry-picked, or pushed to the `main` branch.
+
+## Dev-only files (listed in `.dev-only`)
+
+- `js/dev-toolbar.js` — the toolbar itself
+- `.dev-only` — the manifest
+- `merge-to-main.sh` — the safe merge script
+
+## The dev-toolbar import in `js/main.js`
+
+The line `import("./dev-toolbar.js")` must be REMOVED before any code reaches `main`.
+
+## When merging dev-preview → main
+
+ALWAYS use `merge-to-main.sh` which automatically:
+1. Merges without committing
+2. Removes all `.dev-only` listed files
+3. Strips the dev-toolbar import from `js/main.js`
+
+NEVER do a direct `git merge dev-preview` on main. NEVER manually commit dev-only files on main.
+
+## Safety layers in place
+
+1. **pre-commit hook** — blocks commits on main containing dev-only files
+2. **pre-push hook** — blocks pushes from main if dev-only files exist
+3. **localhost guard** — the import only runs on localhost anyway
+4. **This rule** — reminds the AI agent to never include dev files on main
