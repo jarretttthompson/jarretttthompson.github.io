@@ -3,12 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/breakcomposer/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="manifest" href="/breakcomposer/manifest.json" />
     <title>breakComposer</title>
-    <script type="module" crossorigin src="/breakcomposer/assets/index-Cn8yDrJb.js"></script>
-    <link rel="stylesheet" crossorigin href="/breakcomposer/assets/index-CwZrHO4s.css">
+    <script type="module" crossorigin src="/breakcomposer/assets/index-CHlr5i_O.js"></script>
+    <link rel="stylesheet" crossorigin href="/breakcomposer/assets/index-GfFnX1W9.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        var s = document.createElement('script');
+        s.src = 'js/dev-toolbar.js';
+        document.body.appendChild(s);
+      }
+    </script>
   </body>
 </html>

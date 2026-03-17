@@ -1,0 +1,10 @@
+{
+  "name": "breakComposer",
+  "short_name": "breakComposer",
+  "description": "Breakbeat drum pattern composer",
+  "start_url": "/breakcomposer/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#0a0612",
+  "theme_color": "#1a0f28"
+}
