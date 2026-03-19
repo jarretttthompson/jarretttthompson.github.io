@@ -2,7 +2,6 @@ import {
   ensureCrtShell,
   injectNav,
   lazyHydrateEmbeds,
-  loadDevToolbar,
   registerServiceWorker,
   setIdleWatchers,
   startHeaderFlicker,
@@ -16,7 +15,6 @@ ensureCrtShell();
 injectNav();
 setIdleWatchers();
 startHeaderFlicker();
-loadDevToolbar();
 lazyHydrateEmbeds();
 registerServiceWorker();
 
