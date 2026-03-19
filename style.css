@@ -100,10 +100,12 @@
 .header-box,
 .scroll-window,
 .slideshow,
-.about-text-box {
-  border: 2px solid rgba(224,111,234,0.4);
-  box-shadow: 0 0 8px rgba(224,111,234,0.2);
-  animation: flickerBorder var(--pulse-frequency) infinite;
+.about-text-box,
+.calendar-widget,
+.calendar-submit-widget {
+ border: 2px solid rgba(224,111,234,0.4);
+ box-shadow: 0 0 8px rgba(224,111,234,0.2);
+ animation: flickerBorder var(--pulse-frequency) infinite;
 }
 
 /* Pause animations on hover for readability */
@@ -111,7 +113,9 @@
 .scroll-window:hover,
 .slideshow:hover,
 .about-text-box:hover,
-.nav-box:hover {
+.nav-box:hover,
+.calendar-widget:hover,
+.calendar-submit-widget:hover {
   animation-play-state: paused;
 }
 
@@ -504,10 +508,11 @@ html::after {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 120px;
+  width: 100px;
   max-width: 100%;
   flex: 1 1 auto;
   min-height: 0;
+  gap: 2px;
 }
 
 .social-links-vertical h1,
@@ -515,9 +520,9 @@ html::after {
 .social-links-vertical h3 {
   color: rgba(240, 230, 250, 0.95);
   font-family: 'Vulf Sans', sans-serif;
-  font-size: 20px;
-  margin: 0 0 10px 0;
-  padding: 8px;
+  font-size: 0.95rem;
+  margin: 0 0 4px 0;
+  padding: 2px 4px;
   text-align: center;
   text-shadow: 0 0 6px rgba(224,111,234,0.5);
 }
@@ -530,12 +535,13 @@ html::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 8px;
-  margin: 4px 0;
+  padding: 6px 8px;
+  margin: 0;
   background: transparent;
   border: 2px solid transparent;
   border-radius: var(--radius-sm);
   white-space: nowrap;
+  font-size: 0.9rem;
 }
 
 .social-links-vertical a:hover {
@@ -569,7 +575,7 @@ html::after {
 .content-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 32px;
   align-items: stretch;
   justify-content: center;
   margin: 16px auto;
@@ -577,14 +583,221 @@ html::after {
   max-width: 1000px;
 }
 
-.bio-weather-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1 1 320px;
-  max-width: 350px;
+/* Desktop: put slideshow before intro box */
+@media (min-width: 769px) {
+  /* Desktop: same vertical card flow as mobile, but keep widths aligned with calendar. */
+  .content-container {
+    flex-direction: column-reverse; /* show slideshow first */
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 0 16px; /* match .calendar-at-bottom horizontal padding */
+    box-sizing: border-box;
+  }
+
+  .bio-container,
+  .slideshow-container,
+  .slideshow-social-container {
+    order: 0; /* column-reverse controls the visual order */
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+    min-width: 0;
+    align-items: stretch;
+  }
+
+  /* Prevent slideshow from exploding in height when it becomes full-width. */
+  .slideshow {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: auto;
+    height: clamp(240px, 30vw, 380px);
+  }
 }
 
+.bio-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 360px;
+  min-width: 280px;
+  max-width: min(95vw, 520px);
+  /* Allow the panel to shrink in the flex row so it can sit closer to slideshow */
+  min-width: 0;
+}
+
+/* Calendar always at bottom of home page */
+.calendar-at-bottom {
+  width: 100%;
+  max-width: 1000px;
+  margin: 24px auto 0;
+  padding: 0 16px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.calendar-at-bottom .calendar-widget {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ========= CALENDAR SUBMISSION FORM ========= */
+.calendar-submit-widget {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 24px;
+  padding: var(--space-3);
+  font-family: 'Vulf Sans', sans-serif;
+  background: var(--color-bg-panel);
+  border-radius: var(--radius-md);
+  color: rgba(240, 230, 250, 0.9);
+  border: 2px solid rgba(224, 111, 234, 0.4);
+  box-shadow: 0 0 8px rgba(224, 111, 234, 0.2);
+  animation: flickerBorder var(--pulse-frequency) infinite;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.calendar-submit-widget:hover {
+  animation-play-state: paused;
+}
+
+.calendar-submit__title {
+  color: rgba(240, 230, 250, 0.95);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: var(--space-1);
+  text-shadow: 0 0 4px rgba(224,111,234,0.5);
+}
+
+.calendar-submit__hint {
+  font-size: 0.85rem;
+  color: rgba(240, 230, 250, 0.75);
+  margin-bottom: 16px;
+}
+
+.calendar-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.calendar-submit-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.calendar-submit-form .form-row--inline {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.calendar-submit-form .form-row--inline > div {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar-submit-form .form-row--times {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.calendar-submit-form .form-row--times > .form-row {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 600px) {
+  .calendar-submit-form .form-row--inline,
+  .calendar-submit-form .form-row--times {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .calendar-submit-form .form-row--times > .form-row {
+    flex: none;
+    width: 100%;
+  }
+}
+
+.calendar-submit-form label {
+  font-size: 0.9rem;
+  color: rgba(240, 230, 250, 0.9);
+}
+
+.calendar-submit-form input,
+.calendar-submit-form textarea {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid rgba(224, 111, 234, 0.35);
+  background: rgba(20, 10, 30, 0.8);
+  color: rgba(240, 230, 250, 0.95);
+  font-family: 'Vulf Sans', sans-serif;
+  font-size: 0.95rem;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.calendar-submit-form input::placeholder,
+.calendar-submit-form textarea::placeholder {
+  color: rgba(240, 230, 250, 0.5);
+}
+
+.calendar-submit-form input:focus,
+.calendar-submit-form textarea:focus {
+  outline: none;
+  border-color: rgba(224, 111, 234, 0.6);
+  box-shadow: 0 0 6px rgba(224, 111, 234, 0.3);
+}
+
+.calendar-submit-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.calendar-submit__btn {
+  margin-top: 8px;
+  padding: 10px 20px;
+  background: rgba(224, 111, 234, 0.25);
+  border: 2px solid rgba(224, 111, 234, 0.5);
+  color: rgba(240, 230, 250, 0.95);
+  font-family: 'Vulf Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.calendar-submit__btn:hover {
+  background: rgba(224, 111, 234, 0.4);
+  border-color: rgba(224, 111, 234, 0.7);
+  box-shadow: 0 0 8px rgba(224, 111, 234, 0.3);
+}
+
+.calendar-submit__message {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  min-height: 1.4em;
+}
+
+.calendar-submit__message.success {
+  color: #7fdb7f;
+}
+
+.calendar-submit__message.error {
+  color: #ff7f7f;
+}
+
+.slideshow-container,
 .slideshow-social-container {
   display: flex;
   flex-direction: column;
@@ -598,7 +811,7 @@ html::after {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: min(600px, 100%);
+  width: min(520px, 100%);
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -608,29 +821,65 @@ html::after {
 
 .about-text-box {
   width: 100%;
-  max-width: 350px;
+  max-width: 100%;
   background: var(--color-bg-panel);
   padding: 15px;
   border-radius: var(--radius-md);
   color: rgba(240, 230, 250, 0.9);
   font-family: 'Vulf Mono', monospace;
-  font-size: small;
+  font-size: 0.85rem;
   text-align: left;
-  overflow-y: auto;
-  max-height: clamp(280px, 60vh, 450px);
-  scrollbar-width: thin;
-  scrollbar-color: rgba(224, 111, 234, 0.35) transparent;
 }
 
 .about-text-box p {
   font-family: 'Vulf Sans', sans-serif;
-  font-size: medium;
+  font-size: 0.9rem;
   text-shadow:
     -1px -1px 0 #000,  
      1px -1px 0 #000,
     -1px  1px 0 #000,
      1px  1px 0 #000;
   margin: 8px 0;
+}
+
+/* Social links inside introduction box */
+.social-links-in-bio {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(224, 111, 234, 0.3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.social-links-in-bio .socials-title {
+  width: 100%;
+  margin: 0 0 4px 0;
+  font-family: 'Vulf Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(240, 230, 250, 0.95);
+  text-shadow: 0 0 6px rgba(224,111,234,0.5);
+}
+
+.social-links-in-bio a {
+  color: rgba(160, 128, 184, 1);
+  text-decoration: none;
+  text-shadow: 0 0 4px rgba(224,111,234,0.4);
+  transition: text-shadow 0.3s ease, color 0.3s ease, transform 0.3s ease, border 0.3s ease;
+  padding: 6px 10px;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.social-links-in-bio a:hover {
+  color: rgba(240, 230, 250, 0.95);
+  text-shadow: 0 0 6px rgba(224,111,234,0.5);
+  transform: scale(1.02);
+  border-color: rgba(224, 111, 234, 0.35);
 }
 
 .slideshow img {
@@ -1000,64 +1249,104 @@ body.lightbox-open {
   line-height: 1;
 }
 
-/* ========= WEATHER WIDGET ========= */
-.weather-widget {
+/* ========= GOOGLE CALENDAR WIDGET ========= */
+.calendar-widget {
+ width: 100%;
+ max-width: 100%;
+ margin: 0;
+ padding: var(--space-3);
+ font-family: 'Vulf Sans', sans-serif;
+ background: var(--color-bg-panel);
+ border-radius: var(--radius-md);
+ color: rgba(240, 230, 250, 0.9);
+ box-sizing: border-box;
+ overflow: hidden;
+}
+
+.calendar-widget__title {
+ color: rgba(240, 230, 250, 0.95);
+ font-weight: bold;
+ font-size: 1rem;
+ margin-bottom: var(--space-2);
+ text-align: center;
+ text-shadow: 0 0 4px rgba(224,111,234,0.5);
+}
+
+.calendar-embed-wrapper {
   width: 100%;
-  max-width: 350px;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
   margin: 0;
-  padding: var(--space-3);
-  text-align: center;
-  font-family: 'Vulf Sans', sans-serif;
-  background: var(--color-bg-panel);
-  border-radius: var(--radius-md);
-  color: rgba(240, 230, 250, 0.9);
+  position: relative;
+  background: rgba(26, 15, 40, 0.65);
+  border: 2px solid rgba(224, 111, 234, 0.35);
+  box-shadow: 0 0 14px rgba(224, 111, 234, 0.18);
 }
 
-.weather-widget:hover { animation-play-state: paused; }
-
-.weather-loading {
-  color: var(--color-text);
-  font-size: 0.9rem;
-  opacity: 0.8;
+.calendar-embed-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  /* Additional scanlines over the iframe (site-wide CRT effect already exists,
+     but this helps the calendar area feel consistent). */
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, var(--crt-scanline-opacity)) 0,
+    rgba(255, 255, 255, var(--crt-scanline-opacity)) var(--crt-scanline-thickness),
+    transparent calc(var(--crt-scanline-thickness) + var(--crt-scanline-spacing))
+  );
+  mix-blend-mode: screen;
+  opacity: 0.25;
 }
 
-.weather-location {
-  color: rgba(240, 230, 250, 0.95);
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: var(--space-1);
-  text-shadow: 0 0 4px rgba(224,111,234,0.5);
+.calendar-embed-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  /* Vignette to “frame” the embedded calendar content. */
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0.65;
 }
 
-.weather-temp {
-  color: var(--color-text);
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin: var(--space-1) 0;
-  text-shadow: 0 0 6px rgba(255,255,255,0.4);
-  font-family: 'Vulf Mono', monospace;
+.calendar-widget iframe,
+.calendar-embed {
+ display: block;
+ width: 100%;
+ max-width: 100%;
+ height: clamp(240px, 30vw, 340px);
+ min-height: 220px;
+ margin: 0;
+ padding: 0;
+ border: 0;
+ border-radius: var(--radius-sm);
+ box-sizing: border-box;
+ vertical-align: top;
+  /* Invert the embedded calendar for a CRT-style look.
+     Note: this filters the iframe render output (cross-origin safe). */
+  filter: invert(1) hue-rotate(250deg) contrast(1.15) saturate(1.4) brightness(0.9);
 }
 
-.weather-desc {
-  color: var(--color-text);
-  font-size: 0.95rem;
-  margin-bottom: var(--space-1);
-  text-transform: capitalize;
-}
-
-.weather-feels-like {
-  color: rgba(255,255,255,0.7);
-  font-size: 0.8rem;
-  font-style: italic;
+@media (min-width: 769px) {
+ .calendar-widget iframe,
+ .calendar-embed {
+   height: clamp(260px, 28vw, 360px);
+ }
 }
 
 @media (max-width: 768px) {
-  .weather-widget { 
-    width: 100%; 
-    max-width: 100%; 
-    font-size: 0.9rem; 
-  }
-  .weather-temp { font-size: 1.8rem; }
+ .calendar-widget {
+   width: 100%;
+   max-width: 100%;
+ }
+ .calendar-widget iframe,
+ .calendar-embed {
+   height: clamp(220px, 45vw, 300px);
+ }
 }
 
 /* ========= MOBILE STYLES ========= */
@@ -1101,20 +1390,44 @@ body.lightbox-open {
 
   /* Content sections mobile - Force vertical stacking */
   .content-container {
-    flex-direction: column;    /* Stack vertically instead of horizontally */
-    align-items: center;       /* Center everything */
-    gap: 15px;                 /* Slightly smaller gap for mobile */
+    flex-direction: column-reverse; /* Swap slideshow + intro on mobile */
+    align-items: stretch;      /* Let children fully fill the container width */
+    gap: 14px;                 /* Uniform mobile spacing */
   }
 
-  .slideshow-social-container {
-    order: 1;                  /* Slideshow container first */
-    width: 100%;
-  }
-
-  .bio-weather-container {
-    order: 2;                  /* Bio and weather container second */
+  .bio-container {
+    order: 0;
     width: 100%;
     max-width: 100%;
+  }
+
+  .slideshow-container,
+  .slideshow-social-container {
+    order: 0;
+    width: 100%;
+    align-items: stretch; /* Let the slideshow fill the container width */
+  }
+
+  .calendar-at-bottom {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 14px; /* Match the container gap for uniform spacing */
+    padding: 0 4px;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .calendar-widget {
+    overflow: hidden;
+    padding: var(--space-2);
+  }
+
+  .calendar-submit-widget {
+    margin-top: 0;
+    padding: var(--space-2);
   }
 
   .slideshow {
@@ -1122,6 +1435,7 @@ body.lightbox-open {
     max-width: 100%;
     aspect-ratio: 5/3;
     border-radius: 0px;
+    margin: 0 auto; /* Don't add extra margin; spacing comes from flex gap */
   }
 
   .about-text-box {
@@ -1138,14 +1452,13 @@ body.lightbox-open {
   }
 
   .social-links-vertical a {
-    padding: 8px 6px;          /* Smaller padding for mobile */
-    margin: 2px 0;             /* Tighter spacing */
-    font-size: 0.85rem;        /* Smaller text */
+    padding: 4px 6px;          /* Compact padding for mobile */
+    margin: 0;
+    font-size: 0.85rem;
   }
 
   /* Content sections mobile */
-  .about-box,
-  .slideshow {
+  .about-box {
     margin: 4px auto;
   }
 
@@ -1281,6 +1594,47 @@ body.lightbox-open {
   gap: var(--poster-card-gap, 24px);
   padding: clamp(12px, 2vw, 20px);
   scroll-behavior: smooth;
+}
+
+/* ========= HOMEPAGE UNIFIED CARD LAYOUT ========= */
+/* Force slideshow, intro, calendar, and form to share one centered width stack. */
+body[data-page="index"] .content-container {
+  flex-direction: column-reverse;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 14px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 16px auto 0;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+body[data-page="index"] .slideshow-container,
+body[data-page="index"] .slideshow-social-container,
+body[data-page="index"] .bio-container {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+  order: 0;
+  align-items: stretch;
+}
+
+body[data-page="index"] .slideshow {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: auto;
+  height: clamp(230px, 34vw, 380px);
+}
+
+body[data-page="index"] .about-text-box {
+  width: 100%;
+  max-width: 100%;
+}
+
+body[data-page="index"] .calendar-at-bottom {
+  margin-top: 14px;
 }
 
 .poster-card {

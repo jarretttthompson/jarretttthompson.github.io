@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>thejrummer</title>
-  <link rel="stylesheet" href="style.css?v=20250317" />
+  <link rel="stylesheet" href="style.css?v=20250326" />
   <link rel="preload" as="image" href="optimized/slideshow/slide2-desktop.webp" type="image/webp">
 </head>
 <body data-page="index">
@@ -39,45 +39,87 @@
       <p><br></p>
 
       <div class="content-container">
-      <div class="bio-weather-container">
-        <!-- Weather widget -->
-        <div class="weather-widget panel glow-pulse" id="weatherWidget">
-          <div class="weather-loading">Loading weather...</div>
-          <div class="weather-content" style="display:none;">
-            <div class="weather-location"></div>
-            <div class="weather-temp"></div>
-            <div class="weather-desc"></div>
-            <div class="weather-feels-like"></div>
+        <div class="bio-container">
+          <div class="about-text-box">
+            <p>My name is Jarrett Thompson, I'm a musician, composer, audio engineer, artist, and maker living in Statesboro, GA. I'm currently employed as an AV Systems Engineer with 
+              the Executive IT Services Department at Georgia Southern University. 
+            </p>
+            <p>This website serves as a digital portfolio/scrapbook of things that I make, things that I like, 
+              or art/projects that my friends may be working on. 
+            </p>
+            <div class="social-links-in-bio">
+              <h3 class="socials-title">socials !</h3>
+              <a href="https://www.youtube.com/@thejrummer7297" target="_blank" rel="noopener noreferrer">youtube</a>
+              <a href="https://www.tiktok.com/@thejrummer?lang=en" target="_blank" rel="noopener noreferrer">tiktok</a>
+              <a href="https://github.com/jarretttthompson?tab=repositories" target="_blank" rel="noopener noreferrer">github</a>
+            </div>
           </div>
         </div>
-        
-        <div class="about-text-box">
-          <p>My name is Jarrett Thompson, I'm a musician, composer, audio engineer, artist, and maker living in Statesboro, GA. I'm currently employed as an AV Systems Engineer with 
-            the Executive IT Services Department at Georgia Southern University. 
-          </p>
-          <p>This website serves as a digital portfolio/scrapbook of things that I make, things that I like, 
-            or art/projects that my friends may be working on. 
-          </p>
+
+        <div class="slideshow-container">
+          <div class="slideshow">
+              <img id="slide1" class="slide visible" src="" alt="Slide 1" loading="eager">
+              <img id="slide2" class="slide" src="" alt="Slide 2" loading="lazy">
+          </div>
         </div>
       </div>
 
-      <div class="slideshow-social-container">
-        <div class="slideshow">
-            <img id="slide1" class="slide visible" src="" alt="Slide 1" loading="eager">
-            <img id="slide2" class="slide" src="" alt="Slide 2" loading="lazy">
+      <div class="calendar-at-bottom">
+        <div class="calendar-widget panel glow-pulse">
+          <h3 class="calendar-widget__title">calendar</h3>
+          <div class="calendar-embed-wrapper">
+            <iframe src="https://calendar.google.com/calendar/embed?mode=AGENDA&amp;bgcolor=%232a1a3e&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;src=426e2946bb067a75e341e40434288cb5db457131576722b266af50527137c7d9%40group.calendar.google.com&amp;ctz=America%2FNew_York"
+                    title="Google Calendar"
+                    class="calendar-embed"></iframe>
+          </div>
         </div>
 
-        <div class="social-links-vertical">
-          <h2 class="socials-title">socials !</h2>
-
-          <a href="https://www.youtube.com/@thejrummer7297" target="_blank" rel="noopener noreferrer">youtube</a>
-          <a href="https://www.tiktok.com/@thejrummer?lang=en" target="_blank" rel="noopener noreferrer">tiktok</a>
-          <a href="https://github.com/jarretttthompson?tab=repositories" target="_blank" rel="noopener noreferrer">github</a>
+        <div class="calendar-submit-widget panel glow-pulse">
+          <h3 class="calendar-submit__title">add to calendar</h3>
+          <p class="calendar-submit__hint">Enter the PIN, then add an event. It will appear on the calendar above.</p>
+          <form id="calendarSubmitForm" class="calendar-submit-form" action="https://script.google.com/macros/s/AKfycbzl9rXFa914ZFtQOzdGJHAZ_BtiZ_uB0VzPsn21cvEKWtPNkoukoqdmLPJ7G1kQ7IqA/exec" method="post">
+            <input type="hidden" name="form" value="1">
+            <div class="form-row">
+              <label for="cal-pin">PIN</label>
+              <input type="password" id="cal-pin" name="pin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required autocomplete="off">
+            </div>
+            <div class="form-row">
+              <label for="cal-title">Event title</label>
+              <input type="text" id="cal-title" name="title" required>
+            </div>
+            <div class="form-row">
+              <label for="cal-date">Date</label>
+              <input type="date" id="cal-date" name="date" required>
+            </div>
+            <div class="form-row form-row--times">
+              <div class="form-row">
+                <label for="cal-time-start">Start time</label>
+                <input type="time" id="cal-time-start" name="time_start">
+              </div>
+              <div class="form-row">
+                <label for="cal-time-end">End time</label>
+                <input type="time" id="cal-time-end" name="time_end">
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="cal-desc">Notes (optional)</label>
+              <textarea id="cal-desc" name="description" rows="2"></textarea>
+            </div>
+            <button type="submit" class="calendar-submit__btn">Add event</button>
+          </form>
+          <p id="calendarSubmitMessage" class="calendar-submit__message" aria-live="polite"></p>
         </div>
       </div>
     </div>
   </main>
 
-  <script type="module" src="js/main.js?v=20250317"></script>
+  <script type="module" src="js/main.js?v=20250327"></script>
+  <script>
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.hostname === '0.0.0.0') {
+      var s = document.createElement('script');
+      s.src = '/js/dev-toolbar.js';
+      document.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>

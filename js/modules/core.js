@@ -53,84 +53,46 @@ export function startHeaderFlicker() {
   const h1 = document.getElementById("lightbulb");
   if (!h1) return;
 
+  // Respect reduced motion and idle mode.
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  const transitionMs = 420;
+  h1.style.willChange = "opacity, transform, text-shadow";
+  h1.style.transition = `opacity ${transitionMs}ms ease, transform ${transitionMs}ms ease, text-shadow ${transitionMs}ms ease`;
+
   const randomFlicker = () => {
-    const opacity = Math.random() > 0.9 ? 0.1 : 1;
-    const blur = Math.floor(Math.random() * 15) + 5;
-    const x = Math.floor(Math.random() * 3) - 1;
-    const y = Math.floor(Math.random() * 3) - 1;
+    // Subtle, smooth “CRT breathing” instead of harsh jitter.
+    const opacity = Math.random() > 0.94 ? 0.82 : 1;
+    const blur = Math.floor(Math.random() * 10) + 8; // ~8..18px
+    const x = (Math.random() - 0.5) * 1.0; // -0.5..0.5px
+    const y = (Math.random() - 0.5) * 1.0; // -0.5..0.5px
 
     requestAnimationFrame(() => {
       h1.style.opacity = opacity;
-      h1.style.transform = `translate(${x}px, ${y}px)`;
-      h1.style.textShadow = `0 0 ${blur}px #0ff, 0 0 ${blur * 2}px #fff`;
+      h1.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+
+      const glow1 = Math.round(blur);
+      const glow2 = Math.round(blur * 1.75);
+      h1.style.textShadow = `0 0 ${glow1}px #0ff, 0 0 ${glow2}px #fff`;
     });
   };
 
   const schedule = () => {
     setTimeout(() => {
-      randomFlicker();
-      schedule();
-    }, 120);
-  };
-  schedule();
-}
-
-export function weatherWidget() {
-  const widget = document.getElementById("weatherWidget");
-  if (!widget) return;
-  const CACHE_KEY = "weatherStatesboroGA";
-  const MAX_AGE_MS = 15 * 60 * 1000;
-
-  const loading = widget.querySelector(".weather-loading");
-  const content = widget.querySelector(".weather-content");
-
-  const readCached = () => {
-    try {
-      const raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      const parsed = JSON.parse(raw);
-      if (!parsed?.savedAt || !parsed?.payload) return null;
-      if (Date.now() - parsed.savedAt > MAX_AGE_MS) return null;
-      return parsed.payload;
-    } catch {
-      return null;
-    }
-  };
-
-  const render = (current) => {
-    const tempF = current.temp_F;
-    const feelsLikeF = current.FeelsLikeF;
-    const desc = current.weatherDesc?.[0]?.value || "Weather unavailable";
-    widget.querySelector(".weather-location").textContent = "Statesboro, GA";
-    widget.querySelector(".weather-temp").textContent = `${tempF}°F`;
-    widget.querySelector(".weather-desc").textContent = desc.toLowerCase();
-    widget.querySelector(".weather-feels-like").textContent = `Feels like ${feelsLikeF}°F`;
-    loading.style.display = "none";
-    content.style.display = "block";
-  };
-
-  const fetchWeather = async () => {
-    try {
-      const cached = readCached();
-      if (cached?.current_condition?.[0]) {
-        render(cached.current_condition[0]);
+      if (document.body && document.body.classList.contains("no-anim")) {
+        schedule();
         return;
       }
-      const response = await fetch("https://wttr.in/Statesboro,GA?format=j1", { cache: "force-cache" });
-      const data = await response.json();
-      if (data.current_condition?.length) {
-        render(data.current_condition[0]);
-        localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), payload: data }));
-      } else {
-        loading.textContent = "Weather unavailable";
-      }
-    } catch {
-      loading.textContent = "Weather offline";
-    }
+      randomFlicker();
+      schedule();
+    }, 260);
   };
-
-  fetchWeather();
-  setInterval(fetchWeather, 900000);
+  schedule();
 }
 
 export function lazyHydrateEmbeds() {
@@ -165,4 +127,16 @@ export function registerServiceWorker() {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js").catch(() => {});
   });
+}
+
+export function loadDevToolbar() {
+  if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") return;
+  const load = () => {
+    if (document.getElementById("dev-toolbar")) return;
+    const script = document.createElement("script");
+    script.src = "/js/dev-toolbar.js";
+    (document.body || document.documentElement).appendChild(script);
+  };
+  if (document.body) load();
+  else document.addEventListener("DOMContentLoaded", load);
 }
