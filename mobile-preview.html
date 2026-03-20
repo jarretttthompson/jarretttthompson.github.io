@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mobile preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0b0b10;
-      --panel: rgba(100, 52, 150, 0.65);
-      --accent: #e06fea;
-      --text: #f5f5ff;
-      --frame: #1e2028;
-      --frame-edge: #323544;
+      --bg: #1b0b2f;
+      --panel: rgba(50, 34, 71, 0.92);
+      --accent: #00ff9f;
+      --text: #eedcff;
+      --frame: #150529;
+      --frame-edge: rgba(0, 255, 159, 0.35);
     }
 
     * { box-sizing: border-box; }
@@ -19,12 +20,11 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-family: "JetBrains Mono", ui-monospace, monospace;
       color: var(--text);
-      background:
-        radial-gradient(circle at 20% 20%, rgba(224,111,234,0.2), transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(0,247,255,0.15), transparent 40%),
-        var(--bg);
+      background-color: #1b0b2f;
+      background-image: radial-gradient(#3a4a3f 1px, transparent 1px);
+      background-size: 24px 24px;
       padding: 16px;
     }
 
@@ -32,9 +32,9 @@
       max-width: 1200px;
       margin: 0 auto;
       border: 2px solid var(--accent);
-      border-radius: 14px;
+      border-radius: 0;
       background: var(--panel);
-      box-shadow: 0 0 18px rgba(224,111,234,0.4);
+      box-shadow: 0 0 12px rgba(0, 255, 159, 0.25);
       padding: 14px;
     }
 
@@ -65,10 +65,11 @@
     .toolbar button {
       border-color: var(--accent);
       cursor: pointer;
+      color: var(--accent);
     }
 
     .toolbar button:hover {
-      background: #20253a;
+      background: rgba(0, 255, 159, 0.12);
     }
 
     .sim-wrap {

@@ -5,7 +5,7 @@ import {
   registerServiceWorker,
   setIdleWatchers,
   startHeaderFlicker,
-} from "./modules/core.js?v=20250327";
+} from "./modules/core.js?v=20260332";
 import { initHomeSlideshow, initCalendarForm } from "./modules/home.js";
 import { initPosterCarousel } from "./modules/artwork.js";
 import { initPhotoAlbum } from "./modules/photo-album.js";

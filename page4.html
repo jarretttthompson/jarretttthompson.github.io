@@ -1,42 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>projects</title>
-  <link rel="preload" href="fonts/VulfMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/VulfSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20250317" />
-  <script type="module" src="js/main.js?v=20250327"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260332" />
+  
 </head>
-<body data-page="page4">
-  <header class="text-box header-box glow-pulse">
-     <h1>projects</h1>
-  </header>
-
-  <nav class="nav-boxes" aria-label="Main navigation">
-    <div class="nav-box box-left glow-pulse">
-      <ul class="nav-list">
-        <li><a href="index.html">home</a></li>
-        <li><a href="page2.html">resume/cv</a></li>
-        <li><a href="page5.html">compositions</a></li>
-        <li><a href="friends.html">friends</a></li>
-      </ul>
-    </div>
-    <div class="nav-box box-right glow-pulse">
-      <ul class="nav-list">
-        <li><a href="photo-album.html">photo album</a></li>
-        <li><a href="music.html">music</a></li>
-        <li><a href="page3.html">artwork</a></li>
-        <li><a href="page4.html" aria-current="page">projects</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main>
-    <div class="scroll-window glow-pulse">
-
-      <h2>breakComposer</h2>
+<body class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8" data-page="page4" data-terminal-site>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <main class="site-main-window lofi-static flex flex-col">
+    <h1 class="sr-only">Projects</h1>
+    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
+      <div class="site-header-tagline">Projects</div>
+      <div class="site-header-logo-wrap" id="lightbulb">
+        <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
+      </div>
+    </header>
+    <nav class="nav-boxes" aria-label="Main navigation">
+      <span class="nav-loading">Loading navigation…</span>
+    </nav>
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 min-h-0">
+      <div class="scroll-window mixed-case-prose">
+<h2>breakComposer</h2>
       <a href="breakcomposer/index.html" class="project-link" target="_blank" rel="noopener noreferrer" style="display:block;margin-bottom:1em;">
         <img src="breakcomposer/logo-full.png" alt="breakComposer logo" style="width:min(420px, 90vw);height:130px;object-fit:cover;object-position:center;border-radius:12px;border:1px solid rgba(224,111,234,0.3);margin:0 auto 1em auto;display:block;">
       </a>
@@ -68,7 +56,13 @@
         to refresh this gallery.
       </p>
     </div>
+      </div>
     </div>
+    <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 py-3 shrink-0">
+      <div class="footer-line">Statesboro, GA · Music &amp; AV</div>
+      <div class="footer-url">thejrummer.github.io</div>
+    </footer>
   </main>
+  <script type="module" src="js/main.js?v=20260332"></script>
 </body>
 </html>

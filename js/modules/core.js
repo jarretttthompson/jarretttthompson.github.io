@@ -53,6 +53,11 @@ export function startHeaderFlicker() {
   const h1 = document.getElementById("lightbulb");
   if (!h1) return;
 
+  // Terminal site uses a fixed HUD title — skip legacy CRT cyan flicker.
+  if (document.body?.hasAttribute("data-terminal-site")) {
+    return;
+  }
+
   // Respect reduced motion and idle mode.
   if (
     window.matchMedia &&

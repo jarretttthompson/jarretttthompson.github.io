@@ -1,0 +1,335 @@
+/* breakComposer — mobile + design-language overrides
+   Applied AFTER the bundled Tailwind CSS. All selectors intentionally use
+   [class*="..."] or high-specificity chains so they win over the bundle
+   without touching the minified source. */
+
+/* ─── Design-language tokens (mirror site palette) ─── */
+:root {
+  --bc-cyan: #00ff9f;
+  --bc-pink: #ff41af;
+  --bc-deep: #0d0517;
+  --bc-soft: #1a0b2e;
+  --bc-border: #3d2a55;
+  --bc-text: #eedcff;
+  --bc-text-dim: #a080b8;
+  --bc-font-mono: 'Vulf Mono', ui-monospace, monospace;
+  --bc-font-sans: 'Vulf Sans', system-ui, sans-serif;
+}
+
+/* ─── Global base / body resets ─── */
+html, body, #root {
+  background: var(--bc-deep) !important;
+  color: var(--bc-text);
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  /* Tone down the extreme bundled contrast/saturation while keeping the spirit */
+  filter: contrast(1.3) brightness(1.1) saturate(1.4) !important;
+}
+
+/* ─── Toolbar: Luna-style gradient + inset bevel ─── */
+[class*="toolbar-safe-top"],
+[class*="toolbar-compact"],
+[class*="toolbar"] {
+  background: linear-gradient(
+    180deg,
+    rgba(26, 11, 46, 0.92) 0%,
+    rgba(13, 5, 23, 0.96) 100%
+  ) !important;
+  border-bottom: 1px solid rgba(0, 255, 159, 0.15) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 2px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Toolbar buttons: Luna pill style */
+[class*="toolbar"] button {
+  background: linear-gradient(
+    180deg,
+    rgba(42, 26, 62, 0.85) 0%,
+    rgba(26, 15, 40, 0.92) 100%
+  ) !important;
+  border: 1px solid rgba(0, 255, 159, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3) !important;
+  color: var(--bc-text) !important;
+  transition: border-color 0.15s, box-shadow 0.15s !important;
+}
+
+@media (hover: hover) {
+  [class*="toolbar"] button:hover {
+    border-color: rgba(0, 255, 159, 0.4) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 0 8px rgba(0, 255, 159, 0.12) !important;
+  }
+}
+
+/* Toolbar inputs (BPM, time sig) */
+[class*="toolbar"] input,
+[class*="toolbar"] select {
+  background: rgba(10, 6, 18, 0.8) !important;
+  border: 1px solid rgba(0, 255, 159, 0.15) !important;
+  border-radius: 6px !important;
+  color: var(--bc-cyan) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+[class*="toolbar"] input:focus,
+[class*="toolbar"] select:focus {
+  border-color: rgba(0, 255, 159, 0.45) !important;
+  outline: none !important;
+}
+
+/* CRT overlay softening — less aggressive on small screens */
+@media (max-width: 768px) {
+  #root::after {
+    opacity: 0.5 !important;
+  }
+}
+
+/* ─── Piano roll / notation area: recessed panel ─── */
+#root canvas {
+  border-radius: 4px;
+}
+
+#root svg {
+  filter: drop-shadow(0 0 2px rgba(224, 111, 234, 0.12));
+}
+
+/* ──────────────────────────────────────────────── */
+/* ─── MOBILE FLOATING DOCK ─── */
+/* ──────────────────────────────────────────────── */
+
+.bc-mobile-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1px;
+  padding: 6px 8px;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+  background: linear-gradient(
+    180deg,
+    rgba(26, 11, 46, 0.94) 0%,
+    rgba(10, 4, 20, 0.98) 100%
+  );
+  border-top: 1px solid rgba(0, 255, 159, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 -4px 20px rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.bc-dock-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 48px;
+  max-width: 90px;
+  padding: 6px 4px;
+  border: 1px solid rgba(0, 255, 159, 0.12);
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(42, 26, 62, 0.7) 0%,
+    rgba(26, 15, 40, 0.85) 100%
+  );
+  color: var(--bc-text-dim);
+  cursor: pointer;
+  font-family: var(--bc-font-mono);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.bc-dock-btn__icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.bc-dock-btn__label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+.bc-dock-btn--active {
+  border-color: var(--bc-pink) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 65, 175, 0.18) 0%,
+    rgba(255, 65, 175, 0.08) 100%
+  ) !important;
+  color: var(--bc-pink) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 12px rgba(255, 65, 175, 0.2) !important;
+}
+
+.bc-dock-btn:active {
+  transform: scale(0.95);
+}
+
+/* Hide dock on desktop (mouse-primary) */
+@media (pointer: fine) and (hover: hover) {
+  .bc-mobile-dock {
+    display: none !important;
+  }
+}
+
+/* ──────────────────────────────────────────────── */
+/* ─── MOBILE LAYOUT: phones (≤768px) ─── */
+/* ──────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  /* Give room for the bottom dock */
+  html, body, #root {
+    height: calc(100dvh) !important;
+  }
+
+  /* Toolbar: wrap items, bigger touch targets */
+  [class*="toolbar-safe-top"],
+  [class*="toolbar-compact"],
+  [class*="toolbar"] {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    padding: 6px 8px !important;
+    padding-top: max(6px, env(safe-area-inset-top)) !important;
+  }
+
+  [class*="toolbar"] button {
+    min-height: 36px !important;
+    min-width: 36px !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+  }
+
+  [class*="toolbar"] input,
+  [class*="toolbar"] select {
+    min-height: 36px !important;
+    font-size: 12px !important;
+  }
+
+  /* Staff/notation: cap height so the piano roll gets more room */
+  [class*="mobile-landscape-staff"],
+  #root > div > div:first-child {
+    max-height: 100px !important;
+  }
+}
+
+/* ─── LANDSCAPE phones: extreme vertical constraint ─── */
+@media (max-height: 500px) and (orientation: landscape) {
+  [class*="toolbar-safe-top"],
+  [class*="toolbar-compact"],
+  [class*="toolbar"] {
+    padding: 2px 6px !important;
+    gap: 3px !important;
+  }
+
+  [class*="toolbar"] button {
+    min-height: 28px !important;
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+  }
+
+  .bc-mobile-dock {
+    padding: 3px 6px !important;
+    gap: 1px !important;
+  }
+
+  .bc-dock-btn {
+    min-height: 36px !important;
+    padding: 3px !important;
+  }
+
+  .bc-dock-btn__icon { font-size: 13px; }
+  .bc-dock-btn__label { font-size: 8px; }
+}
+
+/* ─── PORTRAIT phones: give piano roll breathing room ─── */
+@media (max-width: 480px) and (orientation: portrait) {
+  [class*="toolbar"] {
+    font-size: 10px !important;
+  }
+
+  /* Hide large logo in notation gap — not enough room */
+  #breakcomposer-full-logo {
+    display: none !important;
+  }
+}
+
+/* ──────────────────────────────────────────────── */
+/* ─── TABLET (iPad, etc.) ─── */
+/* ──────────────────────────────────────────────── */
+
+@media (min-width: 769px) and (max-width: 1199px) and (pointer: coarse) {
+  [class*="toolbar"] button {
+    min-height: 40px !important;
+    min-width: 40px !important;
+    padding: 6px 10px !important;
+  }
+
+  .bc-dock-btn {
+    max-width: 110px;
+    min-height: 52px;
+  }
+
+  .bc-dock-btn__icon { font-size: 18px; }
+  .bc-dock-btn__label { font-size: 10px; }
+}
+
+/* ──────────────────────────────────────────────── */
+/* ─── DESKTOP (no dock, normal flow) ─── */
+/* ──────────────────────────────────────────────── */
+
+@media (pointer: fine) and (hover: hover) and (min-width: 1200px) {
+  /* Slightly larger toolbar on wide screens */
+  [class*="toolbar"] {
+    padding: 6px 12px !important;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  #root::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* ─── sr-only utility ─── */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

@@ -1,72 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>artwork</title>
-  <link rel="preload" href="fonts/VulfMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/VulfSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20250317" />
-  <script type="module" src="js/main.js?v=20250327"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artwork</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260332" />
 </head>
-<body data-page="page3">
-  <header class="text-box header-box glow-pulse">
-     <h1>artwork</h1>
-  </header>
-
-  <nav class="nav-boxes" aria-label="Main navigation">
-    <div class="nav-box box-left glow-pulse">
-      <ul class="nav-list">
-        <li><a href="index.html">home</a></li>
-        <li><a href="page2.html">resume/cv</a></li>
-        <li><a href="page5.html">compositions</a></li>
-        <li><a href="friends.html">friends</a></li>
-      </ul>
-    </div>
-    <div class="nav-box box-right glow-pulse">
-      <ul class="nav-list">
-        <li><a href="photo-album.html">photo album</a></li>
-        <li><a href="music.html">music</a></li>
-        <li><a href="page3.html" aria-current="page">artwork</a></li>
-        <li><a href="page4.html">projects</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main>
-    <div class="scroll-window glow-pulse">
-    <p class="center-text"> An amalgamation of all the weird things I make and call art, whether it be through traditional or digital methods. </p>
-    <br>
-    <h2>Graphic Design</h2>
-    <p> This is a collection of posters/artwork that I designed for Hip-Oh! or Space Gator using either Procreate or Adobe Fresco.
-    </p>
-    <p> Scroll through here to check them out, if you'd like to have a more in depth look at any of them; right click on the image and select 'Open image in new tab' ! </p>
-    <section class="poster-gallery" aria-label="Featured poster designs">
-      <h2 class="visually-hidden">Poster showreel</h2>
-
-      <div class="poster-carousel poster-carousel--manual">
-        <button class="poster-carousel__control poster-carousel__control--prev" type="button" aria-label="Show previous posters">
-          <span aria-hidden="true">‹</span>
-        </button>
-        <div class="poster-carousel__viewport" data-carousel="manual">
-          <div class="poster-carousel__track" id="posterCarouselManual"></div>
-        </div>
-        <button class="poster-carousel__control poster-carousel__control--next" type="button" aria-label="Show next posters">
-          <span aria-hidden="true">›</span>
-        </button>
-        <div class="poster-carousel__dots" id="posterCarouselDots" aria-label="Select poster group"></div>
+<body class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8" data-page="page3" data-terminal-site>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <main class="site-main-window lofi-static flex flex-col">
+    <h1 class="sr-only">Artwork</h1>
+    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
+      <div class="site-header-tagline">Artwork</div>
+      <div class="site-header-logo-wrap" id="lightbulb">
+        <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
-    </section>
+    </header>
+    <nav class="nav-boxes" aria-label="Main navigation">
+      <span class="nav-loading">Loading navigation…</span>
+    </nav>
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 min-h-0">
+      <div class="scroll-window artwork-page">
+        <header class="artwork-hero">
+          <h2 class="artwork-hero-title">
+            <span class="artwork-hero-dot" aria-hidden="true"></span>
+            Posters &amp; Video
+          </h2>
+          <div class="artwork-hero-rule" aria-hidden="true"></div>
+        </header>
 
-    <h2>Little Fish - Animated Music/Lyric Video</h2>
-     <p>This was my first (and really, only successful) attempt at creating an animation of sorts. I spent weeks in Adobe After Effects attempting to make something that was far above what my computer skills were capable of at the time. <br>
-      The process involved drawing things on my iPad in Adobe Fresco and making sure that I organized the layers in a way that would allow me to tie individual elements of a character to a keyframe in After Effects.<br>
-      I then watched hours of tutorials about how to use the camera within a 3d space so that I could have the lyrics sort of exist within a predefined space. <br>
-      None of this was made with any kind of prior understanding about how After Effects worked at the time, so I learned a lot, and leaned heavily into mistakes if I thought they created an interesting effect.  
-    </p>
-    <iframe class="youtube-embed" src="https://www.youtube.com/embed/FR_n7_dB_QA?list=RDFR_n7_dB_QA" title="Hip-Oh! - Come Together - Cover/Promo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-   
+        <section class="artwork-frame artwork-frame--a2 lofi-static" aria-label="Introduction">
+          <div class="hud-bracket-tl" aria-hidden="true"></div>
+          <div class="hud-bracket-tr" aria-hidden="true"></div>
+          <div class="hud-bracket-bl" aria-hidden="true"></div>
+          <div class="hud-bracket-br" aria-hidden="true"></div>
+          <div class="artwork-intro-row">
+            <span class="artwork-info-icon" aria-hidden="true">i</span>
+            <p class="body-copy m-0">
+              An <span class="text-[#00ff9f] font-medium">amalgamation</span> of the odd things I make and call art—traditional or digital. Most of it comes from late-night iteration and happy accidents.
+            </p>
+          </div>
+        </section>
+
+        <section class="artwork-frame artwork-frame--a1 lofi-static" aria-labelledby="artwork-posters-heading">
+          <div class="hud-bracket-tl" aria-hidden="true"></div>
+          <div class="hud-bracket-br" aria-hidden="true"></div>
+          <header class="artwork-section-head">
+            <h2 id="artwork-posters-heading" class="panel-heading panel-heading-accent m-0">Graphic Design</h2>
+            <p class="panel-sub case-preserve">
+              Posters and graphics for Hip-Oh! and Space Gator, drawn in Procreate and Adobe Fresco.
+            </p>
+          </header>
+
+          <section class="poster-gallery" aria-label="Poster gallery">
+            <h3 class="visually-hidden">Poster carousel</h3>
+            <div class="poster-carousel poster-carousel--manual">
+              <button class="poster-carousel__control poster-carousel__control--prev" type="button" aria-label="Previous posters">
+                <span aria-hidden="true">‹</span>
+              </button>
+              <div class="artwork-viewport-fade">
+                <div class="poster-carousel__viewport" data-carousel="manual">
+                  <div class="poster-carousel__track" id="posterCarouselManual"></div>
+                </div>
+              </div>
+              <button class="poster-carousel__control poster-carousel__control--next" type="button" aria-label="Next posters">
+                <span aria-hidden="true">›</span>
+              </button>
+              <div class="poster-carousel__dots" id="posterCarouselDots" aria-label="Poster pages"></div>
+            </div>
+          </section>
+
+          <p class="artwork-tip m-0">
+            Scroll the row to browse. For a larger view, <kbd>right-click</kbd> an image and choose <strong class="text-[#00ff9f] not-italic font-medium case-preserve">Open image in new tab</strong>.
+          </p>
+        </section>
+
+        <section class="artwork-frame artwork-frame--a3 lofi-static" aria-labelledby="artwork-fish-heading">
+          <div class="hud-bracket-tr" aria-hidden="true"></div>
+          <div class="hud-bracket-bl" aria-hidden="true"></div>
+          <div class="artwork-video-grid">
+            <div>
+              <header class="artwork-section-head">
+                <h2 id="artwork-fish-heading" class="panel-heading panel-heading-accent m-0 case-preserve">Little Fish</h2>
+                <p class="panel-sub case-preserve">Animated lyric video — Hip-Oh! &ldquo;Come Together&rdquo; promo</p>
+              </header>
+              <div class="body-copy space-y-3">
+                <p class="m-0">
+                  My first motion piece I was really happy with. I drew assets in <span class="text-[#ff41af] font-medium case-preserve">Adobe Fresco</span>, built the timeline in <span class="text-[#00ff9f] font-medium case-preserve">After Effects</span>, and learned the 3D camera as I went—lots of tutorials, lots of mistakes kept on purpose when they looked interesting.
+                </p>
+              </div>
+              <div class="artwork-fact-box case-preserve">
+                <strong>Details</strong>
+                HD video · H.264 · embedded from YouTube<br />
+                Process: layer prep in Fresco → AE comps, camera moves, and glitchy &ldquo;errors&rdquo; as part of the look.
+              </div>
+            </div>
+            <div class="artwork-embed-wrap">
+              <span class="artwork-embed-badge">YouTube</span>
+              <iframe
+                class="youtube-embed"
+                src="https://www.youtube.com/embed/FR_n7_dB_QA?list=RDFR_n7_dB_QA"
+                title="Hip-Oh! — Come Together (cover / promo)"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
+    <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 py-3 shrink-0">
+      <div class="footer-line">Statesboro, GA · Music &amp; AV</div>
+      <div class="footer-url">thejrummer.github.io</div>
+    </footer>
   </main>
+  <script type="module" src="js/main.js?v=20260332"></script>
 </body>
 </html>

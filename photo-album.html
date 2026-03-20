@@ -1,41 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>photo album</title>
-  <link rel="preload" href="fonts/VulfMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/VulfSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=20250317" />
-  <link rel="stylesheet" href="photo-album.css" />
-  <script type="module" src="js/main.js?v=20250327"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260332" />
+    <link rel="stylesheet" href="photo-album.css" />
+
 </head>
-<body data-page="photo-album" class="photo-album-page">
-  <header class="text-box header-box glow-pulse">
-     <h1>photo album</h1>
-  </header>
-
-  <nav class="nav-boxes" aria-label="Main navigation">
-    <div class="nav-box box-left glow-pulse">
-      <ul class="nav-list">
-        <li><a href="index.html">home</a></li>
-        <li><a href="page2.html">resume/cv</a></li>
-        <li><a href="page5.html">compositions</a></li>
-        <li><a href="friends.html">friends</a></li>
-      </ul>
-    </div>
-    <div class="nav-box box-right glow-pulse">
-      <ul class="nav-list">
-        <li><a href="photo-album.html" aria-current="page">photo album</a></li>
-        <li><a href="music.html">music</a></li>
-        <li><a href="page3.html">artwork</a></li>
-        <li><a href="page4.html">projects</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main class="album-main">
-    <section class="album-wall glow-pulse" aria-label="Photo album wall">
+<body class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8 text-on-surface photo-album-page" data-page="photo-album" data-terminal-site>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <main class="site-main-window lofi-static flex flex-col">
+    <h1 class="sr-only">Photo album</h1>
+    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
+      <div class="site-header-tagline">Photos</div>
+      <div class="site-header-logo-wrap" id="lightbulb">
+        <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
+      </div>
+    </header>
+    <nav class="nav-boxes" aria-label="Main navigation">
+      <span class="nav-loading">Loading navigation…</span>
+    </nav>
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 min-h-0">
+    <div class="album-main">
+<section class="album-wall glow-pulse" aria-label="Photo album wall">
       <p class="album-intro">
         This page is like that one wall in your nana's house that's got all the pictures of you and your
         siblings/cousins except I don't have any kids or grandkids and it's just random pictures that I took
@@ -45,7 +35,13 @@
         <p class="photo-gallery__loading">Loading photos...</p>
       </div>
     </section>
+    </div>
+    </div>
+    <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 py-3 shrink-0">
+      <div class="footer-line">Statesboro, GA · Music &amp; AV</div>
+      <div class="footer-url">thejrummer.github.io</div>
+    </footer>
   </main>
+  <script type="module" src="js/main.js?v=20260332"></script>
 </body>
 </html>
-

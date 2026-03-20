@@ -72,6 +72,31 @@
   flex-wrap: wrap;
 }
 
+/* Notice: link to terminal layout experiment (remove when no longer needed) */
+.experiment-banner {
+  max-width: min(95vw, 720px);
+  margin: 0.75rem auto 0;
+  padding: 0.65rem 1rem;
+  text-align: center;
+  font-family: 'Vulf Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(240, 230, 250, 0.95);
+  background: rgba(0, 255, 159, 0.08);
+  border: 2px solid rgba(0, 255, 159, 0.45);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 12px rgba(0, 255, 159, 0.2);
+}
+.experiment-banner a {
+  color: #7dffb8;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.experiment-banner a:hover {
+  color: #fff;
+}
+
 /* Utility: shared glowing border with pulse */
 .glow-pulse {
   position: relative;

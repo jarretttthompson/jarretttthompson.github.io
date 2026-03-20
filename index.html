@@ -1,118 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>thejrummer</title>
-  <link rel="stylesheet" href="style.css?v=20250326" />
-  <link rel="preload" as="image" href="optimized/slideshow/slide2-desktop.webp" type="image/webp">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260332" />
+  <link rel="preload" as="image" href="optimized/slideshow/slide2-desktop.webp" type="image/webp" />
 </head>
-<body data-page="index">
-  <header class="text-box header-box glow-pulse">
-     <h1 id="lightbulb">jarrett t. thompson</h1>
-  </header>
-
-  <nav class="nav-boxes" aria-label="Main navigation">
-    <div class="nav-box box-left glow-pulse">
-      <ul class="nav-list">
-        <li><a href="index.html" aria-current="page">home</a></li>
-        <li><a href="page2.html">resume/cv</a></li>
-        <li><a href="page5.html">compositions</a></li>
-        <li><a href="friends.html">friends</a></li>
-      </ul>
-    </div>
-
-    <div class="nav-box box-right glow-pulse">
-      <ul class="nav-list">
-        <li><a href="photo-album.html">photo album</a></li>
-        <li><a href="music.html">music</a></li>
-        <li><a href="page3.html">artwork</a></li>
-        <li><a href="page4.html">projects</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main>
-    <div class="scroll-window">
-      <p><br></p>
-      <h2>howdy !</h2>
-      <p><br></p>
-
-      <div class="content-container">
-        <div class="bio-container">
-          <div class="about-text-box">
-            <p>My name is Jarrett Thompson, I'm a musician, composer, audio engineer, artist, and maker living in Statesboro, GA. I'm currently employed as an AV Systems Engineer with 
-              the Executive IT Services Department at Georgia Southern University. 
-            </p>
-            <p>This website serves as a digital portfolio/scrapbook of things that I make, things that I like, 
-              or art/projects that my friends may be working on. 
-            </p>
-            <div class="social-links-in-bio">
-              <h3 class="socials-title">socials !</h3>
-              <a href="https://www.youtube.com/@thejrummer7297" target="_blank" rel="noopener noreferrer">youtube</a>
-              <a href="https://www.tiktok.com/@thejrummer?lang=en" target="_blank" rel="noopener noreferrer">tiktok</a>
-              <a href="https://github.com/jarretttthompson?tab=repositories" target="_blank" rel="noopener noreferrer">github</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="slideshow-container">
-          <div class="slideshow">
-              <img id="slide1" class="slide visible" src="" alt="Slide 1" loading="eager">
-              <img id="slide2" class="slide" src="" alt="Slide 2" loading="lazy">
-          </div>
-        </div>
+<body
+  class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8"
+  data-page="index"
+  data-terminal-site
+>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <main class="site-main-window lofi-static flex flex-col">
+    <h1 class="sr-only">Home</h1>
+    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
+      <div class="site-header-tagline case-preserve">Jarrett Thompson · Portfolio</div>
+      <div class="site-header-logo-wrap" id="lightbulb">
+        <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
+    </header>
 
-      <div class="calendar-at-bottom">
-        <div class="calendar-widget panel glow-pulse">
-          <h3 class="calendar-widget__title">calendar</h3>
-          <div class="calendar-embed-wrapper">
-            <iframe src="https://calendar.google.com/calendar/embed?mode=AGENDA&amp;bgcolor=%232a1a3e&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;src=426e2946bb067a75e341e40434288cb5db457131576722b266af50527137c7d9%40group.calendar.google.com&amp;ctz=America%2FNew_York"
-                    title="Google Calendar"
-                    class="calendar-embed"></iframe>
-          </div>
-        </div>
+    <nav class="nav-boxes" aria-label="Main navigation">
+      <span class="nav-loading">Loading navigation…</span>
+    </nav>
 
-        <div class="calendar-submit-widget panel glow-pulse">
-          <h3 class="calendar-submit__title">add to calendar</h3>
-          <p class="calendar-submit__hint">Enter the PIN, then add an event. It will appear on the calendar above.</p>
-          <form id="calendarSubmitForm" class="calendar-submit-form" action="https://script.google.com/macros/s/AKfycbzl9rXFa914ZFtQOzdGJHAZ_BtiZ_uB0VzPsn21cvEKWtPNkoukoqdmLPJ7G1kQ7IqA/exec" method="post">
-            <input type="hidden" name="form" value="1">
-            <div class="form-row">
-              <label for="cal-pin">PIN</label>
-              <input type="password" id="cal-pin" name="pin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required autocomplete="off">
-            </div>
-            <div class="form-row">
-              <label for="cal-title">Event title</label>
-              <input type="text" id="cal-title" name="title" required>
-            </div>
-            <div class="form-row">
-              <label for="cal-date">Date</label>
-              <input type="date" id="cal-date" name="date" required>
-            </div>
-            <div class="form-row form-row--times">
-              <div class="form-row">
-                <label for="cal-time-start">Start time</label>
-                <input type="time" id="cal-time-start" name="time_start">
-              </div>
-              <div class="form-row">
-                <label for="cal-time-end">End time</label>
-                <input type="time" id="cal-time-end" name="time_end">
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 space-y-6 md:space-y-8 z-10 min-h-0 relative">
+      <section class="neon-inner-panel relative p-4 md:p-6">
+        <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+        <h2 class="panel-heading text-lg md:text-xl mb-2 flex items-center gap-2">
+          <span class="panel-heading-accent">Welcome</span>
+        </h2>
+        <p class="panel-kicker mb-6">Howdy!</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <div class="lg:col-span-7 order-1">
+            <p class="panel-kicker mb-2">Photos</p>
+            <div class="slideshow-container">
+              <div class="slideshow">
+                <img id="slide1" class="slide visible" src="" alt="Slide 1" loading="eager" />
+                <img id="slide2" class="slide" src="" alt="Slide 2" loading="lazy" />
               </div>
             </div>
-            <div class="form-row">
-              <label for="cal-desc">Notes (optional)</label>
-              <textarea id="cal-desc" name="description" rows="2"></textarea>
+          </div>
+          <div class="lg:col-span-5 order-2 space-y-4">
+            <p class="panel-kicker mb-2">About</p>
+            <div class="body-copy space-y-3">
+              <p>
+                My name is <span class="case-preserve">Jarrett Thompson</span>. I'm a musician, composer, audio engineer, artist, and maker living in
+                <span class="case-preserve">Statesboro, GA</span>. I work as an AV systems engineer with
+                <span class="case-preserve">Executive IT Services</span> at <span class="case-preserve">Georgia Southern University</span>.
+              </p>
+              <p>
+                This site is a portfolio and scrapbook of things I make, things I like,
+                and projects my friends are working on.
+              </p>
             </div>
-            <button type="submit" class="calendar-submit__btn">Add event</button>
-          </form>
-          <p id="calendarSubmitMessage" class="calendar-submit__message" aria-live="polite"></p>
+            <div class="pt-3 border-t border-white/10">
+              <h3 class="panel-heading text-xs mb-2">Social</h3>
+              <div class="flex flex-wrap gap-2">
+                <a
+                  class="font-mono text-xs px-3 py-1.5 rounded border-2 border-primary-container/50 text-primary-container hover:bg-primary-container/15 transition-colors"
+                  href="https://www.youtube.com/@thejrummer7297"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >YouTube</a>
+                <a
+                  class="font-mono text-xs px-3 py-1.5 rounded border-2 border-primary-container/50 text-primary-container hover:bg-primary-container/15 transition-colors"
+                  href="https://www.tiktok.com/@thejrummer?lang=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >TikTok</a>
+                <a
+                  class="font-mono text-xs px-3 py-1.5 rounded border-2 border-primary-container/50 text-primary-container hover:bg-primary-container/15 transition-colors"
+                  href="https://github.com/jarretttthompson?tab=repositories"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >GitHub</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <section class="neon-inner-panel relative p-4 md:p-6">
+        <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+        <h2 class="panel-heading text-lg md:text-xl mb-4">Calendar</h2>
+        <div class="calendar-at-bottom space-y-6">
+          <div class="calendar-widget">
+            <h3 class="panel-kicker mb-2">Upcoming</h3>
+            <div class="calendar-embed-wrapper">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?mode=AGENDA&amp;bgcolor=%232a1a3e&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;src=426e2946bb067a75e341e40434288cb5db457131576722b266af50527137c7d9%40group.calendar.google.com&amp;ctz=America%2FNew_York"
+                title="Google Calendar"
+                class="calendar-embed"
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="calendar-submit-widget border-2 border-primary-container/35 bg-black/40 p-4 rounded-lg">
+            <h3 class="panel-heading text-sm mb-1">Add an event</h3>
+            <p class="body-copy text-sm mb-4 opacity-90">Enter the PIN, then add an event. It will show up in the calendar above.</p>
+            <form id="calendarSubmitForm" class="calendar-submit-form space-y-3" action="https://script.google.com/macros/s/AKfycbzl9rXFa914ZFtQOzdGJHAZ_BtiZ_uB0VzPsn21cvEKWtPNkoukoqdmLPJ7G1kQ7IqA/exec" method="post">
+              <input type="hidden" name="form" value="1" />
+              <div class="form-row flex flex-col gap-1">
+                <label class="font-mono text-[10px] text-primary-container case-preserve" for="cal-pin">PIN</label>
+                <input
+                  class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:ring-1 focus:ring-primary-container/50 focus:outline-none"
+                  type="password"
+                  id="cal-pin"
+                  name="pin"
+                  inputmode="numeric"
+                  pattern="[0-9]{4}"
+                  maxlength="4"
+                  required
+                  autocomplete="off"
+                />
+              </div>
+              <div class="form-row flex flex-col gap-1">
+                <label class="font-mono text-[10px] text-primary-container" for="cal-title">Event title</label>
+                <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="text" id="cal-title" name="title" required />
+              </div>
+              <div class="form-row flex flex-col gap-1">
+                <label class="font-mono text-[10px] text-primary-container" for="cal-date">Date</label>
+                <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="date" id="cal-date" name="date" required />
+              </div>
+              <div class="form-row form-row--times grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="form-row flex flex-col gap-1">
+                  <label class="font-mono text-[10px] text-primary-container" for="cal-time-start">Start time</label>
+                  <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="time" id="cal-time-start" name="time_start" />
+                </div>
+                <div class="form-row flex flex-col gap-1">
+                  <label class="font-mono text-[10px] text-primary-container" for="cal-time-end">End time</label>
+                  <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="time" id="cal-time-end" name="time_end" />
+                </div>
+              </div>
+              <div class="form-row flex flex-col gap-1">
+                <label class="font-mono text-[10px] text-primary-container" for="cal-desc">Notes (optional)</label>
+                <textarea
+                  class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none min-h-[4rem]"
+                  id="cal-desc"
+                  name="description"
+                  rows="2"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="calendar-submit__btn w-full sm:w-auto font-mono text-xs tracking-wider border-2 border-primary-container text-primary-container px-4 py-2 rounded hover:bg-primary-container/15 transition-colors"
+              >
+                Add event
+              </button>
+            </form>
+            <p id="calendarSubmitMessage" class="calendar-submit__message font-mono text-xs mt-3 min-h-[1.25em]" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 py-3 shrink-0">
+      <div class="footer-line">Statesboro, GA · Music &amp; AV</div>
+      <div class="footer-url">thejrummer.github.io</div>
+    </footer>
   </main>
 
-  <script type="module" src="js/main.js?v=20250327"></script>
+  <script type="module" src="js/main.js?v=20260332"></script>
 </body>
 </html>

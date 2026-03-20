@@ -10,7 +10,7 @@
     { label: 'breakComposer', href: base ? 'index.html' : 'breakcomposer/index.html' },
     { label: 'Projects', href: base + 'page4.html' },
     { label: 'Home', href: base + 'index.html' },
-    { label: 'Resume', href: base + 'page2.html' },
+    { label: 'resume/cv', href: base + 'page2.html' },
     { label: 'Artwork', href: base + 'page3.html' },
   ];
 
