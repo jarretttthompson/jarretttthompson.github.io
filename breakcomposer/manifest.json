@@ -6,5 +6,12 @@
   "display": "standalone",
   "orientation": "landscape",
   "background_color": "#0a0612",
-  "theme_color": "#1a0f28"
+  "theme_color": "#1a0f28",
+  "icons": [
+    {
+      "src": "/breakcomposer/logo-simple.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/breakcomposer/favicon.svg" />
+    <link rel="icon" type="image/png" href="/breakcomposer/logo-simple.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="manifest" href="/breakcomposer/manifest.json" />
     <title>breakComposer</title>
@@ -17,6 +17,866 @@
         s.src = 'js/dev-toolbar.js';
         document.body.appendChild(s);
       }
+    </script>
+    <script>
+      // Inject the full breakComposer logo into the app UI (above the notation area).
+      (() => {
+        const FULL_SRC = '/breakcomposer/logo-full.png';
+        const ID = 'breakcomposer-full-logo';
+        const MAX_TRIES = 200; // ~40 seconds at 200ms
+
+        let tries = 0;
+        let placementInterval = null;
+        let processedSrc = null;
+
+        function findToolbarEl(root) {
+          // In the bundled CSS this shows up as `toolbar-safe-top` / `toolbar-compact`.
+          return (
+            root.querySelector('[class*="toolbar-safe-top"]') ||
+            root.querySelector('[class*="toolbar-compact"]') ||
+            root.querySelector('[class*="toolbar"]') ||
+            null
+          );
+        }
+
+        function findBestNotationRect(root) {
+          const candidates = Array.from(root.querySelectorAll('svg, canvas'));
+          if (!candidates.length) return null;
+
+          // Prefer the big notation/staff rendering surface.
+          const scored = candidates
+            .map((el) => {
+              const r = el.getBoundingClientRect();
+              const area = r.width * r.height;
+              const bigBonus = r.height > 80 ? 1e9 : 0;
+              const wideBonus = r.width > 250 ? 1e7 : 0;
+              return { r, score: area + bigBonus + wideBonus };
+            })
+            .sort((a, b) => b.score - a.score);
+
+          return scored[0]?.r || null;
+        }
+
+        function processFullLogoToTransparentCropped(src) {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+              try {
+                const w = img.naturalWidth;
+                const h = img.naturalHeight;
+
+                const canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                if (!ctx) return resolve(src);
+
+                ctx.drawImage(img, 0, 0);
+                const imgData = ctx.getImageData(0, 0, w, h);
+                const data = imgData.data;
+
+                // We want:
+                // - pixels outside the logo silhouette => fully transparent
+                // - pixels inside the silhouette where the original asset had the dark box background => solid black
+                // - pixels inside the silhouette where the logo content exists => keep original colors
+                const isNearBlack = (r, g, b) => {
+                  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                  return lum < 18 && r < 45 && g < 45 && b < 45;
+                };
+
+                // contentMask: logo-content pixels (not near-black box background)
+                const contentMask = new Uint8Array(w * h);
+                let hasContent = false;
+
+                for (let y = 0; y < h; y++) {
+                  for (let x = 0; x < w; x++) {
+                    const p = (y * w + x) * 4;
+                    const r = data[p], g = data[p + 1], b = data[p + 2], a = data[p + 3];
+                    if (a === 0) continue;
+                    if (!isNearBlack(r, g, b)) {
+                      contentMask[y * w + x] = 1;
+                      hasContent = true;
+                    }
+                  }
+                }
+
+                if (!hasContent) return resolve(src);
+
+                // Build an integral image for fast dilation-like silhouette mask.
+                // We dilate around content pixels so the silhouette follows the logo contours,
+                // then we fill within that silhouette.
+                const radius = 8; // larger => silhouette expands more
+                const iw = w + 1;
+                const ih = h + 1;
+                const integral = new Uint32Array(iw * ih);
+
+                for (let y = 1; y <= h; y++) {
+                  let rowSum = 0;
+                  for (let x = 1; x <= w; x++) {
+                    rowSum += contentMask[(y - 1) * w + (x - 1)];
+                    integral[y * iw + x] = integral[(y - 1) * iw + x] + rowSum;
+                  }
+                }
+
+                const rectSum = (x0, y0, x1, y1) => {
+                  // inclusive coords
+                  const X0 = Math.max(0, x0);
+                  const Y0 = Math.max(0, y0);
+                  const X1 = Math.min(w - 1, x1);
+                  const Y1 = Math.min(h - 1, y1);
+                  if (X1 < X0 || Y1 < Y0) return 0;
+                  const A = integral[(Y0) * iw + (X0)];
+                  const B = integral[(Y0) * iw + (X1 + 1)];
+                  const C = integral[(Y1 + 1) * iw + (X0)];
+                  const D = integral[(Y1 + 1) * iw + (X1 + 1)];
+                  return D - B - C + A;
+                };
+
+                const mask = new Uint8Array(w * h);
+                let minX = w, minY = h, maxX = 0, maxY = 0;
+
+                for (let y = 0; y < h; y++) {
+                  for (let x = 0; x < w; x++) {
+                    const idx = y * w + x;
+                    const sum = rectSum(x - radius, y - radius, x + radius, y + radius);
+                    if (sum > 0) {
+                      mask[idx] = 1;
+                      if (x < minX) minX = x;
+                      if (y < minY) minY = y;
+                      if (x > maxX) maxX = x;
+                      if (y > maxY) maxY = y;
+                    }
+                  }
+                }
+
+                if (maxX <= minX || maxY <= minY) return resolve(src);
+
+                // Pad slightly so we don't clip glow edges.
+                const pad = 4;
+                minX = Math.max(0, minX - pad);
+                minY = Math.max(0, minY - pad);
+                maxX = Math.min(w - 1, maxX + pad);
+                maxY = Math.min(h - 1, maxY + pad);
+
+                const cropW = maxX - minX + 1;
+                const cropH = maxY - minY + 1;
+
+                // Apply the silhouette mask:
+                // - outside silhouette => transparent
+                // - inside silhouette => if near-black -> solid black, else keep original
+                for (let y = 0; y < h; y++) {
+                  for (let x = 0; x < w; x++) {
+                    const idx = y * w + x;
+                    const p = idx * 4;
+                    const r = data[p], g = data[p + 1], b = data[p + 2];
+
+                    if (mask[idx] === 0) {
+                      data[p + 3] = 0;
+                      continue;
+                    }
+
+                    if (isNearBlack(r, g, b)) {
+                      data[p] = 0;
+                      data[p + 1] = 0;
+                      data[p + 2] = 0;
+                      data[p + 3] = 255;
+                    } else {
+                      data[p + 3] = 255;
+                    }
+                  }
+                }
+
+                const out = document.createElement('canvas');
+                out.width = cropW;
+                out.height = cropH;
+                const outCtx = out.getContext('2d', { willReadFrequently: false });
+                if (!outCtx) return resolve(src);
+
+                const tmp = document.createElement('canvas');
+                tmp.width = w;
+                tmp.height = h;
+                const tmpCtx = tmp.getContext('2d', { willReadFrequently: true });
+                if (!tmpCtx) return resolve(src);
+                tmpCtx.putImageData(imgData, 0, 0);
+                outCtx.drawImage(tmp, minX, minY, cropW, cropH, 0, 0, cropW, cropH);
+
+                resolve(out.toDataURL('image/png'));
+              } catch {
+                resolve(src);
+              }
+            };
+            img.onerror = () => resolve(src);
+            img.src = src;
+          });
+        }
+
+        function positionOverlay(img, staffRect, toolbarRect) {
+          if (!staffRect) return;
+
+          // Put the logo in the gap between toolbar and the staff/notation rendering.
+          const gapTop = Math.min(toolbarRect.bottom + 8, staffRect.top - 6);
+          const gapBottom = staffRect.top - 6;
+          const gapHeight = Math.max(0, gapBottom - gapTop);
+          if (gapHeight <= 0) return;
+
+          // Keep padding so it doesn't touch the purple/rotating header background.
+          const padding = 10;
+          const usableHeight = Math.max(0, gapHeight - padding * 2);
+          if (usableHeight <= 0) return;
+
+          // Make the logo a bit smaller than the full gap.
+          const aspect = img.naturalWidth > 0 ? (img.naturalWidth / img.naturalHeight) : 1;
+          let height = usableHeight * 0.80; // smaller
+          height = Math.max(60, Math.min(usableHeight, height));
+          let width = height * aspect;
+
+          // Clamp width so we don't spill past the staff area.
+          const maxWidth = Math.min(staffRect.width, (window.innerWidth || 1200) * 0.85);
+          if (width > maxWidth) {
+            width = maxWidth;
+            height = width / Math.max(1e-6, aspect);
+          }
+
+          const left = staffRect.left; // align logo left edge with staff left edge
+          const top = gapTop + padding + (usableHeight - height) / 2;
+
+          img.style.left = `${left}px`;
+          img.style.top = `${top}px`;
+          img.style.width = `${width}px`;
+          img.style.height = `${height}px`;
+
+          // With the transparent/cropped image, `contain` lets it fit perfectly without touching.
+          img.style.objectFit = 'contain';
+          img.style.objectPosition = 'left center';
+          img.style.borderRadius = '0px';
+          img.style.border = 'none';
+          img.style.opacity = '1';
+        }
+
+        // Create/reuse fixed overlay element.
+        let imgEl = document.getElementById(ID);
+        if (!imgEl) {
+          imgEl = document.createElement('img');
+          imgEl.id = ID;
+          imgEl.alt = 'breakComposer logo';
+          imgEl.draggable = false;
+          imgEl.style.position = 'fixed';
+          imgEl.style.zIndex = '2147483646';
+          imgEl.style.pointerEvents = 'none';
+          imgEl.style.display = 'block';
+          imgEl.style.opacity = '0';
+          imgEl.style.filter = 'drop-shadow(0 0 10px rgba(224, 111, 234, 0.18))';
+          imgEl.style.transform = 'translateZ(0)';
+          imgEl.style.willChange = 'top, left, width, height, opacity';
+          document.body.appendChild(imgEl);
+        }
+
+        // Process/crop to transparent background once, then reuse it.
+        processFullLogoToTransparentCropped(FULL_SRC).then((src) => {
+          processedSrc = src;
+          imgEl.src = processedSrc || FULL_SRC;
+        });
+
+        placementInterval = window.setInterval(() => {
+          try {
+            const root = document.getElementById('root');
+            if (!root) return;
+
+            const toolbarEl = findToolbarEl(root);
+            const staffRect = findBestNotationRect(root);
+
+            if (!staffRect) {
+              if (tries++ >= MAX_TRIES) window.clearInterval(placementInterval);
+              return;
+            }
+
+            const toolbarRect = toolbarEl ? toolbarEl.getBoundingClientRect() : { bottom: 120 };
+            positionOverlay(imgEl, staffRect, toolbarRect);
+
+            // Stop once we've positioned once the image is ready.
+            if (imgEl.complete && imgEl.naturalWidth && tries++ > 10) {
+              window.clearInterval(placementInterval);
+            }
+          } catch (e) {
+            if (tries++ >= MAX_TRIES) window.clearInterval(placementInterval);
+          }
+        }, 200);
+      })();
+    </script>
+    <script>
+      // Mobile Select + Copy controls
+      (() => {
+        const SELECT_ID = 'breakcomposer-mobile-select-btn';
+        const COPY_ID = 'breakcomposer-mobile-copy-btn';
+
+        let selectMode = false;
+        let copyMode = false; // copy-next-drag, auto-disables after touchend
+
+        let canvasEl = null;
+        let listenersAttached = false;
+        let gestureActive = false;
+        let activePointerId = null;
+
+        const STATE = {
+          selectModeEnabled: () => selectMode,
+          copyModeEnabled: () => copyMode,
+          setCopyMode: (v) => {
+            copyMode = v;
+            updateButtonStyles();
+          },
+          setSelectMode: (v) => {
+            selectMode = v;
+            updateButtonStyles();
+          }
+        };
+
+        const SELECT_STYLE_ON = {
+          background: 'rgba(224, 111, 234, 0.18)',
+          borderColor: 'rgba(224, 111, 234, 0.65)'
+        };
+        const SELECT_STYLE_OFF = {
+          background: 'rgba(26, 15, 40, 0.82)',
+          borderColor: 'rgba(224, 111, 234, 0.35)'
+        };
+
+        function $id(id) {
+          return document.getElementById(id);
+        }
+
+        function findToolbarEl(root) {
+          return (
+            root.querySelector('[class*="toolbar-safe-top"]') ||
+            root.querySelector('[class*="toolbar-compact"]') ||
+            root.querySelector('[class*="toolbar"]') ||
+            null
+          );
+        }
+
+        function findBpmAnchor(toolbarEl) {
+          const els = Array.from(toolbarEl.querySelectorAll('*'));
+          return (
+            els.find((el) => {
+              const t = (el.textContent || '').trim();
+              return t === 'BPM' || /\\bBPM\\b/i.test(t);
+            }) || null
+          );
+        }
+
+        function updateButtonStyles() {
+          const selectBtn = $id(SELECT_ID);
+          const copyBtn = $id(COPY_ID);
+          if (selectBtn) {
+            Object.assign(selectBtn.style, selectMode ? SELECT_STYLE_ON : SELECT_STYLE_OFF);
+            selectBtn.setAttribute('aria-pressed', String(!!selectMode));
+          }
+          if (copyBtn) {
+            Object.assign(copyBtn.style, copyMode ? SELECT_STYLE_ON : SELECT_STYLE_OFF);
+            copyBtn.setAttribute('aria-pressed', String(!!copyMode));
+          }
+        }
+
+        function createButtons() {
+          if ($id(SELECT_ID) && $id(COPY_ID)) return;
+
+          const selectBtn = document.createElement('button');
+          selectBtn.id = SELECT_ID;
+          selectBtn.type = 'button';
+          selectBtn.textContent = 'Select';
+          selectBtn.setAttribute('aria-label', 'Select notes (mobile)');
+
+          const copyBtn = document.createElement('button');
+          copyBtn.id = COPY_ID;
+          copyBtn.type = 'button';
+          copyBtn.textContent = 'Copy';
+          copyBtn.setAttribute('aria-label', 'Copy selected notes (mobile)');
+
+          const base = {
+            fontFamily: 'Vulf Mono, Courier New, monospace',
+            fontSize: '12px',
+            padding: '4px 8px',
+            borderRadius: '10px',
+            border: '1px solid rgba(224, 111, 234, 0.35)',
+            color: '#f0e6f6',
+            background: 'rgba(26, 15, 40, 0.82)',
+            boxShadow: '0 0 10px rgba(224, 111, 234, 0.08)',
+            cursor: 'pointer'
+          };
+
+          Object.assign(selectBtn.style, base);
+          Object.assign(copyBtn.style, base);
+
+          selectBtn.addEventListener('click', () => STATE.setSelectMode(!selectMode));
+          copyBtn.addEventListener('click', () => STATE.setCopyMode(!copyMode));
+
+          const toolbarWrap = document.createElement('div');
+          toolbarWrap.id = 'breakcomposer-mobile-tools-wrap';
+          toolbarWrap.style.display = 'flex';
+          toolbarWrap.style.alignItems = 'center';
+          toolbarWrap.style.gap = '8px';
+          toolbarWrap.style.marginLeft = '6px';
+          toolbarWrap.appendChild(selectBtn);
+          toolbarWrap.appendChild(copyBtn);
+
+          document.body.appendChild(toolbarWrap);
+        }
+
+        function tryInsertButtonsInToolbar() {
+          const root = document.getElementById('root');
+          if (!root) return false;
+
+          const toolbarEl = findToolbarEl(root);
+          if (!toolbarEl) return false;
+
+          const bpmEl = findBpmAnchor(toolbarEl);
+          if (!bpmEl || !bpmEl.parentElement) return false;
+
+          createButtons();
+
+          const wrap = document.getElementById('breakcomposer-mobile-tools-wrap');
+          if (!wrap || wrap.dataset.inserted === 'true') return true;
+
+          // Insert the wrapper right before the BPM element, which is between title and BPM.
+          bpmEl.parentElement.insertBefore(wrap, bpmEl);
+          wrap.dataset.inserted = 'true';
+          updateButtonStyles();
+          return true;
+        }
+
+        function findPianoRollCanvas() {
+          const root = document.getElementById('root');
+          if (!root) return null;
+
+          const toolbarEl = findToolbarEl(root);
+          const toolbarRect = toolbarEl ? toolbarEl.getBoundingClientRect() : { bottom: 0 };
+
+          const canvases = Array.from(root.querySelectorAll('canvas'));
+          if (!canvases.length) return null;
+
+          // Choose the biggest canvas in the main area below the toolbar.
+          let best = null;
+          for (const c of canvases) {
+            const r = c.getBoundingClientRect();
+            if (!r.width || !r.height) continue;
+            if (r.top < toolbarRect.bottom + 80) continue; // likely not the piano roll
+            const area = r.width * r.height;
+            const score = area + (r.height > 250 ? 1e7 : 0) + (r.top > toolbarRect.bottom + 150 ? 1e9 : 0);
+            if (!best || score > best.score) best = { canvas: c, score, r };
+          }
+          return best?.canvas || null;
+        }
+
+        function dispatchMouse(target, type, x, y, options) {
+          const event = new MouseEvent(type, {
+            bubbles: true,
+            cancelable: true,
+            clientX: x,
+            clientY: y,
+            ...options
+          });
+          target.dispatchEvent(event);
+        }
+
+        function onTouchStart(e) {
+          if (!selectMode && !copyMode) return;
+          if (!canvasEl) return;
+
+          const t = e.touches && e.touches.length ? e.touches[0] : null;
+          if (!t) return;
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          gestureActive = true;
+
+          const opts = selectMode
+            ? { button: 2, buttons: 2 }
+            : { button: 0, buttons: 1, metaKey: true, ctrlKey: true };
+
+          dispatchMouse(canvasEl, 'mousedown', t.clientX, t.clientY, opts);
+        }
+
+        function onTouchMove(e) {
+          if (!gestureActive) return;
+          if (!selectMode && !copyMode) return;
+          if (!canvasEl) return;
+
+          const t = e.touches && e.touches.length ? e.touches[0] : null;
+          if (!t) return;
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          const opts = selectMode
+            ? { buttons: 2, button: 2 }
+            : { buttons: 1, button: 0, metaKey: true, ctrlKey: true };
+
+          dispatchMouse(canvasEl, 'mousemove', t.clientX, t.clientY, opts);
+        }
+
+        function onTouchEndOrCancel(e) {
+          if (!gestureActive) return;
+          if (!selectMode && !copyMode) return;
+          if (!canvasEl) return;
+
+          e.preventDefault();
+          e.stopPropagation();
+
+          gestureActive = false;
+          const t = (e.changedTouches && e.changedTouches.length ? e.changedTouches[0] : null) || null;
+          const x = t ? t.clientX : 0;
+          const y = t ? t.clientY : 0;
+
+          const opts = selectMode
+            ? { button: 2, buttons: 0 }
+            : { button: 0, buttons: 0, metaKey: true, ctrlKey: true };
+
+          dispatchMouse(canvasEl, 'mouseup', x, y, opts);
+
+          // Copy is momentary; disable after the gesture ends.
+          if (copyMode) {
+            STATE.setCopyMode(false);
+          }
+        }
+
+        function attachCanvasListenersIfNeeded() {
+          if (!canvasEl) return;
+          if (listenersAttached) return;
+
+          canvasEl.addEventListener('touchstart', onTouchStart, { passive: false, capture: true });
+          canvasEl.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
+          canvasEl.addEventListener('touchend', onTouchEndOrCancel, { passive: false, capture: true });
+          canvasEl.addEventListener('touchcancel', onTouchEndOrCancel, { passive: false, capture: true });
+
+          // Many mobile browsers deliver interaction via Pointer Events instead of touch-only.
+          // When Select is enabled, we must suppress normal taps so the app can ONLY go through
+          // our synthetic "select"/"copy" branches.
+          canvasEl.addEventListener('pointerdown', (e) => {
+            if (!selectMode && !copyMode) return;
+            if (e.pointerType === 'mouse') return; // don't interfere with desktop
+            if (activePointerId !== null) return;
+            activePointerId = e.pointerId;
+            gestureActive = true;
+
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation?.();
+
+            const opts = selectMode
+              ? { button: 2, buttons: 2 }
+              : { button: 0, buttons: 1, metaKey: true, ctrlKey: true };
+            dispatchMouse(canvasEl, 'mousedown', e.clientX, e.clientY, opts);
+          }, { passive: false, capture: true });
+
+          canvasEl.addEventListener('pointermove', (e) => {
+            if (!gestureActive) return;
+            if (!selectMode && !copyMode) return;
+            if (e.pointerType === 'mouse') return;
+            if (activePointerId !== e.pointerId) return;
+            if (!canvasEl) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation?.();
+
+            const opts = selectMode
+              ? { buttons: 2, button: 2 }
+              : { buttons: 1, button: 0, metaKey: true, ctrlKey: true };
+            dispatchMouse(canvasEl, 'mousemove', e.clientX, e.clientY, opts);
+          }, { passive: false, capture: true });
+
+          const endPointer = (e) => {
+            if (!gestureActive) return;
+            if (e.pointerType === 'mouse') return;
+            if (activePointerId !== e.pointerId) return;
+            if (!canvasEl) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation?.();
+
+            gestureActive = false;
+            activePointerId = null;
+
+            const opts = selectMode
+              ? { button: 2, buttons: 0 }
+              : { button: 0, buttons: 0, metaKey: true, ctrlKey: true };
+            dispatchMouse(canvasEl, 'mouseup', e.clientX, e.clientY, opts);
+
+            // Copy is momentary; disable after the gesture ends.
+            if (copyMode) {
+              STATE.setCopyMode(false);
+            }
+          };
+
+          canvasEl.addEventListener('pointerup', endPointer, { passive: false, capture: true });
+          canvasEl.addEventListener('pointercancel', endPointer, { passive: false, capture: true });
+
+          listenersAttached = true;
+        }
+
+        // Initialize
+        createButtons();
+        updateButtonStyles();
+
+        let canvasFindInterval = window.setInterval(() => {
+          try {
+            // Insert toolbar buttons as soon as toolbar is ready.
+            tryInsertButtonsInToolbar();
+
+            // Find interactive piano-roll canvas.
+            const nextCanvas = findPianoRollCanvas();
+            if (nextCanvas && nextCanvas !== canvasEl) {
+              canvasEl = nextCanvas;
+              listenersAttached = false;
+              gestureActive = false;
+            }
+            attachCanvasListenersIfNeeded();
+          } catch {}
+        }, 200);
+
+        // Keep searching for a bit; stop once we successfully attach listeners.
+        window.setTimeout(() => {
+          try {
+            if (listenersAttached) window.clearInterval(canvasFindInterval);
+          } catch {}
+        }, 15000);
+      })();
+    </script>
+    <script>
+      // "How to use" overlay instructions.
+      // Implemented as an optional fixed UI overlay so we don't need to modify the bundled app code.
+      (() => {
+        const BTN_ID = 'breakcomposer-help-button';
+        const MODAL_ID = 'breakcomposer-help-modal';
+        const STORAGE_KEY = 'breakcomposer_help_dismissed_v1';
+
+        function $(id) {
+          return document.getElementById(id);
+        }
+
+        function createStyles() {
+          const styleId = 'breakcomposer-help-styles';
+          if ($(styleId)) return;
+          const style = document.createElement('style');
+          style.id = styleId;
+          style.textContent = `
+            #${BTN_ID} {
+              position: relative;
+              z-index: 2147483647;
+              pointer-events: auto;
+              border: 1px solid rgba(224, 111, 234, 0.35);
+              color: #f0e6f6;
+              background: rgba(26, 15, 40, 0.82);
+              backdrop-filter: blur(6px);
+              -webkit-backdrop-filter: blur(6px);
+              padding: 10px 12px;
+              border-radius: 12px;
+              cursor: pointer;
+              font-family: Vulf Mono, Courier New, monospace;
+              box-shadow: 0 0 18px rgba(224, 111, 234, 0.14);
+            }
+            #${BTN_ID}:hover { border-color: rgba(224, 111, 234, 0.6); }
+
+            #${MODAL_ID} {
+              position: fixed;
+              inset: 0;
+              z-index: 2147483647;
+              display: none;
+              pointer-events: auto;
+              background: rgba(0,0,0,0.55);
+            }
+            #${MODAL_ID}[data-open="true"] { display: block; }
+            #${MODAL_ID} .panel {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              width: min(720px, 92vw);
+              max-height: min(78vh, 720px);
+              overflow: auto;
+              background: rgba(10, 6, 18, 0.92);
+              border: 1px solid rgba(224, 111, 234, 0.35);
+              border-radius: 16px;
+              padding: 18px 18px 16px 18px;
+              color: #f0e6f6;
+              box-shadow: 0 0 28px rgba(224, 111, 234, 0.16);
+            }
+            #${MODAL_ID} .title {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 12px;
+              margin-bottom: 10px;
+            }
+            #${MODAL_ID} h3 {
+              margin: 0;
+              font-size: 16px;
+              letter-spacing: 0.3px;
+            }
+            #${MODAL_ID} button.close {
+              border: 1px solid rgba(224, 111, 234, 0.35);
+              background: rgba(224, 111, 234, 0.12);
+              color: #f0e6f6;
+              border-radius: 10px;
+              padding: 6px 10px;
+              cursor: pointer;
+              font-family: Vulf Mono, Courier New, monospace;
+            }
+            #${MODAL_ID} .content {
+              font-size: 14px;
+              line-height: 1.45;
+              color: rgba(240, 230, 246, 0.92);
+            }
+            #${MODAL_ID} ol {
+              margin: 10px 0 0 18px;
+              padding: 0;
+            }
+            #${MODAL_ID} li { margin: 8px 0; }
+            #${MODAL_ID} .hint {
+              margin-top: 10px;
+              color: rgba(160, 128, 184, 0.95);
+              font-size: 13px;
+            }
+            #${MODAL_ID} .kbd {
+              border: 1px solid rgba(61, 42, 85, 0.9);
+              background: rgba(61, 42, 85, 0.25);
+              padding: 1px 6px;
+              border-radius: 8px;
+              font-family: Vulf Mono, Courier New, monospace;
+              color: #f0e6f6;
+              font-size: 12px;
+            }
+          `;
+          document.head.appendChild(style);
+        }
+
+        function openModal() {
+          const modal = $(MODAL_ID);
+          if (!modal) return;
+          modal.setAttribute('data-open', 'true');
+          modal.querySelector('button.close')?.focus();
+        }
+
+        function closeModal() {
+          const modal = $(MODAL_ID);
+          if (!modal) return;
+          modal.setAttribute('data-open', 'false');
+          try { localStorage.setItem(STORAGE_KEY, '1'); } catch {}
+        }
+
+        function ensureUI() {
+          if ($('breakcomposer-help-button')) return;
+          createStyles();
+
+          const btn = document.createElement('button');
+          btn.id = BTN_ID;
+          btn.type = 'button';
+          btn.textContent = '?';
+          btn.setAttribute('aria-label', 'How to use breakComposer');
+          btn.addEventListener('click', () => openModal());
+
+          const modal = document.createElement('div');
+          modal.id = MODAL_ID;
+          modal.setAttribute('data-open', 'false');
+
+          modal.innerHTML = `
+            <div class="panel" role="dialog" aria-modal="true" aria-label="How to use breakComposer">
+              <div class="title">
+                <h3>How to use breakComposer</h3>
+                <button class="close" type="button">Close</button>
+              </div>
+              <div class="content">
+                <ol>
+                  <li>Place notes by clicking within the piano roll, the notation at the top will update automatically.</li>
+                  <li>Select multiple notes by right-clicking (or toggling the select button in mobile), and dragging over the notes you want to select in the piano roll.</li>
+                  <li>Once the notes are selected you can move them uniformly across the piano roll, either vertically or horizontally.</li>
+                  <li>Additionally you can copy and paste notes by holding command/ctrl while dragging and it will leave the original notes and paste a copy wherever your mouse releases the new group. </li>
+                  <li>If you want a fresh start, use <b>Clear</b> to wipe the pattern, if you would like to generate a breakbeat press the breakbeat button (you can then edit this generated breakbeat if you please).</li>
+                  <li>If you want to accent a note or group of notes, select them and press the shift key. If you want to ghost a note or group of notes, select them and press option/alt.</li>
+                  <li>You can adjust the tempo and time signature in the top toolbar.</li>
+                </ol>
+              
+                
+            </div>
+          `;
+
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+          });
+
+          modal.querySelector('button.close')?.addEventListener('click', closeModal);
+
+          window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+          });
+
+          document.body.appendChild(btn);
+          document.body.appendChild(modal);
+
+          function findToolbarEl(root) {
+            return (
+              root.querySelector('[class*="toolbar-safe-top"]') ||
+              root.querySelector('[class*="toolbar-compact"]') ||
+              root.querySelector('[class*="toolbar"]') ||
+              null
+            );
+          }
+
+          function findBpmAnchor(toolbarEl) {
+            const els = Array.from(toolbarEl.querySelectorAll('*'));
+            return (
+              els.find((el) => {
+                const t = (el.textContent || '').trim();
+                return t === 'BPM' || /\\bBPM\\b/i.test(t);
+              }) || null
+            );
+          }
+
+          function tryInsertInToolbar() {
+            const root = document.getElementById('root');
+            if (!root) return false;
+            const toolbarEl = findToolbarEl(root);
+            if (!toolbarEl) return false;
+            if (toolbarEl.contains(btn)) return true;
+
+            // Make it compact so it fits between title and BPM.
+            btn.style.padding = '6px 10px';
+            btn.style.borderRadius = '10px';
+            btn.style.marginLeft = '8px';
+
+            const bpmEl = findBpmAnchor(toolbarEl);
+            if (bpmEl && bpmEl.parentElement) {
+              // Insert directly before the BPM label/control.
+              bpmEl.parentElement.insertBefore(btn, bpmEl);
+              return true;
+            }
+
+            // Fallback: append to toolbar.
+            toolbarEl.appendChild(btn);
+            return true;
+          }
+
+          // Insert once the toolbar has rendered.
+          const interval = window.setInterval(() => {
+            try {
+              if (tryInsertInToolbar()) window.clearInterval(interval);
+            } catch {}
+          }, 200);
+        }
+
+        try {
+          ensureUI();
+          // Default to hidden; if dismissed previously, keep it closed.
+          if (localStorage.getItem(STORAGE_KEY) === '1') {
+            const modal = $(MODAL_ID);
+            if (modal) modal.setAttribute('data-open', 'false');
+          }
+        } catch {
+          // If localStorage is blocked, we still keep the UI.
+          ensureUI();
+        }
+      })();
     </script>
   </body>
 </html>
