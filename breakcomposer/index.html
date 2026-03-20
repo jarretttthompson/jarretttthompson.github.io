@@ -28,6 +28,7 @@
         let tries = 0;
         let placementInterval = null;
         let processedSrc = null;
+        let logoLocked = false;
 
         function findToolbarEl(root) {
           // In the bundled CSS this shows up as `toolbar-safe-top` / `toolbar-compact`.
@@ -280,6 +281,10 @@
 
         placementInterval = window.setInterval(() => {
           try {
+            if (logoLocked) {
+              window.clearInterval(placementInterval);
+              return;
+            }
             const root = document.getElementById('root');
             if (!root) return;
 
@@ -294,9 +299,12 @@
             const toolbarRect = toolbarEl ? toolbarEl.getBoundingClientRect() : { bottom: 120 };
             positionOverlay(imgEl, staffRect, toolbarRect);
 
-            // Stop once we've positioned once the image is ready.
-            if (imgEl.complete && imgEl.naturalWidth && tries++ > 10) {
+            // Lock immediately after first successful placement once the image is ready.
+            if (imgEl.complete && imgEl.naturalWidth) {
+              logoLocked = true;
+              imgEl.style.willChange = 'auto';
               window.clearInterval(placementInterval);
+              return;
             }
           } catch (e) {
             if (tries++ >= MAX_TRIES) window.clearInterval(placementInterval);
