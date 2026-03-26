@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Local dev server for this static site (same as: python3 run_site.py)
+set -euo pipefail
+cd "$(dirname "$0")"
+exec python3 run_site.py

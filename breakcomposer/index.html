@@ -6,6 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1" />
     <link rel="manifest" href="/breakcomposer/manifest.json" />
     <title>breakComposer</title>
+    <!--
+      Viewport fix for mobile browsers:
+      - visualViewport.height → --bc-vh (visible height, excludes most chrome)
+      - visualViewport.offsetTop → --bc-vp-offset-top (gap from layout viewport top;
+        pushes #root down so the toolbar isn’t drawn under the tab/address bar)
+    -->
+    <script>
+      (function () {
+        function updateVh() {
+          var vp = window.visualViewport;
+          if (vp) {
+            document.documentElement.style.setProperty('--bc-vh', vp.height + 'px');
+            document.documentElement.style.setProperty(
+              '--bc-vp-offset-top',
+              Math.max(0, vp.offsetTop) + 'px'
+            );
+          } else {
+            document.documentElement.style.setProperty('--bc-vh', window.innerHeight + 'px');
+            document.documentElement.style.setProperty('--bc-vp-offset-top', '0px');
+          }
+        }
+        updateVh();
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener('resize', updateVh);
+          window.visualViewport.addEventListener('scroll', updateVh);
+        }
+        window.addEventListener('resize', updateVh);
+        window.addEventListener('orientationchange', function () {
+          setTimeout(updateVh, 100);
+        });
+        /* Re-run after a short delay so any initial browser-chrome animation settles */
+        setTimeout(updateVh, 300);
+        setTimeout(updateVh, 800);
+      })();
+    </script>
     <script type="module" crossorigin src="/breakcomposer/assets/index-BZjjttJl.js"></script>
     <link rel="stylesheet" crossorigin href="/breakcomposer/assets/index-DwoNwjap.css">
     <link rel="stylesheet" href="/breakcomposer/breakcomposer-mobile.css" />
@@ -34,19 +69,80 @@
           );
         }
 
-        function findBestNotationRect(root) {
-          const candidates = Array.from(root.querySelectorAll('svg, canvas'));
-          if (!candidates.length) return null;
-          const scored = candidates
-            .map((el) => {
+        /**
+         * Largest canvas is almost always the piano roll (huge area). We use it only
+         * as a landmark so the logo gap is toolbar → top of staff, not toolbar → piano roll
+         * (centering in the latter was drawing the logo on top of the notation).
+         */
+        function findPianoRollCanvasRect(root) {
+          const canvases = Array.from(root.querySelectorAll('canvas'));
+          if (!canvases.length) return null;
+          let best = null;
+          let bestArea = -1;
+          for (const el of canvases) {
+            const r = el.getBoundingClientRect();
+            const area = r.width * r.height;
+            if (area > bestArea) {
+              bestArea = area;
+              best = r;
+            }
+          }
+          return best && best.width > 40 && best.height > 40 ? best : null;
+        }
+
+        /**
+         * Notation staff is the wide SVG sitting directly above the piano roll (short
+         * height, full width). Do not use area-based scoring — that picks the roll canvas.
+         */
+        function findStaffNotationRect(root, toolbarRect) {
+          const piano = findPianoRollCanvasRect(root);
+          const tb = toolbarRect ? toolbarRect.bottom : 0;
+          const svgs = Array.from(root.querySelectorAll('svg'));
+          const pad = 6;
+          let best = null;
+          let bestBottom = -Infinity;
+
+          for (const el of svgs) {
+            const r = el.getBoundingClientRect();
+            if (r.width < 120 || r.height < 28 || r.height > 420) continue;
+            if (r.top < tb - 4) continue;
+            if (piano) {
+              if (r.bottom > piano.top + pad) continue;
+              if (r.bottom <= piano.top + pad && r.bottom > bestBottom) {
+                bestBottom = r.bottom;
+                best = r;
+              }
+            } else {
+              if (r.bottom > bestBottom) {
+                bestBottom = r.bottom;
+                best = r;
+              }
+            }
+          }
+
+          if (best) return best;
+
+          if (piano) {
+            let relaxed = null;
+            let relaxedBottom = -Infinity;
+            for (const el of svgs) {
               const r = el.getBoundingClientRect();
-              const area = r.width * r.height;
-              const bigBonus = r.height > 80 ? 1e9 : 0;
-              const wideBonus = r.width > 250 ? 1e7 : 0;
-              return { r, score: area + bigBonus + wideBonus };
-            })
-            .sort((a, b) => b.score - a.score);
-          return scored[0]?.r || null;
+              if (r.width < 120 || r.height < 28 || r.height > 420) continue;
+              if (r.top < tb - 4) continue;
+              if (r.top >= piano.top) continue;
+              if (r.bottom > relaxedBottom) {
+                relaxedBottom = r.bottom;
+                relaxed = r;
+              }
+            }
+            if (relaxed) return relaxed;
+          }
+
+          const fallback = svgs
+            .map((el) => el.getBoundingClientRect())
+            .filter((r) => r.width >= 120 && r.height >= 28 && r.height <= 420 && r.top >= tb - 4)
+            .sort((a, b) => b.top - a.top);
+          return fallback[0] || null;
         }
 
         function processFullLogoToTransparentCropped(src) {
@@ -164,19 +260,21 @@
           const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
           if (isMobile) { img.style.display = 'none'; return; }
           img.style.display = 'block';
-          const gapTop = Math.min(toolbarRect.bottom + 8, staffRect.top - 6);
-          const gapBottom = staffRect.top - 6;
-          const gapHeight = Math.max(0, gapBottom - gapTop);
-          if (gapHeight <= 0) return;
-          const padding = 10;
+          const margin = 8;
+          const gapTop = toolbarRect.bottom + margin;
+          const gapBottom = staffRect.top - margin;
+          const gapHeight = gapBottom - gapTop;
+          if (gapHeight <= 4) return;
+          const padding = 6;
           const usableHeight = Math.max(0, gapHeight - padding * 2);
-          if (usableHeight <= 0) return;
+          if (usableHeight <= 8) return;
           const aspect = img.naturalWidth > 0 ? (img.naturalWidth / img.naturalHeight) : 1;
-          let height = usableHeight * 0.80;
-          height = Math.max(60, Math.min(usableHeight, height));
+          let height = Math.min(usableHeight * 0.92, usableHeight);
+          height = Math.max(32, Math.min(usableHeight, height));
           let width = height * aspect;
           const maxWidth = Math.min(staffRect.width, (window.innerWidth || 1200) * 0.85);
           if (width > maxWidth) { width = maxWidth; height = width / Math.max(1e-6, aspect); }
+          if (height > usableHeight) { height = usableHeight; width = height * aspect; }
           const left = staffRect.left;
           const top = gapTop + padding + (usableHeight - height) / 2;
           img.style.left = `${left}px`;
@@ -218,9 +316,9 @@
             const root = document.getElementById('root');
             if (!root) return;
             const toolbarEl = findToolbarEl(root);
-            const staffRect = findBestNotationRect(root);
+            const toolbarRect = toolbarEl ? toolbarEl.getBoundingClientRect() : { bottom: 120, left: 0, top: 0, right: 0, width: 0, height: 0 };
+            const staffRect = findStaffNotationRect(root, toolbarRect);
             if (!staffRect) { if (tries++ >= MAX_TRIES) window.clearInterval(placementInterval); return; }
-            const toolbarRect = toolbarEl ? toolbarEl.getBoundingClientRect() : { bottom: 120 };
             positionOverlay(imgEl, staffRect, toolbarRect);
             if (imgEl.complete && imgEl.naturalWidth) {
               logoLocked = true;
