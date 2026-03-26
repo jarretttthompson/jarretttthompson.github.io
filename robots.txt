@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Build artifacts and demo pages — not meant for indexing
+Disallow: /mobile-preview.html
+Disallow: /terminal-experiment.html
+
+Sitemap: https://jarretttthompson.github.io/sitemap.xml

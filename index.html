@@ -3,14 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>thejrummer</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-site-config.js"></script>
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260332" />
-  <link rel="preload" as="image" href="optimized/slideshow/slide2-desktop.webp" type="image/webp" />
+  <title>Jarrett Thompson</title>
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0d0517" />
+  <meta name="description" content="Portfolio of Jarrett Thompson — musician, composer, audio engineer, AV systems engineer, and artist based in Statesboro, GA." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jarretttthompson.github.io/" />
+  <meta property="og:title" content="Jarrett Thompson" />
+  <meta property="og:description" content="Portfolio of Jarrett Thompson — musician, composer, audio engineer, AV systems engineer, and artist based in Statesboro, GA." />
+  <meta property="og:image" content="https://jarretttthompson.github.io/optimized/slideshow/slide11-desktop-t1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jarrett Thompson" />
+  <meta name="twitter:description" content="Portfolio of Jarrett Thompson — musician, composer, audio engineer, AV systems engineer, and artist based in Statesboro, GA." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <!-- Preload first slideshow image (slide11) — avif for modern browsers, webp fallback, desktop + mobile. -->
+  <link rel="preload" as="image" href="optimized/slideshow/slide11-desktop-t0.avif" type="image/avif" media="(min-width: 769px)" />
+  <link rel="preload" as="image" href="optimized/slideshow/slide11-desktop-t0.webp" type="image/webp" media="(min-width: 769px)" />
+  <link rel="preload" as="image" href="optimized/slideshow/slide11-mobile-t0.avif" type="image/avif" media="(max-width: 768px)" />
+  <link rel="preload" as="image" href="optimized/slideshow/slide11-mobile-t0.webp" type="image/webp" media="(max-width: 768px)" />
 </head>
 <body
-  class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8"
+  class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8"
   data-page="index"
   data-terminal-site
 >
@@ -28,7 +44,7 @@
       <span class="nav-loading">Loading navigation…</span>
     </nav>
 
-    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 space-y-6 md:space-y-8 z-10 min-h-0 relative">
+    <div class="site-shell-content p-4 md:p-6 space-y-6 md:space-y-8 relative">
       <section class="neon-inner-panel relative p-4 md:p-6">
         <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
         <h2 class="panel-heading text-lg md:text-xl mb-2 flex items-center gap-2">
@@ -41,8 +57,12 @@
             <p class="panel-kicker mb-2">Photos</p>
             <div class="slideshow-container">
               <div class="slideshow">
-                <img id="slide1" class="slide visible" src="" alt="Slide 1" loading="eager" />
-                <img id="slide2" class="slide" src="" alt="Slide 2" loading="lazy" />
+                <picture id="slide1" class="slide visible">
+                  <img src="" alt="Slide 1" loading="eager" decoding="async" width="1600" height="1200" />
+                </picture>
+                <picture id="slide2" class="slide">
+                  <img src="" alt="Slide 2" loading="lazy" decoding="async" width="1600" height="1200" />
+                </picture>
               </div>
             </div>
           </div>
@@ -166,6 +186,6 @@
     </footer>
   </main>
 
-  <script type="module" src="js/main.js?v=20260332"></script>
+  <script type="module" src="js/main.js?v=20260351"></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+{
+  "name": "Jarrett Thompson",
+  "short_name": "thejrummer",
+  "description": "Portfolio of Jarrett Thompson — musician, composer, audio engineer, and maker.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0517",
+  "theme_color": "#0d0517",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

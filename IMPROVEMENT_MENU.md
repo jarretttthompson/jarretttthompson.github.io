@@ -14,7 +14,6 @@ I reviewed the current project (`html/css/js`, media folders, data json, and pag
   - `posterPortfolio`: ~37 MB
   - `projects`: ~150 MB
 - Several single files are very large (10-31 MB each), which directly impacts mobile load time.
-- `script.js` and `style.css` are handling multiple page concerns; there is room to split by page for maintainability and performance.
 - The photo album is now in a good direction visually; next wins are mostly packing/perf and maintainability.
 
 ---
@@ -31,7 +30,7 @@ I reviewed the current project (`html/css/js`, media folders, data json, and pag
    Compress `posterPortfolio` and `projects` media with quality targets, preserving visual quality.
 
 4. **Page-specific JS loading**  
-   Split `script.js` into page modules (home, artwork, projects, photo album) so each page only runs needed code.
+   (Done) Shell logic lives in `js/main.js` + `js/modules/*`.
 
 5. **CSS cleanup + split**  
    Move photo-album redesign styles into a dedicated section/file to reduce CSS complexity and regressions.

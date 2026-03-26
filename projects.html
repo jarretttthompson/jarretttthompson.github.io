@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarrett Thompson · Projects</title>
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0d0517" />
+  <meta name="description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jarretttthompson.github.io/projects.html" />
+  <meta property="og:title" content="Jarrett Thompson · Projects" />
+  <meta property="og:description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
+  <meta property="og:image" content="https://jarretttthompson.github.io/optimized/slideshow/slide11-desktop-t1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Jarrett Thompson · Projects" />
+  <meta name="twitter:description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/site.webmanifest" />
+</head>
+<body class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8" data-page="projects" data-terminal-site>
+  <div class="crt-overlay" aria-hidden="true"></div>
+  <main class="site-main-window lofi-static flex flex-col">
+    <h1 class="sr-only">Projects</h1>
+    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
+      <div class="site-header-tagline">Projects</div>
+      <div class="site-header-logo-wrap" id="lightbulb">
+        <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
+      </div>
+    </header>
+    <nav class="nav-boxes" aria-label="Main navigation">
+      <span class="nav-loading">Loading navigation…</span>
+    </nav>
+    <div class="site-shell-content p-4 md:p-6">
+      <div class="scroll-window mixed-case-prose">
+
+        <!-- Portfolio-style project entries (breakComposer first via PROJECTS order) + install write-up + gallery -->
+        <div id="projectsPortfolioSection">
+          <div id="projectsAppCards" class="projects-portfolio-entries" aria-live="polite"></div>
+          <p class="panel-kicker mt-8 mb-2 max-w-3xl">
+            Launch a GitHub Pages build inside this page, or open in a new tab. If a frame is empty, the repo may not have Pages enabled yet — use <strong>Repository</strong> or <strong>Open in new tab</strong>.
+            breakComposer also lives on this site at <a class="project-link" href="breakcomposer/index.html">/breakcomposer/</a>.
+          </p>
+
+          <hr style="border:none;border-top:1px solid rgba(224,111,234,0.25);margin:2em 0;">
+
+          <div class="projects-install-layout">
+            <div class="projects-install-layout__slideshow">
+              <div id="projectsGallery" class="projects-gallery" aria-live="polite"></div>
+            </div>
+
+            <div class="projects-install-layout__text projects-install-copy space-y-3">
+              <h2>Southern Social A/V Install</h2>
+              <p>This was a large install that I planned out and carried out myself
+                here at a club here in Statesboro called Southern Social. This was
+                and has been the only occasion where I was given free reign to design and
+                install an A/V system from the ground up.
+                We easily raised and hung over a hundred feet of truss, installed 40+ lighting fixtures (both moving and static),
+                hung and tuned 12 RCF HDL6 line array speakers, and built a booth that houses an M32R digital mixer and an Obsidian NX1
+                lighting console. I am the full time A/V technician for this establishment, but I was also tasked with programming the lightboard
+                and soundboard in a user friendly way so that the staff can interact with the equipment without much prior knowledge.
+                Additionally, I designed a visualizer for the TV wall up on the stage that reacts to the different frequencies of the
+                music being played throught the sound system, and primarily utilized vintage alcohol commercials as the content.
+                The visualizer was built using Cycling 74's Max/MSP software and runs from my PC in the booth.
+              </p>
+              <p>Below are some pictures and videos from the venue that showcase aspects of the installation and what the final
+                product looks like. </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full-width app viewer (hidden until Launch app); appears after list in DOM -->
+        <section id="projectsViewerSection" class="neon-inner-panel relative p-4 md:p-6 mb-6 md:mb-8 hidden" aria-live="polite">
+          <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+          <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-start sm:justify-between gap-3 mb-4">
+            <div>
+              <p id="projectsViewerTitle" class="panel-heading text-sm mb-1">App viewer</p>
+              <p id="projectsViewerDesc" class="panel-kicker">Launch a project from the list above.</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <a
+                id="projectsOpenNewTab"
+                class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/50 text-primary-container hover:bg-primary-container/15 transition-colors"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Open in new tab</a>
+              <button id="projectsCloseViewer" type="button" class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/60 text-primary-container bg-primary-container/10 hover:bg-primary-container/20 transition-colors">
+                Back to project list
+              </button>
+            </div>
+          </div>
+          <div class="projects-app-viewer__frame-wrap border-0 shadow-none p-0 bg-transparent">
+            <iframe
+              id="projectsAppFrame"
+              class="projects-app-viewer__frame"
+              title="Project app preview"
+              loading="eager"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+            <p class="body-copy text-sm mt-3 opacity-90">
+              If nothing loads here, try
+              <a id="projectsFallbackLink" class="project-link" href="#" target="_blank" rel="noopener noreferrer">open in new tab</a>.
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+    <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 py-3 shrink-0">
+      <div class="footer-line">Statesboro, GA · Music &amp; AV</div>
+      <div class="footer-url">thejrummer.github.io</div>
+    </footer>
+  </main>
+  <script type="module" src="js/main.js?v=20260351"></script>
+  <script>
+    /*
+     * Public GitHub repos (jarretttthompson), excluding this site repo.
+     * liveUrl = GitHub Pages; breakComposer uses /breakcomposer/ on this site.
+     */
+    const PROJECTS = [
+      {
+        name: "breakComposer",
+        description:
+          "A browser-based composition tool for creating drum beats that converts a traditional piano roll into sheet music notation. Use Launch app or click the image to open breakComposer. Mobile users should rotate to landscape for the best experience. Built with React, VexFlow, and Tone.js.",
+        tags: ["TypeScript", "React", "Tone.js"],
+        repo: "breakComposer",
+        /* Same-origin: app ships inside this site. A separate jarretttthompson.github.io/breakcomposer/ project page often 404s if that repo has no Pages build. */
+        embedUrl: "/breakcomposer/",
+        liveUrl: "https://jarretttthompson.github.io/breakcomposer/",
+        githubUrl: "https://github.com/jarretttthompson/breakComposer",
+        heroSrc: "breakcomposer/logo-full.png",
+        heroAlt: "breakComposer logo",
+        heroHref: "breakcomposer/index.html",
+      },
+      {
+        name: "Sunrise Alarm",
+        description:
+          "Wall-mounted sunrise alarm: WebGL2 dawn scene, schedule, birds and creek audio.",
+        tags: ["JavaScript", "WebGL", "Web Audio"],
+        repo: "sunriseAlarm",
+        liveUrl: "https://jarretttthompson.github.io/sunriseAlarm/",
+        githubUrl: "https://github.com/jarretttthompson/sunriseAlarm",
+      },
+      {
+        name: "Reddit Media Slideshow",
+        description:
+          "Slideshow for Reddit media. Deploy with GitHub Pages on this repo to run it embedded here.",
+        tags: ["JavaScript"],
+        repo: "redditMediaSlideshow",
+        liveUrl: "https://jarretttthompson.github.io/redditMediaSlideshow/",
+        githubUrl: "https://github.com/jarretttthompson/redditMediaSlideshow",
+      },
+      {
+        name: "sautae",
+        description:
+          "Browser-based video effects that chain and randomize until your footage looks deep-fried. See the repo for setup.",
+        tags: ["Python", "Video"],
+        repo: "sautae",
+        liveUrl: "https://jarretttthompson.github.io/sautae/",
+        githubUrl: "https://github.com/jarretttthompson/sautae",
+      },
+      {
+        name: "ghostie",
+        description:
+          "Python project on GitHub. Enable GitHub Pages if you want a web build to open inside this site.",
+        tags: ["Python"],
+        repo: "ghostie",
+        liveUrl: "https://jarretttthompson.github.io/ghostie/",
+        githubUrl: "https://github.com/jarretttthompson/ghostie",
+      },
+    ];
+
+    (function initProjectsAppsOnPage4() {
+      const cardsHost = document.getElementById("projectsAppCards");
+      const portfolioSection = document.getElementById("projectsPortfolioSection");
+      const viewerSection = document.getElementById("projectsViewerSection");
+      const frame = document.getElementById("projectsAppFrame");
+      const title = document.getElementById("projectsViewerTitle");
+      const desc = document.getElementById("projectsViewerDesc");
+      const openNewTab = document.getElementById("projectsOpenNewTab");
+      const fallback = document.getElementById("projectsFallbackLink");
+      const closeBtn = document.getElementById("projectsCloseViewer");
+
+      if (!cardsHost || !portfolioSection || !viewerSection || !frame) return;
+
+      function escapeHtml(str) {
+        if (str == null) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function renderCards() {
+        cardsHost.innerHTML = "";
+        PROJECTS.forEach((project) => {
+          const article = document.createElement("article");
+          article.className = "projects-portfolio-entry";
+
+          const tags = Array.isArray(project.tags) ? project.tags : [];
+          const tagsHtml = tags
+            .map((tag) => `<span class="projects-app-tag">${escapeHtml(tag)}</span>`)
+            .join("");
+
+          const gh = project.githubUrl
+            ? `<a class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/45 text-primary-container/90 hover:bg-primary-container/12 transition-colors inline-block no-underline" href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer">Repository</a>`
+            : "";
+
+          const appOpenHref = escapeHtml(project.embedUrl || project.liveUrl || "#");
+
+          const heroHref = escapeHtml(project.heroHref || project.embedUrl || project.liveUrl || "#");
+          const heroBlock =
+            project.heroSrc
+              ? `<a href="${heroHref}" class="projects-entry-hero-link project-link" target="_blank" rel="noopener noreferrer"><img class="projects-entry-hero" src="${escapeHtml(project.heroSrc)}" alt="${escapeHtml(project.heroAlt || project.name)}" width="420" height="130" loading="lazy" decoding="async" /></a>`
+              : "";
+
+          article.innerHTML = `
+            <h2>${escapeHtml(project.name)}</h2>
+            ${heroBlock}
+            <p class="body-copy text-sm">${escapeHtml(project.description || "")}</p>
+            <div class="projects-app-tags">${tagsHtml}</div>
+            <div class="projects-app-actions flex flex-wrap gap-2">
+              <button class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/60 text-primary-container bg-primary-container/10 hover:bg-primary-container/20 transition-colors projects-app-launch" type="button">Launch app</button>
+              <a class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/45 text-primary-container/90 hover:bg-primary-container/12 transition-colors inline-block no-underline" href="${appOpenHref}" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+              ${gh}
+            </div>
+          `;
+
+          const launchBtn = article.querySelector(".projects-app-launch");
+          if (launchBtn) {
+            launchBtn.addEventListener("click", () => launchProject(project));
+          }
+
+          cardsHost.appendChild(article);
+        });
+      }
+
+      function launchProject(project) {
+        const openUrl = project.embedUrl || project.liveUrl;
+        frame.src = openUrl;
+        title.textContent = project.name;
+        desc.textContent = project.description || "Live app preview";
+        openNewTab.href = openUrl;
+        fallback.href = openUrl;
+        portfolioSection.classList.add("hidden");
+        viewerSection.classList.remove("hidden");
+        viewerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function closeViewer() {
+        frame.src = "";
+        viewerSection.classList.add("hidden");
+        portfolioSection.classList.remove("hidden");
+        portfolioSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      closeBtn.addEventListener("click", closeViewer);
+      renderCards();
+    })();
+  </script>
+</body>
+</html>

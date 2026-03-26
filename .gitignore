@@ -1,3 +1,23 @@
 .venv/
+node_modules/
 __pycache__/
 *.pyc
+
+# Secrets & local-only config (never commit real credentials)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+credentials.json
+service-account*.json
+**/site.secrets.json
+js/site.secrets.json
+secrets/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~

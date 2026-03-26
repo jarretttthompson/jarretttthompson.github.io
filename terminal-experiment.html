@@ -4,14 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Layout demo — thejrummer</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260332" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
 </head>
-<body class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8" data-terminal-site>
+<body class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8" data-terminal-site>
   <div class="crt-overlay" aria-hidden="true"></div>
-  <main class="site-main-window lofi-static flex flex-col min-h-[85vh] max-h-[min(100vh-2rem,960px)]">
+  <main class="site-main-window lofi-static flex flex-col">
     <header class="site-shell-header flex justify-between items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-tagline">Layout demo</div>
       <a href="index.html" class="w-8 h-8 flex items-center justify-center rounded border-2 border-primary-container text-primary-container hover:bg-primary-container/15 transition-colors" aria-label="Close and go home">
@@ -22,12 +21,12 @@
     <nav class="nav-boxes border-b border-white/10" aria-label="Demo navigation">
       <a href="index.html">Home</a>
       <a href="music.html">Music</a>
-      <a href="page4.html">Projects</a>
+      <a href="projects.html">Projects</a>
       <a href="friends.html">Friends</a>
       <a href="terminal-experiment.html" aria-current="page">This page</a>
     </nav>
 
-    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 space-y-6 z-10 min-h-0">
+    <div class="site-shell-content p-4 md:p-6 space-y-6 relative">
       <section class="neon-inner-panel relative p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
         <div class="lg:col-span-12">
@@ -82,7 +81,7 @@
           <article class="border-2 border-primary-container/35 rounded-lg p-4 space-y-2 bg-black/25">
             <h3 class="font-mono text-primary-container text-sm font-bold">Project one</h3>
             <p class="opacity-90">Placeholder copy for a featured project card.</p>
-            <a class="text-secondary-container font-mono text-xs font-bold hover:underline" href="page4.html">View projects →</a>
+            <a class="text-secondary-container font-mono text-xs font-bold hover:underline" href="projects.html">View projects →</a>
           </article>
           <article class="border-2 border-primary-container/35 rounded-lg p-4 space-y-2 bg-black/25">
             <h3 class="font-mono text-primary-container text-sm font-bold">Project two</h3>

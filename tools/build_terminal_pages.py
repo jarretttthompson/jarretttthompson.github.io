@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-SCRIPT_VER = "20260332"
+SCRIPT_VER = "20260344"
 
 
 def extract_scroll_inner(html: str) -> str | None:
@@ -60,12 +60,11 @@ def shell(
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/tailwind-built.css?v={SCRIPT_VER}" />
   <link rel="stylesheet" href="css/terminal-site.css?v={SCRIPT_VER}" />
   {extra_head}
 </head>
-<body class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8" data-page="{page}" data-terminal-site>
+<body class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8" data-page="{page}" data-terminal-site>
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">{h1}</h1>
@@ -78,7 +77,7 @@ def shell(
     <nav class="nav-boxes" aria-label="Main navigation">
       <span class="nav-loading">Loading navigation…</span>
     </nav>
-    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 min-h-0">
+    <div class="site-shell-content p-4 md:p-6">
       <div class="scroll-window">
 {inner_block}
       </div>
@@ -109,12 +108,11 @@ def shell_no_scroll_wrapper(
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-site-config.js"></script>
+  <link rel="stylesheet" href="css/tailwind-built.css?v={SCRIPT_VER}" />
   <link rel="stylesheet" href="css/terminal-site.css?v={SCRIPT_VER}" />
   {extra_head}
 </head>
-<body class="terminal-site min-h-screen flex items-center justify-center p-4 md:p-8 photo-album-page" data-page="{page}" data-terminal-site>
+<body class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8 photo-album-page" data-page="{page}" data-terminal-site>
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">{h1}</h1>
@@ -127,7 +125,7 @@ def shell_no_scroll_wrapper(
     <nav class="nav-boxes" aria-label="Main navigation">
       <span class="nav-loading">Loading navigation…</span>
     </nav>
-    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 md:p-6 min-h-0">
+    <div class="site-shell-content p-4 md:p-6">
 {inner}
     </div>
     <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 md:px-6 py-2 shrink-0">

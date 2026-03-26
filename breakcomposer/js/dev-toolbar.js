@@ -8,10 +8,10 @@
   const base = location.pathname.includes('breakcomposer') ? '../' : '';
   const pages = [
     { label: 'breakComposer', href: base ? 'index.html' : 'breakcomposer/index.html' },
-    { label: 'Projects', href: base + 'page4.html' },
+    { label: 'Projects', href: base + 'projects.html' },
     { label: 'Home', href: base + 'index.html' },
-    { label: 'resume/cv', href: base + 'page2.html' },
-    { label: 'Artwork', href: base + 'page3.html' },
+    { label: 'resume/cv', href: base + 'resume.html' },
+    { label: 'Artwork', href: base + 'artwork.html' },
   ];
 
   const devices = [

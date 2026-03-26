@@ -69,19 +69,19 @@
         "type": "image"
       },
       {
-        "src": "projects/socialInstall/IMG_4925.MOV",
+        "src": "projects/socialInstall/IMG_4925.gif",
         "alt": "IMG 4925",
-        "type": "video"
+        "type": "gif"
       },
       {
-        "src": "projects/socialInstall/IMG_4961.MOV",
+        "src": "projects/socialInstall/IMG_4961.gif",
         "alt": "IMG 4961",
-        "type": "video"
+        "type": "gif"
       },
       {
-        "src": "projects/socialInstall/IMG_5258.MOV",
+        "src": "projects/socialInstall/IMG_5258.gif",
         "alt": "IMG 5258",
-        "type": "video"
+        "type": "gif"
       }
     ]
   }

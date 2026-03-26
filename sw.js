@@ -1,11 +1,25 @@
-const CACHE_NAME = "site-cache-v1";
+// Bump CACHE_NAME and the ?v= strings below together whenever assets change.
+// Nav partial is safe to precache now that injectNav() fetches it with ?v= (versioned URL = no stale-link risk).
+const CACHE_NAME = "site-cache-v20260351";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
-  "/style.css",
+  "/projects.html",
+  "/projects.html",
+  "/css/tailwind-built.css",
+  "/css/terminal-site.css",
   "/js/main.js",
-  "/partials/nav.html",
+  // JS modules — precached so repeat visits don't need a network round-trip for each import
+  "/js/modules/core.js?v=20260351",
+  "/js/modules/home.js?v=20260344",
+  "/js/modules/artwork.js?v=20260344",
+  "/js/modules/photo-album.js?v=20260344",
+  "/js/modules/projects.js?v=20260344",
+  "/js/modules/media.js?v=20260344",
+  // Nav partial — versioned, so safe to precache (eliminates "Loading navigation…" flash on repeat visits)
+  "/partials/nav.html?v=20260344",
   "/slides.optimized.json",
+  "/optimized/variants.json",
 ];
 
 self.addEventListener("install", (event) => {

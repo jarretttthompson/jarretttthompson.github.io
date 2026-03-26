@@ -1,4 +1,4 @@
-import { buildOptimizedPicture, encoded } from "./media.js";
+import { buildOptimizedPicture, encoded, optimizedFullJpegUrl, loadVariantsManifest } from "./media.js";
 
 export function initPhotoAlbum() {
   const gallery = document.getElementById("photoGallery");
@@ -20,42 +20,45 @@ export function initPhotoAlbum() {
       if (!response.ok) throw new Error("Unable to load photo manifest");
       return response.json();
     })
-    .then((data) => {
+    .then(async (data) => {
       if (!Array.isArray(data)) throw new Error("Invalid photo manifest");
       const photos = data.map(normalizePhoto).filter(Boolean);
       if (!photos.length) throw new Error("No photos found");
-      render(photos);
+      await loadVariantsManifest();
+      await render(gallery, photos);
     })
     .catch(() => {
       gallery.innerHTML = '<p class="photo-gallery__loading">Unable to load photos right now.</p>';
     });
+}
 
-  function render(items) {
-    gallery.innerHTML = "";
-    const frag = document.createDocumentFragment();
-    items.forEach((photo, index) => {
-      const link = document.createElement("a");
-      link.className = "album-link";
-      link.href = encoded(photo.src);
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.setAttribute("aria-label", `Open full image: ${photo.alt}`);
+async function render(gallery, items) {
+  gallery.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  for (let index = 0; index < items.length; index += 1) {
+    const photo = items[index];
+    const link = document.createElement("a");
+    link.className = "album-link";
+    const fullJpeg = await optimizedFullJpegUrl(photo.src);
+    link.href = encoded(fullJpeg);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute("aria-label", `Open full image: ${photo.alt}`);
 
-      const card = document.createElement("figure");
-      card.className = "framed-photo album-card";
+    const card = document.createElement("figure");
+    card.className = "framed-photo album-card";
 
-      const { picture, img } = buildOptimizedPicture({
-        src: photo.src,
-        alt: photo.alt,
-        loading: index < 8 ? "eager" : "lazy",
-        fetchPriority: index < 4 ? "high" : "low",
-      });
-      img.classList.add("album-image");
-
-      card.appendChild(picture);
-      link.appendChild(card);
-      frag.appendChild(link);
+    const { picture, img } = await buildOptimizedPicture({
+      src: photo.src,
+      alt: photo.alt,
+      loading: index < 8 ? "eager" : "lazy",
+      fetchPriority: index < 4 ? "high" : "low",
     });
-    gallery.appendChild(frag);
+    img.classList.add("album-image");
+
+    card.appendChild(picture);
+    link.appendChild(card);
+    frag.appendChild(link);
   }
+  gallery.appendChild(frag);
 }

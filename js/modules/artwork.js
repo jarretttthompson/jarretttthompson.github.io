@@ -1,4 +1,4 @@
-import { buildOptimizedPicture } from "./media.js";
+import { buildOptimizedPicture, loadVariantsManifest } from "./media.js";
 
 export function initPosterCarousel() {
   const manualTrack = document.getElementById("posterCarouselManual");
@@ -11,19 +11,23 @@ export function initPosterCarousel() {
 
   fetch("posters.json")
     .then((r) => r.json())
-    .then((list) => {
+    .then(async (list) => {
       if (!Array.isArray(list) || !list.length) return;
-      list.forEach((name) => manualTrack.appendChild(createPosterCard(name)));
+      await loadVariantsManifest();
+      const cards = await Promise.all(list.map((name) => createPosterCard(name)));
+      for (const card of cards) {
+        if (card) manualTrack.appendChild(card);
+      }
       initControls(manualViewport, manualTrack, dotsContainer, prevBtn, nextBtn);
     })
     .catch(() => {});
 }
 
-function createPosterCard(filename) {
+async function createPosterCard(filename) {
   const card = document.createElement("div");
   card.className = "poster-card";
   const src = `posterPortfolio/${filename}`;
-  const { picture } = buildOptimizedPicture({
+  const { picture } = await buildOptimizedPicture({
     src,
     alt: filename.replace(/[-_]/g, " ").replace(/\.[a-zA-Z0-9]+$/, ""),
     loading: "lazy",

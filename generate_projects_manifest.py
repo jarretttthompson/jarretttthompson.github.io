@@ -94,6 +94,9 @@ def build_manifest() -> List[Project]:
                     MediaItem(src=str(rel).replace('\\', '/'), alt=derive_alt(media_path), kind='image')
                 )
             elif ext in VIDEO_EXTS:
+                # Prefer a sidecar GIF (e.g. hand-tuned) over re-encoding the same clip twice.
+                if media_path.with_suffix('.gif').exists():
+                    continue
                 gif_path = convert_video_to_gif(media_path, ffmpeg_path)
                 if gif_path:
                     rel = gif_path.relative_to(REPO_ROOT)
