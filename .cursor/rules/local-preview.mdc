@@ -1,0 +1,12 @@
+---
+description: Local static site preview — prefer README commands over re-explaining
+---
+
+# Local preview (this repo)
+
+When the user asks to run, open, or preview the site locally, **do not** treat it as a research task.
+
+- From repo root: `./serve` or `npm run serve` (both invoke `python3 run_site.py`).
+- URLs and details: **README.md → section “Local preview”**.
+
+This is a static site served by Python’s `http.server`; no separate framework dev server is required unless the user asks for one.
