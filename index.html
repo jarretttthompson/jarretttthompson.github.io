@@ -17,8 +17,9 @@
   <meta name="twitter:description" content="Portfolio of Jarrett Thompson — musician, composer, audio engineer, AV systems engineer, and artist based in Statesboro, GA." />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="/site.webmanifest" />
-  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260392" />
+  <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
   <!-- Preload first slideshow image (slide11) — avif for modern browsers, webp fallback, desktop + mobile. -->
   <link rel="preload" as="image" href="optimized/slideshow/slide11-desktop-t0.avif" type="image/avif" media="(min-width: 769px)" />
   <link rel="preload" as="image" href="optimized/slideshow/slide11-desktop-t0.webp" type="image/webp" media="(min-width: 769px)" />
@@ -33,8 +34,7 @@
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">Home</h1>
-    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline case-preserve">Jarrett Thompson · Portfolio</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-logo-wrap" id="lightbulb">
         <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
@@ -45,29 +45,24 @@
     </nav>
 
     <div class="site-shell-content p-4 md:p-6 space-y-6 md:space-y-8 relative">
-      <section class="neon-inner-panel relative p-4 md:p-6">
-        <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
-        <h2 class="panel-heading text-lg md:text-xl mb-2 flex items-center gap-2">
-          <span class="panel-heading-accent">Welcome</span>
-        </h2>
-        <p class="panel-kicker mb-6">Howdy!</p>
+      <section id="site-home-hero" class="neon-inner-panel hero-bg relative p-4 md:p-6">
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           <div class="lg:col-span-7 order-1">
-            <p class="panel-kicker mb-2">Photos</p>
+            <h3 class="panel-heading text-lg md:text-xl mb-4">Howdy!</h3>
             <div class="slideshow-container">
-              <div class="slideshow">
-                <picture id="slide1" class="slide visible">
-                  <img src="" alt="Slide 1" loading="eager" decoding="async" width="1600" height="1200" />
-                </picture>
-                <picture id="slide2" class="slide">
-                  <img src="" alt="Slide 2" loading="lazy" decoding="async" width="1600" height="1200" />
-                </picture>
-              </div>
-            </div>
+               <div class="slideshow">
+                 <picture id="slide1" class="slide visible">
+                   <img src="" alt="Slide 1" loading="eager" decoding="async" width="1600" height="1200" />
+                 </picture>
+                 <picture id="slide2" class="slide">
+                   <img src="" alt="Slide 2" loading="lazy" decoding="async" width="1600" height="1200" />
+                 </picture>
+               </div>
+             </div>
           </div>
           <div class="lg:col-span-5 order-2 space-y-4">
-            <p class="panel-kicker mb-2">About</p>
+            <h3 class="panel-heading text-lg md:text-xl mb-2">About</h3>
             <div class="body-copy space-y-3">
               <p>
                 My name is <span class="case-preserve">Jarrett Thompson</span>. I'm a musician, composer, audio engineer, artist, and maker living in
@@ -106,8 +101,7 @@
         </div>
       </section>
 
-      <section class="neon-inner-panel relative p-4 md:p-6">
-        <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+      <section class="neon-inner-panel inner-panel-photo-bg inner-panel-photo-bg--cover relative p-4 md:p-6" data-bg-art="0">
         <h2 class="panel-heading text-lg md:text-xl mb-4">Calendar</h2>
         <div class="calendar-at-bottom space-y-6">
           <div class="calendar-widget">
@@ -186,6 +180,6 @@
     </footer>
   </main>
 
-  <script type="module" src="js/main.js?v=20260351"></script>
+  <script type="module" src="js/main.js?v=20260393"></script>
 </body>
 </html>

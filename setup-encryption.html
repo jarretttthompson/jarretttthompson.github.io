@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Upload Setup · jarretttthompson.github.io</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Courier New", Courier, monospace;
+      background: #0d0517;
+      color: #c0b8d0;
+      padding: 2rem 1.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    h1 { color: #00ff9f; font-size: 1.25rem; margin-bottom: 0.25rem; }
+    h2 { color: #ff41af; font-size: 1rem; margin: 1.75rem 0 0.75rem; }
+    p, li { font-size: 0.875rem; color: #b0a8c0; }
+    ol { padding-left: 1.5rem; }
+    li { margin-bottom: 0.4rem; }
+    code {
+      background: #1a0b2e;
+      color: #00ff9f;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.82rem;
+    }
+    a { color: #00ff9f; }
+    .card {
+      background: #12041f;
+      border: 1px solid rgba(0,255,159,0.2);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 0.75rem;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: #00ff9f;
+      margin-bottom: 0.3rem;
+      margin-top: 1rem;
+    }
+    input[type="password"], input[type="text"] {
+      display: block;
+      width: 100%;
+      background: #0d0517;
+      color: #00ff9f;
+      border: 1px solid rgba(0,255,159,0.35);
+      border-radius: 6px;
+      padding: 0.45rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input:focus { border-color: rgba(0,255,159,0.75); }
+    button {
+      margin-top: 1rem;
+      background: transparent;
+      border: 1px solid #00ff9f;
+      color: #00ff9f;
+      border-radius: 6px;
+      padding: 0.5rem 1.5rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    button:hover { background: rgba(0,255,159,0.1); }
+    button:disabled { opacity: 0.4; cursor: default; }
+    .error { color: #ff41af; font-size: 0.82rem; margin-top: 0.5rem; display: none; }
+    .output-section { display: none; }
+    .output-box {
+      background: #1a0b2e;
+      border: 1px solid rgba(0,255,159,0.25);
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.75rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      color: #00ff9f;
+      max-height: 220px;
+      overflow-y: auto;
+      margin-top: 0.5rem;
+    }
+    .note {
+      font-size: 0.78rem;
+      color: rgba(255,65,175,0.6);
+      margin-top: 0.75rem;
+    }
+    .step-num {
+      display: inline-block;
+      background: rgba(0,255,159,0.12);
+      color: #00ff9f;
+      border-radius: 50%;
+      width: 1.4rem;
+      height: 1.4rem;
+      text-align: center;
+      line-height: 1.4rem;
+      font-size: 0.8rem;
+      margin-right: 0.4rem;
+    }
+    hr { border: none; border-top: 1px solid rgba(0,255,159,0.1); margin: 1.5rem 0; }
+  </style>
+</head>
+<body>
+
+  <h1>📷 Photo Upload Setup</h1>
+  <p style="margin-top:0.4rem;font-size:0.82rem;color:rgba(0,255,159,0.5)">
+    Run this file locally (double-click to open in your browser).
+    It never sends your token anywhere — all crypto happens in-page.
+  </p>
+
+  <hr />
+
+  <!-- STEP 1 -->
+  <div>
+    <h2><span class="step-num">1</span> Create a GitHub Personal Access Token</h2>
+    <div class="card">
+      <ol>
+        <li>Go to <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens</a></li>
+        <li>Click <strong>"Generate new token"</strong></li>
+        <li>Token name: <code>portfolio-photo-upload</code></li>
+        <li>Expiration: <strong>1 year</strong> (or custom — you'll need to re-run this setup when it expires)</li>
+        <li>Repository access: <strong>Only select repositories</strong> → choose <code>jarretttthompson/jarretttthompson.github.io</code></li>
+        <li>Permissions → Repository permissions → <strong>Contents → Read and write</strong></li>
+        <li>Leave everything else at the default (No access)</li>
+        <li>Click <strong>"Generate token"</strong> and copy it — you won't see it again</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- STEP 2 -->
+  <div>
+    <h2><span class="step-num">2</span> Encrypt your token</h2>
+    <p>Your token is encrypted with AES-GCM using a key derived from your password (PBKDF2, 200k rounds). The output is safe to commit to a public repo — without the password it's useless.</p>
+    <div class="card">
+      <label for="pat-input">GitHub Personal Access Token</label>
+      <input id="pat-input" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false" />
+
+      <label for="pw-input">Upload password (choose something you'll remember)</label>
+      <input id="pw-input" type="password" placeholder="your upload password" autocomplete="new-password" />
+
+      <button id="encrypt-btn">Encrypt →</button>
+      <p class="error" id="encrypt-err"></p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- STEP 3 (shown after encryption) -->
+  <div class="output-section" id="output-section">
+    <h2><span class="step-num">3</span> Paste into photo-upload.js</h2>
+    <p>Open <code>js/modules/photo-upload.js</code> in your editor and replace this line:</p>
+    <div class="output-box" style="color:rgba(0,255,159,0.5)">const ENCRYPTED_PAT = null;</div>
+    <p style="margin-top:0.5rem">with the following:</p>
+    <div class="output-box" id="output-box"></div>
+    <button id="copy-btn">Copy to clipboard</button>
+    <p id="copied-msg" style="display:none;color:#00ff9f;font-size:0.82rem;margin-top:0.4rem">✓ Copied!</p>
+    <p class="note">
+      After pasting, save the file and push to GitHub.<br />
+      You can delete or keep this setup file — it's safe either way since your token was never stored here.
+    </p>
+  </div>
+
+  <hr />
+
+  <!-- STEP 4 -->
+  <div>
+    <h2><span class="step-num">4</span> Upload your first photo</h2>
+    <p>On your phone (or desktop), bookmark this URL:</p>
+    <div class="output-box" style="margin-top:0.5rem">https://jarretttthompson.github.io/photo-album.html?upload</div>
+    <p style="margin-top:0.75rem">When you visit it, an upload panel appears at the top of the photo album. Enter your password, pick a photo, add an optional caption, and tap Upload. Your photo will appear in the album in about 60 seconds (GitHub Pages rebuild time).</p>
+    <p class="note" style="margin-top:0.75rem">
+      Token expired? Come back to this setup file, generate a new PAT, re-encrypt, and paste the new blob into photo-upload.js.
+    </p>
+  </div>
+
+  <script>
+    "use strict";
+
+    function bytesToB64(bytes) {
+      let str = "";
+      for (const b of bytes) str += String.fromCharCode(b);
+      return btoa(str);
+    }
+
+    document.getElementById("encrypt-btn").addEventListener("click", async () => {
+      const pat    = document.getElementById("pat-input").value.trim();
+      const pw     = document.getElementById("pw-input").value;
+      const errEl  = document.getElementById("encrypt-err");
+      const btn    = document.getElementById("encrypt-btn");
+
+      errEl.style.display = "none";
+
+      if (!pat) {
+        errEl.textContent   = "Please enter your GitHub PAT.";
+        errEl.style.display = "block";
+        return;
+      }
+      if (pw.length < 6) {
+        errEl.textContent   = "Password must be at least 6 characters.";
+        errEl.style.display = "block";
+        return;
+      }
+
+      btn.disabled    = true;
+      btn.textContent = "Encrypting…";
+
+      try {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        const iv   = crypto.getRandomValues(new Uint8Array(12));
+
+        const keyMaterial = await crypto.subtle.importKey(
+          "raw",
+          new TextEncoder().encode(pw),
+          "PBKDF2",
+          false,
+          ["deriveKey"],
+        );
+        const key = await crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt, iterations: 200_000, hash: "SHA-256" },
+          keyMaterial,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["encrypt"],
+        );
+        const encrypted = await crypto.subtle.encrypt(
+          { name: "AES-GCM", iv },
+          key,
+          new TextEncoder().encode(pat),
+        );
+
+        const blob = {
+          salt: bytesToB64(salt),
+          iv:   bytesToB64(iv),
+          data: bytesToB64(new Uint8Array(encrypted)),
+        };
+
+        const line = "const ENCRYPTED_PAT = " + JSON.stringify(blob, null, 2) + ";";
+
+        document.getElementById("output-box").textContent    = line;
+        document.getElementById("output-section").style.display = "block";
+        document.getElementById("output-section").scrollIntoView({ behavior: "smooth" });
+
+        document.getElementById("copy-btn").onclick = () => {
+          navigator.clipboard.writeText(line).then(() => {
+            const msg = document.getElementById("copied-msg");
+            msg.style.display = "block";
+            setTimeout(() => { msg.style.display = "none"; }, 2500);
+          });
+        };
+
+      } catch (e) {
+        errEl.textContent   = "Encryption failed: " + e.message;
+        errEl.style.display = "block";
+      } finally {
+        btn.disabled    = false;
+        btn.textContent = "Encrypt →";
+      }
+    });
+
+    // Allow Enter key on password field
+    document.getElementById("pw-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") document.getElementById("encrypt-btn").click();
+    });
+  </script>
+
+</body>
+</html>

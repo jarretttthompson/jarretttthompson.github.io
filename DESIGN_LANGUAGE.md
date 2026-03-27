@@ -52,13 +52,13 @@ Defined in `:root` in `terminal-site.css` (keep in sync with Tailwind `extend` w
 
 1. **`body.terminal-site`** — Column flex, **top-aligned** (`justify-start`), horizontal centering of the shell; transparent body bg (no dot grid). **Page scroll** on `body` (single scrollbar).
 2. **`body.terminal-site::before`** — Full-viewport **rotating** `images/background.png`, blurred + vignette (original site asset).
-3. **`.crt-overlay`** — Fixed, pointer-events none, subtle scanlines + RGB tint (z above content except intentional HUD).
+3. **`.crt-overlay`** — Fixed, pointer-events none, subtle scanlines + RGB tint (z above content except intentional overlays).
 4. **`.site-main-window`** — Single “desktop window”: banded gradient fill (rounded with the same **`--shell-radius-*`** tokens). **Neon frame is not a normal `border` on the box** — descendants would paint **on top** of it (CSS order). Instead, **`::after`** (`z-index: 60`, `pointer-events: none`) draws **`--shell-frame-width`** + **`--shell-frame-color`** (**uniform** on all sides) and **symmetric** multi-layer cyan + pink halos (`--shell-frame-glow-*`, `--shell-frame-pink-halo`) so the frame **reads evenly** left/right/top/bottom and **sits above** header, nav, and content. **`overflow: visible`** so outer `box-shadow` isn’t clipped (inset depth stays on the main box). Max width ~72rem, column flex. **Height follows content** (no `max-height` / inner scroll trap); the **whole shell** scrolls with the page like one document.
-5. **`.site-shell-header` / `.site-shell-footer`** — Title bar uses **`border-top-left-radius` / `border-top-right-radius`** = `var(--shell-radius-tl)` / `var(--shell-radius-tr)`; footer bottom corners use **`var(--shell-radius-bl)` / `var(--shell-radius-br)`** so chrome lines up with the outer window curve. Frosted gradients, thin dividers, light glow. **Upper-right:** shared **wordmark** — `images/logo-jarrett-name.png` is a **cropped transparent** mask (white glyphs). Replace **`images/logo-jarrett-name-source.png`** with a flat export, then run `tools/build_logo_png.py` (auto-detects **hairline-on-gray** vs **light-on-black**). Update **`aspect-ratio`** in `terminal-site.css` (`.site-header-logo`) if the rebuilt crop size changes. Tinted **`--neon-pink`** with CSS `mask-mode: alpha` + `background-color`, plus **static outer glow** and a **linear-gradient sweep** (`::after`, `site-header-logo-glow-sweep`) through the glyphs; page title stays in a **screen-reader-only** `<h1 class="sr-only">` plus the left tagline.
+5. **`.site-shell-header` / `.site-shell-footer`** — Title bar uses **`border-top-left-radius` / `border-top-right-radius`** = `var(--shell-radius-tl)` / `var(--shell-radius-tr)`; footer bottom corners use **`var(--shell-radius-bl)` / `var(--shell-radius-br)`** so chrome lines up with the outer window curve. **Title bar** uses **`::before`** for a **photo + dark gradient** stack (same idea as home hero): tunable via **`--shell-header-bg-image`**, **`--shell-header-bg-pos-x/y`**, **`--shell-header-bg-size-pct`** (default art under `images/bg-images/`). Visible chrome: **wordmark only** (right). **`images/logo-jarrett-name.png`** is a **cropped transparent** mask (white glyphs). Replace **`images/logo-jarrett-name-source.png`** with a flat export, then run `tools/build_logo_png.py` (auto-detects **hairline-on-gray** vs **light-on-black**). Update **`aspect-ratio`** in `terminal-site.css` (`.site-header-logo`) if the rebuilt crop size changes. Tinted **`--neon-pink`** with CSS `mask-mode: alpha` + `background-color`, plus **static outer glow** and a **linear-gradient sweep** (`::after`, `site-header-logo-glow-sweep`) through the glyphs. **Page title** for assistive tech stays in a **screen-reader-only** `<h1 class="sr-only">` in the shell (no visible title bar text).
 6. **Nav** — Injected via `partials/nav.html` + `injectNav()`; style via **CSS classes in `terminal-site.css`** (don’t rely only on Tailwind for nav).
 7. **Scroll** — **One scrollbar** on `body` (WebKit thumb styled like `.custom-scrollbar`). Main column uses **`.site-shell-content`** (no `overflow-y: auto`); **`.scroll-window`** remains the recessed “client” panel inside pages that use it.
 
-Inner blocks use **`.neon-inner-panel`** (or equivalent) + optional **HUD corner brackets** where it fits.
+Inner blocks use **`.neon-inner-panel`** (or equivalent).
 
 ---
 
@@ -75,13 +75,13 @@ Inner blocks use **`.neon-inner-panel`** (or equivalent) + optional **HUD corner
 
 - Use **plain, recognizable words** in UI: Home, resume/cv, Music, Projects, etc.
 - Avoid **fake system jargon** in user-facing strings: no `SITE_V1`, `BIO_TEXT`, `DIR_HOME`, `SYSTEM_ONLINE`, random underscores, or “hacker flavor” unless it’s clearly decorative and minimal.
-- **Decorative** terminal styling is ok in **visual design** (brackets, glow); **labels** should still read like a normal personal site.
+- **Decorative** terminal styling is ok in **visual design** (glow, panel chrome); **labels** should still read like a normal personal site.
 
 ### Casing (sentence-style prose)
 
 - **Body copy and headings** use **normal capitalization from HTML** (sentence starts and titles capitalized where it reads naturally). CSS does **not** force lowercase on the page body.
 - **Main nav** (`nav.nav-boxes a`) stays **stylistically lowercase** via CSS.
-- **resume/cv:** class **`resume-prose`** on that page’s `scroll-window` keeps the document body exactly as authored (plus optional layout like the header photo).
+- **resume/cv:** class **`resume-prose`** on that page’s `scroll-window` keeps the document body exactly as authored (plus the **stacked** header card: performance photo on top, name/contact below, at all breakpoints).
 - **Proper nouns / brands:** **`case-preserve`** spans or classes where you need explicit control (e.g. home intro).
 - **Composition / piece titles** in **`<i>` / `<em>`** keep authored casing.
 - **Friend names** (`.friend-name`), **footer location** (`.footer-line`), and **in-page links** (`.scroll-window a`) keep authored casing.
@@ -93,6 +93,7 @@ Inner blocks use **`.neon-inner-panel`** (or equivalent) + optional **HUD corner
 
 - **Tailwind** via self-hosted **`css/tailwind-built.css`** (see `tailwind.config.js`, `npm run build:css`); **canonical look** for the shell is in **`terminal-site.css`**.
 - Bump cache query strings on CSS/JS when iterating (`?v=…`) if users see stale assets.
+- **Site Tuner** (`site-tune.js` et al.): **must not ship on the default `main` branch** for production — see **`docs/SITE_TUNING_POLICY.md`**. Gate the import to localhost or keep tuning on a dev-only branch.
 - **`breakcomposer/`** is a separate app now aligned with the site design language via **`breakcomposer/breakcomposer-mobile.css`** (mobile + Luna-style overrides). Dev toolbar removed. For future reference see **`breakcomposer/STITCH_HANDOFF.md`**.
 
 ---
@@ -101,6 +102,7 @@ Inner blocks use **`.neon-inner-panel`** (or equivalent) + optional **HUD corner
 
 | Area | File(s) |
 |------|---------|
+| Site Tuner policy (no tuner on prod `main`) | `docs/SITE_TUNING_POLICY.md`, `.cursor/rules/site-tuning-policy.mdc` |
 | Tokens, shell, panels, CRT | `css/terminal-site.css` |
 | Tailwind theme / purge | `tailwind.config.js` → `npm run build:css` → `css/tailwind-built.css` |
 | Shared nav labels | `partials/nav.html` (CV page label: **resume/cv**, ASCII) |
@@ -116,7 +118,6 @@ Stitch-style layout, aligned with tokens above (no JetBrains / no fake `DATA_STR
 |------|----------------|
 | Gradient hero title + underline | `.artwork-hero`, `.artwork-hero-title`, `.artwork-hero-rule` |
 | Cyan → pink gradient frame around sections | `.artwork-frame` + `.artwork-frame--a1` / `--a2` / `--a3` (asymmetric radii) |
-| HUD corners | `.hud-bracket-tl` … `.hud-bracket-br` inside each frame |
 | Intro row with icon | `.artwork-intro-row` + `.artwork-info-icon` (mono “i”, no Material font) |
 | Poster strip | Existing `poster-carousel--manual` + `#posterCarouselManual` (`artwork.js`); fade at edges `.artwork-viewport-fade` |
 | Poster tile shape | **Scoped to** `.artwork-page .poster-card` only (2:3 tiles, softer border) |
@@ -136,7 +137,13 @@ _Add dated bullets when the user explicitly likes or wants to keep something. Ag
 - **2026-03-20** — User wants the **Stitch “art data stream” artwork layout** (gradient section frames, asymmetric corners, horizontal poster previews, split column for YouTube) **adapted** into this design language (Vulf fonts, plain labels, shared site shell).
 - **2026-03-20** — User wants **most site copy to read in lowercase** by default, with **resume/cv body unchanged** and **proper nouns preserved** (via `.case-preserve`, link text, italics, or `.mixed-case-prose` on dense pages).
 - **2026-03-20** — User wants **sentence-initial capitalization** (normal grammar) for words that start sentences, not all-lowercase body text — implemented by **dropping global body lowercase** and capitalizing from HTML / keeping nav lowercase only.
-- **2026-03-20** — User wants the site to say **resume/cv** (ASCII “resume”, no accents) everywhere that label appears, and a **performance photo** on the resume page header (`images/resume-photo.png`) beside name/contact without breaking the rest of the layout.
+- **2026-03-26** — User wants **no cyan HUD corner brackets** site-wide (removed from pages and CSS).
+- **2026-03-27** — User wants the **shell title bar** to show **only the wordmark** (no left tagline) and use a **background image** from `images/bg-images/` (hero-style gradient + photo, tunable like home hero).
+- **2026-03-27** — **Resume header card** background art is **`images/resume-bg-glitch.png`** (synced from the chosen glitch asset in `images/bg-images/`); **shell header** uses a **different** default from the same folder (`--shell-header-bg-image`).
+- **2026-03-27** — **Friends** page: the main **`neon-inner-panel`** (heading + friend grid) uses another **`images/bg-images/`** asset via **`::before`** and **`--friends-panel-bg-*`** (tunable like the shell header).
+- **2026-03-28** — **Site Tuner** must not ship on production **`main`**: documented in **`docs/SITE_TUNING_POLICY.md`**; **`main.js`** only imports **`site-tune.js`** on localhost-class hostnames.
+- **2026-03-20** — User wants the site to say **resume/cv** (ASCII “resume”, no accents) everywhere that label appears, and a **performance photo** on the resume page header (`images/resume-photo.png`) with name/contact without breaking the rest of the layout.
+- **2026-03-26** — User wants the **resume/cv title card** to stay **stacked** (wide photo on top, name/contact below inside the neon frame) on **desktop as well as mobile**, not a side-by-side layout on wide screens.
 - **2026-03-20** — User wants **Windows XP / Luna–style** bubbly gradients and embossed controls **without changing** the vapor/neon color palette (see `--xp-*` in `terminal-site.css`).
 - **2026-03-20** — User wants the **condensed name wordmark** (`images/logo-jarrett-name.png`) in the **upper-right** on main pages, **`--neon-pink`** with **glow** (sweeping highlight through the letters, not whole-logo scale pulse), replacing per-page header text (page title remains for screen readers via `sr-only` + tagline).
 - **2026-03-20** — User provided an updated **hairline / tall condensed** wordmark reference; source lives at `images/logo-jarrett-name-source.png`, mask rebuilt for transparent PNG + pink mask.

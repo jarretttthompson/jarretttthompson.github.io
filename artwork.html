@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarrett Thompson · Artwork</title>
-  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260392" />
+  <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d0517" />
   <meta name="description" content="Poster design and video work by Jarrett Thompson — graphic art, concert posters, and electroacoustic compositions." />
@@ -24,8 +25,7 @@
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">Artwork</h1>
-    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline">Artwork</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-logo-wrap" id="lightbulb">
         <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
@@ -43,11 +43,7 @@
           <div class="artwork-hero-rule" aria-hidden="true"></div>
         </header>
 
-        <section class="artwork-frame artwork-frame--a2 lofi-static" aria-label="Introduction">
-          <div class="hud-bracket-tl" aria-hidden="true"></div>
-          <div class="hud-bracket-tr" aria-hidden="true"></div>
-          <div class="hud-bracket-bl" aria-hidden="true"></div>
-          <div class="hud-bracket-br" aria-hidden="true"></div>
+        <section class="artwork-frame artwork-frame--a2 lofi-static artwork-bg-photo" aria-label="Introduction" data-bg-art="9">
           <div class="artwork-intro-row">
             <span class="artwork-info-icon" aria-hidden="true">i</span>
             <p class="body-copy m-0">
@@ -57,8 +53,6 @@
         </section>
 
         <section class="artwork-frame artwork-frame--a1 lofi-static" aria-labelledby="artwork-posters-heading">
-          <div class="hud-bracket-tl" aria-hidden="true"></div>
-          <div class="hud-bracket-br" aria-hidden="true"></div>
           <header class="artwork-section-head">
             <h2 id="artwork-posters-heading" class="panel-heading panel-heading-accent m-0">Graphic Design</h2>
             <p class="panel-sub case-preserve">
@@ -89,9 +83,7 @@
           </p>
         </section>
 
-        <section class="artwork-frame artwork-frame--a3 lofi-static" aria-labelledby="artwork-fish-heading">
-          <div class="hud-bracket-tr" aria-hidden="true"></div>
-          <div class="hud-bracket-bl" aria-hidden="true"></div>
+        <section class="artwork-frame artwork-frame--a3 lofi-static artwork-bg-photo" aria-labelledby="artwork-fish-heading" data-bg-art="11">
           <div class="artwork-video-grid">
             <div>
               <header class="artwork-section-head">
@@ -130,6 +122,6 @@
       <div class="footer-url">thejrummer.github.io</div>
     </footer>
   </main>
-  <script type="module" src="js/main.js?v=20260351"></script>
+  <script type="module" src="js/main.js?v=20260393"></script>
 </body>
 </html>

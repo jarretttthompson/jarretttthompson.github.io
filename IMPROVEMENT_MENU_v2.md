@@ -62,8 +62,8 @@ Several friend links contain long `?fbclid=...` query strings in the HTML source
 
 Referring to `DESIGN_LANGUAGE.md`: Y2K / lo-fi terminal / CRT, Vulf Mono + Vulf Sans, neon cyan + hot pink, uniform border treatment.
 
-### A1 — Friends page could use the `neon-inner-panel` + HUD bracket treatment
-Currently it just uses `.scroll-window` with `.friend-boxes` inside. The Friends page is the one main page that doesn't have the neon panel / HUD corner aesthetic that the rest of the site uses. Wrapping the friend grid in a `neon-inner-panel` with `hud-bracket-*` corners would make it feel part of the family.
+### A1 — Friends page panel (done)
+Friends uses `.scroll-window` → `.neon-inner-panel` around the grid. Site-wide HUD corner brackets were removed per preference; rely on uniform neon panel chrome instead.
 
 ### A2 — Music page structure is dense and informal
 The `music.html` page is a series of paragraphs + iframes with no visual hierarchy — no headings, no panel labels, no section separation. Each "credit block" (song + collaborator list + embed) is a great candidate for a small neon panel card. Preserves the `mixed-case-prose` approach while making it more scannable.

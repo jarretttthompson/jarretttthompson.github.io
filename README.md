@@ -22,6 +22,10 @@ Then open (port may differ—use the URL printed in the terminal):
 
 Stop the server with **Ctrl+C**.
 
+## Site Tuner (dev only)
+
+The interactive **Site Tuner** must **not** be merged or pushed to **`main`** in a way that ships it to production visitors. See **`docs/SITE_TUNING_POLICY.md`**.
+
 ## CSS: Tailwind (self-hosted)
 
 Utilities come from a **purged** build, not the Tailwind CDN:

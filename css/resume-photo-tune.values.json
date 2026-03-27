@@ -1,0 +1,17 @@
+{
+  "version": 5,
+  "resumeTitlePhoto": {
+    "bgPosX": 100,
+    "bgPosY": 17.75,
+    "bgSizePct": 159,
+    "wrapWidthPct": 61.5,
+    "wrapOffsetXVw": 12,
+    "wrapOffsetYVh": 4,
+    "widthPct": 100,
+    "bandHeightVh": 25.5,
+    "objectFit": "cover",
+    "objectPosition": "17% 51.75%",
+    "scale": 1,
+    "maxHeight": "none"
+  }
+}

@@ -2,6 +2,7 @@
 """Simple dev helper to serve the static site and open it in a browser."""
 import contextlib
 import http.server
+import json
 import os
 import socket
 import subprocess
@@ -15,10 +16,48 @@ PORT = 8000
 LISTEN_HOST = "0.0.0.0"
 LOCAL_HOST = "127.0.0.1"
 ROOT = os.path.dirname(os.path.abspath(__file__))
+SITE_TUNE_OVERRIDES_PATH = os.path.join(ROOT, "css", "site-tune-overrides.css")
 
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, format: str, *args) -> None:  # noqa: A003 - match base signature
         pass
+
+    def end_headers(self) -> None:
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
+    def _send_json(self, status: int, payload: dict) -> None:
+        body = json.dumps(payload).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def do_POST(self) -> None:  # noqa: N802 - base class API
+        if self.path != "/__site_tune/save":
+            self._send_json(404, {"ok": False, "error": "Not found"})
+            return
+
+        length = int(self.headers.get("Content-Length", "0") or "0")
+        raw = self.rfile.read(length)
+        try:
+            payload = json.loads(raw.decode("utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            self._send_json(400, {"ok": False, "error": "Invalid JSON"})
+            return
+
+        css = payload.get("css")
+        if not isinstance(css, str):
+            self._send_json(400, {"ok": False, "error": "Missing css string"})
+            return
+
+        os.makedirs(os.path.dirname(SITE_TUNE_OVERRIDES_PATH), exist_ok=True)
+        with open(SITE_TUNE_OVERRIDES_PATH, "w", encoding="utf-8") as f:
+            f.write(css)
+
+        self._send_json(200, {"ok": True, "path": SITE_TUNE_OVERRIDES_PATH})
 
 
 def find_open_port(host: str, port: int) -> int:

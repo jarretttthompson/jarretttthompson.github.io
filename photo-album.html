@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarrett Thompson · Photos</title>
-  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260392" />
+  <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
     <link rel="stylesheet" href="photo-album.css" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d0517" />
@@ -25,8 +26,7 @@
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">Photo album</h1>
-    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline">Photos</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-logo-wrap" id="lightbulb">
         <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
@@ -36,7 +36,7 @@
     </nav>
     <div class="site-shell-content p-4 md:p-6">
     <div class="album-main">
-<section class="album-wall glow-pulse" aria-label="Photo album wall">
+<section class="album-wall glow-pulse inner-panel-photo-bg" aria-label="Photo album wall" data-bg-art="12">
       <p class="album-intro">
         This page is like that one wall in your nana's house that's got all the pictures of you and your
         siblings/cousins except I don't have any kids or grandkids and it's just random pictures that I took
@@ -53,6 +53,6 @@
       <div class="footer-url">thejrummer.github.io</div>
     </footer>
   </main>
-  <script type="module" src="js/main.js?v=20260351"></script>
+  <script type="module" src="js/main.js?v=20260393"></script>
 </body>
 </html>

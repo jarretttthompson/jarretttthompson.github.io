@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-SCRIPT_VER = "20260344"
+SCRIPT_VER = "20260393"
 
 
 def extract_scroll_inner(html: str) -> str | None:
@@ -68,8 +68,7 @@ def shell(
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">{h1}</h1>
-    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline">{module}</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-logo-wrap" id="lightbulb">
         <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
@@ -116,8 +115,7 @@ def shell_no_scroll_wrapper(
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">{h1}</h1>
-    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline">{module}</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-logo-wrap" id="lightbulb">
         <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>

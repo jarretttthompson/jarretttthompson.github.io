@@ -1,0 +1,24 @@
+/**
+ * Resume title-card photo — CSS overrides (resume.html).
+ *
+ * Interactive tuning: open resume.html?photoTune=1 and use the Site Tuner controls,
+ * then copy page changes from the ledger action and commit css/resume-photo-tune.values.json
+ * (loaded on every resume view) and/or paste CSS here.
+ *
+ * When finished with this file: merge into terminal-site.css, remove the <link>, delete if unused.
+ */
+body.terminal-site .resume-prose .resume-header-card {
+  /* Mirrors committed css/resume-photo-tune.values.json when not using JS tuning. */
+  --resume-photo-wrap-width-pct: 61.5;
+  --resume-photo-wrap-offset-x-vw: 12;
+  --resume-photo-wrap-offset-y-vh: 4;
+  --resume-title-photo-width-pct: 100;
+  --resume-title-photo-band-height-vh: 25.5;
+  --resume-title-photo-object-fit: cover;
+  --resume-title-photo-object-position: 17% 51.75%;
+  --resume-title-photo-scale: 1;
+  --resume-title-photo-max-height: none;
+  --resume-header-bg-pos-x: 100;
+  --resume-header-bg-pos-y: 17.75;
+  --resume-header-bg-size-pct: 159;
+}

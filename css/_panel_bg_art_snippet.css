@@ -1,0 +1,61 @@
+/* bg-images/* — percent-encoded (NNBSP before AM). Use data-bg-art="0".."19" on .inner-panel-photo-bg / .artwork-bg-photo. */
+body.terminal-site [data-bg-art="0"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.03.14%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="1"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.03%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="2"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.34%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="3"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.52%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="4"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.05%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="5"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.15%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="6"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.24%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="7"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.35%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="8"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.43%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="9"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.00%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="10"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.06%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="11"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.11%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="12"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.32%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="13"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.46%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="14"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.51%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="15"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.58%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="16"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.07.14%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="17"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.37.21%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="18"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.40.55%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="19"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.41.53%E2%80%AFAM.png");
+}

@@ -1,0 +1,22 @@
+/*
+ * Live overrides saved by the Site Tuner local dev tool.
+ * Commit this file when you want to keep the latest tuned document state.
+ *
+ * Shell title bar background (optional): override on body.terminal-site .site-shell-header, e.g.
+ *   --shell-header-bg-image: url("../images/bg-images/your-file.png");
+ *   --shell-header-bg-pos-x: 50;
+ *   --shell-header-bg-pos-y: 40;
+ *   --shell-header-bg-size-pct: 120;
+ * macOS screenshot filenames often use a narrow no-break space (U+202F) before "AM" — percent-encode as %E2%80%AF in url() or rename the file.
+ *
+ * Friends page panel (optional): on body[data-page="friends"].terminal-site .site-shell-content .scroll-window > section.neon-inner-panel
+ *   --friends-panel-bg-image: url("../images/bg-images/your-file.png");
+ *   --friends-panel-bg-pos-x: 50;
+ *   --friends-panel-bg-pos-y: 45;
+ *   --friends-panel-bg-size-pct: 152; /* higher = zoom in (panel crops edges) */
+ *
+ * Portrait phones: @media (orientation: portrait) and (max-width: 720px) rotates photo pseudos; vars
+ *   --inner-panel-bg-size-pct-portrait, --panel-photo-bg-size-pct-portrait, --shell-header-bg-size-pct-portrait.
+ * (Avoid container-type: size on auto-height panels — it breaks layout and warps backgrounds.)
+ *
+ */

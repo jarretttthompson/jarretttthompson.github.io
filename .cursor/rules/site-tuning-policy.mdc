@@ -1,0 +1,14 @@
+---
+description: Site Tuner must not ship on main — gate or remove before merge to default branch
+globs: js/main.js,js/modules/site-tune.js,js/modules/element-tune.js,js/modules/image-tune.js,css/site-tune-overrides.css
+---
+
+# Site Tuning tool — never on production `main`
+
+Follow **`docs/SITE_TUNING_POLICY.md`** in this repo.
+
+**Summary:** Do **not** merge to **`main`** changes that load **`site-tune.js`** (or sibling tuning modules) for **public** GitHub Pages visitors. Use **localhost-only** gating, a **dev branch**, or **remove** the dynamic import from `main.js` before release.
+
+When editing **`main.js`**: if the user asks to add tuning for local dev, prefer **`location.hostname === "localhost"`** (and `127.0.0.1`) around the `import("./modules/site-tune.js")` call so `main` stays policy-compliant without a separate branch.
+
+Do **not** commit **bulk auto-generated** content into **`site-tune-overrides.css`** unless the user explicitly wants those overrides shared.

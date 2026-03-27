@@ -133,26 +133,125 @@ body.terminal-site {
   /* Prose uses normal sentence capitalization from HTML. Nav stays lowercase (see nav.nav-boxes a). */
 }
 
+/* Light sans prose: black stroke so body copy stays readable on photo panels */
+body.terminal-site main :is(p, li, td, th, dd, dt, blockquote):not(.panel-kicker):not(.nav-loading),
+body.terminal-site main .body-copy,
+body.terminal-site main .text-on-surface,
+body.terminal-site main .text-white,
+body.terminal-site main .mixed-case-prose :is(h2, h3):not(.panel-heading),
+body.terminal-site main .mixed-case-prose :is(h2, h3) :not(.panel-heading),
+body.terminal-site.photo-album-page .album-intro,
+body.terminal-site main .center-text {
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    0 0 4px rgba(0, 0, 0, 0.75);
+}
+
+/* Same targets: 50% black panel behind text blocks (avoid .body-copy wrapper when it only wraps <p>) */
+body.terminal-site main :is(p, li, td, th, dd, dt, blockquote):not(.panel-kicker):not(.nav-loading),
+body.terminal-site main .text-on-surface,
+body.terminal-site main .text-white,
+body.terminal-site main .mixed-case-prose :is(h2, h3):not(.panel-heading),
+body.terminal-site main .mixed-case-prose :is(h2, h3) :not(.panel-heading),
+body.terminal-site.photo-album-page .album-intro,
+body.terminal-site main .center-text,
+body.terminal-site main .body-copy:not(:has(p)) {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  padding: 0.35em 0.55em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 /* resume/cv page (class resume-prose): keep source capitalization */
 body.terminal-site .resume-prose,
 body.terminal-site .resume-prose * {
   text-transform: none !important;
 }
 
-/* resume/cv — contact + photo as one panel (matches site “window” language) */
+/* Home page hero panel: tunable background art + content above ::before. */
+body.terminal-site #site-home-hero {
+  --home-hero-bg-pos-x: 50;
+  --home-hero-bg-pos-y: 50;
+  /* Zoom/crop + brighter stack (aligned with .inner-panel-photo-bg treatment) */
+  --home-hero-bg-size-pct: 152;
+  /* Narrow portrait viewport: see @media (orientation: portrait) below */
+  --panel-photo-bg-size-pct-portrait: 172;
+  background:
+    linear-gradient(180deg, rgba(2, 0, 8, 0.08) 0%, rgba(2, 0, 8, 0.18) 100%);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+body.terminal-site #site-home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(
+      150deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(18, 6, 32, 0.2) 42%,
+      rgba(0, 0, 0, 0.26) 100%
+    ),
+    url("../images/home-hero-bg.png");
+  background-size: cover, calc(var(--home-hero-bg-size-pct) * 1%) auto;
+  background-position: center, calc(var(--home-hero-bg-pos-x) * 1%) calc(var(--home-hero-bg-pos-y) * 1%);
+  background-repeat: no-repeat;
+  opacity: 1;
+  filter: saturate(1.1) contrast(1.01) brightness(1.18);
+}
+
+body.terminal-site #site-home-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* resume/cv — contact + photo as one panel (photo on top, text below at all breakpoints)
+   Tunable via --resume-photo-wrap-*, --resume-title-photo-* (override in css/resume-title-card-tune.css). */
 body.terminal-site .resume-prose .resume-header-card {
+  /* Width (% of the card) and band height (vh) are independent; aspect-ratio alone made both sliders feel like “height only”. */
+  /* Outer figure: width within the card + vertical nudge (vh). Inner img width is % of this wrap. */
+  --resume-photo-wrap-width-pct: 100;
+  --resume-photo-wrap-offset-x-vw: 0;
+  --resume-photo-wrap-offset-y-vh: 0;
+  --resume-title-photo-width-pct: 100;
+  --resume-title-photo-band-height-vh: 22;
+  --resume-title-photo-object-fit: cover;
+  --resume-title-photo-object-position: 50% 35%;
+  --resume-title-photo-scale: 1;
+  --resume-title-photo-max-height: none;
+  /* Text block: sits above the art + photo; scrim keeps contact lines readable. */
+  --resume-header-text-scrim: rgba(8, 4, 18, 0.82);
+  --resume-header-text-scrim-blur: 10px;
+  /* Second background layer (header art): position + zoom; first layer stays gradient. */
+  --resume-header-bg-pos-x: 50;
+  --resume-header-bg-pos-y: 50;
+  --resume-header-bg-size-pct: 112;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(160px, 230px);
-  gap: 1rem 1rem;
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: 0;
+  align-items: stretch;
   margin: 0 0 1.35rem;
-  padding: 1.1rem 1.2rem 1.15rem 1.35rem;
-  background: linear-gradient(
-    145deg,
-    rgba(0, 0, 0, 0.42) 0%,
-    rgba(21, 5, 41, 0.38) 45%,
-    rgba(0, 0, 0, 0.32) 100%
-  );
+  padding: 0;
+  background-color: rgba(8, 4, 18, 0.97);
+  background-image:
+    linear-gradient(
+      145deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(21, 5, 41, 0.38) 45%,
+      rgba(0, 0, 0, 0.48) 100%
+    ),
+    url("../images/resume-bg-glitch.png");
+  background-size: cover, calc(var(--resume-header-bg-size-pct) * 1%) auto;
+  background-position: center, calc(var(--resume-header-bg-pos-x) * 1%) calc(var(--resume-header-bg-pos-y) * 1%);
+  background-repeat: no-repeat;
   border: var(--ui-border-width) solid var(--ui-border-color-strong);
   border-radius: 10px;
   box-shadow:
@@ -163,6 +262,32 @@ body.terminal-site .resume-prose .resume-header-card {
     0 0 32px var(--ui-border-glow);
   position: relative;
   overflow: hidden;
+  position: relative;
+}
+body.terminal-site .resume-prose .resume-header-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      145deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(21, 5, 41, 0.38) 45%,
+      rgba(0, 0, 0, 0.48) 100%
+    ),
+    url("../images/resume-bg-glitch.png");
+  background-size: cover, calc(var(--resume-header-bg-size-pct) * 1%) auto;
+  background-position: center, calc(var(--resume-header-bg-pos-x) * 1%) calc(var(--resume-header-bg-pos-y) * 1%);
+  background-repeat: no-repeat;
+  transform: scaleX(-1);
+  border-radius: inherit;
+  opacity: 1;
+}
+body.terminal-site .resume-prose .resume-header-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 body.terminal-site .resume-prose .resume-header-card::before {
@@ -179,6 +304,13 @@ body.terminal-site .resume-prose .resume-header-text {
   position: relative;
   z-index: 1;
   min-width: 0;
+  padding: 1rem 1.15rem 1.1rem;
+  margin: 0;
+  background: var(--resume-header-text-scrim);
+  backdrop-filter: blur(var(--resume-header-text-scrim-blur));
+  -webkit-backdrop-filter: blur(var(--resume-header-text-scrim-blur));
+  border-radius: 0 0 10px 10px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 body.terminal-site .resume-prose .resume-header-text h2 {
@@ -189,72 +321,51 @@ body.terminal-site .resume-prose .resume-header-text h2 {
 
 body.terminal-site .resume-prose .resume-photo-wrap {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   margin: 0;
-  justify-self: end;
-  width: 100%;
-  max-width: 230px;
+  justify-self: center;
+  width: min(calc(var(--resume-photo-wrap-width-pct) * 1%), 100%);
+  max-width: 100%;
+  order: -1;
+  overflow: hidden;
+  transform: translateX(calc(var(--resume-photo-wrap-offset-x-vw) * 1vw))
+    translateY(calc(var(--resume-photo-wrap-offset-y-vh) * 1vh));
 }
 
 body.terminal-site .resume-prose .resume-photo-wrap::after {
   content: "";
   position: absolute;
-  inset: -1px;
-  border-radius: 12px;
+  inset: 0;
+  border-radius: 10px 10px 0 0;
   padding: 1px;
   background: linear-gradient(135deg, rgba(0, 255, 159, 0.35), rgba(255, 65, 175, 0.22));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.5;
 }
 
 body.terminal-site .resume-prose .resume-photo-wrap img {
   position: relative;
-  z-index: 1;
-  width: 100%;
-  height: auto;
+  z-index: 4;
+  width: min(calc(var(--resume-title-photo-width-pct) * 1%), 100%);
+  max-width: 100%;
+  height: calc(var(--resume-title-photo-band-height-vh) * 1vh);
+  max-height: var(--resume-title-photo-max-height);
+  margin-left: auto;
+  margin-right: auto;
   display: block;
-  border-radius: 11px;
-  object-fit: cover;
-  object-position: 45% 28%;
-  aspect-ratio: 3 / 4;
+  border-radius: 10px 10px 0 0;
+  object-fit: var(--resume-title-photo-object-fit);
+  object-position: var(--resume-title-photo-object-position);
+  aspect-ratio: auto;
+  transform: scale(var(--resume-title-photo-scale));
+  transform-origin: center center;
   border: none !important;
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.55),
     inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
-@media (max-width: 560px) {
-  body.terminal-site .resume-prose .resume-header-card {
-    grid-template-columns: 1fr;
-    padding: 0;
-    align-items: stretch;
-    gap: 0;
-  }
-
-  body.terminal-site .resume-prose .resume-photo-wrap {
-    max-width: none;
-    justify-self: stretch;
-    order: -1;
-  }
-
-  body.terminal-site .resume-prose .resume-photo-wrap img {
-    aspect-ratio: 21 / 9;
-    object-position: 50% 35%;
-    border-radius: 10px 10px 0 0;
-  }
-
-  body.terminal-site .resume-prose .resume-photo-wrap::after {
-    border-radius: 10px 10px 0 0;
-    inset: 0;
-    opacity: 0.5;
-  }
-
-  body.terminal-site .resume-prose .resume-header-text {
-    padding: 1rem 1.15rem 1.1rem;
-  }
 }
 
 /* Work titles, song titles, composition names (often in italics) */
@@ -383,15 +494,26 @@ body.terminal-site .mixed-case-prose * {
   border-radius: inherit;
 }
 
+/* Title bar: tunable photo + gradient (same idea as #site-home-hero). Swap art via --shell-header-bg-image in site-tune-overrides.css or DevTools. */
+body.terminal-site .site-shell-header {
+  --shell-header-bg-pos-x: 50;
+  --shell-header-bg-pos-y: 50;
+  --shell-header-bg-size-pct: 118;
+  /* Default: one asset from images/bg-images/ (NNBSP before AM in filename → percent-encoded). */
+  --shell-header-bg-image: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.07.14%E2%80%AFAM.png");
+}
+
 .site-shell-header {
   position: relative;
   z-index: 22;
+  --shell-header-bg-size-pct-portrait: 135;
   /* Match parent shell top radius so title bar doesn’t square off inside the neon frame */
   border-top-left-radius: var(--shell-radius-tl);
   border-top-right-radius: var(--shell-radius-tr);
-  background: var(--xp-title-bar);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background:
+    linear-gradient(180deg, rgba(2, 0, 8, 0.22) 0%, rgba(2, 0, 8, 0.42) 100%);
+  isolation: isolate;
+  overflow: hidden;
   border-bottom: 1px solid rgba(0, 0, 0, 0.45);
   box-shadow:
     inset 0 1px 0 var(--xp-shine),
@@ -399,14 +521,31 @@ body.terminal-site .mixed-case-prose * {
     0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.site-shell-header .site-header-tagline {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 10px rgba(0, 255, 159, 0.65);
-  letter-spacing: 0.12em;
-  text-transform: none;
-  font-size: clamp(9px, 2vw, 11px);
+.site-shell-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(
+      150deg,
+      rgba(0, 0, 0, 0.74) 0%,
+      rgba(18, 6, 32, 0.56) 42%,
+      rgba(0, 0, 0, 0.72) 100%
+    ),
+    var(--shell-header-bg-image);
+  background-size: cover, calc(var(--shell-header-bg-size-pct) * 1%) auto;
+  background-position: center, calc(var(--shell-header-bg-pos-x) * 1%) calc(var(--shell-header-bg-pos-y) * 1%);
+  background-repeat: no-repeat;
+  opacity: 0.96;
+  filter: saturate(1.06) contrast(1.04);
+}
+
+body.terminal-site .site-shell-header > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Upper-right wordmark (PNG → palette pink via mask; static outer glow + sweep through glyphs) */
@@ -546,6 +685,207 @@ body.terminal-site .mixed-case-prose * {
   z-index: -1;
 }
 
+/* bg-images/* — percent-encoded (NNBSP before AM). Pair with .inner-panel-photo-bg or .artwork-bg-photo + data-bg-art="0".."19". */
+body.terminal-site [data-bg-art="0"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.03.14%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="1"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.03%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="2"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.34%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="3"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.52%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="4"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.05%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="5"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.15%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="6"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.24%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="7"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.35%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="8"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.43%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="9"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.00%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="10"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.06%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="11"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.11%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="12"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.32%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="13"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.46%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="14"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.51%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="15"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.58%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="16"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.07.14%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="17"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.37.21%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="18"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.40.55%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="19"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.41.53%E2%80%AFAM.png");
+}
+
+/* Shared photo stack for neon inner panels + album wall (not artwork — see .artwork-bg-photo) */
+body.terminal-site .inner-panel-photo-bg {
+  position: relative;
+  --inner-panel-bg-pos-x: 50;
+  --inner-panel-bg-pos-y: 50;
+  /* Moderate zoom: very wide + short panels + huge % width = muddy strip of the asset */
+  --inner-panel-bg-size-pct: 120;
+  --inner-panel-bg-size-pct-portrait: 165;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(2, 0, 8, 0.08) 0%, rgba(2, 0, 8, 0.18) 100%);
+}
+
+body.terminal-site .inner-panel-photo-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(
+      150deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(18, 6, 32, 0.2) 42%,
+      rgba(0, 0, 0, 0.26) 100%
+    ),
+    var(--panel-art-url);
+  background-size: cover, calc(var(--inner-panel-bg-size-pct) * 1%) auto;
+  background-position: center, calc(var(--inner-panel-bg-pos-x) * 1%) calc(var(--inner-panel-bg-pos-y) * 1%);
+  background-repeat: no-repeat;
+  opacity: 1;
+  filter: saturate(1.1) contrast(1.01) brightness(1.18);
+}
+
+body.terminal-site .inner-panel-photo-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Friends: keep a bit more zoom than default (wide prose pages use lower % to avoid strip artifacts) */
+body[data-page="friends"].terminal-site .inner-panel-photo-bg {
+  --inner-panel-bg-size-pct: 140;
+}
+
+/* Dense text pages: slightly stronger scrim so body copy stays legible over screenshots */
+body[data-page="compositions"].terminal-site .inner-panel-photo-bg::before {
+  background-image:
+    linear-gradient(
+      150deg,
+      rgba(0, 0, 0, 0.42) 0%,
+      rgba(18, 6, 32, 0.3) 42%,
+      rgba(0, 0, 0, 0.4) 100%
+    ),
+    var(--panel-art-url);
+}
+
+/* Artwork frames: ::before = gradient border ring; photo lives on ::after */
+body.terminal-site .artwork-frame.artwork-bg-photo {
+  --inner-panel-bg-pos-x: 50;
+  --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-size-pct: 120;
+  --inner-panel-bg-size-pct-portrait: 165;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(155deg, rgba(0, 0, 0, 0.35) 0%, rgba(21, 5, 41, 0.28) 100%);
+}
+
+body.terminal-site .artwork-frame.artwork-bg-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    linear-gradient(
+      150deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(18, 6, 32, 0.2) 42%,
+      rgba(0, 0, 0, 0.26) 100%
+    ),
+    var(--panel-art-url);
+  background-size: cover, calc(var(--inner-panel-bg-size-pct) * 1%) auto;
+  background-position: center, calc(var(--inner-panel-bg-pos-x) * 1%) calc(var(--inner-panel-bg-pos-y) * 1%);
+  background-repeat: no-repeat;
+  opacity: 1;
+  filter: saturate(1.1) contrast(1.01) brightness(1.18);
+}
+
+body.terminal-site .artwork-frame.artwork-bg-photo > * {
+  position: relative;
+  z-index: 1;
+}
+
+/*
+ * Portrait phones: rotate + zoom photo layers. We avoid container-type: size on panels — it applies
+ * size containment and breaks auto-height sections (e.g. compositions), warping bg-size and layout.
+ */
+@media (orientation: portrait) and (max-width: 720px) {
+  body.terminal-site #site-home-hero::before {
+    transform: rotate(90deg) scale(1.08);
+    transform-origin: center center;
+    background-size: cover, calc(var(--panel-photo-bg-size-pct-portrait) * 1%) auto;
+  }
+
+  body.terminal-site .inner-panel-photo-bg:not(.inner-panel-photo-bg--cover)::before {
+    transform: rotate(90deg) scale(1.08);
+    transform-origin: center center;
+    background-size: cover, calc(var(--inner-panel-bg-size-pct-portrait) * 1%) auto;
+  }
+
+  body.terminal-site .artwork-frame.artwork-bg-photo::after {
+    transform: rotate(90deg) scale(1.08);
+    transform-origin: center center;
+    background-size: cover, calc(var(--inner-panel-bg-size-pct-portrait) * 1%) auto;
+  }
+
+  body.terminal-site .site-shell-header::before {
+    transform: rotate(90deg) scale(1.06);
+    transform-origin: center center;
+    background-size: cover, calc(var(--shell-header-bg-size-pct-portrait) * 1%) auto;
+  }
+}
+
+/* Music: panel bg-images — 90° + tight crop (Hip-Oh / Hugo only; see .inner-panel-photo-bg--cover) */
+body[data-page="music"].terminal-site .inner-panel-photo-bg:not(.inner-panel-photo-bg--cover)::before {
+  transform: rotate(90deg) scale(1.2);
+  transform-origin: center center;
+  background-size: cover, 235% auto;
+}
+
+/* Photo layer uses cover on both stacks so the art fills the panel (no side/top/bottom gaps) */
+body.terminal-site .inner-panel-photo-bg.inner-panel-photo-bg--cover::before {
+  transform: none;
+  background-size: cover, cover;
+  background-position: center, center;
+}
+
 .panel-heading {
   font-family: var(--font-mono);
   font-weight: 700;
@@ -577,41 +917,6 @@ body.terminal-site .mixed-case-prose * {
 
 .scanline {
   display: none;
-}
-
-.hud-bracket-tl,
-.hud-bracket-tr,
-.hud-bracket-bl,
-.hud-bracket-br {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  z-index: 3;
-  filter: drop-shadow(0 0 4px var(--neon-cyan));
-}
-.hud-bracket-tl {
-  top: -1px;
-  left: -1px;
-  border-top: 2px solid var(--neon-cyan);
-  border-left: 2px solid var(--neon-cyan);
-}
-.hud-bracket-tr {
-  top: -1px;
-  right: -1px;
-  border-top: 2px solid var(--neon-cyan);
-  border-right: 2px solid var(--neon-cyan);
-}
-.hud-bracket-bl {
-  bottom: -1px;
-  left: -1px;
-  border-bottom: 2px solid var(--neon-cyan);
-  border-left: 2px solid var(--neon-cyan);
-}
-.hud-bracket-br {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 2px solid var(--neon-cyan);
-  border-right: 2px solid var(--neon-cyan);
 }
 
 .custom-scrollbar::-webkit-scrollbar,
@@ -2088,7 +2393,7 @@ body.terminal-site.photo-album-page .album-main {
   margin: 8px auto 24px;
 }
 
-body.terminal-site.photo-album-page .album-wall {
+body.terminal-site.photo-album-page .album-wall:not(.inner-panel-photo-bg) {
   background: linear-gradient(180deg, rgba(26, 11, 46, 0.92) 0%, rgba(0, 0, 0, 0.55) 100%);
   border: var(--ui-border-width) solid var(--ui-border-color-strong);
   border-radius: var(--radius-md);
@@ -2100,6 +2405,18 @@ body.terminal-site.photo-album-page .album-wall {
     0 0 34px var(--ui-border-glow);
   padding: 14px;
   overflow: hidden;
+}
+
+body.terminal-site.photo-album-page .album-wall.inner-panel-photo-bg {
+  border: var(--ui-border-width) solid var(--ui-border-color-strong);
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 6px 18px var(--xp-shadow-soft),
+    inset 0 1px 0 var(--xp-shine-soft),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 0 18px var(--ui-border-glow-soft),
+    0 0 34px var(--ui-border-glow);
+  padding: 14px;
 }
 
 body.terminal-site.photo-album-page .album-intro {

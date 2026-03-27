@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarrett Thompson · Projects</title>
-  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260392" />
+  <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d0517" />
   <meta name="description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
@@ -24,8 +25,7 @@
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
     <h1 class="sr-only">Projects</h1>
-    <header class="site-shell-header flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline">Projects</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <div class="site-header-logo-wrap" id="lightbulb">
         <span class="site-header-logo" role="img" aria-label="Jarrett T. Thompson"></span>
       </div>
@@ -72,8 +72,7 @@
         </div>
 
         <!-- Full-width app viewer (hidden until Launch app); appears after list in DOM -->
-        <section id="projectsViewerSection" class="neon-inner-panel relative p-4 md:p-6 mb-6 md:mb-8 hidden" aria-live="polite">
-          <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+        <section id="projectsViewerSection" class="neon-inner-panel inner-panel-photo-bg relative p-4 md:p-6 mb-6 md:mb-8 hidden" aria-live="polite" data-bg-art="5">
           <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-start sm:justify-between gap-3 mb-4">
             <div>
               <p id="projectsViewerTitle" class="panel-heading text-sm mb-1">App viewer</p>
@@ -114,7 +113,7 @@
       <div class="footer-url">thejrummer.github.io</div>
     </footer>
   </main>
-  <script type="module" src="js/main.js?v=20260351"></script>
+  <script type="module" src="js/main.js?v=20260393"></script>
   <script>
     /*
      * Public GitHub repos (jarretttthompson), excluding this site repo.

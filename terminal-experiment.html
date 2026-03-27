@@ -4,15 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Layout demo — thejrummer</title>
-  <link rel="stylesheet" href="css/tailwind-built.css?v=20260351" />
+  <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260351" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260392" />
 </head>
-<body class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8" data-terminal-site>
+<body class="terminal-site min-h-screen flex flex-col items-center justify-start py-6 md:py-10 px-4 md:px-8" data-page="terminal-experiment" data-terminal-site>
   <div class="crt-overlay" aria-hidden="true"></div>
   <main class="site-main-window lofi-static flex flex-col">
-    <header class="site-shell-header flex justify-between items-center w-full px-4 py-3 shrink-0">
-      <div class="site-header-tagline">Layout demo</div>
+    <header class="site-shell-header flex justify-end items-center w-full px-4 py-3 shrink-0">
       <a href="index.html" class="w-8 h-8 flex items-center justify-center rounded border-2 border-primary-container text-primary-container hover:bg-primary-container/15 transition-colors" aria-label="Close and go home">
         <span class="material-symbols-outlined text-sm">close</span>
       </a>
@@ -27,8 +26,7 @@
     </nav>
 
     <div class="site-shell-content p-4 md:p-6 space-y-6 relative">
-      <section class="neon-inner-panel relative p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+      <section class="neon-inner-panel inner-panel-photo-bg relative p-6 grid grid-cols-1 lg:grid-cols-12 gap-8" data-bg-art="6">
         <div class="lg:col-span-12">
           <h1 class="panel-heading text-lg md:text-xl mb-2 flex items-center gap-2">
             <span class="panel-heading-accent">Featured track</span>
@@ -74,8 +72,7 @@
         </div>
       </section>
 
-      <section class="neon-inner-panel relative p-6">
-        <div class="hud-bracket-tl"></div><div class="hud-bracket-tr"></div><div class="hud-bracket-bl"></div><div class="hud-bracket-br"></div>
+      <section class="neon-inner-panel inner-panel-photo-bg relative p-6" data-bg-art="8">
         <h2 class="panel-heading text-lg mb-4">Sample projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 body-copy text-sm">
           <article class="border-2 border-primary-container/35 rounded-lg p-4 space-y-2 bg-black/25">
