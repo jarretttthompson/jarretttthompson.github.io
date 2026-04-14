@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-SCRIPT_VER = "20260393"
+SCRIPT_VER = "20260398"
 
 
 def extract_scroll_inner(html: str) -> str | None:

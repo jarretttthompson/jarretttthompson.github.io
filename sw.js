@@ -43,7 +43,17 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
-  if (new URL(req.url).origin !== self.location.origin) return;
+  const url = new URL(req.url);
+  if (url.origin !== self.location.origin) return;
+
+  // Never cache site-tuner endpoints or state files — always fetch fresh
+  if (
+    url.pathname.startsWith("/__site_tune/") ||
+    url.pathname.startsWith("/css/tune-state/")
+  ) {
+    event.respondWith(fetch(req));
+    return;
+  }
 
   const isLocalhost =
     self.location.hostname === "localhost" ||

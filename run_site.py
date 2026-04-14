@@ -17,6 +17,7 @@ LISTEN_HOST = "0.0.0.0"
 LOCAL_HOST = "127.0.0.1"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_TUNE_OVERRIDES_PATH = os.path.join(ROOT, "css", "site-tune-overrides.css")
+TUNE_STATE_DIR = os.path.join(ROOT, "css", "tune-state")
 
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, format: str, *args) -> None:  # noqa: A003 - match base signature
@@ -57,7 +58,23 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
         with open(SITE_TUNE_OVERRIDES_PATH, "w", encoding="utf-8") as f:
             f.write(css)
 
-        self._send_json(200, {"ok": True, "path": SITE_TUNE_OVERRIDES_PATH})
+        result: dict = {"ok": True, "cssPath": SITE_TUNE_OVERRIDES_PATH}
+
+        # Optional: write per-page state JSON for JS-layer restore on refresh
+        state = payload.get("state")
+        page_name = payload.get("page", "")
+        if isinstance(state, dict) and page_name:
+            import re
+            safe = re.sub(r"[^a-zA-Z0-9_-]", "_", page_name.strip("/").replace("/", "_"))
+            safe = re.sub(r"_+", "_", safe).strip("_") or "default"
+            os.makedirs(TUNE_STATE_DIR, exist_ok=True)
+            state_path = os.path.join(TUNE_STATE_DIR, f"{safe}.json")
+            with open(state_path, "w", encoding="utf-8") as f:
+                json.dump(state, f, indent=2)
+                f.write("\n")
+            result["statePath"] = state_path
+
+        self._send_json(200, result)
 
 
 def find_open_port(host: str, port: int) -> int:

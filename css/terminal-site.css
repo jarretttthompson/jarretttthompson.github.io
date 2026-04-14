@@ -200,7 +200,7 @@ body.terminal-site #site-home-hero::before {
       rgba(18, 6, 32, 0.2) 42%,
       rgba(0, 0, 0, 0.26) 100%
     ),
-    url("../images/home-hero-bg.png");
+    url("../images/bg-images/Screenshot%202026-03-27%20at%2010.04.19%E2%80%AFAM.png");
   background-size: cover, calc(var(--home-hero-bg-size-pct) * 1%) auto;
   background-position: center, calc(var(--home-hero-bg-pos-x) * 1%) calc(var(--home-hero-bg-pos-y) * 1%);
   background-repeat: no-repeat;
@@ -301,6 +301,7 @@ body.terminal-site .resume-prose .resume-header-card::before {
 }
 
 body.terminal-site .resume-prose .resume-header-text {
+  --inner-panel-bg-opacity: 0.38;
   position: relative;
   z-index: 1;
   min-width: 0;
@@ -500,7 +501,7 @@ body.terminal-site .site-shell-header {
   --shell-header-bg-pos-y: 50;
   --shell-header-bg-size-pct: 118;
   /* Default: one asset from images/bg-images/ (NNBSP before AM in filename → percent-encoded). */
-  --shell-header-bg-image: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.07.14%E2%80%AFAM.png");
+  --shell-header-bg-image: url("../images/bg-images/Screenshot%202026-03-27%20at%209.57.24%E2%80%AFAM.png");
 }
 
 .site-shell-header {
@@ -685,7 +686,7 @@ body.terminal-site .site-shell-header > * {
   z-index: -1;
 }
 
-/* bg-images/* — percent-encoded (NNBSP before AM). Pair with .inner-panel-photo-bg or .artwork-bg-photo + data-bg-art="0".."19". */
+/* bg-images/* — percent-encoded (NNBSP before AM). Shared index map for .inner-panel-photo-bg / .artwork-bg-photo + data-bg-art="0".."20". */
 body.terminal-site [data-bg-art="0"] {
   --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.03.14%E2%80%AFAM.png");
 }
@@ -746,12 +747,17 @@ body.terminal-site [data-bg-art="18"] {
 body.terminal-site [data-bg-art="19"] {
   --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.41.53%E2%80%AFAM.png");
 }
+body.terminal-site [data-bg-art="20"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2010.03.33%E2%80%AFAM.png");
+}
 
 /* Shared photo stack for neon inner panels + album wall (not artwork — see .artwork-bg-photo) */
 body.terminal-site .inner-panel-photo-bg {
   position: relative;
   --inner-panel-bg-pos-x: 50;
   --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-rotate-deg: 0;
+  --inner-panel-bg-opacity: 1;
   /* Moderate zoom: very wide + short panels + huge % width = muddy strip of the asset */
   --inner-panel-bg-size-pct: 120;
   --inner-panel-bg-size-pct-portrait: 165;
@@ -775,10 +781,12 @@ body.terminal-site .inner-panel-photo-bg::before {
       rgba(0, 0, 0, 0.26) 100%
     ),
     var(--panel-art-url);
-  background-size: cover, calc(var(--inner-panel-bg-size-pct) * 1%) auto;
+  background-size: cover, calc(var(--inner-panel-bg-size-pct) * 1%) calc(var(--inner-panel-bg-size-pct) * 1%);
   background-position: center, calc(var(--inner-panel-bg-pos-x) * 1%) calc(var(--inner-panel-bg-pos-y) * 1%);
   background-repeat: no-repeat;
-  opacity: 1;
+  transform: rotate(calc(var(--inner-panel-bg-rotate-deg) * 1deg));
+  transform-origin: center center;
+  opacity: clamp(0, var(--inner-panel-bg-opacity), 1);
   filter: saturate(1.1) contrast(1.01) brightness(1.18);
 }
 
@@ -808,6 +816,8 @@ body[data-page="compositions"].terminal-site .inner-panel-photo-bg::before {
 body.terminal-site .artwork-frame.artwork-bg-photo {
   --inner-panel-bg-pos-x: 50;
   --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-rotate-deg: 0;
+  --inner-panel-bg-opacity: 1;
   --inner-panel-bg-size-pct: 120;
   --inner-panel-bg-size-pct-portrait: 165;
   isolation: isolate;
@@ -830,10 +840,12 @@ body.terminal-site .artwork-frame.artwork-bg-photo::after {
       rgba(0, 0, 0, 0.26) 100%
     ),
     var(--panel-art-url);
-  background-size: cover, calc(var(--inner-panel-bg-size-pct) * 1%) auto;
+  background-size: cover, calc(var(--inner-panel-bg-size-pct) * 1%) calc(var(--inner-panel-bg-size-pct) * 1%);
   background-position: center, calc(var(--inner-panel-bg-pos-x) * 1%) calc(var(--inner-panel-bg-pos-y) * 1%);
   background-repeat: no-repeat;
-  opacity: 1;
+  transform: rotate(calc(var(--inner-panel-bg-rotate-deg) * 1deg));
+  transform-origin: center center;
+  opacity: clamp(0, var(--inner-panel-bg-opacity), 1);
   filter: saturate(1.1) contrast(1.01) brightness(1.18);
 }
 
@@ -854,15 +866,15 @@ body.terminal-site .artwork-frame.artwork-bg-photo > * {
   }
 
   body.terminal-site .inner-panel-photo-bg:not(.inner-panel-photo-bg--cover)::before {
-    transform: rotate(90deg) scale(1.08);
+    transform: rotate(calc(90deg + (var(--inner-panel-bg-rotate-deg) * 1deg))) scale(1.08);
     transform-origin: center center;
-    background-size: cover, calc(var(--inner-panel-bg-size-pct-portrait) * 1%) auto;
+    background-size: cover, calc(var(--inner-panel-bg-size-pct-portrait) * 1%) calc(var(--inner-panel-bg-size-pct-portrait) * 1%);
   }
 
   body.terminal-site .artwork-frame.artwork-bg-photo::after {
-    transform: rotate(90deg) scale(1.08);
+    transform: rotate(calc(90deg + (var(--inner-panel-bg-rotate-deg) * 1deg))) scale(1.08);
     transform-origin: center center;
-    background-size: cover, calc(var(--inner-panel-bg-size-pct-portrait) * 1%) auto;
+    background-size: cover, calc(var(--inner-panel-bg-size-pct-portrait) * 1%) calc(var(--inner-panel-bg-size-pct-portrait) * 1%);
   }
 
   body.terminal-site .site-shell-header::before {
@@ -874,14 +886,14 @@ body.terminal-site .artwork-frame.artwork-bg-photo > * {
 
 /* Music: panel bg-images — 90° + tight crop (Hip-Oh / Hugo only; see .inner-panel-photo-bg--cover) */
 body[data-page="music"].terminal-site .inner-panel-photo-bg:not(.inner-panel-photo-bg--cover)::before {
-  transform: rotate(90deg) scale(1.2);
+  transform: rotate(calc(90deg + (var(--inner-panel-bg-rotate-deg) * 1deg))) scale(1.2);
   transform-origin: center center;
-  background-size: cover, 235% auto;
+  background-size: cover, 235% 235%;
 }
 
 /* Photo layer uses cover on both stacks so the art fills the panel (no side/top/bottom gaps) */
 body.terminal-site .inner-panel-photo-bg.inner-panel-photo-bg--cover::before {
-  transform: none;
+  transform: rotate(calc(var(--inner-panel-bg-rotate-deg) * 1deg));
   background-size: cover, cover;
   background-position: center, center;
 }
@@ -1031,6 +1043,24 @@ body.terminal-site .scroll-window {
   line-height: 1.55;
   text-align: left;
   box-sizing: border-box;
+}
+
+body[data-page="resume"].terminal-site .scroll-window.resume-prose.inner-panel-photo-bg {
+  --inner-panel-bg-pos-x: 50;
+  --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-size-pct: 145;
+  --inner-panel-bg-opacity: 0.5;
+}
+
+/* Resume body: keep readability but let panel-art changes remain visible. */
+body[data-page="resume"].terminal-site .scroll-window.resume-prose :is(p, li, td, th, dd, dt, blockquote):not(.panel-kicker):not(.nav-loading),
+body[data-page="resume"].terminal-site .scroll-window.resume-prose .text-on-surface,
+body[data-page="resume"].terminal-site .scroll-window.resume-prose .text-white,
+body[data-page="resume"].terminal-site .scroll-window.resume-prose .mixed-case-prose :is(h2, h3):not(.panel-heading),
+body[data-page="resume"].terminal-site .scroll-window.resume-prose .mixed-case-prose :is(h2, h3) :not(.panel-heading),
+body[data-page="resume"].terminal-site .scroll-window.resume-prose .center-text,
+body[data-page="resume"].terminal-site .scroll-window.resume-prose .body-copy:not(:has(p)) {
+  background-color: rgba(0, 0, 0, 0.26);
 }
 
 body.terminal-site .scroll-window h1,

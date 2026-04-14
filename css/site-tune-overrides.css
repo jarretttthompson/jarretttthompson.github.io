@@ -1,22 +1,62 @@
 /*
  * Live overrides saved by the Site Tuner local dev tool.
- * Commit this file when you want to keep the latest tuned document state.
- *
- * Shell title bar background (optional): override on body.terminal-site .site-shell-header, e.g.
- *   --shell-header-bg-image: url("../images/bg-images/your-file.png");
- *   --shell-header-bg-pos-x: 50;
- *   --shell-header-bg-pos-y: 40;
- *   --shell-header-bg-size-pct: 120;
- * macOS screenshot filenames often use a narrow no-break space (U+202F) before "AM" — percent-encode as %E2%80%AF in url() or rename the file.
- *
- * Friends page panel (optional): on body[data-page="friends"].terminal-site .site-shell-content .scroll-window > section.neon-inner-panel
- *   --friends-panel-bg-image: url("../images/bg-images/your-file.png");
- *   --friends-panel-bg-pos-x: 50;
- *   --friends-panel-bg-pos-y: 45;
- *   --friends-panel-bg-size-pct: 152; /* higher = zoom in (panel crops edges) */
- *
- * Portrait phones: @media (orientation: portrait) and (max-width: 720px) rotates photo pseudos; vars
- *   --inner-panel-bg-size-pct-portrait, --panel-photo-bg-size-pct-portrait, --shell-header-bg-size-pct-portrait.
- * (Avoid container-type: size on auto-height panels — it breaks layout and warps backgrounds.)
- *
+ * Saved: 2026-03-27T15:02:27.237Z
  */
+
+body.terminal-site div:nth-of-type(1) > main > div > div > section:nth-of-type(1) {
+  data-bg-art: 13;
+  --inner-panel-bg-pos-x: 27.75;
+  --inner-panel-bg-pos-y: 11.75;
+  --inner-panel-bg-size-pct: 205.5;
+  --inner-panel-bg-rotate-deg: 36;
+  --inner-panel-bg-opacity: 1;
+}
+
+body.terminal-site div:nth-of-type(1) > main > div > div > section:nth-of-type(2) {
+  data-bg-art: 2;
+  --inner-panel-bg-pos-x: 50;
+  --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-size-pct: 120;
+  --inner-panel-bg-rotate-deg: 0;
+  --inner-panel-bg-opacity: 1;
+}
+
+body.terminal-site div:nth-of-type(1) > main > div > div > section:nth-of-type(3) {
+  data-bg-art: 3;
+  --inner-panel-bg-pos-x: 50;
+  --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-size-pct: 120;
+  --inner-panel-bg-rotate-deg: 0;
+  --inner-panel-bg-opacity: 1;
+}
+
+body.terminal-site div:nth-of-type(1) > main > div > div > section:nth-of-type(4) {
+  data-bg-art: 4;
+  --inner-panel-bg-pos-x: 50;
+  --inner-panel-bg-pos-y: 50;
+  --inner-panel-bg-size-pct: 120;
+  --inner-panel-bg-rotate-deg: 0;
+  --inner-panel-bg-opacity: 1;
+}
+
+body.terminal-site div:nth-of-type(1) > main > div > div > section:nth-of-type(4) > p:nth-of-type(3) {
+  translate: 0px 0px;
+  font-size: 14.4px;
+  line-height: 1.55;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
+body.terminal-site #st-overlay-badge {
+  translate: 0px 0px;
+  width: 45.4805px;
+  height: 24.4336px;
+  max-width: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  gap: 0px;
+}

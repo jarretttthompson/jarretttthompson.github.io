@@ -21,7 +21,7 @@ registerServiceWorker();
   const allowTune =
     h === "localhost" || h === "127.0.0.1" || h === "[::1]" || h.endsWith(".local");
   if (allowTune) {
-    import("./modules/site-tune.js?v=20260393")
+    import("./modules/site-tune.js?v=20260398")
       .then((m) => m.initSiteTuning())
       .catch((err) => console.warn("[site-tune] failed to load:", err));
   }

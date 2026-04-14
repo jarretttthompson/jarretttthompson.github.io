@@ -1,4 +1,4 @@
-/* bg-images/* — percent-encoded (NNBSP before AM). Use data-bg-art="0".."19" on .inner-panel-photo-bg / .artwork-bg-photo. */
+/* bg-images/* — percent-encoded (NNBSP before AM). Use shared data-bg-art="0".."20" on .inner-panel-photo-bg / .artwork-bg-photo. */
 body.terminal-site [data-bg-art="0"] {
   --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.03.14%E2%80%AFAM.png");
 }
@@ -58,4 +58,7 @@ body.terminal-site [data-bg-art="18"] {
 }
 body.terminal-site [data-bg-art="19"] {
   --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.41.53%E2%80%AFAM.png");
+}
+body.terminal-site [data-bg-art="20"] {
+  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2010.03.33%E2%80%AFAM.png");
 }

@@ -6,6 +6,10 @@
  * Modes:
  *   resume  Auto-selected on /resume. Reads CSS vars + JSON persistence.
  *           Sliders: posX/Y, scale, wrapWidth/OffsetX/OffsetY, bgPos/Zoom.
+ *   shell-header
+ *           The shell title bar background behind the logo. Selected from
+ *           the Element Picker.
+ *           Sliders: bgPosX/Y, bgSizePct.
  *   img     Any <img>. Selected from the Element Picker.
  *           Sliders: posX/Y, scale, widthPct, bandHeightVh.
  *   text    h1–h6, p, span, etc. Selected from the Element Picker.
@@ -21,7 +25,12 @@
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const RESUME_JSON_PATH = "css/resume-photo-tune.values.json";
+const TUNE_STATE_BASE = "css/tune-state";
 const HOME_HERO_SELECTOR = "#site-home-hero";
+const SHELL_HEADER_SELECTOR = ".site-shell-header";
+const PANEL_ART_SELECTOR = ".inner-panel-photo-bg, .artwork-bg-photo";
+const PANEL_ART_MIN = 0;
+const PANEL_ART_MAX = 20;
 
 const TEXT_TAGS = new Set([
   "h1","h2","h3","h4","h5","h6",
@@ -37,6 +46,14 @@ function px(v) { const n = parseFloat(v); return isNaN(n) ? 0 : n; }
 
 function isHomeHeroEl(el) {
   return el instanceof HTMLElement && el.matches(HOME_HERO_SELECTOR);
+}
+
+function isShellHeaderEl(el) {
+  return el instanceof HTMLElement && el.matches(SHELL_HEADER_SELECTOR);
+}
+
+function isPanelArtEl(el) {
+  return el instanceof HTMLElement && el.matches(PANEL_ART_SELECTOR);
 }
 
 function parseObjectPosition(str) {
@@ -71,6 +88,76 @@ function parseTranslate(cs) {
     x: px(parts[0]),
     y: px(parts[1] || "0"),
   };
+}
+
+function parseCssRotateDeg(cs) {
+  const raw = (cs.rotate || "none").trim();
+  if (raw === "none") return 0;
+  if (raw.endsWith("deg")) return parseFloat(raw) || 0;
+  if (raw.endsWith("rad")) return ((parseFloat(raw) || 0) * 180) / Math.PI;
+  return parseFloat(raw) || 0;
+}
+
+function parseBgPosition(str) {
+  // Computed background-position is always in pixels or percentages — convert to %
+  const parts = (str || "50% 50%").trim().split(/\s+/);
+  const toNum = (s, fallback) => {
+    const n = parseFloat(s);
+    return isNaN(n) ? fallback : n;
+  };
+  return {
+    x: clamp(toNum(parts[0], 50), 0, 100),
+    y: clamp(toNum(parts[1] ?? parts[0], 50), 0, 100),
+  };
+}
+
+/** True only when an element has a real image (url()) as its background. */
+function hasBgImage(el) {
+  if (!el) return false;
+  const bg = getComputedStyle(el).backgroundImage;
+  return bg && bg !== "none" && bg.includes("url(");
+}
+
+// ─── Background Image: Read / Apply ──────────────────────────────────────────
+
+function readStateFromBgImg(el) {
+  const cs = getComputedStyle(el);
+  // background-position computed value: "X% Y%" or pixel values
+  const rawPos = cs.backgroundPosition || "50% 50%";
+  // When multiple layers exist, the first value is for the last declared layer
+  const firstLayer = rawPos.split(",")[0].trim();
+  const pos = parseBgPosition(firstLayer);
+  const rawSize = (cs.backgroundSize || "cover").split(",")[0].trim();
+  // Normalise size: "cover"/"contain"/"auto" → use 100 as placeholder, flag it
+  let bgSizePct = 100;
+  let bgSizeMode = "cover";
+  if (rawSize !== "cover" && rawSize !== "contain" && rawSize !== "auto") {
+    bgSizeMode = "custom";
+    bgSizePct = parseFloat(rawSize) || 100;
+  }
+  return {
+    mode: "bg-img",
+    posX: pos.x,
+    posY: pos.y,
+    bgSizePct,
+    bgSizeMode,
+    rotate: parseCssRotateDeg(cs),
+  };
+}
+
+function applyStateToBgImg(el, v) {
+  el.style.backgroundPosition = `${clamp(v.posX ?? 50, 0, 100)}% ${clamp(v.posY ?? 50, 0, 100)}%`;
+  if ((v.bgSizeMode || "cover") === "cover") {
+    el.style.backgroundSize = "cover";
+  } else {
+    el.style.backgroundSize = `${clamp(v.bgSizePct ?? 100, 10, 400)}%`;
+  }
+  const deg = v.rotate ?? 0;
+  if (deg === 0) {
+    el.style.removeProperty("rotate");
+  } else {
+    el.style.rotate = `${deg}deg`;
+  }
 }
 
 // ─── Element Type Detection ───────────────────────────────────────────────────
@@ -227,6 +314,58 @@ async function loadResumeJson(card) {
   } catch { /* missing or invalid */ }
 }
 
+/**
+ * Load and apply the saved state JSON for any non-resume page.
+ * Mirrors what loadResumeJson does for the resume card, but for all element types.
+ * Populates _savedStateSnapshot so renderLedger can colour entries saved vs pending.
+ */
+async function loadPageState(page) {
+  if (!page) return;
+  const safePage = page.replace(/[^a-zA-Z0-9_-]/g, "_").replace(/^_+|_+$/g, "") || "default";
+  try {
+    const r = await fetch(`${TUNE_STATE_BASE}/${safePage}.json`, { cache: "no-store" });
+    if (!r.ok) return;
+    const data = await r.json();
+    if (!Array.isArray(data?.elements) || data.elements.length === 0) return;
+
+    _savedStateSnapshot.clear();
+
+    for (const item of data.elements) {
+      const { selector, confidence, mode, state } = item;
+      if (!selector || !state) continue;
+      let el = null;
+      try { el = document.querySelector(selector); } catch { /* bad selector */ }
+      if (!el) continue;
+
+      // Re-apply saved styles as inline (authoritative, beats CSS cascade)
+      if (mode === "img" || el.tagName === "IMG") {
+        applyStateToImg(el, state);
+      } else if (mode === "text") {
+        applyStateToText(el, state);
+      } else if (mode === "block") {
+        applyStateToBlock(el, state);
+      } else if (mode === "home-hero") {
+        applyStateToHomeHero(el, state);
+      } else if (mode === "shell-header") {
+        applyStateToShellHeader(el, state);
+      } else if (mode === "panel-art") {
+        applyStateToPanelArt(el, state);
+      } else if (mode === "bg-img") {
+        applyStateToBgImg(el, state);
+      }
+
+      // Use as baseline so sliders initialise from the restored values
+      _baselineByElement.set(el, { ...state });
+
+      // Record the saved property values — renderLedger compares live state against this
+      const savedDiffs = buildCurrentStateProps(mode, state);
+      _savedStateSnapshot.set(selector, savedDiffs);
+    }
+
+    _lastSavedAt = data.savedAt || null;
+  } catch { /* missing or invalid state file — start fresh */ }
+}
+
 function readStateFromHomeHero(section) {
   const cs = getComputedStyle(section);
   const get = (prop, fallback) => {
@@ -245,6 +384,55 @@ function applyStateToHomeHero(section, v) {
   section.style.setProperty("--home-hero-bg-pos-x", String(clamp(v.bgPosX ?? 50, 0, 100)));
   section.style.setProperty("--home-hero-bg-pos-y", String(clamp(v.bgPosY ?? 50, 0, 100)));
   section.style.setProperty("--home-hero-bg-size-pct", String(clamp(v.bgSizePct ?? 118, 108, 220)));
+}
+
+function readStateFromShellHeader(header) {
+  const cs = getComputedStyle(header);
+  const get = (prop, fallback) => {
+    const v = parseFloat(cs.getPropertyValue(prop));
+    return Number.isFinite(v) ? v : fallback;
+  };
+  return {
+    mode: "shell-header",
+    bgPosX: clamp(get("--shell-header-bg-pos-x", 50), 0, 100),
+    bgPosY: clamp(get("--shell-header-bg-pos-y", 50), 0, 100),
+    bgSizePct: clamp(get("--shell-header-bg-size-pct", 118), 108, 220),
+  };
+}
+
+function applyStateToShellHeader(header, v) {
+  header.style.setProperty("--shell-header-bg-pos-x", String(clamp(v.bgPosX ?? 50, 0, 100)));
+  header.style.setProperty("--shell-header-bg-pos-y", String(clamp(v.bgPosY ?? 50, 0, 100)));
+  header.style.setProperty("--shell-header-bg-size-pct", String(clamp(v.bgSizePct ?? 118, 108, 220)));
+}
+
+function readStateFromPanelArt(el) {
+  const cs = getComputedStyle(el);
+  const get = (prop, fallback) => {
+    const v = parseFloat(cs.getPropertyValue(prop));
+    return Number.isFinite(v) ? v : fallback;
+  };
+  const rawIdx = parseInt(el.getAttribute("data-bg-art") || "0", 10);
+  const artIndex = Number.isFinite(rawIdx) ? clamp(rawIdx, PANEL_ART_MIN, PANEL_ART_MAX) : 0;
+  return {
+    mode: "panel-art",
+    artIndex,
+    bgPosX: clamp(get("--inner-panel-bg-pos-x", 50), 0, 100),
+    bgPosY: clamp(get("--inner-panel-bg-pos-y", 50), 0, 100),
+    bgSizePct: clamp(get("--inner-panel-bg-size-pct", 120), 80, 260),
+    rotateDeg: clamp(get("--inner-panel-bg-rotate-deg", 0), -180, 180),
+    opacity: clamp(get("--inner-panel-bg-opacity", 1), 0, 1),
+  };
+}
+
+function applyStateToPanelArt(el, v) {
+  const nextIdx = Math.round(clamp(v.artIndex ?? 0, PANEL_ART_MIN, PANEL_ART_MAX));
+  el.setAttribute("data-bg-art", String(nextIdx));
+  el.style.setProperty("--inner-panel-bg-pos-x", String(clamp(v.bgPosX ?? 50, 0, 100)));
+  el.style.setProperty("--inner-panel-bg-pos-y", String(clamp(v.bgPosY ?? 50, 0, 100)));
+  el.style.setProperty("--inner-panel-bg-size-pct", String(clamp(v.bgSizePct ?? 120, 80, 260)));
+  el.style.setProperty("--inner-panel-bg-rotate-deg", String(clamp(v.rotateDeg ?? 0, -180, 180)));
+  el.style.setProperty("--inner-panel-bg-opacity", String(clamp(v.opacity ?? 1, 0, 1)));
 }
 
 // ─── Image: Read / Apply ──────────────────────────────────────────────────────
@@ -274,6 +462,7 @@ function readStateFromImg(img) {
     widthPx: px(cs.width),
     heightPx: px(cs.height),
     scale: parseTransformScale(cs),
+    rotate: parseCssRotateDeg(cs),
     useBandLayout, widthPct, bandHeightVh,
     objectFit: cs.objectFit || "cover",
     maxHeight: cs.maxHeight || "none",
@@ -286,6 +475,8 @@ function applyStateToImg(img, v) {
   img.style.translate = `${v.offsetX ?? 0}px ${v.offsetY ?? 0}px`;
   img.style.transform = `scale(${clamp(v.scale, 0.25, 3)})`;
   img.style.transformOrigin = "center center";
+  const deg = v.rotate ?? 0;
+  if (deg === 0) { img.style.removeProperty("rotate"); } else { img.style.rotate = `${deg}deg`; }
   if (v.useBandLayout === true) {
     img.style.width = `${clamp(v.widthPct, 40, 100)}%`;
     img.style.height = `${clamp(v.bandHeightVh, 8, 55)}vh`;
@@ -349,8 +540,10 @@ function readStateFromBlock(el) {
 
 function applyStateToBlock(el, v) {
   el.style.translate = `${v.offsetX ?? 0}px ${v.offsetY ?? 0}px`;
-  el.style.width = `${Math.max(v.widthPx ?? 1, 1)}px`;
-  el.style.height = `${Math.max(v.heightPx ?? 1, 1)}px`;
+  // widthPx/heightPx are only applied when present (in-session slider use).
+  // They are intentionally omitted from the saved JSON to preserve responsive layout.
+  if (v.widthPx != null) el.style.width = `${Math.max(v.widthPx, 1)}px`;
+  if (v.heightPx != null) el.style.height = `${Math.max(v.heightPx, 1)}px`;
   el.style.maxWidth = (v.maxWidth ?? 9999) >= 9990 ? "none" : `${v.maxWidth}px`;
   el.style.paddingTop = `${v.paddingTop}px`;
   el.style.paddingBottom = `${v.paddingBottom}px`;
@@ -447,6 +640,31 @@ function computeDiffs(baseline, current) {
     return diffs;
   }
 
+  if (mode === "shell-header") {
+    const pairs = [
+      ["--shell-header-bg-pos-x", baseline.bgPosX, current.bgPosX, () => Math.abs(current.bgPosX - baseline.bgPosX) > 0.5],
+      ["--shell-header-bg-pos-y", baseline.bgPosY, current.bgPosY, () => Math.abs(current.bgPosY - baseline.bgPosY) > 0.5],
+      ["--shell-header-bg-size-pct", baseline.bgSizePct, current.bgSizePct, () => Math.abs(current.bgSizePct - baseline.bgSizePct) > 0.5],
+    ];
+    for (const [prop, bv, av, changed] of pairs)
+      if (changed()) diffs.push({ property: prop, before: String(bv), after: String(av) });
+    return diffs;
+  }
+
+  if (mode === "panel-art") {
+    const pairs = [
+      ["data-bg-art", baseline.artIndex, current.artIndex, () => Math.round(current.artIndex) !== Math.round(baseline.artIndex)],
+      ["--inner-panel-bg-pos-x", baseline.bgPosX, current.bgPosX, () => Math.abs(current.bgPosX - baseline.bgPosX) > 0.5],
+      ["--inner-panel-bg-pos-y", baseline.bgPosY, current.bgPosY, () => Math.abs(current.bgPosY - baseline.bgPosY) > 0.5],
+      ["--inner-panel-bg-size-pct", baseline.bgSizePct, current.bgSizePct, () => Math.abs(current.bgSizePct - baseline.bgSizePct) > 0.5],
+      ["--inner-panel-bg-rotate-deg", baseline.rotateDeg, current.rotateDeg, () => Math.abs((current.rotateDeg ?? 0) - (baseline.rotateDeg ?? 0)) > 0.25],
+      ["--inner-panel-bg-opacity", baseline.opacity, current.opacity, () => Math.abs((current.opacity ?? 1) - (baseline.opacity ?? 1)) > 0.01],
+    ];
+    for (const [prop, bv, av, changed] of pairs)
+      if (changed()) diffs.push({ property: prop, before: String(bv), after: String(av) });
+    return diffs;
+  }
+
   if (mode === "img") {
     if (Math.abs((current.offsetX ?? 0) - (baseline.offsetX ?? 0)) > 0.5 ||
         Math.abs((current.offsetY ?? 0) - (baseline.offsetY ?? 0)) > 0.5) {
@@ -460,6 +678,8 @@ function computeDiffs(baseline, current) {
       diffs.push({ property: "object-position", before: `${baseline.posX}% ${baseline.posY}%`, after: `${current.posX}% ${current.posY}%` });
     if (Math.abs(current.scale - baseline.scale) > 0.005)
       diffs.push({ property: "transform", before: `scale(${baseline.scale.toFixed(3)})`, after: `scale(${current.scale.toFixed(3)})` });
+    if (Math.abs((current.rotate ?? 0) - (baseline.rotate ?? 0)) > 0.5)
+      diffs.push({ property: "rotate", before: `${(baseline.rotate ?? 0).toFixed(1)}deg`, after: `${(current.rotate ?? 0).toFixed(1)}deg` });
     if (current.objectFit !== baseline.objectFit)
       diffs.push({ property: "object-fit", before: baseline.objectFit, after: current.objectFit });
     const bandBefore = baseline.useBandLayout === true;
@@ -535,7 +755,31 @@ function computeDiffs(baseline, current) {
     return diffs;
   }
 
+  if (mode === "bg-img") {
+    if (Math.abs(current.posX - baseline.posX) > 0.5 || Math.abs(current.posY - baseline.posY) > 0.5)
+      diffs.push({ property: "background-position", before: `${baseline.posX}% ${baseline.posY}%`, after: `${current.posX}% ${current.posY}%` });
+    const bSize = baseline.bgSizeMode === "cover" ? "cover" : `${baseline.bgSizePct}%`;
+    const aSize = current.bgSizeMode === "cover" ? "cover" : `${current.bgSizePct}%`;
+    if (bSize !== aSize)
+      diffs.push({ property: "background-size", before: bSize, after: aSize });
+    if (Math.abs((current.rotate ?? 0) - (baseline.rotate ?? 0)) > 0.5)
+      diffs.push({ property: "rotate", before: `${(baseline.rotate ?? 0).toFixed(1)}deg`, after: `${(current.rotate ?? 0).toFixed(1)}deg` });
+    return diffs;
+  }
+
   return diffs;
+}
+
+// ─── Diff Equality ────────────────────────────────────────────────────────────
+
+/** True when two diffs arrays represent the same property→value pairs (order-insensitive). */
+function diffsMatch(a, b) {
+  if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+  const aMap = new Map(a.map(d => [d.property, d.after]));
+  for (const d of b) {
+    if (aMap.get(d.property) !== d.after) return false;
+  }
+  return aMap.size === b.length;
 }
 
 // ─── Change Ledger ────────────────────────────────────────────────────────────
@@ -546,6 +790,12 @@ let _ledgerContainer = null; // set during buildPanel
 let _baselineByElement = new WeakMap();
 let _resumeBaseline = null;
 let _liveLedgerFrame = 0;
+let _lastSavedAt = null;               // ISO string of last successful save
+let _savedStateSnapshot = new Map();   // selector → diffs[] at last save (for saved/pending diff)
+// Bridge: initSiteTuning() replaces this with the real closure function so
+// module-level helpers (collectCurrentPageEntries) can call it without
+// breaking the encapsulation of the page/card/state closure vars.
+let _buildPageTargetCatalog = () => [];
 
 function confBg(c) {
   return c === "high" ? "rgba(0,200,100,0.35)" : c === "medium" ? "rgba(255,180,0,0.35)" : "rgba(255,80,80,0.35)";
@@ -588,31 +838,73 @@ function commitEntry(diffs, note, selectedEl, baseline) {
 function renderLedger() {
   if (!_ledgerContainer) return;
   _ledgerContainer.innerHTML = "";
+
+  // Last-saved timestamp
+  if (_lastSavedAt) {
+    const ts = document.createElement("p");
+    ts.style.cssText = "color:rgba(0,255,159,0.5);font-size:10px;margin:0 0 8px;";
+    try {
+      ts.textContent = `Last saved: ${new Date(_lastSavedAt).toLocaleTimeString()}`;
+    } catch {
+      ts.textContent = `Last saved: ${_lastSavedAt}`;
+    }
+    _ledgerContainer.appendChild(ts);
+  }
+
   if (_ledger.length === 0) {
     const p = document.createElement("p");
     p.style.cssText = "color:rgba(180,230,200,0.4);font-size:11px;margin:6px 0 0;line-height:1.6;";
-    p.textContent = "Current document matches the saved baseline.";
+    p.textContent = _lastSavedAt
+      ? "All changes are saved — document matches the saved baseline."
+      : "Current document matches the saved baseline.";
     _ledgerContainer.appendChild(p);
     return;
   }
+
   const hdr = document.createElement("p");
   hdr.style.cssText = "color:#00ff9f;font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin:0 0 8px;font-weight:600;";
   hdr.textContent = `Current page snapshot (${_ledger.length})`;
   _ledgerContainer.appendChild(hdr);
+
   for (const entry of [..._ledger]) {
+    // Compare live diffs against the last-saved snapshot to decide badge colour
+    const savedDiffs = _savedStateSnapshot.get(entry.selector);
+    const isSaved = savedDiffs != null && diffsMatch(savedDiffs, entry.diffs);
+
     const card = document.createElement("div");
-    card.style.cssText = "margin-bottom:9px;padding:9px 10px;background:rgba(0,255,159,0.05);border:1px solid rgba(0,255,159,0.2);border-radius:6px;";
+    card.style.cssText = [
+      "margin-bottom:9px;padding:9px 10px;border-radius:6px;",
+      isSaved
+        ? "background:rgba(0,255,159,0.05);border:1px solid rgba(0,255,159,0.2);"
+        : "background:rgba(255,200,0,0.04);border:1px solid rgba(255,200,0,0.28);",
+    ].join("");
+
     const selRow = document.createElement("div");
-    selRow.style.cssText = "display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:5px;";
+    selRow.style.cssText = "display:flex;justify-content:space-between;align-items:flex-start;gap:5px;margin-bottom:5px;flex-wrap:wrap;";
+
     const selSpan = document.createElement("span");
     selSpan.textContent = entry.selector;
-    selSpan.style.cssText = "font-size:11px;color:#a8ffd4;word-break:break-all;flex:1;";
-    const badge = document.createElement("span");
-    badge.textContent = entry.selectorConfidence;
-    badge.style.cssText = `font-size:9px;padding:1px 5px;border-radius:3px;white-space:nowrap;background:${confBg(entry.selectorConfidence)};`;
+    selSpan.style.cssText = "font-size:11px;color:#a8ffd4;word-break:break-all;flex:1;min-width:0;";
+
+    const badges = document.createElement("span");
+    badges.style.cssText = "display:flex;gap:3px;flex-shrink:0;";
+
+    const confBadge = document.createElement("span");
+    confBadge.textContent = entry.selectorConfidence;
+    confBadge.style.cssText = `font-size:9px;padding:1px 5px;border-radius:3px;white-space:nowrap;background:${confBg(entry.selectorConfidence)};`;
+
+    const statusBadge = document.createElement("span");
+    statusBadge.textContent = isSaved ? "saved" : "pending";
+    statusBadge.style.cssText = isSaved
+      ? "font-size:9px;padding:1px 6px;border-radius:3px;white-space:nowrap;font-weight:600;background:rgba(0,180,90,0.3);color:#00ff9f;"
+      : "font-size:9px;padding:1px 6px;border-radius:3px;white-space:nowrap;font-weight:600;background:rgba(255,200,0,0.28);color:#ffd060;";
+
+    badges.appendChild(confBadge);
+    badges.appendChild(statusBadge);
     selRow.appendChild(selSpan);
-    selRow.appendChild(badge);
+    selRow.appendChild(badges);
     card.appendChild(selRow);
+
     for (const d of entry.diffs) {
       const line = document.createElement("div");
       line.style.cssText = "font-size:11px;margin:2px 0;";
@@ -622,12 +914,14 @@ function renderLedger() {
         `→ <span style="color:#00ff9f;">${d.after}</span>`;
       card.appendChild(line);
     }
+
     if (entry.note) {
       const n = document.createElement("div");
       n.style.cssText = "margin-top:4px;font-size:10px;color:rgba(180,255,220,0.55);font-style:italic;";
       n.textContent = `"${entry.note}"`;
       card.appendChild(n);
     }
+
     const rm = document.createElement("button");
     rm.type = "button";
     rm.textContent = "✕ Remove";
@@ -675,7 +969,9 @@ function buildCurrentCssSnapshot(entries = _ledger) {
   ];
   for (const entry of entries) {
     if (!entry?.selector || !Array.isArray(entry.diffs) || entry.diffs.length === 0) continue;
-    lines.push(`${entry.selector} {`);
+    // Boost specificity so overrides beat Tailwind / terminal-site.css
+    const prefixed = entry.selector.startsWith("body") ? entry.selector : `body.terminal-site ${entry.selector}`;
+    lines.push(`${prefixed} {`);
     for (const diff of entry.diffs) {
       lines.push(`  ${diff.property}: ${diff.after};`);
     }
@@ -683,6 +979,46 @@ function buildCurrentCssSnapshot(entries = _ledger) {
     lines.push("");
   }
   return `${lines.join("\n").trimEnd()}\n`;
+}
+
+/**
+ * Build the per-page state export object that the server writes to
+ * css/tune-state/{page}.json.  On next page load, loadPageState() reads this
+ * and re-applies inline styles — no agent, no copy-paste required.
+ *
+ * Block elements intentionally omit widthPx/heightPx so responsive layout
+ * is not broken by fixed pixel dimensions after a viewport resize.
+ */
+function buildPageStateExport(page, entries = _ledger) {
+  const elements = [];
+  const seen = new WeakSet();
+
+  // Resume card uses its own JSON file; skip here
+  for (const entry of entries) {
+    if (!entry?.selector || entry.mode === "resume") continue;
+    let el = null;
+    try { el = document.querySelector(entry.selector); } catch { /* */ }
+    if (!el || seen.has(el)) continue;
+    seen.add(el);
+
+    const state = readStateForElement(el);
+    if (!state) continue;
+
+    // Strip non-responsive properties from block state
+    if (state.mode === "block") {
+      delete state.widthPx;
+      delete state.heightPx;
+    }
+
+    elements.push({
+      selector: entry.selector,
+      confidence: entry.selectorConfidence || "medium",
+      mode: state.mode,
+      state,
+    });
+  }
+
+  return { version: 1, page, savedAt: new Date().toISOString(), elements };
 }
 
 function doExport(mode, entries = _ledger) {
@@ -700,12 +1036,15 @@ function doExport(mode, entries = _ledger) {
 }
 
 async function saveOverridesToFiles(entries = _ledger) {
+  const page = document.body.getAttribute("data-page") || location.pathname;
+  const stateExport = buildPageStateExport(page, entries);
   const res = await fetch("/__site_tune/save", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       css: buildCurrentCssSnapshot(entries),
-      page: document.body.getAttribute("data-page") || location.pathname,
+      page,
+      state: stateExport,
       savedAt: new Date().toISOString(),
     }),
   });
@@ -713,15 +1052,28 @@ async function saveOverridesToFiles(entries = _ledger) {
     const text = await res.text().catch(() => "");
     throw new Error(text || `Save failed (${res.status})`);
   }
-  return res.json().catch(() => ({}));
+  const result = await res.json().catch(() => ({}));
+  // Update saved-state tracking so ledger flips entries to "saved"
+  _lastSavedAt = new Date().toISOString();
+  _savedStateSnapshot.clear();
+  for (const entry of entries) {
+    if (entry?.selector && Array.isArray(entry.diffs)) {
+      _savedStateSnapshot.set(entry.selector, entry.diffs.map(d => ({ ...d })));
+    }
+  }
+  return result;
 }
 
 function readStateForElement(el) {
   if (!el) return null;
   if (isHomeHeroEl(el)) return readStateFromHomeHero(el);
+  if (isShellHeaderEl(el)) return readStateFromShellHeader(el);
+  if (isPanelArtEl(el)) return readStateFromPanelArt(el);
   const kind = detectElementKind(el);
   if (kind === "img") return readStateFromImg(el);
   if (kind === "text") return readStateFromText(el);
+  // Check for CSS background-image before falling back to block
+  if (hasBgImage(el)) return readStateFromBgImg(el);
   return readStateFromBlock(el);
 }
 
@@ -738,6 +1090,23 @@ function buildCurrentStateProps(mode, current) {
       { property: "--home-hero-bg-pos-x", before: "(current)", after: String(current.bgPosX) },
       { property: "--home-hero-bg-pos-y", before: "(current)", after: String(current.bgPosY) },
       { property: "--home-hero-bg-size-pct", before: "(current)", after: String(current.bgSizePct) },
+    ];
+  }
+  if (mode === "shell-header") {
+    return [
+      { property: "--shell-header-bg-pos-x", before: "(current)", after: String(current.bgPosX) },
+      { property: "--shell-header-bg-pos-y", before: "(current)", after: String(current.bgPosY) },
+      { property: "--shell-header-bg-size-pct", before: "(current)", after: String(current.bgSizePct) },
+    ];
+  }
+  if (mode === "panel-art") {
+    return [
+      { property: "data-bg-art", before: "(current)", after: String(Math.round(current.artIndex ?? 0)) },
+      { property: "--inner-panel-bg-pos-x", before: "(current)", after: String(current.bgPosX) },
+      { property: "--inner-panel-bg-pos-y", before: "(current)", after: String(current.bgPosY) },
+      { property: "--inner-panel-bg-size-pct", before: "(current)", after: String(current.bgSizePct) },
+      { property: "--inner-panel-bg-rotate-deg", before: "(current)", after: String(current.rotateDeg ?? 0) },
+      { property: "--inner-panel-bg-opacity", before: "(current)", after: String(current.opacity ?? 1) },
     ];
   }
   if (mode === "resume") {
@@ -761,6 +1130,7 @@ function buildCurrentStateProps(mode, current) {
       { property: "translate", before: "(current)", after: `${current.offsetX ?? 0}px ${current.offsetY ?? 0}px` },
       { property: "object-position", before: "(current)", after: `${current.posX}% ${current.posY}%` },
       { property: "transform", before: "(current)", after: `scale(${current.scale})` },
+      { property: "rotate", before: "(current)", after: `${current.rotate ?? 0}deg` },
       { property: "object-fit", before: "(current)", after: String(current.objectFit) },
       { property: "layout-mode", before: "(current)", after: current.useBandLayout ? "band" : "intrinsic" },
     ];
@@ -776,6 +1146,13 @@ function buildCurrentStateProps(mode, current) {
       );
     }
     return props;
+  }
+  if (mode === "bg-img") {
+    return [
+      { property: "background-position", before: "(current)", after: `${current.posX ?? 50}% ${current.posY ?? 50}%` },
+      { property: "background-size", before: "(current)", after: (current.bgSizeMode === "cover" ? "cover" : `${current.bgSizePct ?? 100}%`) },
+      { property: "rotate", before: "(current)", after: `${current.rotate ?? 0}deg` },
+    ];
   }
   if (mode === "text") {
     return [
@@ -815,12 +1192,13 @@ function collectCurrentPageEntries() {
   }
 
   const seen = new WeakSet();
-  for (const item of buildPageTargetCatalog()) {
+  for (const item of _buildPageTargetCatalog()) {
     if (!item?.element || item.key.startsWith("resume:")) continue;
     if (seen.has(item.element)) continue;
     seen.add(item.element);
     const styleAttr = item.element.getAttribute("style") || "";
-    if (!styleAttr.trim()) continue;
+    const keepPanelArtEntry = item.action === "panel-art" || item.element.matches?.(PANEL_ART_SELECTOR);
+    if (!styleAttr.trim() && !keepPanelArtEntry) continue;
     const current = readStateForElement(item.element);
     if (!current) continue;
     const mode = current.mode || detectElementKind(item.element);
@@ -1112,60 +1490,69 @@ function injectPanelStyles() {
       letter-spacing: 0.05em;
     }
 
-    /* Selected highlight + flash */
-    @keyframes st-select-flash {
-      from { box-shadow: inset 0 0 0 3px #00ff9f, 0 0 32px rgba(0,255,159,0.65); }
-      to   { box-shadow: inset 0 0 0 2px rgba(0,255,159,0.9), 0 0 16px rgba(0,255,159,0.3); }
+    /* ── Dim overlay: darkens the whole page behind the selected element ── */
+    #st-dim-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.52);
+      z-index: 2147482992;
+      pointer-events: none;
+      transition: opacity 0.18s;
+    }
+    #st-dim-overlay[hidden] { display: none !important; }
+
+    /* ── Selected element: sits above the dim overlay and pulses continuously ── */
+    @keyframes st-selected-pulse {
+      0%   { outline-color: #00ff9f;              box-shadow: 0 0 0 5px rgba(0,255,159,0.35), 0 0 28px rgba(0,255,159,0.55); }
+      50%  { outline-color: rgba(0,255,159,0.55); box-shadow: 0 0 0 9px rgba(0,255,159,0.08), 0 0 48px rgba(0,255,159,0.2); }
+      100% { outline-color: #00ff9f;              box-shadow: 0 0 0 5px rgba(0,255,159,0.35), 0 0 28px rgba(0,255,159,0.55); }
     }
     .st-selected {
-      outline: 2px solid #00ff9f !important;
-      outline-offset: 1px !important;
+      outline: 3px solid #00ff9f !important;
+      outline-offset: 4px !important;
       position: relative !important;
-      z-index: 5 !important;
-      animation: st-select-flash 0.45s ease-out 1;
+      z-index: 2147482993 !important;
+      animation: st-selected-pulse 1.9s ease-in-out infinite !important;
+    }
+
+    @keyframes st-hero-pulse {
+      0%   { outline-color: rgba(120,220,255,0.95); box-shadow: 0 0 0 5px rgba(120,220,255,0.28), 0 0 30px rgba(120,220,255,0.4); }
+      50%  { outline-color: rgba(120,220,255,0.5);  box-shadow: 0 0 0 9px rgba(120,220,255,0.07), 0 0 50px rgba(120,220,255,0.15); }
+      100% { outline-color: rgba(120,220,255,0.95); box-shadow: 0 0 0 5px rgba(120,220,255,0.28), 0 0 30px rgba(120,220,255,0.4); }
     }
     .st-home-hero-target {
-      outline: 2px dashed rgba(120,220,255,0.95) !important;
+      outline: 3px dashed rgba(120,220,255,0.95) !important;
       outline-offset: 4px !important;
-      box-shadow:
-        inset 0 0 0 2px rgba(120,220,255,0.26),
-        0 0 18px rgba(120,220,255,0.22) !important;
-      animation: st-select-flash 0.45s ease-out 1;
+      position: relative !important;
+      z-index: 2147482993 !important;
+      animation: st-hero-pulse 1.9s ease-in-out infinite !important;
     }
+
     @keyframes st-resume-bg-pulse {
-      from {
-        box-shadow: inset 0 0 0 2px rgba(255,65,175,0.85), 0 0 28px rgba(255,65,175,0.38);
-      }
-      to {
-        box-shadow: inset 0 0 0 2px rgba(255,65,175,0.55), 0 0 14px rgba(255,65,175,0.22);
-      }
+      0%   { outline-color: rgba(255,65,175,0.92); box-shadow: 0 0 0 5px rgba(255,65,175,0.28), 0 0 30px rgba(255,65,175,0.45); }
+      50%  { outline-color: rgba(255,65,175,0.45); box-shadow: 0 0 0 9px rgba(255,65,175,0.07), 0 0 50px rgba(255,65,175,0.15); }
+      100% { outline-color: rgba(255,65,175,0.92); box-shadow: 0 0 0 5px rgba(255,65,175,0.28), 0 0 30px rgba(255,65,175,0.45); }
     }
     .st-resume-bg-target {
-      outline: 2px dashed rgba(255,65,175,0.92) !important;
-      outline-offset: 4px !important;
-      animation: st-resume-bg-pulse 0.55s ease-out 1;
+      outline: 3px dashed rgba(255,65,175,0.92) !important;
+      outline-offset: 5px !important;
+      position: relative !important;
+      z-index: 2147482993 !important;
+      animation: st-resume-bg-pulse 1.9s ease-in-out infinite !important;
     }
     .st-resume-frame-target {
       outline: 3px solid rgba(120,220,255,0.95) !important;
-      outline-offset: 2px !important;
+      outline-offset: 3px !important;
       position: relative !important;
-      z-index: 6 !important;
-      box-shadow:
-        inset 0 0 0 1px rgba(120,220,255,0.75),
-        0 0 0 2px rgba(120,220,255,0.28),
-        0 0 22px rgba(120,220,255,0.25) !important;
-      animation: st-select-flash 0.45s ease-out 1;
+      z-index: 2147482993 !important;
+      animation: st-hero-pulse 1.9s ease-in-out infinite !important;
     }
     .st-resume-crop-target {
       outline: 3px solid rgba(0,255,159,0.96) !important;
-      outline-offset: 2px !important;
+      outline-offset: 3px !important;
       position: relative !important;
-      z-index: 6 !important;
-      box-shadow:
-        inset 0 0 0 2px rgba(0,255,159,0.68),
-        0 0 0 2px rgba(0,255,159,0.18),
-        0 0 18px rgba(0,255,159,0.18) !important;
-      animation: st-select-flash 0.45s ease-out 1;
+      z-index: 2147482993 !important;
+      animation: st-selected-pulse 1.9s ease-in-out infinite !important;
     }
     .st-resume-photo-target {
       outline: none !important;
@@ -1178,18 +1565,29 @@ function injectPanelStyles() {
       position: fixed;
       z-index: 2147483001;
       pointer-events: none;
-      padding: 5px 8px;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(8, 4, 18, 0.92);
-      border: 1px solid rgba(0,255,159,0.55);
+      background: rgba(4, 12, 8, 0.96);
+      border: 1.5px solid rgba(0,255,159,0.75);
       color: #00ff9f;
-      font: 600 11px/1.2 ui-monospace, monospace;
-      letter-spacing: 0.04em;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4), 0 0 12px rgba(0,255,159,0.18);
+      font: 700 12px/1.2 ui-monospace, monospace;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 18px rgba(0,255,159,0.28);
       white-space: nowrap;
+      text-shadow: 0 0 10px rgba(0,255,159,0.5);
     }
     #st-overlay-badge[hidden] {
       display: none !important;
+    }
+
+    /* Hover inspector: crosshair cursor on page when active */
+    body.st-hover-inspect * {
+      cursor: crosshair !important;
+    }
+    #st-hover-toggle[aria-pressed="true"] {
+      border-color: rgba(120,220,255,0.85) !important;
+      background: rgba(120,220,255,0.14) !important;
+      color: #78dcff !important;
     }
   `;
   document.head.appendChild(s);
@@ -1255,14 +1653,17 @@ export function initSiteTuning() {
   const page = document.body.getAttribute("data-page");
 
   // ── Shared mutable state ──
-  let targetMode = page === "resume" ? "resume" : "none"; // resume | home-hero | img | text | block | none
+  let targetMode = page === "resume" ? "resume" : "none"; // resume | home-hero | shell-header | panel-art | img | text | block | none
   let cardEl = null;
   let homeHeroEl = null;
+  let shellHeaderEl = null;
+  let panelArtEl = null;
   let targetEl = null; // the currently selected non-resume element
   let resumeTargetKey = "photo-crop";
   let state = null;
   let snapshot = null;
   let panelOpen = false;
+  let hoverInspectorActive = false; // hover-to-inspect mode
 
   // ── DOM refs for controls (rebuilt per selection) ──
   let targetsWrap = null;
@@ -1327,6 +1728,10 @@ export function initSiteTuning() {
   overlayBadgeEl.id = "st-overlay-badge";
   overlayBadgeEl.hidden = true;
 
+  const dimOverlay = document.createElement("div");
+  dimOverlay.id = "st-dim-overlay";
+  dimOverlay.hidden = true;
+
   // Ledger section
   const ledgerWrap = document.createElement("div");
   ledgerWrap.id = "st-ledger-wrap";
@@ -1342,17 +1747,63 @@ export function initSiteTuning() {
   const saveBtn = mkStBtn("💾 Save To Files", "", async () => {
     try {
       const entries = syncLivePageLedger();
-      await saveOverridesToFiles(entries);
-      flashBtn(saveBtn, entries.length ? `💾 Saved ${entries.length}` : "💾 Saved!");
+      const result = await saveOverridesToFiles(entries);
+      renderLedger(); // flip pending → saved immediately
+      // Show saved file paths if returned by server
+      const paths = [result?.cssPath, result?.statePath].filter(Boolean);
+      if (paths.length) {
+        const names = paths.map(p => p.split(/[\\/]/).slice(-2).join("/"));
+        flashBtn(saveBtn, `✓ ${names.join(" + ")}`);
+      } else {
+        flashBtn(saveBtn, entries.length ? `💾 Saved ${entries.length}` : "💾 Saved!");
+      }
     } catch (err) {
       console.warn("[site-tune] save failed:", err);
       const msg = String(err?.message || err || "");
-      if (msg.includes("404") || msg.includes("Not found")) flashBtn(saveBtn, "restart server");
-      else if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) flashBtn(saveBtn, "server offline");
-      else flashBtn(saveBtn, "save failed");
+      if (msg.includes("404") || msg.includes("Not found")) {
+        flashBtn(saveBtn, "⚠ restart server");
+      } else if (msg.includes("Failed to fetch") || msg.includes("NetworkError")) {
+        // Offline fallback: download the CSS as a file so changes aren't lost
+        try {
+          const entries2 = syncLivePageLedger();
+          const css = buildCurrentCssSnapshot(entries2);
+          const blob = new Blob([css], { type: "text/css" });
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "site-tune-overrides.css";
+          a.click();
+          URL.revokeObjectURL(a.href);
+          flashBtn(saveBtn, "⬇ downloaded (server offline)");
+        } catch {
+          flashBtn(saveBtn, "⚠ server offline");
+        }
+      } else {
+        flashBtn(saveBtn, "⚠ save failed");
+      }
     }
   });
-  const snapshotBtn = mkStBtn("⎘ Copy Page Changes", "st-btn-primary", () => {
+  const revertBtn = mkStBtn("↺ Revert", "", async () => {
+    if (!_lastSavedAt && _savedStateSnapshot.size === 0) {
+      flashBtn(revertBtn, "nothing saved yet");
+      return;
+    }
+    if (!confirm("Revert all unsaved changes on this page?")) return;
+    // Remove inline styles from all elements that have them
+    for (const item of buildPageTargetCatalog()) {
+      if (!item?.element || item.key.startsWith("resume:")) continue;
+      const el = item.element;
+      if (el.getAttribute("style")) el.removeAttribute("style");
+    }
+    // Re-apply saved state from file
+    await loadPageState(page);
+    syncLivePageLedger();
+    if (state && targetEl) {
+      const freshState = readStateForElement(targetEl);
+      if (freshState) { state = { ...freshState }; snapshot = { ...state }; buildControls(); apply(); }
+    }
+    flashBtn(revertBtn, "↺ reverted");
+  });
+  const snapshotBtn = mkStBtn("⎘ Copy Changes", "st-btn-primary", () => {
     const entries = syncLivePageLedger();
     doExport("copy", entries);
     flashBtn(snapshotBtn, entries.length ? `⎘ ${entries.length} copied` : "⎘ copied");
@@ -1361,7 +1812,7 @@ export function initSiteTuning() {
     if (_ledger.length === 0) return;
     if (confirm("Clear the current snapshot list?")) { _ledger = []; _changeId = 0; renderLedger(); }
   });
-  appendAll(exportRow, saveBtn, snapshotBtn, clearLedgerBtn);
+  appendAll(exportRow, saveBtn, revertBtn, snapshotBtn, clearLedgerBtn);
   appendAll(ledgerWrap, ledgerTitle, _ledgerContainer, exportRow);
 
   appendAll(panel, closeBtn, titleEl, intro, targetsWrap, selInfoEl, noSelEl, controlsWrap, readoutEl, ledgerWrap);
@@ -1369,6 +1820,7 @@ export function initSiteTuning() {
   document.body.appendChild(tab);
   document.body.appendChild(panel);
   document.body.appendChild(overlayBadgeEl);
+  document.body.appendChild(dimOverlay);
 
   // ── Helpers ──
   function mkStBtn(text, extraClass, fn) {
@@ -1454,6 +1906,15 @@ export function initSiteTuning() {
     return "Hero background";
   }
 
+  function shellHeaderTargetLabel() {
+    return "Shell header background";
+  }
+
+  function panelArtTargetLabel(el) {
+    if (el?.matches?.(".artwork-bg-photo")) return "Artwork container background";
+    return "Container background";
+  }
+
   function getResumeParts(card) {
     return {
       background: card,
@@ -1484,6 +1945,28 @@ export function initSiteTuning() {
         });
       }
     }
+    const shellHeader = document.querySelector(SHELL_HEADER_SELECTOR);
+    if (shellHeader) {
+      ensureBaselineForElement(shellHeader);
+      pushItem({
+        key: "shell:header-background",
+        label: "shell: Header background",
+        element: shellHeader,
+        action: "shell-header",
+        group: "Shell",
+      });
+    }
+    for (const panelArtEl of document.body.querySelectorAll(PANEL_ART_SELECTOR)) {
+      if (!(panelArtEl instanceof HTMLElement)) continue;
+      ensureBaselineForElement(panelArtEl);
+      pushItem({
+        key: `panel-art:${count++}`,
+        label: `panel: ${panelArtTargetLabel(panelArtEl)}`,
+        element: panelArtEl,
+        action: "panel-art",
+        group: "Panel backgrounds",
+      });
+    }
     if (page === "resume") {
       pushItem(
         { key: "resume:background", label: "resume: Header background", group: "Resume" },
@@ -1495,6 +1978,8 @@ export function initSiteTuning() {
       if (!(el instanceof HTMLElement)) continue;
       if (isExcludedFromSelection(el)) continue;
       if (page === "index" && isHomeHeroEl(el)) continue;
+      if (isShellHeaderEl(el)) continue;
+      if (isPanelArtEl(el)) continue;
       if (page === "resume" && el.closest(".resume-header-card")) continue;
       const kind = detectElementKind(el);
       const keyBase = `el:${count++}`;
@@ -1521,7 +2006,7 @@ export function initSiteTuning() {
         }
       }
     }
-    const order = ["Home", "Resume", "Images", "Image Frames", "Text", "Containers"];
+    const order = ["Home", "Shell", "Panel backgrounds", "Resume", "Images", "Image Frames", "Text", "Containers"];
     items.sort((a, b) => {
       const ag = getCatalogGroupForEntry(a);
       const bg = getCatalogGroupForEntry(b);
@@ -1533,10 +2018,17 @@ export function initSiteTuning() {
     pageTargetCatalog = items;
     return items;
   }
+  // Expose to module-level helpers (collectCurrentPageEntries etc.)
+  _buildPageTargetCatalog = buildPageTargetCatalog;
 
   function getCurrentTargetKey() {
     if (currentTargetCatalogKey) return currentTargetCatalogKey;
     if (targetMode === "home-hero") return "home:hero-background";
+    if (targetMode === "shell-header") return "shell:header-background";
+    if (targetMode === "panel-art" && panelArtEl) {
+      const match = pageTargetCatalog.find((item) => item.element === panelArtEl && item.action === "panel-art");
+      return match?.key || "";
+    }
     if (targetMode === "resume") return `resume:${resumeTargetKey}`;
     if (!targetEl) return "";
     const match = pageTargetCatalog.find((item) => item.element === targetEl);
@@ -1546,8 +2038,19 @@ export function initSiteTuning() {
   function selectTargetByKey(key) {
     if (!key) return;
     currentTargetCatalogKey = key;
+    // Persist last selection for this page so it survives panel close/open
+    try { sessionStorage.setItem(`st-last-key-${page}`, key); } catch { /* */ }
     if (key.startsWith("home:")) {
       selectHomeHeroTarget();
+      return;
+    }
+    if (key.startsWith("shell:")) {
+      selectShellHeaderTarget();
+      return;
+    }
+    if (key.startsWith("panel-art:")) {
+      const item = pageTargetCatalog.find((entry) => entry.key === key);
+      if (item?.element) selectPanelArtTarget(item.element);
       return;
     }
     if (key.startsWith("resume:")) {
@@ -1562,6 +2065,8 @@ export function initSiteTuning() {
 
   function getOverlayAnchor() {
     if (targetMode === "home-hero" && homeHeroEl) return homeHeroEl;
+    if (targetMode === "shell-header" && shellHeaderEl) return shellHeaderEl;
+    if (targetMode === "panel-art" && panelArtEl) return panelArtEl;
     if (targetMode === "resume" && cardEl) {
       const parts = getResumeParts(cardEl);
       return parts[resumeTargetKey] || cardEl;
@@ -1573,6 +2078,12 @@ export function initSiteTuning() {
     if (!state) return "";
     if (targetMode === "home-hero") {
       return "Use the sliders to pan and zoom the hero background behind the intro content. Arrow keys nudge the background position.";
+    }
+    if (targetMode === "shell-header") {
+      return "Use the sliders to pan and zoom the shell header background behind the logo. Arrow keys nudge the background position.";
+    }
+    if (targetMode === "panel-art") {
+      return "Use the sliders to switch panel image index, pan, and zoom the container background. Arrow keys nudge background position.";
     }
     if (targetMode === "resume") {
       if (resumeTargetKey === "photo-crop") return "Use the sliders to adjust crop and zoom. Arrow keys nudge the crop.";
@@ -1596,12 +2107,28 @@ export function initSiteTuning() {
       return;
     }
     const rect = anchor.getBoundingClientRect();
-    overlayBadgeEl.textContent =
-      targetMode === "home-hero"
-        ? homeHeroTargetLabel()
-        : targetMode === "resume"
-          ? resumeTargetLabel(resumeTargetKey)
-          : humanizeKind(targetMode);
+    // Build a descriptive label: show tag + id or first class for generic elements
+    let badgeLabel;
+    if (targetMode === "home-hero") {
+      badgeLabel = homeHeroTargetLabel();
+    } else if (targetMode === "shell-header") {
+      badgeLabel = shellHeaderTargetLabel();
+    } else if (targetMode === "panel-art") {
+      badgeLabel = panelArtTargetLabel(panelArtEl);
+    } else if (targetMode === "resume") {
+      badgeLabel = `resume · ${resumeTargetLabel(resumeTargetKey)}`;
+    } else if (targetEl) {
+      const tag = targetEl.tagName.toLowerCase();
+      const id = targetEl.id ? `#${targetEl.id}` : "";
+      const cls = !id
+        ? Array.from(targetEl.classList).filter(c => !c.startsWith("st-")).slice(0, 2).map(c => `.${c}`).join("")
+        : "";
+      const textPreview = (targetEl.textContent || "").replace(/\s+/g, " ").trim().slice(0, 28);
+      badgeLabel = `<${tag}${id || cls}>${textPreview ? ` · "${textPreview}${textPreview.length >= 28 ? "…" : ""}"` : ""}`;
+    } else {
+      badgeLabel = humanizeKind(targetMode);
+    }
+    overlayBadgeEl.textContent = badgeLabel;
     overlayBadgeEl.hidden = false;
     const badgeRect = overlayBadgeEl.getBoundingClientRect();
     const top = Math.max(8, rect.top + 8);
@@ -1644,7 +2171,20 @@ export function initSiteTuning() {
       (optgroup || pageTargetSelect).appendChild(opt);
     }
     pageTargetSelect.addEventListener("change", () => selectTargetByKey(pageTargetSelect.value));
-    appendAll(targetsWrap, title, pageTargetSelect);
+
+    // Hover inspector toggle
+    const hoverToggle = document.createElement("button");
+    hoverToggle.id = "st-hover-toggle";
+    hoverToggle.type = "button";
+    hoverToggle.textContent = "⊹ Click to select";
+    hoverToggle.setAttribute("aria-pressed", String(hoverInspectorActive));
+    hoverToggle.style.cssText = "margin-top:7px;width:100%;padding:6px 10px;font:inherit;font-size:11px;cursor:pointer;border:1px solid rgba(0,255,159,0.3);border-radius:6px;background:rgba(8,20,12,0.55);color:#c8ffe0;text-align:left;";
+    hoverToggle.addEventListener("click", () => {
+      hoverInspectorActive = !hoverInspectorActive;
+      hoverToggle.setAttribute("aria-pressed", String(hoverInspectorActive));
+      document.body.classList.toggle("st-hover-inspect", hoverInspectorActive);
+    });
+    appendAll(targetsWrap, title, pageTargetSelect, hoverToggle);
   }
 
   // ── Panel open/close ──
@@ -1655,6 +2195,13 @@ export function initSiteTuning() {
     tab.style.display = "none";
     document.body.classList.add("site-tune-panel-open");
     renderTargets();
+    // Restore last selection for this page from session storage
+    if (!state) {
+      try {
+        const lastKey = sessionStorage.getItem(`st-last-key-${page}`);
+        if (lastKey) selectTargetByKey(lastKey);
+      } catch { /* */ }
+    }
     syncOverlayBadge();
   }
 
@@ -1664,6 +2211,7 @@ export function initSiteTuning() {
     tab.setAttribute("aria-expanded", "false");
     tab.style.removeProperty("display");
     document.body.classList.remove("site-tune-panel-open");
+    dimOverlay.hidden = true;
     if (overlayBadgeEl) overlayBadgeEl.hidden = true;
   }
 
@@ -1686,6 +2234,41 @@ export function initSiteTuning() {
   window.addEventListener("scroll", syncOverlayBadge, { passive: true });
   window.addEventListener("resize", syncOverlayBadge, { passive: true });
 
+  // ── Hover Inspector ──
+  document.body.addEventListener("mouseover", (e) => {
+    if (!hoverInspectorActive || !panelOpen) return;
+    const el = e.target;
+    if (!el || el === document.body || isExcludedFromSelection(el)) return;
+    if (!overlayBadgeEl) return;
+    const rect = el.getBoundingClientRect();
+    overlayBadgeEl.textContent = describeElementLabel(el);
+    overlayBadgeEl.hidden = false;
+    const badgeRect = overlayBadgeEl.getBoundingClientRect();
+    overlayBadgeEl.style.top = `${Math.max(8, rect.top + 6)}px`;
+    overlayBadgeEl.style.left = `${Math.min(Math.max(8, rect.left + 6), window.innerWidth - badgeRect.width - 8)}px`;
+  }, { passive: true });
+
+  document.body.addEventListener("click", (e) => {
+    if (!hoverInspectorActive || !panelOpen) return;
+    const el = e.target;
+    if (!el || isExcludedFromSelection(el)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    // Turn off inspector mode after selection
+    hoverInspectorActive = false;
+    document.body.classList.remove("st-hover-inspect");
+    const toggle = document.getElementById("st-hover-toggle");
+    if (toggle) toggle.setAttribute("aria-pressed", "false");
+    // Select the clicked element
+    if (el.tagName === "IMG" && !isExcludedImage(el)) {
+      selectImg(el);
+    } else {
+      selectGenericEl(el);
+    }
+    // Re-render targets so picker reflects new selection
+    renderTargets();
+  }, true /* capture so it fires before page handlers */);
+
   // ── Selection highlight ──
   function clearSelected() {
     if (targetEl) { targetEl.classList.remove("st-selected"); }
@@ -1696,15 +2279,22 @@ export function initSiteTuning() {
     document.querySelectorAll(".st-resume-crop-target").forEach(n => n.classList.remove("st-resume-crop-target"));
     document.querySelectorAll(".st-resume-photo-target").forEach(n => n.classList.remove("st-resume-photo-target"));
     targetEl = null;
+    dimOverlay.hidden = true;
     if (overlayBadgeEl) overlayBadgeEl.hidden = true;
   }
 
   function setSelected(el) {
     clearSelected();
     if (!el) return;
-    void el.offsetWidth; // reflow → replay animation
+    void el.offsetWidth; // reflow → restart animation
     el.classList.add("st-selected");
     targetEl = el;
+    dimOverlay.hidden = false;
+    // Scroll so the element is visible — delay slightly so the dim overlay
+    // renders first and the user sees the spotlight effect land on the element.
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }, 60);
     syncOverlayBadge();
   }
 
@@ -1712,12 +2302,22 @@ export function initSiteTuning() {
     clearSelected();
     if (!card) return;
     const parts = getResumeParts(card);
-    if (resumeTargetKey === "background" && parts.background) parts.background.classList.add("st-resume-bg-target");
-    if (resumeTargetKey === "photo-frame" && parts["photo-frame"]) parts["photo-frame"].classList.add("st-resume-frame-target");
+    let highlightEl = card;
+    if (resumeTargetKey === "background" && parts.background) {
+      parts.background.classList.add("st-resume-bg-target");
+      highlightEl = parts.background;
+    }
+    if (resumeTargetKey === "photo-frame" && parts["photo-frame"]) {
+      parts["photo-frame"].classList.add("st-resume-frame-target");
+      highlightEl = parts["photo-frame"];
+    }
     if (resumeTargetKey === "photo-crop" && parts["photo-crop"] && !isExcludedImage(parts["photo-crop"])) {
       if (parts["photo-frame"]) parts["photo-frame"].classList.add("st-resume-crop-target");
       parts["photo-crop"].classList.add("st-resume-photo-target");
+      highlightEl = parts["photo-frame"] || card;
     }
+    dimOverlay.hidden = false;
+    setTimeout(() => highlightEl?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" }), 60);
     syncOverlayBadge();
   }
 
@@ -1725,6 +2325,8 @@ export function initSiteTuning() {
     clearSelected();
     if (!section) return;
     section.classList.add("st-home-hero-target");
+    dimOverlay.hidden = false;
+    setTimeout(() => section.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" }), 60);
     syncOverlayBadge();
   }
 
@@ -1732,6 +2334,8 @@ export function initSiteTuning() {
   function apply() {
     if (!state) return;
     if (targetMode === "home-hero" && homeHeroEl) applyStateToHomeHero(homeHeroEl, state);
+    if (targetMode === "shell-header" && shellHeaderEl) applyStateToShellHeader(shellHeaderEl, state);
+    if (targetMode === "panel-art" && panelArtEl) applyStateToPanelArt(panelArtEl, state);
     if (targetMode === "resume" && cardEl) applyStateToCard(cardEl, state);
     if (targetMode === "img" && targetEl) applyStateToImg(targetEl, state);
     if (targetMode === "text" && targetEl) applyStateToText(targetEl, state);
@@ -1746,6 +2350,24 @@ export function initSiteTuning() {
     if (!state) return false;
 
     if (targetMode === "home-hero") {
+      if (key === "ArrowLeft") state.bgPosX = clamp((state.bgPosX ?? 50) - amount, 0, 100);
+      if (key === "ArrowRight") state.bgPosX = clamp((state.bgPosX ?? 50) + amount, 0, 100);
+      if (key === "ArrowUp") state.bgPosY = clamp((state.bgPosY ?? 50) - amount, 0, 100);
+      if (key === "ArrowDown") state.bgPosY = clamp((state.bgPosY ?? 50) + amount, 0, 100);
+      apply();
+      return true;
+    }
+
+    if (targetMode === "shell-header") {
+      if (key === "ArrowLeft") state.bgPosX = clamp((state.bgPosX ?? 50) - amount, 0, 100);
+      if (key === "ArrowRight") state.bgPosX = clamp((state.bgPosX ?? 50) + amount, 0, 100);
+      if (key === "ArrowUp") state.bgPosY = clamp((state.bgPosY ?? 50) - amount, 0, 100);
+      if (key === "ArrowDown") state.bgPosY = clamp((state.bgPosY ?? 50) + amount, 0, 100);
+      apply();
+      return true;
+    }
+
+    if (targetMode === "panel-art") {
       if (key === "ArrowLeft") state.bgPosX = clamp((state.bgPosX ?? 50) - amount, 0, 100);
       if (key === "ArrowRight") state.bgPosX = clamp((state.bgPosX ?? 50) + amount, 0, 100);
       if (key === "ArrowUp") state.bgPosY = clamp((state.bgPosY ?? 50) - amount, 0, 100);
@@ -1817,6 +2439,27 @@ export function initSiteTuning() {
         `bgSizePct: ${state.bgSizePct.toFixed(2)}`,
       ];
       readoutEl.innerHTML = `<strong>Current values</strong>${lines.join("\n")}`;
+    } else if (targetMode === "shell-header") {
+      readoutEl.hidden = false;
+      const lines = [
+        "layoutMode: shell-header",
+        `bgPosX: ${state.bgPosX.toFixed(2)}`,
+        `bgPosY: ${state.bgPosY.toFixed(2)}`,
+        `bgSizePct: ${state.bgSizePct.toFixed(2)}`,
+      ];
+      readoutEl.innerHTML = `<strong>Current values</strong>${lines.join("\n")}`;
+    } else if (targetMode === "panel-art") {
+      readoutEl.hidden = false;
+      const lines = [
+        "layoutMode: panel-art",
+        `artIndex: ${Math.round(state.artIndex ?? 0)}`,
+        `bgPosX: ${state.bgPosX.toFixed(2)}`,
+        `bgPosY: ${state.bgPosY.toFixed(2)}`,
+        `bgSizePct: ${state.bgSizePct.toFixed(2)}`,
+        `rotateDeg: ${(state.rotateDeg ?? 0).toFixed(2)}`,
+        `opacity: ${(state.opacity ?? 1).toFixed(2)}`,
+      ];
+      readoutEl.innerHTML = `<strong>Current values</strong>${lines.join("\n")}`;
     } else if (targetMode === "resume" || targetMode === "img") {
       readoutEl.hidden = false;
       const lines = [
@@ -1870,6 +2513,14 @@ export function initSiteTuning() {
     updateSelInfo("Home · Hero background", "#site-home-hero", "high");
   }
 
+  function updateShellHeaderSelInfo() {
+    updateSelInfo("Shell · Header background", ".site-shell-header", "high");
+  }
+
+  function updatePanelArtSelInfo() {
+    updateSelInfo("Panel · Container background", null, null);
+  }
+
   // ── Build context-aware controls ──
   function buildControls() {
     controlsWrap.innerHTML = "";
@@ -1880,6 +2531,10 @@ export function initSiteTuning() {
       buildResumeControls();
     } else if (targetMode === "home-hero") {
       buildHomeHeroControls();
+    } else if (targetMode === "shell-header") {
+      buildShellHeaderControls();
+    } else if (targetMode === "panel-art") {
+      buildPanelArtControls();
     } else if (targetMode === "img") {
       buildImgControls();
     } else if (targetMode === "text") {
@@ -1999,6 +2654,39 @@ export function initSiteTuning() {
     addRange("st-home-bgzoom", "Background zoom (%)", 108, 220, 0.5, "bgSizePct", "%");
   }
 
+  function buildShellHeaderControls() {
+    sliderRefs = {};
+    const hdr = document.createElement("h3");
+    hdr.textContent = shellHeaderTargetLabel();
+    controlsWrap.appendChild(hdr);
+
+    const help = document.createElement("p");
+    help.style.cssText = "margin:0 0 8px;font-size:11px;line-height:1.6;color:rgba(160,230,190,0.62);";
+    help.textContent = "Pan and zoom the shell title bar background behind the wordmark.";
+    controlsWrap.appendChild(help);
+    addRange("st-shell-bgx", "Pan background X (%)", 0, 100, 0.25, "bgPosX", "%");
+    addRange("st-shell-bgy", "Pan background Y (%)", 0, 100, 0.25, "bgPosY", "%");
+    addRange("st-shell-bgzoom", "Background zoom (%)", 108, 220, 0.5, "bgSizePct", "%");
+  }
+
+  function buildPanelArtControls() {
+    sliderRefs = {};
+    const hdr = document.createElement("h3");
+    hdr.textContent = panelArtTargetLabel(panelArtEl);
+    controlsWrap.appendChild(hdr);
+
+    const help = document.createElement("p");
+    help.style.cssText = "margin:0 0 8px;font-size:11px;line-height:1.6;color:rgba(160,230,190,0.62);";
+    help.textContent = "Use a shared image index (data-bg-art) so container backgrounds are referenced consistently across pages.";
+    controlsWrap.appendChild(help);
+    addRange("st-panel-art-index", "Image index (data-bg-art)", PANEL_ART_MIN, PANEL_ART_MAX, 1, "artIndex", "");
+    addRange("st-panel-bgx", "Pan background X (%)", 0, 100, 0.25, "bgPosX", "%");
+    addRange("st-panel-bgy", "Pan background Y (%)", 0, 100, 0.25, "bgPosY", "%");
+    addRange("st-panel-bgzoom", "Background zoom (%)", 80, 260, 0.5, "bgSizePct", "%");
+    addRange("st-panel-bgrot", "Background rotate (deg)", -180, 180, 0.5, "rotateDeg", "deg");
+    addRange("st-panel-bgopacity", "Background opacity", 0, 1, 0.01, "opacity", "");
+  }
+
   function buildImgControls() {
     sliderRefs = {};
     const hdr = document.createElement("h3");
@@ -2105,6 +2793,35 @@ export function initSiteTuning() {
     apply();
   }
 
+  function selectShellHeaderTarget(sourceEl = null) {
+    shellHeaderEl = sourceEl || document.querySelector(SHELL_HEADER_SELECTOR);
+    if (!shellHeaderEl) return;
+    clearSelected();
+    targetMode = "shell-header";
+    currentTargetCatalogKey = "shell:header-background";
+    state = { ...readStateFromShellHeader(shellHeaderEl) };
+    snapshot = { ...state };
+    if (panelOpen) setSelected(shellHeaderEl);
+    updateShellHeaderSelInfo();
+    buildControls();
+    apply();
+  }
+
+  function selectPanelArtTarget(sourceEl = null) {
+    panelArtEl = sourceEl instanceof HTMLElement ? sourceEl : null;
+    if (!panelArtEl) return;
+    clearSelected();
+    targetMode = "panel-art";
+    state = { ...readStateFromPanelArt(panelArtEl) };
+    snapshot = { ...state };
+    const match = pageTargetCatalog.find((item) => item.element === panelArtEl && item.action === "panel-art");
+    currentTargetCatalogKey = match?.key || currentTargetCatalogKey;
+    if (panelOpen) setSelected(panelArtEl);
+    updatePanelArtSelInfo();
+    buildControls();
+    apply();
+  }
+
   function selectResumeTarget(targetKey = "photo-crop", sourceCard = null) {
     cardEl = sourceCard || document.querySelector(".resume-header-card");
     if (!cardEl) return;
@@ -2143,6 +2860,10 @@ export function initSiteTuning() {
 
   function selectGenericEl(el) {
     if (isExcludedFromSelection(el)) return;
+    if (isPanelArtEl(el)) {
+      selectPanelArtTarget(el);
+      return;
+    }
     // If it's an image, use the image path (unless excluded)
     if (el.tagName === "IMG") { if (!isExcludedImage(el)) selectImg(el); return; }
     // Resume header card: use named resume targets on resume page
@@ -2209,17 +2930,23 @@ export function initSiteTuning() {
     }
   });
 
-  // ── Resume page init: load JSON + auto-select card ──
+  // ── Page init: load saved state → restore inline styles → sync ledger ──
   void (async () => {
     if (page === "resume") {
       const card = document.querySelector(".resume-header-card");
       if (card) {
         cardEl = card;
         await loadResumeJson(card);
+        // Resume card uses its own JSON, but panel-art/background targets on
+        // this page are restored from css/tune-state/resume.json.
+        await loadPageState(page);
         _resumeBaseline = { ...readStateFromCard(card) };
         selectResumeCard();
       }
     } else {
+      // Restore saved element states from css/tune-state/{page}.json
+      // before the first ledger sync so sliders initialise from correct values.
+      await loadPageState(page);
       deselect();
     }
     syncLivePageLedger();
