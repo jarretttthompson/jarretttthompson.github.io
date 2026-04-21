@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarrett Thompson · Projects</title>
   <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260392" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260421" />
   <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d0517" />
@@ -128,6 +128,9 @@
         repo: "patchNet",
         liveUrl: "https://jarretttthompson.github.io/patchNet/",
         githubUrl: "https://github.com/jarretttthompson/patchNet",
+        heroSrc: "images/patchNetLogo.png",
+        heroAlt: "patchNet logo",
+        heroHref: "https://jarretttthompson.github.io/patchNet/",
       },
       {
         name: "breakComposer",
@@ -223,7 +226,7 @@
           const heroHref = escapeHtml(project.heroHref || project.embedUrl || project.liveUrl || "#");
           const heroBlock =
             project.heroSrc
-              ? `<a href="${heroHref}" class="projects-entry-hero-link project-link" target="_blank" rel="noopener noreferrer"><img class="projects-entry-hero" src="${escapeHtml(project.heroSrc)}" alt="${escapeHtml(project.heroAlt || project.name)}" width="420" height="130" loading="lazy" decoding="async" /></a>`
+              ? `<a href="${heroHref}" class="projects-entry-hero-link project-link" target="_blank" rel="noopener noreferrer"><img class="projects-entry-hero" src="${escapeHtml(project.heroSrc)}" alt="${escapeHtml(project.heroAlt || project.name)}" width="420" height="200" loading="lazy" decoding="async" /></a>`
               : "";
 
           article.innerHTML = `
