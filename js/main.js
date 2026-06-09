@@ -6,7 +6,7 @@ import {
   setIdleWatchers,
 } from "./modules/core.js?v=20260351";
 // Site Tuner: local dev only (see docs/SITE_TUNING_POLICY.md) — not loaded on production hostnames
-import { initHomeSlideshow, initCalendarForm } from "./modules/home.js";
+import { initHomeSlideshow } from "./modules/home.js";
 import { initPosterCarousel } from "./modules/artwork.js";
 import { initPhotoAlbum } from "./modules/photo-album.js";
 import { initProjectsGallery } from "./modules/projects.js";
@@ -30,7 +30,6 @@ registerServiceWorker();
 const page = document.body?.getAttribute("data-page");
 if (page === "index") {
   initHomeSlideshow();
-  void initCalendarForm();
 }
 if (page === "artwork") initPosterCarousel();
 if (page === "photo-album") {

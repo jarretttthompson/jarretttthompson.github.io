@@ -100,78 +100,6 @@
           </div>
         </div>
       </section>
-
-      <section class="neon-inner-panel inner-panel-photo-bg inner-panel-photo-bg--cover relative p-4 md:p-6" data-bg-art="20">
-        <h2 class="panel-heading text-lg md:text-xl mb-4">Calendar</h2>
-        <div class="calendar-at-bottom space-y-6">
-          <div class="calendar-widget">
-            <h3 class="panel-kicker mb-2">Upcoming</h3>
-            <div class="calendar-embed-wrapper">
-              <iframe
-                src="https://calendar.google.com/calendar/embed?mode=AGENDA&amp;bgcolor=%232a1a3e&amp;showTitle=0&amp;showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;src=426e2946bb067a75e341e40434288cb5db457131576722b266af50527137c7d9%40group.calendar.google.com&amp;ctz=America%2FNew_York"
-                title="Google Calendar"
-                class="calendar-embed"
-              ></iframe>
-            </div>
-          </div>
-
-          <div class="calendar-submit-widget border-2 border-primary-container/35 bg-black/40 p-4 rounded-lg">
-            <h3 class="panel-heading text-sm mb-1">Add an event</h3>
-            <p class="body-copy text-sm mb-4 opacity-90">Enter the PIN, then add an event. It will show up in the calendar above.</p>
-            <form id="calendarSubmitForm" class="calendar-submit-form space-y-3" action="https://script.google.com/macros/s/AKfycbzl9rXFa914ZFtQOzdGJHAZ_BtiZ_uB0VzPsn21cvEKWtPNkoukoqdmLPJ7G1kQ7IqA/exec" method="post">
-              <input type="hidden" name="form" value="1" />
-              <div class="form-row flex flex-col gap-1">
-                <label class="font-mono text-[10px] text-primary-container case-preserve" for="cal-pin">PIN</label>
-                <input
-                  class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:ring-1 focus:ring-primary-container/50 focus:outline-none"
-                  type="password"
-                  id="cal-pin"
-                  name="pin"
-                  inputmode="numeric"
-                  pattern="[0-9]{4}"
-                  maxlength="4"
-                  required
-                  autocomplete="off"
-                />
-              </div>
-              <div class="form-row flex flex-col gap-1">
-                <label class="font-mono text-[10px] text-primary-container" for="cal-title">Event title</label>
-                <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="text" id="cal-title" name="title" required />
-              </div>
-              <div class="form-row flex flex-col gap-1">
-                <label class="font-mono text-[10px] text-primary-container" for="cal-date">Date</label>
-                <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="date" id="cal-date" name="date" required />
-              </div>
-              <div class="form-row form-row--times grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="form-row flex flex-col gap-1">
-                  <label class="font-mono text-[10px] text-primary-container" for="cal-time-start">Start time</label>
-                  <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="time" id="cal-time-start" name="time_start" />
-                </div>
-                <div class="form-row flex flex-col gap-1">
-                  <label class="font-mono text-[10px] text-primary-container" for="cal-time-end">End time</label>
-                  <input class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none" type="time" id="cal-time-end" name="time_end" />
-                </div>
-              </div>
-              <div class="form-row flex flex-col gap-1">
-                <label class="font-mono text-[10px] text-primary-container" for="cal-desc">Notes (optional)</label>
-                <textarea
-                  class="w-full bg-black/50 border-2 border-primary-container/40 text-on-surface px-2 py-2 text-sm rounded focus:border-primary-container focus:outline-none min-h-[4rem]"
-                  id="cal-desc"
-                  name="description"
-                  rows="2"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                class="calendar-submit__btn w-full sm:w-auto font-mono text-xs tracking-wider border-2 border-primary-container text-primary-container px-4 py-2 rounded hover:bg-primary-container/15 transition-colors"
-              >
-                Add event
-              </button>
-            </form>
-            <p id="calendarSubmitMessage" class="calendar-submit__message font-mono text-xs mt-3 min-h-[1.25em]" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
     </div>
 
     <footer class="site-shell-footer flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 px-4 py-3 shrink-0">
@@ -180,6 +108,6 @@
     </footer>
   </main>
 
-  <script type="module" src="js/main.js?v=20260398"></script>
+  <script type="module" src="js/main.js?v=20260422"></script>
 </body>
 </html>

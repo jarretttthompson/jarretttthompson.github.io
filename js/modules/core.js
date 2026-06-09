@@ -56,7 +56,7 @@ export function setIdleWatchers() {
 /** Sets `loading="lazy"` on embeds; do not strip `src` (empty iframes stay blank). */
 export function lazyHydrateEmbeds() {
   const embeds = document.querySelectorAll(
-    "iframe.youtube-embed, iframe.spotify-embed, iframe.calendar-embed",
+    "iframe.youtube-embed, iframe.spotify-embed",
   );
   embeds.forEach((frame) => {
     if (frame.classList.contains("spotify-embed")) return;
