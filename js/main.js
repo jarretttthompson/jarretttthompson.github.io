@@ -4,7 +4,7 @@ import {
   lazyHydrateEmbeds,
   registerServiceWorker,
   setIdleWatchers,
-} from "./modules/core.js?v=20260351";
+} from "./modules/core.js?v=20260731";
 // Site Tuner: local dev only (see docs/SITE_TUNING_POLICY.md) — not loaded on production hostnames
 import { initHomeSlideshow } from "./modules/home.js";
 import { initPosterCarousel } from "./modules/artwork.js";

@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarrett Thompson · Projects</title>
   <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260421" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20260731" />
   <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d0517" />
   <meta name="description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jarretttthompson.github.io/projects.html" />
+  <meta property="og:url" content="https://thejrummer.art/projects.html" />
   <meta property="og:title" content="Jarrett Thompson · Projects" />
   <meta property="og:description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
-  <meta property="og:image" content="https://jarretttthompson.github.io/optimized/slideshow/slide11-desktop-t1.jpg" />
+  <meta property="og:image" content="https://thejrummer.art/optimized/slideshow/slide11-desktop-t1.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Jarrett Thompson · Projects" />
   <meta name="twitter:description" content="Software and music technology projects by Jarrett Thompson, including breakComposer — a browser-based beat notation tool." />
@@ -31,8 +31,15 @@
       </div>
     </header>
     <nav class="nav-boxes" aria-label="Main navigation">
-      <span class="nav-loading">Loading navigation…</span>
-    </nav>
+  <a href="index.html" data-page="index">Home</a>
+  <a href="resume.html" data-page="resume">resume/cv</a>
+  <a href="compositions.html" data-page="compositions">Compositions</a>
+  <a href="friends.html" data-page="friends">Friends</a>
+  <a href="photo-album.html" data-page="photo-album">Photos</a>
+  <a href="music.html" data-page="music">Music</a>
+  <a href="artwork.html" data-page="artwork">Artwork</a>
+  <a href="projects.html" data-page="projects" aria-current="page">Projects</a>
+</nav>
     <div class="site-shell-content p-4 md:p-6">
       <div class="scroll-window mixed-case-prose">
 
@@ -126,11 +133,11 @@
           "A browser-based visual audio patching environment — build signal graphs by connecting nodes, like Max/MSP or Pure Data, but in the browser. Supports Web Audio routing, real-time visualization, and in-patch code editing via CodeMirror. Built with TypeScript and Vite.",
         tags: ["TypeScript", "Web Audio", "Vite"],
         repo: "patchNet",
-        liveUrl: "https://jarretttthompson.github.io/patchNet/",
+        liveUrl: "https://thejrummer.art/patchNet/",
         githubUrl: "https://github.com/jarretttthompson/patchNet",
         heroSrc: "images/patchNetLogo.png",
         heroAlt: "patchNet logo",
-        heroHref: "https://jarretttthompson.github.io/patchNet/",
+        heroHref: "https://thejrummer.art/patchNet/",
       },
       {
         name: "breakComposer",
@@ -138,9 +145,9 @@
           "A browser-based composition tool for creating drum beats that converts a traditional piano roll into sheet music notation. Use Launch app or click the image to open breakComposer. Mobile users should rotate to landscape for the best experience. Built with React, VexFlow, and Tone.js.",
         tags: ["TypeScript", "React", "Tone.js"],
         repo: "breakComposer",
-        /* Same-origin: app ships inside this site. A separate jarretttthompson.github.io/breakcomposer/ project page often 404s if that repo has no Pages build. */
+        /* Same-origin: app ships inside this site. A separate thejrummer.art/breakcomposer/ project page often 404s if that repo has no Pages build. */
         embedUrl: "/breakcomposer/",
-        liveUrl: "https://jarretttthompson.github.io/breakcomposer/",
+        liveUrl: "https://thejrummer.art/breakcomposer/",
         githubUrl: "https://github.com/jarretttthompson/breakComposer",
         heroSrc: "breakcomposer/logo-full.png",
         heroAlt: "breakComposer logo",
@@ -152,7 +159,7 @@
           "Wall-mounted sunrise alarm: WebGL2 dawn scene, schedule, birds and creek audio.",
         tags: ["JavaScript", "WebGL", "Web Audio"],
         repo: "sunriseAlarm",
-        liveUrl: "https://jarretttthompson.github.io/sunriseAlarm/",
+        liveUrl: "https://thejrummer.art/sunriseAlarm/",
         githubUrl: "https://github.com/jarretttthompson/sunriseAlarm",
       },
       {
@@ -161,7 +168,7 @@
           "Slideshow for Reddit media. Deploy with GitHub Pages on this repo to run it embedded here.",
         tags: ["JavaScript"],
         repo: "redditMediaSlideshow",
-        liveUrl: "https://jarretttthompson.github.io/redditMediaSlideshow/",
+        liveUrl: "https://thejrummer.art/redditMediaSlideshow/",
         githubUrl: "https://github.com/jarretttthompson/redditMediaSlideshow",
       },
       {
@@ -170,7 +177,7 @@
           "Browser-based video effects that chain and randomize until your footage looks deep-fried. See the repo for setup.",
         tags: ["Python", "Video"],
         repo: "sautae",
-        liveUrl: "https://jarretttthompson.github.io/sautae/",
+        liveUrl: "https://thejrummer.art/sautae/",
         githubUrl: "https://github.com/jarretttthompson/sautae",
       },
       {
@@ -179,7 +186,7 @@
           "Python project on GitHub. Enable GitHub Pages if you want a web build to open inside this site.",
         tags: ["Python"],
         repo: "ghostie",
-        liveUrl: "https://jarretttthompson.github.io/ghostie/",
+        liveUrl: "https://thejrummer.art/ghostie/",
         githubUrl: "https://github.com/jarretttthompson/ghostie",
       },
     ];

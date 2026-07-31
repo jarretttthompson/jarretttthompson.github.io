@@ -200,7 +200,7 @@ body.terminal-site #site-home-hero::before {
       rgba(18, 6, 32, 0.2) 42%,
       rgba(0, 0, 0, 0.26) 100%
     ),
-    url("../images/bg-images/Screenshot%202026-03-27%20at%2010.04.19%E2%80%AFAM.png");
+    url("../optimized/bg-images/bg-01.webp");
   background-size: cover, calc(var(--home-hero-bg-size-pct) * 1%) auto;
   background-position: center, calc(var(--home-hero-bg-pos-x) * 1%) calc(var(--home-hero-bg-pos-y) * 1%);
   background-repeat: no-repeat;
@@ -501,7 +501,7 @@ body.terminal-site .site-shell-header {
   --shell-header-bg-pos-y: 50;
   --shell-header-bg-size-pct: 118;
   /* Default: one asset from images/bg-images/ (NNBSP before AM in filename → percent-encoded). */
-  --shell-header-bg-image: url("../images/bg-images/Screenshot%202026-03-27%20at%209.57.24%E2%80%AFAM.png");
+  --shell-header-bg-image: url("../optimized/bg-images/bg-22.webp");
 }
 
 .site-shell-header {
@@ -688,67 +688,67 @@ body.terminal-site .site-shell-header > * {
 
 /* bg-images/* — percent-encoded (NNBSP before AM). Shared index map for .inner-panel-photo-bg / .artwork-bg-photo + data-bg-art="0".."20". */
 body.terminal-site [data-bg-art="0"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.03.14%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-02.webp");
 }
 body.terminal-site [data-bg-art="1"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.03%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-03.webp");
 }
 body.terminal-site [data-bg-art="2"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.34%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-04.webp");
 }
 body.terminal-site [data-bg-art="3"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.04.52%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-05.webp");
 }
 body.terminal-site [data-bg-art="4"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.05%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-06.webp");
 }
 body.terminal-site [data-bg-art="5"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.15%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-07.webp");
 }
 body.terminal-site [data-bg-art="6"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.24%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-08.webp");
 }
 body.terminal-site [data-bg-art="7"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.35%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-09.webp");
 }
 body.terminal-site [data-bg-art="8"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.05.43%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-10.webp");
 }
 body.terminal-site [data-bg-art="9"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.00%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-11.webp");
 }
 body.terminal-site [data-bg-art="10"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.06%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-12.webp");
 }
 body.terminal-site [data-bg-art="11"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.11%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-13.webp");
 }
 body.terminal-site [data-bg-art="12"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.32%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-14.webp");
 }
 body.terminal-site [data-bg-art="13"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.46%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-15.webp");
 }
 body.terminal-site [data-bg-art="14"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.51%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-16.webp");
 }
 body.terminal-site [data-bg-art="15"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.06.58%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-17.webp");
 }
 body.terminal-site [data-bg-art="16"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.07.14%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-18.webp");
 }
 body.terminal-site [data-bg-art="17"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.37.21%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-19.webp");
 }
 body.terminal-site [data-bg-art="18"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.40.55%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-20.webp");
 }
 body.terminal-site [data-bg-art="19"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2012.41.53%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-20.webp");
 }
 body.terminal-site [data-bg-art="20"] {
-  --panel-art-url: url("../images/bg-images/Screenshot%202026-03-27%20at%2010.03.33%E2%80%AFAM.png");
+  --panel-art-url: url("../optimized/bg-images/bg-00.webp");
 }
 
 /* Shared photo stack for neon inner panels + album wall (not artwork — see .artwork-bg-photo) */

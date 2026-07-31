@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Photo Upload Setup · jarretttthompson.github.io</title>
+  <title>Photo Upload Setup · thejrummer.art</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -104,6 +104,7 @@
     }
     hr { border: none; border-top: 1px solid rgba(0,255,159,0.1); margin: 1.5rem 0; }
   </style>
+  <meta name="robots" content="noindex" />
 </head>
 <body>
 
@@ -124,7 +125,7 @@
         <li>Click <strong>"Generate new token"</strong></li>
         <li>Token name: <code>portfolio-photo-upload</code></li>
         <li>Expiration: <strong>1 year</strong> (or custom — you'll need to re-run this setup when it expires)</li>
-        <li>Repository access: <strong>Only select repositories</strong> → choose <code>jarretttthompson/jarretttthompson.github.io</code></li>
+        <li>Repository access: <strong>Only select repositories</strong> → choose <code>jarretttthompson/thejrummer.art</code></li>
         <li>Permissions → Repository permissions → <strong>Contents → Read and write</strong></li>
         <li>Leave everything else at the default (No access)</li>
         <li>Click <strong>"Generate token"</strong> and copy it — you won't see it again</li>
@@ -173,7 +174,7 @@
   <div>
     <h2><span class="step-num">4</span> Upload your first photo</h2>
     <p>On your phone (or desktop), bookmark this URL:</p>
-    <div class="output-box" style="margin-top:0.5rem">https://jarretttthompson.github.io/photo-album.html?upload</div>
+    <div class="output-box" style="margin-top:0.5rem">https://thejrummer.art/photo-album.html?upload</div>
     <p style="margin-top:0.75rem">When you visit it, an upload panel appears at the top of the photo album. Enter your password, pick a photo, add an optional caption, and tap Upload. Your photo will appear in the album in about 60 seconds (GitHub Pages rebuild time).</p>
     <p class="note" style="margin-top:0.75rem">
       Token expired? Come back to this setup file, generate a new PAT, re-encrypt, and paste the new blob into photo-upload.js.

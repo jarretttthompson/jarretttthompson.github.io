@@ -16,6 +16,16 @@ const NAV_PARTIAL_VER = "20260344";
 export function injectNav() {
   const container = document.querySelector(".nav-boxes");
   if (!container) return;
+  /* Nav is baked into the HTML at build time; only sync aria-current and skip the fetch. */
+  if (container.querySelector("a")) {
+    const current = document.body.getAttribute("data-page");
+    if (current) {
+      container.querySelectorAll("a[data-page]").forEach((a) => {
+        if (a.dataset.page === current) a.setAttribute("aria-current", "page");
+      });
+    }
+    return;
+  }
   fetch(`partials/nav.html?v=${NAV_PARTIAL_VER}`)
     .then((r) => r.text())
     .then((html) => {
