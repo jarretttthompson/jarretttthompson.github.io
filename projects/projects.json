@@ -71,17 +71,38 @@
       {
         "src": "projects/socialInstall/IMG_4925.gif",
         "alt": "IMG 4925",
-        "type": "gif"
+        "type": "image"
       },
       {
         "src": "projects/socialInstall/IMG_4961.gif",
         "alt": "IMG 4961",
-        "type": "gif"
+        "type": "image"
       },
       {
         "src": "projects/socialInstall/IMG_5258.gif",
         "alt": "IMG 5258",
-        "type": "gif"
+        "type": "image"
+      }
+    ]
+  },
+  {
+    "slug": "truss-lab",
+    "title": "Truss Lab",
+    "items": [
+      {
+        "src": "projects/truss-lab/trusslab-downstage-rig.jpeg",
+        "alt": "trusslab downstage rig",
+        "type": "image"
+      },
+      {
+        "src": "projects/truss-lab/trusslab-fixture-library.jpeg",
+        "alt": "trusslab fixture library",
+        "type": "image"
+      },
+      {
+        "src": "projects/truss-lab/trusslab-overview.jpeg",
+        "alt": "trusslab overview",
+        "type": "image"
       }
     ]
   }
