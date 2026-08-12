@@ -1907,5 +1907,74 @@
         "jpg": "optimized/projects/socialInstall/IMG_4898-t2.jpg"
       }
     ]
+  },
+  "optimized/projects/truss-lab/trusslab-downstage-rig": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "avif": "optimized/projects/truss-lab/trusslab-downstage-rig-t0.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-downstage-rig-t0.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-downstage-rig-t0.jpg"
+      },
+      {
+        "w": 960,
+        "avif": "optimized/projects/truss-lab/trusslab-downstage-rig-t1.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-downstage-rig-t1.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-downstage-rig-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "avif": "optimized/projects/truss-lab/trusslab-downstage-rig-t2.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-downstage-rig-t2.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-downstage-rig-t2.jpg"
+      }
+    ]
+  },
+  "optimized/projects/truss-lab/trusslab-fixture-library": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "avif": "optimized/projects/truss-lab/trusslab-fixture-library-t0.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-fixture-library-t0.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-fixture-library-t0.jpg"
+      },
+      {
+        "w": 960,
+        "avif": "optimized/projects/truss-lab/trusslab-fixture-library-t1.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-fixture-library-t1.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-fixture-library-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "avif": "optimized/projects/truss-lab/trusslab-fixture-library-t2.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-fixture-library-t2.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-fixture-library-t2.jpg"
+      }
+    ]
+  },
+  "optimized/projects/truss-lab/trusslab-overview": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "avif": "optimized/projects/truss-lab/trusslab-overview-t0.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-overview-t0.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-overview-t0.jpg"
+      },
+      {
+        "w": 960,
+        "avif": "optimized/projects/truss-lab/trusslab-overview-t1.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-overview-t1.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-overview-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "avif": "optimized/projects/truss-lab/trusslab-overview-t2.avif",
+        "webp": "optimized/projects/truss-lab/trusslab-overview-t2.webp",
+        "jpg": "optimized/projects/truss-lab/trusslab-overview-t2.jpg"
+      }
+    ]
   }
 }
