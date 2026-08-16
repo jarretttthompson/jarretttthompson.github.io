@@ -84,26 +84,5 @@
         "type": "image"
       }
     ]
-  },
-  {
-    "slug": "truss-lab",
-    "title": "Truss Lab",
-    "items": [
-      {
-        "src": "projects/truss-lab/trusslab-downstage-rig.jpeg",
-        "alt": "trusslab downstage rig",
-        "type": "image"
-      },
-      {
-        "src": "projects/truss-lab/trusslab-fixture-library.jpeg",
-        "alt": "trusslab fixture library",
-        "type": "image"
-      },
-      {
-        "src": "projects/truss-lab/trusslab-overview.jpeg",
-        "alt": "trusslab overview",
-        "type": "image"
-      }
-    ]
   }
 ]
