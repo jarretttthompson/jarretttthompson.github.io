@@ -1,6 +1,6 @@
 // Bump CACHE_NAME and the ?v= strings below together whenever assets change.
 // Nav partial is safe to precache now that injectNav() fetches it with ?v= (versioned URL = no stale-link risk).
-const CACHE_NAME = "site-cache-v20260816";
+const CACHE_NAME = "site-cache-v20260820";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
