@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "page": "music",
+  "savedAt": "2026-03-27T15:02:27.237Z",
+  "elements": [
+    {
+      "selector": "div:nth-of-type(1) > main > div > div > section:nth-of-type(1)",
+      "confidence": "low",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 13,
+        "bgPosX": 27.75,
+        "bgPosY": 11.75,
+        "bgSizePct": 205.5,
+        "rotateDeg": 36,
+        "opacity": 1
+      }
+    },
+    {
+      "selector": "div:nth-of-type(1) > main > div > div > section:nth-of-type(2)",
+      "confidence": "low",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 2,
+        "bgPosX": 50,
+        "bgPosY": 50,
+        "bgSizePct": 120,
+        "rotateDeg": 0,
+        "opacity": 1
+      }
+    },
+    {
+      "selector": "div:nth-of-type(1) > main > div > div > section:nth-of-type(3)",
+      "confidence": "low",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 3,
+        "bgPosX": 50,
+        "bgPosY": 50,
+        "bgSizePct": 120,
+        "rotateDeg": 0,
+        "opacity": 1
+      }
+    },
+    {
+      "selector": "div:nth-of-type(1) > main > div > div > section:nth-of-type(4)",
+      "confidence": "low",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 4,
+        "bgPosX": 50,
+        "bgPosY": 50,
+        "bgSizePct": 120,
+        "rotateDeg": 0,
+        "opacity": 1
+      }
+    },
+    {
+      "selector": "div:nth-of-type(1) > main > div > div > section:nth-of-type(4) > p:nth-of-type(3)",
+      "confidence": "low",
+      "mode": "text",
+      "state": {
+        "mode": "text",
+        "offsetX": 0,
+        "offsetY": 0,
+        "fontSize": 14.4,
+        "lineHeight": 1.55,
+        "letterSpacing": 0,
+        "textAlign": "left"
+      }
+    },
+    {
+      "selector": "#st-overlay-badge",
+      "confidence": "high",
+      "mode": "block",
+      "state": {
+        "mode": "block",
+        "offsetX": 0,
+        "offsetY": 0,
+        "maxWidth": 9999,
+        "paddingTop": 5,
+        "paddingBottom": 5,
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "marginTop": 0,
+        "marginBottom": 0,
+        "gap": 0,
+        "display": "block"
+      }
+    }
+  ]
+}

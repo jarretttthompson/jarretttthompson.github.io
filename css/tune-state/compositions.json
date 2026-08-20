@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "page": "compositions",
+  "savedAt": "2026-03-27T14:47:38.531Z",
+  "elements": [
+    {
+      "selector": ".neon-inner-panel.inner-panel-photo-bg.relative",
+      "confidence": "high",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 5,
+        "bgPosX": 50,
+        "bgPosY": 50,
+        "bgSizePct": 120,
+        "rotateDeg": 0,
+        "opacity": 1
+      }
+    },
+    {
+      "selector": ".panel-kicker",
+      "confidence": "medium",
+      "mode": "text",
+      "state": {
+        "mode": "text",
+        "offsetX": 0,
+        "offsetY": 0,
+        "fontSize": 14.4,
+        "lineHeight": 1.55,
+        "letterSpacing": 1.15,
+        "textAlign": "left"
+      }
+    },
+    {
+      "selector": "#st-overlay-badge",
+      "confidence": "high",
+      "mode": "block",
+      "state": {
+        "mode": "block",
+        "offsetX": 0,
+        "offsetY": 0,
+        "maxWidth": 9999,
+        "paddingTop": 5,
+        "paddingBottom": 5,
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "marginTop": 0,
+        "marginBottom": 0,
+        "gap": 0,
+        "display": "block"
+      }
+    }
+  ]
+}

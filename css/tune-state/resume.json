@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "page": "resume",
+  "savedAt": "2026-03-27T15:00:25.501Z",
+  "elements": [
+    {
+      "selector": ".scroll-window.resume-prose.inner-panel-photo-bg",
+      "confidence": "high",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 8,
+        "bgPosX": 50,
+        "bgPosY": 50,
+        "bgSizePct": 145,
+        "rotateDeg": 0,
+        "opacity": 0.5
+      }
+    },
+    {
+      "selector": ".resume-header-text.inner-panel-photo-bg.inner-panel-photo-bg--cover",
+      "confidence": "high",
+      "mode": "panel-art",
+      "state": {
+        "mode": "panel-art",
+        "artIndex": 17,
+        "bgPosX": 50,
+        "bgPosY": 50,
+        "bgSizePct": 120,
+        "rotateDeg": 0,
+        "opacity": 0.38
+      }
+    },
+    {
+      "selector": "#st-overlay-badge",
+      "confidence": "high",
+      "mode": "block",
+      "state": {
+        "mode": "block",
+        "offsetX": 0,
+        "offsetY": 0,
+        "maxWidth": 9999,
+        "paddingTop": 5,
+        "paddingBottom": 5,
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "marginTop": 0,
+        "marginBottom": 0,
+        "gap": 0,
+        "display": "block"
+      }
+    }
+  ]
+}
