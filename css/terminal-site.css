@@ -2462,3 +2462,51 @@ body.terminal-site.photo-album-page .album-intro {
     transition: none;
   }
 }
+
+/* resume/cv — two-column body below the title card.
+   Main column: work experience. Side column: education, awards, skills, touring acts. */
+body.terminal-site .resume-prose .resume-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 0 1.6rem;
+  align-items: start;
+  margin-top: 0.75rem;
+}
+body.terminal-site .resume-prose .resume-col--side {
+  border-left: var(--ui-border-width) solid var(--ui-border-color-muted);
+  padding-left: 1.4rem;
+}
+body.terminal-site .resume-prose .resume-columns h2:first-child {
+  margin-top: 0;
+}
+body.terminal-site .resume-prose .resume-col--side h2 {
+  font-size: clamp(0.95rem, 1vw + 0.8rem, 1.15rem);
+}
+body.terminal-site .resume-prose .resume-col--side p {
+  font-size: 0.86rem;
+}
+/* Tighter rhythm: bullets sit close, each role gets its own breathing room. */
+body.terminal-site .resume-prose .resume-columns p {
+  margin: 0.3rem 0;
+  line-height: 1.45;
+}
+body.terminal-site .resume-prose .resume-columns p.job-title {
+  margin-top: 1rem;
+}
+body.terminal-site .resume-prose .resume-columns h2 + p.job-title {
+  margin-top: 0.5rem;
+}
+@media (max-width: 860px) {
+  body.terminal-site .resume-prose .resume-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  body.terminal-site .resume-prose .resume-col--side {
+    border-left: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+  }
+  body.terminal-site .resume-prose .resume-col--side h2:first-child {
+    margin-top: 1rem;
+  }
+}

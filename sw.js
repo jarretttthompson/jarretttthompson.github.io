@@ -1,12 +1,12 @@
 // Bump CACHE_NAME and the ?v= strings below together whenever assets change.
 // Nav partial is safe to precache now that injectNav() fetches it with ?v= (versioned URL = no stale-link risk).
-const CACHE_NAME = "site-cache-v20260915a";
+const CACHE_NAME = "site-cache-v20260915b";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
   "/projects.html",
   "/css/tailwind-built.css",
-  "/css/terminal-site.css?v=20260731",
+  "/css/terminal-site.css?v=20260915",
   "/css/site-tune-overrides.css?v=20260381",
   "/js/main.js",
   // JS modules — precached so repeat visits don't need a network round-trip for each import
