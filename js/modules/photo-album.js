@@ -24,6 +24,11 @@ export function initPhotoAlbum() {
       if (!Array.isArray(data)) throw new Error("Invalid photo manifest");
       const photos = data.map(normalizePhoto).filter(Boolean);
       if (!photos.length) throw new Error("No photos found");
+      // A fresh order on every visit (Fisher–Yates).
+      for (let i = photos.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [photos[i], photos[j]] = [photos[j], photos[i]];
+      }
       await loadVariantsManifest();
       await render(gallery, photos);
     })

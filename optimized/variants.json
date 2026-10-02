@@ -45,29 +45,6 @@
       }
     ]
   },
-  "optimized/images/photo album/431": {
-    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
-    "tiers": [
-      {
-        "w": 150,
-        "avif": "optimized/images/photo album/431-t0.avif",
-        "webp": "optimized/images/photo album/431-t0.webp",
-        "jpg": "optimized/images/photo album/431-t0.jpg"
-      },
-      {
-        "w": 150,
-        "avif": "optimized/images/photo album/431-t1.avif",
-        "webp": "optimized/images/photo album/431-t1.webp",
-        "jpg": "optimized/images/photo album/431-t1.jpg"
-      },
-      {
-        "w": 150,
-        "avif": "optimized/images/photo album/431-t2.avif",
-        "webp": "optimized/images/photo album/431-t2.webp",
-        "jpg": "optimized/images/photo album/431-t2.jpg"
-      }
-    ]
-  },
   "optimized/images/photo album/464367237_18462699658030832_2682471997050053221_n_18471548149042399": {
     "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
     "tiers": [
@@ -2542,6 +2519,474 @@
         "avif": "optimized/images/paintings/IMG_1445-c2-t2.avif",
         "webp": "optimized/images/paintings/IMG_1445-c2-t2.webp",
         "jpg": "optimized/images/paintings/IMG_1445-c2-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_2225": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 360,
+        "avif": "optimized/images/photo album/IMG_2225-t0.avif",
+        "webp": "optimized/images/photo album/IMG_2225-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_2225-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 720,
+        "avif": "optimized/images/photo album/IMG_2225-t1.avif",
+        "webp": "optimized/images/photo album/IMG_2225-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_2225-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "avif": "optimized/images/photo album/IMG_2225-t2.avif",
+        "webp": "optimized/images/photo album/IMG_2225-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_2225-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_2277-2": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_2277-2-t0.avif",
+        "webp": "optimized/images/photo album/IMG_2277-2-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_2277-2-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_2277-2-t1.avif",
+        "webp": "optimized/images/photo album/IMG_2277-2-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_2277-2-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_2277-2-t2.avif",
+        "webp": "optimized/images/photo album/IMG_2277-2-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_2277-2-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_1732": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_1732-t0.avif",
+        "webp": "optimized/images/photo album/IMG_1732-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_1732-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_1732-t1.avif",
+        "webp": "optimized/images/photo album/IMG_1732-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_1732-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_1732-t2.avif",
+        "webp": "optimized/images/photo album/IMG_1732-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_1732-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_1618": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 360,
+        "avif": "optimized/images/photo album/IMG_1618-t0.avif",
+        "webp": "optimized/images/photo album/IMG_1618-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_1618-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 720,
+        "avif": "optimized/images/photo album/IMG_1618-t1.avif",
+        "webp": "optimized/images/photo album/IMG_1618-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_1618-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 1200,
+        "avif": "optimized/images/photo album/IMG_1618-t2.avif",
+        "webp": "optimized/images/photo album/IMG_1618-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_1618-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 384,
+        "h": 480,
+        "avif": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t0.avif",
+        "webp": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t0.webp",
+        "jpg": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t0.jpg"
+      },
+      {
+        "w": 768,
+        "h": 960,
+        "avif": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t1.avif",
+        "webp": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t1.webp",
+        "jpg": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t1.jpg"
+      },
+      {
+        "w": 1008,
+        "h": 1260,
+        "avif": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t2.avif",
+        "webp": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t2.webp",
+        "jpg": "optimized/images/photo album/4d48706f-44cd-4500-9620-3b248ba6c0fe-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_1580": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_1580-t0.avif",
+        "webp": "optimized/images/photo album/IMG_1580-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_1580-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_1580-t1.avif",
+        "webp": "optimized/images/photo album/IMG_1580-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_1580-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_1580-t2.avif",
+        "webp": "optimized/images/photo album/IMG_1580-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_1580-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_1559": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_1559-t0.avif",
+        "webp": "optimized/images/photo album/IMG_1559-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_1559-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_1559-t1.avif",
+        "webp": "optimized/images/photo album/IMG_1559-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_1559-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_1559-t2.avif",
+        "webp": "optimized/images/photo album/IMG_1559-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_1559-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_0267": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_0267-t0.avif",
+        "webp": "optimized/images/photo album/IMG_0267-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_0267-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_0267-t1.avif",
+        "webp": "optimized/images/photo album/IMG_0267-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_0267-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_0267-t2.avif",
+        "webp": "optimized/images/photo album/IMG_0267-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_0267-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_1158": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_1158-t0.avif",
+        "webp": "optimized/images/photo album/IMG_1158-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_1158-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_1158-t1.avif",
+        "webp": "optimized/images/photo album/IMG_1158-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_1158-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_1158-t2.avif",
+        "webp": "optimized/images/photo album/IMG_1158-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_1158-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_0352": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_0352-t0.avif",
+        "webp": "optimized/images/photo album/IMG_0352-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_0352-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_0352-t1.avif",
+        "webp": "optimized/images/photo album/IMG_0352-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_0352-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_0352-t2.avif",
+        "webp": "optimized/images/photo album/IMG_0352-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_0352-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_2172": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_2172-t0.avif",
+        "webp": "optimized/images/photo album/IMG_2172-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_2172-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_2172-t1.avif",
+        "webp": "optimized/images/photo album/IMG_2172-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_2172-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_2172-t2.avif",
+        "webp": "optimized/images/photo album/IMG_2172-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_2172-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 344,
+        "avif": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t0.avif",
+        "webp": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t0.webp",
+        "jpg": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 689,
+        "avif": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t1.avif",
+        "webp": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t1.webp",
+        "jpg": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 1148,
+        "avif": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t2.avif",
+        "webp": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t2.webp",
+        "jpg": "optimized/images/photo album/Screenshot-2026-02-15-at-101252-AM-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_0913": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_0913-t0.avif",
+        "webp": "optimized/images/photo album/IMG_0913-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_0913-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_0913-t1.avif",
+        "webp": "optimized/images/photo album/IMG_0913-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_0913-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_0913-t2.avif",
+        "webp": "optimized/images/photo album/IMG_0913-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_0913-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_1520": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_1520-t0.avif",
+        "webp": "optimized/images/photo album/IMG_1520-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_1520-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_1520-t1.avif",
+        "webp": "optimized/images/photo album/IMG_1520-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_1520-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_1520-t2.avif",
+        "webp": "optimized/images/photo album/IMG_1520-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_1520-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_0756": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_0756-t0.avif",
+        "webp": "optimized/images/photo album/IMG_0756-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_0756-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_0756-t1.avif",
+        "webp": "optimized/images/photo album/IMG_0756-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_0756-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_0756-t2.avif",
+        "webp": "optimized/images/photo album/IMG_0756-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_0756-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 282,
+        "h": 480,
+        "avif": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t0.avif",
+        "webp": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t0.webp",
+        "jpg": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t0.jpg"
+      },
+      {
+        "w": 563,
+        "h": 960,
+        "avif": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t1.avif",
+        "webp": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t1.webp",
+        "jpg": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t1.jpg"
+      },
+      {
+        "w": 939,
+        "h": 1600,
+        "avif": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t2.avif",
+        "webp": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t2.webp",
+        "jpg": "optimized/images/photo album/0ba27dd6-6cab-4b25-ab10-3b53ab9096bf-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/IMG_8775": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_8775-t0.avif",
+        "webp": "optimized/images/photo album/IMG_8775-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_8775-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_8775-t1.avif",
+        "webp": "optimized/images/photo album/IMG_8775-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_8775-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_8775-t2.avif",
+        "webp": "optimized/images/photo album/IMG_8775-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_8775-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/photo album/PNG-image": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 430,
+        "h": 480,
+        "avif": "optimized/images/photo album/PNG-image-t0.avif",
+        "webp": "optimized/images/photo album/PNG-image-t0.webp",
+        "jpg": "optimized/images/photo album/PNG-image-t0.jpg"
+      },
+      {
+        "w": 861,
+        "h": 960,
+        "avif": "optimized/images/photo album/PNG-image-t1.avif",
+        "webp": "optimized/images/photo album/PNG-image-t1.webp",
+        "jpg": "optimized/images/photo album/PNG-image-t1.jpg"
+      },
+      {
+        "w": 1434,
+        "h": 1600,
+        "avif": "optimized/images/photo album/PNG-image-t2.avif",
+        "webp": "optimized/images/photo album/PNG-image-t2.webp",
+        "jpg": "optimized/images/photo album/PNG-image-t2.jpg"
       }
     ]
   }
