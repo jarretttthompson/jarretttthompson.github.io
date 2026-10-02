@@ -7,7 +7,7 @@ import {
 } from "./modules/core.js?v=20260731";
 // Site Tuner: local dev only (see docs/SITE_TUNING_POLICY.md) — not loaded on production hostnames
 import { initHomeSlideshow } from "./modules/home.js";
-import { initPosterCarousel } from "./modules/artwork.js";
+import { initArtworkWalls } from "./modules/artwork.js";
 import { initPhotoAlbum } from "./modules/photo-album.js";
 import { initProjectsGallery } from "./modules/projects.js";
 
@@ -31,7 +31,7 @@ const page = document.body?.getAttribute("data-page");
 if (page === "index") {
   initHomeSlideshow();
 }
-if (page === "artwork") initPosterCarousel();
+if (page === "artwork") initArtworkWalls();
 if (page === "photo-album") {
   initPhotoAlbum();
   // Dynamically load upload module only when ?upload is in the URL

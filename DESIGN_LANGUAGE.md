@@ -119,12 +119,10 @@ Stitch-style layout, aligned with tokens above (no JetBrains / no fake `DATA_STR
 | Gradient hero title + underline | `.artwork-hero`, `.artwork-hero-title`, `.artwork-hero-rule` |
 | Cyan → pink gradient frame around sections | `.artwork-frame` + `.artwork-frame--a1` / `--a2` / `--a3` (asymmetric radii) |
 | Intro row with icon | `.artwork-intro-row` + `.artwork-info-icon` (mono “i”, no Material font) |
-| Poster strip | Existing `poster-carousel--manual` + `#posterCarouselManual` (`artwork.js`); fade at edges `.artwork-viewport-fade` |
-| Poster tile shape | **Scoped to** `.artwork-page .poster-card` only (2:3 tiles, softer border) |
-| Tip callout | `.artwork-tip` |
+| Paintings + Graphic Design walls | `.art-wall` on `#paintingWall` (`paintings.json`) then `#posterWall` (`posters.json`), built by `artwork.js`: equal-width columns, uncropped pictures, optional caption; each opens `.art-lightbox` |
 | Video + copy | `.artwork-video-grid`, `.artwork-embed-wrap`, `.artwork-embed-badge`, `.youtube-embed` |
 
-**Poster carousel layout** for all `terminal-site` pages that use `.poster-carousel--manual` is defined in `terminal-site.css`.
+The old `.poster-carousel--manual` styles are still in `terminal-site.css` but no page uses them now.
 
 ---
 
@@ -153,6 +151,7 @@ _Add dated bullets when the user explicitly likes or wants to keep something. Ag
 - **2026-03-20** — User wants the **neon frame to read in front of** inner chrome (not “behind” the shell) → implemented as **`.site-main-window::after`** above content.
 - **2026-03-20** — User wants the **outer window border/glow uniform on every side** (left was bright, right looked missing) → **single stroke color** + **symmetric 0-offset halos**; tokens `--shell-frame-*`.
 - **2026-03-20** — User wants that **same uniform neon border + symmetric glow treatment site-wide** on inner UI (panels, nav, embeds, forms, friends, carousel, photo album, etc.) → tokens **`--ui-border-*`** in `terminal-site.css`; **breakComposer** mobile overlay mirrors with **`--bc-ui-*`**.
+- **2026-10-02** — **Artwork** page: user wants **Paintings first, Graphic Design beneath it**, both as **masonry walls** (pictures at their own proportions, click to enlarge) instead of the horizontal poster carousel.
 
 ---
 

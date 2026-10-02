@@ -1985,6 +1985,187 @@ body.terminal-site .artwork-tip kbd {
   text-underline-offset: 2px;
 }
 
+/* Artwork page — walls (paintings, graphic design): equal-width columns, every picture at its own proportions */
+body.terminal-site .art-wall {
+  --art-wall-cols: 3;
+  --art-wall-gap: 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--art-wall-gap);
+}
+
+body.terminal-site .art-wall__col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--art-wall-gap);
+}
+
+@media (max-width: 1024px) {
+  body.terminal-site .art-wall {
+    --art-wall-cols: 2;
+    --art-wall-gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  body.terminal-site .art-wall {
+    --art-wall-cols: 1;
+  }
+}
+
+body.terminal-site .art-card {
+  margin: 0;
+}
+
+body.terminal-site .art-card__open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  cursor: zoom-in;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 255, 159, 0.28);
+  border-radius: 4px 4px 14px 4px;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+body.terminal-site .art-card__open picture,
+body.terminal-site .art-card__open img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.terminal-site .art-card__open:hover,
+body.terminal-site .art-card__open:focus-visible {
+  border-color: var(--ui-border-color-strong);
+  box-shadow:
+    0 0 22px var(--ui-border-glow),
+    0 0 40px var(--ui-border-glow-soft);
+}
+
+body.terminal-site .art-card__open:focus-visible {
+  outline: 2px solid var(--neon-cyan);
+  outline-offset: 2px;
+}
+
+body.terminal-site .art-card__caption {
+  margin-top: 0.45rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: rgba(238, 220, 255, 0.75);
+}
+
+body.terminal-site .art-lightbox {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(8, 2, 18, 0.94);
+  overflow: hidden;
+}
+
+body.terminal-site .art-lightbox::backdrop {
+  background: rgba(8, 2, 18, 0.94);
+}
+
+body.terminal-site .art-lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 3.25rem 1rem 1rem;
+  box-sizing: border-box;
+}
+
+body.terminal-site .art-lightbox__stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.terminal-site .art-lightbox__stage picture {
+  display: contents;
+}
+
+body.terminal-site .art-lightbox__stage img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid var(--ui-border-color);
+  box-shadow: 0 0 30px var(--ui-border-glow);
+}
+
+body.terminal-site .art-lightbox__caption {
+  flex: 0 0 auto;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+  color: rgba(238, 220, 255, 0.8);
+}
+
+body.terminal-site .art-lightbox__btn {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--neon-cyan);
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(0, 255, 159, 0.14) 0%, rgba(0, 0, 0, 0.6) 100%);
+  border: var(--ui-border-width) solid var(--ui-border-color);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 var(--xp-shine-soft),
+    0 0 10px var(--ui-border-glow-soft);
+}
+
+body.terminal-site .art-lightbox__btn:hover,
+body.terminal-site .art-lightbox__btn:focus-visible {
+  border-color: var(--ui-border-color-strong);
+  box-shadow: 0 0 18px var(--ui-border-glow);
+}
+
+body.terminal-site .art-lightbox__btn--close {
+  top: 0.6rem;
+  right: 0.75rem;
+}
+
+body.terminal-site .art-lightbox__btn--prev,
+body.terminal-site .art-lightbox__btn--next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+body.terminal-site .art-lightbox__btn--prev {
+  left: 0.75rem;
+}
+
+body.terminal-site .art-lightbox__btn--next {
+  right: 0.75rem;
+}
+
 body.terminal-site .artwork-video-grid {
   display: grid;
   grid-template-columns: 1fr;

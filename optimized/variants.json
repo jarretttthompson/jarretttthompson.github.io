@@ -1246,18 +1246,21 @@
     "tiers": [
       {
         "w": 309,
+        "h": 479,
         "avif": "optimized/posterPortfolio/0hipoh0-t0.avif",
         "webp": "optimized/posterPortfolio/0hipoh0-t0.webp",
         "jpg": "optimized/posterPortfolio/0hipoh0-t0.jpg"
       },
       {
         "w": 619,
+        "h": 959,
         "avif": "optimized/posterPortfolio/0hipoh0-t1.avif",
         "webp": "optimized/posterPortfolio/0hipoh0-t1.webp",
         "jpg": "optimized/posterPortfolio/0hipoh0-t1.jpg"
       },
       {
         "w": 1032,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/0hipoh0-t2.avif",
         "webp": "optimized/posterPortfolio/0hipoh0-t2.webp",
         "jpg": "optimized/posterPortfolio/0hipoh0-t2.jpg"
@@ -1269,18 +1272,21 @@
     "tiers": [
       {
         "w": 310,
+        "h": 480,
         "avif": "optimized/posterPortfolio/Untitled_Artwork 4-t0.avif",
         "webp": "optimized/posterPortfolio/Untitled_Artwork 4-t0.webp",
         "jpg": "optimized/posterPortfolio/Untitled_Artwork 4-t0.jpg"
       },
       {
         "w": 621,
+        "h": 960,
         "avif": "optimized/posterPortfolio/Untitled_Artwork 4-t1.avif",
         "webp": "optimized/posterPortfolio/Untitled_Artwork 4-t1.webp",
         "jpg": "optimized/posterPortfolio/Untitled_Artwork 4-t1.jpg"
       },
       {
         "w": 1035,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/Untitled_Artwork 4-t2.avif",
         "webp": "optimized/posterPortfolio/Untitled_Artwork 4-t2.webp",
         "jpg": "optimized/posterPortfolio/Untitled_Artwork 4-t2.jpg"
@@ -1292,18 +1298,21 @@
     "tiers": [
       {
         "w": 329,
+        "h": 480,
         "avif": "optimized/posterPortfolio/blueClues-t0.avif",
         "webp": "optimized/posterPortfolio/blueClues-t0.webp",
         "jpg": "optimized/posterPortfolio/blueClues-t0.jpg"
       },
       {
         "w": 659,
+        "h": 960,
         "avif": "optimized/posterPortfolio/blueClues-t1.avif",
         "webp": "optimized/posterPortfolio/blueClues-t1.webp",
         "jpg": "optimized/posterPortfolio/blueClues-t1.jpg"
       },
       {
         "w": 1099,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/blueClues-t2.avif",
         "webp": "optimized/posterPortfolio/blueClues-t2.webp",
         "jpg": "optimized/posterPortfolio/blueClues-t2.jpg"
@@ -1315,18 +1324,21 @@
     "tiers": [
       {
         "w": 370,
+        "h": 480,
         "avif": "optimized/posterPortfolio/cSpaceGator1-t0.avif",
         "webp": "optimized/posterPortfolio/cSpaceGator1-t0.webp",
         "jpg": "optimized/posterPortfolio/cSpaceGator1-t0.jpg"
       },
       {
         "w": 741,
+        "h": 960,
         "avif": "optimized/posterPortfolio/cSpaceGator1-t1.avif",
         "webp": "optimized/posterPortfolio/cSpaceGator1-t1.webp",
         "jpg": "optimized/posterPortfolio/cSpaceGator1-t1.jpg"
       },
       {
         "w": 1236,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/cSpaceGator1-t2.avif",
         "webp": "optimized/posterPortfolio/cSpaceGator1-t2.webp",
         "jpg": "optimized/posterPortfolio/cSpaceGator1-t2.jpg"
@@ -1338,18 +1350,21 @@
     "tiers": [
       {
         "w": 370,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipOh10222024-t0.avif",
         "webp": "optimized/posterPortfolio/hipOh10222024-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOh10222024-t0.jpg"
       },
       {
         "w": 741,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipOh10222024-t1.avif",
         "webp": "optimized/posterPortfolio/hipOh10222024-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOh10222024-t1.jpg"
       },
       {
         "w": 1236,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipOh10222024-t2.avif",
         "webp": "optimized/posterPortfolio/hipOh10222024-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOh10222024-t2.jpg"
@@ -1361,18 +1376,21 @@
     "tiers": [
       {
         "w": 392,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipOhApril5th2025-t0.avif",
         "webp": "optimized/posterPortfolio/hipOhApril5th2025-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOhApril5th2025-t0.jpg"
       },
       {
         "w": 784,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipOhApril5th2025-t1.avif",
         "webp": "optimized/posterPortfolio/hipOhApril5th2025-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOhApril5th2025-t1.jpg"
       },
       {
         "w": 1307,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipOhApril5th2025-t2.avif",
         "webp": "optimized/posterPortfolio/hipOhApril5th2025-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOhApril5th2025-t2.jpg"
@@ -1384,18 +1402,21 @@
     "tiers": [
       {
         "w": 362,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipOhFebruary14th2025-t0.avif",
         "webp": "optimized/posterPortfolio/hipOhFebruary14th2025-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOhFebruary14th2025-t0.jpg"
       },
       {
         "w": 724,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipOhFebruary14th2025-t1.avif",
         "webp": "optimized/posterPortfolio/hipOhFebruary14th2025-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOhFebruary14th2025-t1.jpg"
       },
       {
         "w": 1208,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipOhFebruary14th2025-t2.avif",
         "webp": "optimized/posterPortfolio/hipOhFebruary14th2025-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOhFebruary14th2025-t2.jpg"
@@ -1407,18 +1428,21 @@
     "tiers": [
       {
         "w": 310,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipOhMay172025-t0.avif",
         "webp": "optimized/posterPortfolio/hipOhMay172025-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOhMay172025-t0.jpg"
       },
       {
         "w": 621,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipOhMay172025-t1.avif",
         "webp": "optimized/posterPortfolio/hipOhMay172025-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOhMay172025-t1.jpg"
       },
       {
         "w": 1035,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipOhMay172025-t2.avif",
         "webp": "optimized/posterPortfolio/hipOhMay172025-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOhMay172025-t2.jpg"
@@ -1430,18 +1454,21 @@
     "tiers": [
       {
         "w": 310,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipOhPurpleRain-t0.avif",
         "webp": "optimized/posterPortfolio/hipOhPurpleRain-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOhPurpleRain-t0.jpg"
       },
       {
         "w": 621,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipOhPurpleRain-t1.avif",
         "webp": "optimized/posterPortfolio/hipOhPurpleRain-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOhPurpleRain-t1.jpg"
       },
       {
         "w": 1035,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipOhPurpleRain-t2.avif",
         "webp": "optimized/posterPortfolio/hipOhPurpleRain-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOhPurpleRain-t2.jpg"
@@ -1453,18 +1480,21 @@
     "tiers": [
       {
         "w": 480,
+        "h": 310,
         "avif": "optimized/posterPortfolio/hipOhSticker-t0.avif",
         "webp": "optimized/posterPortfolio/hipOhSticker-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOhSticker-t0.jpg"
       },
       {
         "w": 960,
+        "h": 621,
         "avif": "optimized/posterPortfolio/hipOhSticker-t1.avif",
         "webp": "optimized/posterPortfolio/hipOhSticker-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOhSticker-t1.jpg"
       },
       {
         "w": 1600,
+        "h": 1035,
         "avif": "optimized/posterPortfolio/hipOhSticker-t2.avif",
         "webp": "optimized/posterPortfolio/hipOhSticker-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOhSticker-t2.jpg"
@@ -1476,18 +1506,21 @@
     "tiers": [
       {
         "w": 453,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipOhStpat2024-t0.avif",
         "webp": "optimized/posterPortfolio/hipOhStpat2024-t0.webp",
         "jpg": "optimized/posterPortfolio/hipOhStpat2024-t0.jpg"
       },
       {
         "w": 907,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipOhStpat2024-t1.avif",
         "webp": "optimized/posterPortfolio/hipOhStpat2024-t1.webp",
         "jpg": "optimized/posterPortfolio/hipOhStpat2024-t1.jpg"
       },
       {
         "w": 1512,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipOhStpat2024-t2.avif",
         "webp": "optimized/posterPortfolio/hipOhStpat2024-t2.webp",
         "jpg": "optimized/posterPortfolio/hipOhStpat2024-t2.jpg"
@@ -1499,18 +1532,21 @@
     "tiers": [
       {
         "w": 479,
+        "h": 438,
         "avif": "optimized/posterPortfolio/hipohGnats-t0.avif",
         "webp": "optimized/posterPortfolio/hipohGnats-t0.webp",
         "jpg": "optimized/posterPortfolio/hipohGnats-t0.jpg"
       },
       {
         "w": 959,
+        "h": 876,
         "avif": "optimized/posterPortfolio/hipohGnats-t1.avif",
         "webp": "optimized/posterPortfolio/hipohGnats-t1.webp",
         "jpg": "optimized/posterPortfolio/hipohGnats-t1.jpg"
       },
       {
         "w": 1600,
+        "h": 1460,
         "avif": "optimized/posterPortfolio/hipohGnats-t2.avif",
         "webp": "optimized/posterPortfolio/hipohGnats-t2.webp",
         "jpg": "optimized/posterPortfolio/hipohGnats-t2.jpg"
@@ -1522,18 +1558,21 @@
     "tiers": [
       {
         "w": 338,
+        "h": 480,
         "avif": "optimized/posterPortfolio/hipohMarch17th2025-t0.avif",
         "webp": "optimized/posterPortfolio/hipohMarch17th2025-t0.webp",
         "jpg": "optimized/posterPortfolio/hipohMarch17th2025-t0.jpg"
       },
       {
         "w": 677,
+        "h": 960,
         "avif": "optimized/posterPortfolio/hipohMarch17th2025-t1.avif",
         "webp": "optimized/posterPortfolio/hipohMarch17th2025-t1.webp",
         "jpg": "optimized/posterPortfolio/hipohMarch17th2025-t1.jpg"
       },
       {
         "w": 1129,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/hipohMarch17th2025-t2.avif",
         "webp": "optimized/posterPortfolio/hipohMarch17th2025-t2.webp",
         "jpg": "optimized/posterPortfolio/hipohMarch17th2025-t2.jpg"
@@ -1545,18 +1584,21 @@
     "tiers": [
       {
         "w": 480,
+        "h": 462,
         "avif": "optimized/posterPortfolio/hungryHipoh-t0.avif",
         "webp": "optimized/posterPortfolio/hungryHipoh-t0.webp",
         "jpg": "optimized/posterPortfolio/hungryHipoh-t0.jpg"
       },
       {
         "w": 960,
+        "h": 924,
         "avif": "optimized/posterPortfolio/hungryHipoh-t1.avif",
         "webp": "optimized/posterPortfolio/hungryHipoh-t1.webp",
         "jpg": "optimized/posterPortfolio/hungryHipoh-t1.jpg"
       },
       {
         "w": 1188,
+        "h": 1144,
         "avif": "optimized/posterPortfolio/hungryHipoh-t2.avif",
         "webp": "optimized/posterPortfolio/hungryHipoh-t2.webp",
         "jpg": "optimized/posterPortfolio/hungryHipoh-t2.jpg"
@@ -1568,18 +1610,21 @@
     "tiers": [
       {
         "w": 418,
+        "h": 480,
         "avif": "optimized/posterPortfolio/spaceGator2-t0.avif",
         "webp": "optimized/posterPortfolio/spaceGator2-t0.webp",
         "jpg": "optimized/posterPortfolio/spaceGator2-t0.jpg"
       },
       {
         "w": 837,
+        "h": 960,
         "avif": "optimized/posterPortfolio/spaceGator2-t1.avif",
         "webp": "optimized/posterPortfolio/spaceGator2-t1.webp",
         "jpg": "optimized/posterPortfolio/spaceGator2-t1.jpg"
       },
       {
         "w": 1201,
+        "h": 1376,
         "avif": "optimized/posterPortfolio/spaceGator2-t2.avif",
         "webp": "optimized/posterPortfolio/spaceGator2-t2.webp",
         "jpg": "optimized/posterPortfolio/spaceGator2-t2.jpg"
@@ -1591,18 +1636,21 @@
     "tiers": [
       {
         "w": 370,
+        "h": 480,
         "avif": "optimized/posterPortfolio/spaceGator3-t0.avif",
         "webp": "optimized/posterPortfolio/spaceGator3-t0.webp",
         "jpg": "optimized/posterPortfolio/spaceGator3-t0.jpg"
       },
       {
         "w": 741,
+        "h": 960,
         "avif": "optimized/posterPortfolio/spaceGator3-t1.avif",
         "webp": "optimized/posterPortfolio/spaceGator3-t1.webp",
         "jpg": "optimized/posterPortfolio/spaceGator3-t1.jpg"
       },
       {
         "w": 1236,
+        "h": 1600,
         "avif": "optimized/posterPortfolio/spaceGator3-t2.avif",
         "webp": "optimized/posterPortfolio/spaceGator3-t2.webp",
         "jpg": "optimized/posterPortfolio/spaceGator3-t2.jpg"
@@ -1974,6 +2022,526 @@
         "avif": "optimized/projects/truss-lab/trusslab-overview-t2.avif",
         "webp": "optimized/projects/truss-lab/trusslab-overview-t2.webp",
         "jpg": "optimized/projects/truss-lab/trusslab-overview-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2135": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 436,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_2135-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2135-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2135-t0.jpg"
+      },
+      {
+        "w": 872,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_2135-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2135-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2135-t1.jpg"
+      },
+      {
+        "w": 1453,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_2135-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2135-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2135-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2056": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 265,
+        "avif": "optimized/images/paintings/IMG_2056-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2056-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2056-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 529,
+        "avif": "optimized/images/paintings/IMG_2056-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2056-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2056-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 882,
+        "avif": "optimized/images/paintings/IMG_2056-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2056-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2056-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2060": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 251,
+        "avif": "optimized/images/paintings/IMG_2060-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2060-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2060-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 502,
+        "avif": "optimized/images/paintings/IMG_2060-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2060-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2060-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 837,
+        "avif": "optimized/images/paintings/IMG_2060-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2060-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2060-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_1728": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 432,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_1728-t0.avif",
+        "webp": "optimized/images/paintings/IMG_1728-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_1728-t0.jpg"
+      },
+      {
+        "w": 864,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_1728-t1.avif",
+        "webp": "optimized/images/paintings/IMG_1728-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_1728-t1.jpg"
+      },
+      {
+        "w": 1441,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_1728-t2.avif",
+        "webp": "optimized/images/paintings/IMG_1728-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_1728-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_4119-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 336,
+        "avif": "optimized/images/paintings/IMG_4119-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_4119-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_4119-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 673,
+        "avif": "optimized/images/paintings/IMG_4119-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_4119-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_4119-c1-t1.jpg"
+      },
+      {
+        "w": 1284,
+        "h": 900,
+        "avif": "optimized/images/paintings/IMG_4119-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_4119-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_4119-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_0990-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 137,
+        "avif": "optimized/images/paintings/IMG_0990-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_0990-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_0990-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 275,
+        "avif": "optimized/images/paintings/IMG_0990-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_0990-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_0990-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 458,
+        "avif": "optimized/images/paintings/IMG_0990-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_0990-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_0990-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2363-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 288,
+        "avif": "optimized/images/paintings/IMG_2363-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2363-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2363-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 577,
+        "avif": "optimized/images/paintings/IMG_2363-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2363-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2363-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 961,
+        "avif": "optimized/images/paintings/IMG_2363-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2363-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2363-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 437,
+        "h": 480,
+        "avif": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t0.avif",
+        "webp": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t0.webp",
+        "jpg": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t0.jpg"
+      },
+      {
+        "w": 874,
+        "h": 960,
+        "avif": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t1.avif",
+        "webp": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t1.webp",
+        "jpg": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t1.jpg"
+      },
+      {
+        "w": 1457,
+        "h": 1600,
+        "avif": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t2.avif",
+        "webp": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t2.webp",
+        "jpg": "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_7841-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 422,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_7841-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_7841-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_7841-c1-t0.jpg"
+      },
+      {
+        "w": 845,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_7841-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_7841-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_7841-c1-t1.jpg"
+      },
+      {
+        "w": 1408,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_7841-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_7841-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_7841-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2069-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 419,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_2069-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2069-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2069-c1-t0.jpg"
+      },
+      {
+        "w": 837,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_2069-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2069-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2069-c1-t1.jpg"
+      },
+      {
+        "w": 1198,
+        "h": 1374,
+        "avif": "optimized/images/paintings/IMG_2069-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2069-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2069-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_1763-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 421,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_1763-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_1763-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_1763-c1-t0.jpg"
+      },
+      {
+        "w": 842,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_1763-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_1763-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_1763-c1-t1.jpg"
+      },
+      {
+        "w": 1404,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_1763-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_1763-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_1763-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_0991-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 284,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_0991-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_0991-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_0991-c1-t0.jpg"
+      },
+      {
+        "w": 567,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_0991-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_0991-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_0991-c1-t1.jpg"
+      },
+      {
+        "w": 886,
+        "h": 1499,
+        "avif": "optimized/images/paintings/IMG_0991-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_0991-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_0991-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2063-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 241,
+        "avif": "optimized/images/paintings/IMG_2063-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2063-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2063-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 482,
+        "avif": "optimized/images/paintings/IMG_2063-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2063-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2063-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 804,
+        "avif": "optimized/images/paintings/IMG_2063-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2063-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2063-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2064-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 180,
+        "avif": "optimized/images/paintings/IMG_2064-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2064-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2064-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 360,
+        "avif": "optimized/images/paintings/IMG_2064-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2064-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2064-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 601,
+        "avif": "optimized/images/paintings/IMG_2064-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2064-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2064-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_1054-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 463,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_1054-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_1054-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_1054-c1-t0.jpg"
+      },
+      {
+        "w": 926,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_1054-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_1054-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_1054-c1-t1.jpg"
+      },
+      {
+        "w": 1544,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_1054-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_1054-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_1054-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2225-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 476,
+        "avif": "optimized/images/paintings/IMG_2225-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2225-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2225-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 951,
+        "avif": "optimized/images/paintings/IMG_2225-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2225-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2225-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 1585,
+        "avif": "optimized/images/paintings/IMG_2225-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2225-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2225-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_1443-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 290,
+        "avif": "optimized/images/paintings/IMG_1443-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_1443-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_1443-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 579,
+        "avif": "optimized/images/paintings/IMG_1443-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_1443-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_1443-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 966,
+        "avif": "optimized/images/paintings/IMG_1443-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_1443-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_1443-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_1727-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 283,
+        "avif": "optimized/images/paintings/IMG_1727-c1-t0.avif",
+        "webp": "optimized/images/paintings/IMG_1727-c1-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_1727-c1-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 567,
+        "avif": "optimized/images/paintings/IMG_1727-c1-t1.avif",
+        "webp": "optimized/images/paintings/IMG_1727-c1-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_1727-c1-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 944,
+        "avif": "optimized/images/paintings/IMG_1727-c1-t2.avif",
+        "webp": "optimized/images/paintings/IMG_1727-c1-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_1727-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 388,
+        "h": 480,
+        "avif": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t0.avif",
+        "webp": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t0.webp",
+        "jpg": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t0.jpg"
+      },
+      {
+        "w": 775,
+        "h": 960,
+        "avif": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t1.avif",
+        "webp": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t1.webp",
+        "jpg": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t1.jpg"
+      },
+      {
+        "w": 1292,
+        "h": 1600,
+        "avif": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t2.avif",
+        "webp": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t2.webp",
+        "jpg": "optimized/images/paintings/3f9b4bed-ccc5-4c24-bdbd-4198b8737af1-c1-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_1445-c2": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 332,
+        "avif": "optimized/images/paintings/IMG_1445-c2-t0.avif",
+        "webp": "optimized/images/paintings/IMG_1445-c2-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_1445-c2-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 665,
+        "avif": "optimized/images/paintings/IMG_1445-c2-t1.avif",
+        "webp": "optimized/images/paintings/IMG_1445-c2-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_1445-c2-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 1108,
+        "avif": "optimized/images/paintings/IMG_1445-c2-t2.avif",
+        "webp": "optimized/images/paintings/IMG_1445-c2-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_1445-c2-t2.jpg"
       }
     ]
   }
