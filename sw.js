@@ -2,7 +2,7 @@
 // fallback), so a publish can never leave a visitor with a new page and an old stylesheet or image
 // index. Only pictures, fonts and video are served from the saved copy first.
 // Bump CACHE_NAME on every publish so the saved pictures are refreshed too.
-const CACHE_NAME = "site-cache-v20261002f";
+const CACHE_NAME = "site-cache-v20261002g";
 const STATIC_ASSETS = [
   "/",
   "/index.html",

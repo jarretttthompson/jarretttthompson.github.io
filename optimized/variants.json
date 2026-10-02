@@ -2989,5 +2989,31 @@
         "jpg": "optimized/images/photo album/PNG-image-t2.jpg"
       }
     ]
+  },
+  "optimized/images/photo album/IMG_9279": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/photo album/IMG_9279-t0.avif",
+        "webp": "optimized/images/photo album/IMG_9279-t0.webp",
+        "jpg": "optimized/images/photo album/IMG_9279-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/photo album/IMG_9279-t1.avif",
+        "webp": "optimized/images/photo album/IMG_9279-t1.webp",
+        "jpg": "optimized/images/photo album/IMG_9279-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/photo album/IMG_9279-t2.avif",
+        "webp": "optimized/images/photo album/IMG_9279-t2.webp",
+        "jpg": "optimized/images/photo album/IMG_9279-t2.jpg"
+      }
+    ]
   }
 }

@@ -1615,5 +1615,651 @@
         }
       ]
     }
+  },
+  {
+    "name": "IMG_2344-c1.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 726,
+          "h": 600,
+          "avif": "optimized/slideshow/IMG_2344-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_2344-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_2344-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 807,
+          "h": 667,
+          "avif": "optimized/slideshow/IMG_2344-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_2344-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_2344-c1-desktop-t1.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 397,
+          "avif": "optimized/slideshow/IMG_2344-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_2344-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_2344-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 595,
+          "avif": "optimized/slideshow/IMG_2344-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_2344-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_2344-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 807,
+          "h": 667,
+          "avif": "optimized/slideshow/IMG_2344-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_2344-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_2344-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_0315.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 600,
+          "h": 600,
+          "avif": "optimized/slideshow/IMG_0315-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_0315-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_0315-desktop-t0.jpg"
+        },
+        {
+          "w": 828,
+          "h": 828,
+          "avif": "optimized/slideshow/IMG_0315-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_0315-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_0315-desktop-t1.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 480,
+          "avif": "optimized/slideshow/IMG_0315-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_0315-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_0315-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 720,
+          "avif": "optimized/slideshow/IMG_0315-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_0315-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_0315-mobile-t1.jpg"
+        },
+        {
+          "w": 828,
+          "h": 828,
+          "avif": "optimized/slideshow/IMG_0315-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_0315-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_0315-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "100_0249.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 600,
+          "avif": "optimized/slideshow/100_0249-desktop-t0.avif",
+          "webp": "optimized/slideshow/100_0249-desktop-t0.webp",
+          "jpg": "optimized/slideshow/100_0249-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "avif": "optimized/slideshow/100_0249-desktop-t1.avif",
+          "webp": "optimized/slideshow/100_0249-desktop-t1.webp",
+          "jpg": "optimized/slideshow/100_0249-desktop-t1.jpg"
+        },
+        {
+          "w": 1600,
+          "h": 1200,
+          "avif": "optimized/slideshow/100_0249-desktop-t2.avif",
+          "webp": "optimized/slideshow/100_0249-desktop-t2.webp",
+          "jpg": "optimized/slideshow/100_0249-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 360,
+          "avif": "optimized/slideshow/100_0249-mobile-t0.avif",
+          "webp": "optimized/slideshow/100_0249-mobile-t0.webp",
+          "jpg": "optimized/slideshow/100_0249-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 540,
+          "avif": "optimized/slideshow/100_0249-mobile-t1.avif",
+          "webp": "optimized/slideshow/100_0249-mobile-t1.webp",
+          "jpg": "optimized/slideshow/100_0249-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 675,
+          "avif": "optimized/slideshow/100_0249-mobile-t2.avif",
+          "webp": "optimized/slideshow/100_0249-mobile-t2.webp",
+          "jpg": "optimized/slideshow/100_0249-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_4740-c1.png",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 636,
+          "h": 600,
+          "avif": "optimized/slideshow/IMG_4740-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_4740-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_4740-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 953,
+          "h": 900,
+          "avif": "optimized/slideshow/IMG_4740-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_4740-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_4740-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1271,
+          "h": 1200,
+          "avif": "optimized/slideshow/IMG_4740-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_4740-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_4740-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 453,
+          "avif": "optimized/slideshow/IMG_4740-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_4740-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_4740-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 680,
+          "avif": "optimized/slideshow/IMG_4740-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_4740-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_4740-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 850,
+          "avif": "optimized/slideshow/IMG_4740-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_4740-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_4740-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_8663-c1.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 544,
+          "avif": "optimized/slideshow/IMG_8663-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_8663-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_8663-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 816,
+          "avif": "optimized/slideshow/IMG_8663-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_8663-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_8663-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1600,
+          "h": 1087,
+          "avif": "optimized/slideshow/IMG_8663-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_8663-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_8663-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 326,
+          "avif": "optimized/slideshow/IMG_8663-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_8663-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_8663-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 489,
+          "avif": "optimized/slideshow/IMG_8663-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_8663-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_8663-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 612,
+          "avif": "optimized/slideshow/IMG_8663-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_8663-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_8663-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_0863-c1.png",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 469,
+          "avif": "optimized/slideshow/IMG_0863-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_0863-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_0863-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 703,
+          "avif": "optimized/slideshow/IMG_0863-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_0863-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_0863-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1600,
+          "h": 938,
+          "avif": "optimized/slideshow/IMG_0863-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_0863-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_0863-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 281,
+          "avif": "optimized/slideshow/IMG_0863-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_0863-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_0863-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 422,
+          "avif": "optimized/slideshow/IMG_0863-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_0863-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_0863-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 527,
+          "avif": "optimized/slideshow/IMG_0863-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_0863-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_0863-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_1182.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 600,
+          "avif": "optimized/slideshow/IMG_1182-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_1182-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_1182-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 900,
+          "avif": "optimized/slideshow/IMG_1182-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_1182-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_1182-desktop-t1.jpg"
+        },
+        {
+          "w": 1600,
+          "h": 1200,
+          "avif": "optimized/slideshow/IMG_1182-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_1182-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_1182-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 360,
+          "avif": "optimized/slideshow/IMG_1182-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_1182-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_1182-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 540,
+          "avif": "optimized/slideshow/IMG_1182-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_1182-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_1182-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 675,
+          "avif": "optimized/slideshow/IMG_1182-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_1182-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_1182-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "A7308440.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 450,
+          "avif": "optimized/slideshow/A7308440-desktop-t0.avif",
+          "webp": "optimized/slideshow/A7308440-desktop-t0.webp",
+          "jpg": "optimized/slideshow/A7308440-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 676,
+          "avif": "optimized/slideshow/A7308440-desktop-t1.avif",
+          "webp": "optimized/slideshow/A7308440-desktop-t1.webp",
+          "jpg": "optimized/slideshow/A7308440-desktop-t1.jpg"
+        },
+        {
+          "w": 1600,
+          "h": 901,
+          "avif": "optimized/slideshow/A7308440-desktop-t2.avif",
+          "webp": "optimized/slideshow/A7308440-desktop-t2.webp",
+          "jpg": "optimized/slideshow/A7308440-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 270,
+          "avif": "optimized/slideshow/A7308440-mobile-t0.avif",
+          "webp": "optimized/slideshow/A7308440-mobile-t0.webp",
+          "jpg": "optimized/slideshow/A7308440-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 405,
+          "avif": "optimized/slideshow/A7308440-mobile-t1.avif",
+          "webp": "optimized/slideshow/A7308440-mobile-t1.webp",
+          "jpg": "optimized/slideshow/A7308440-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 507,
+          "avif": "optimized/slideshow/A7308440-mobile-t2.avif",
+          "webp": "optimized/slideshow/A7308440-mobile-t2.webp",
+          "jpg": "optimized/slideshow/A7308440-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_2694-c1.png",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 727,
+          "h": 600,
+          "avif": "optimized/slideshow/IMG_2694-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_2694-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_2694-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 1090,
+          "h": 900,
+          "avif": "optimized/slideshow/IMG_2694-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_2694-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_2694-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1284,
+          "h": 1060,
+          "avif": "optimized/slideshow/IMG_2694-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_2694-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_2694-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 396,
+          "avif": "optimized/slideshow/IMG_2694-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_2694-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_2694-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 594,
+          "avif": "optimized/slideshow/IMG_2694-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_2694-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_2694-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 743,
+          "avif": "optimized/slideshow/IMG_2694-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_2694-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_2694-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_9192-c1.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 517,
+          "avif": "optimized/slideshow/IMG_9192-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_9192-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_9192-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 776,
+          "avif": "optimized/slideshow/IMG_9192-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_9192-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_9192-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1600,
+          "h": 1035,
+          "avif": "optimized/slideshow/IMG_9192-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_9192-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_9192-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 310,
+          "avif": "optimized/slideshow/IMG_9192-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_9192-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_9192-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 466,
+          "avif": "optimized/slideshow/IMG_9192-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_9192-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_9192-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 582,
+          "avif": "optimized/slideshow/IMG_9192-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_9192-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_9192-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_5783-c1.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 800,
+          "h": 570,
+          "avif": "optimized/slideshow/IMG_5783-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_5783-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_5783-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 1200,
+          "h": 855,
+          "avif": "optimized/slideshow/IMG_5783-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_5783-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_5783-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1365,
+          "h": 973,
+          "avif": "optimized/slideshow/IMG_5783-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_5783-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_5783-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 342,
+          "avif": "optimized/slideshow/IMG_5783-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_5783-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_5783-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 513,
+          "avif": "optimized/slideshow/IMG_5783-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_5783-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_5783-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 642,
+          "avif": "optimized/slideshow/IMG_5783-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_5783-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_5783-c1-mobile-t2.jpg"
+        }
+      ]
+    }
+  },
+  {
+    "name": "IMG_5781-c1.jpeg",
+    "desktop": {
+      "sizes": "(max-width: 768px) 0px, min(92vw, 900px)",
+      "tiers": [
+        {
+          "w": 664,
+          "h": 600,
+          "avif": "optimized/slideshow/IMG_5781-c1-desktop-t0.avif",
+          "webp": "optimized/slideshow/IMG_5781-c1-desktop-t0.webp",
+          "jpg": "optimized/slideshow/IMG_5781-c1-desktop-t0.jpg"
+        },
+        {
+          "w": 996,
+          "h": 900,
+          "avif": "optimized/slideshow/IMG_5781-c1-desktop-t1.avif",
+          "webp": "optimized/slideshow/IMG_5781-c1-desktop-t1.webp",
+          "jpg": "optimized/slideshow/IMG_5781-c1-desktop-t1.jpg"
+        },
+        {
+          "w": 1327,
+          "h": 1200,
+          "avif": "optimized/slideshow/IMG_5781-c1-desktop-t2.avif",
+          "webp": "optimized/slideshow/IMG_5781-c1-desktop-t2.webp",
+          "jpg": "optimized/slideshow/IMG_5781-c1-desktop-t2.jpg"
+        }
+      ]
+    },
+    "mobile": {
+      "sizes": "(max-width: 768px) 92vw, 100vw",
+      "tiers": [
+        {
+          "w": 480,
+          "h": 434,
+          "avif": "optimized/slideshow/IMG_5781-c1-mobile-t0.avif",
+          "webp": "optimized/slideshow/IMG_5781-c1-mobile-t0.webp",
+          "jpg": "optimized/slideshow/IMG_5781-c1-mobile-t0.jpg"
+        },
+        {
+          "w": 720,
+          "h": 651,
+          "avif": "optimized/slideshow/IMG_5781-c1-mobile-t1.avif",
+          "webp": "optimized/slideshow/IMG_5781-c1-mobile-t1.webp",
+          "jpg": "optimized/slideshow/IMG_5781-c1-mobile-t1.jpg"
+        },
+        {
+          "w": 900,
+          "h": 814,
+          "avif": "optimized/slideshow/IMG_5781-c1-mobile-t2.avif",
+          "webp": "optimized/slideshow/IMG_5781-c1-mobile-t2.webp",
+          "jpg": "optimized/slideshow/IMG_5781-c1-mobile-t2.jpg"
+        }
+      ]
+    }
   }
 ]
