@@ -32,15 +32,21 @@ self.addEventListener("install", (event) => {
   );
 });
 
+// Workers before this version served saved pages first, so a page opened under one of them can be
+// a stale mix of old and new files. Taking over from one reloads the open pages once.
+const FRESH_FIRST_SINCE = "site-cache-v20261002d";
+
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key)),
-      ),
-    ).then(() => self.clients.claim()),
+    caches.keys().then(async (keys) => {
+      const old = keys.filter((key) => key !== CACHE_NAME);
+      await Promise.all(old.map((key) => caches.delete(key)));
+      await self.clients.claim();
+      if (old.some((key) => key.startsWith("site-cache-v") && key < FRESH_FIRST_SINCE)) {
+        const pages = await self.clients.matchAll({ type: "window" });
+        await Promise.all(pages.map((page) => page.navigate(page.url).catch(() => {})));
+      }
+    }),
   );
 });
 
