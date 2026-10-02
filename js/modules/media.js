@@ -1,5 +1,13 @@
+// Pictures in these folders are served from the image host; siteDeck uploads them on publish.
+const MEDIA_HOST = "https://img.thejrummer.art/";
+const HOSTED_DIRS = ["optimized/slideshow/", "optimized/images/", "optimized/posterPortfolio/", "optimized/projects/"];
+// A local preview shows the files on disk, which may not be published yet.
+const LOCAL_PREVIEW =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname.endsWith(".local");
+
 export function encoded(url) {
-  return encodeURI(url);
+  const path = encodeURI(url);
+  return !LOCAL_PREVIEW && HOSTED_DIRS.some((dir) => url.startsWith(dir)) ? MEDIA_HOST + path : path;
 }
 
 export function optimizedBasePath(src) {

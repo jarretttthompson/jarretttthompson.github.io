@@ -21,3 +21,10 @@ secrets/
 Thumbs.db
 *.swp
 *~
+
+
+# Pictures served from img.thejrummer.art — siteDeck uploads them on publish, so new ones stay out of git
+optimized/slideshow/
+optimized/images/
+optimized/posterPortfolio/
+optimized/projects/

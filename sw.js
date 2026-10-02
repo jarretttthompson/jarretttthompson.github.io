@@ -1,6 +1,8 @@
-// Bump CACHE_NAME and the ?v= strings below together whenever assets change.
-// Nav partial is safe to precache now that injectNav() fetches it with ?v= (versioned URL = no stale-link risk).
-const CACHE_NAME = "site-cache-v20261002c";
+// Pages, lists, styles and scripts are always asked for fresh (the saved copy is only an offline
+// fallback), so a publish can never leave a visitor with a new page and an old stylesheet or image
+// index. Only pictures, fonts and video are served from the saved copy first.
+// Bump CACHE_NAME on every publish so the saved pictures are refreshed too.
+const CACHE_NAME = "site-cache-v20261002d";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
@@ -23,6 +25,8 @@ const STATIC_ASSETS = [
 ];
 
 self.addEventListener("install", (event) => {
+  // Take over from the previous worker straight away instead of waiting for every tab to close.
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS)).catch(() => {}),
   );
@@ -36,9 +40,18 @@ self.addEventListener("activate", (event) => {
           .filter((key) => key !== CACHE_NAME)
           .map((key) => caches.delete(key)),
       ),
-    ),
+    ).then(() => self.clients.claim()),
   );
 });
+
+const SAVED_FIRST = /\.(avif|webp|jpe?g|png|gif|svg|ico|woff2?|ttf|otf|mp4|webm|mov)$/i;
+
+function save(req, response) {
+  if (!response || response.status !== 200 || response.type !== "basic") return response;
+  const clone = response.clone();
+  caches.open(CACHE_NAME).then((cache) => cache.put(req, clone)).catch(() => {});
+  return response;
+}
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
@@ -64,17 +77,17 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  if (SAVED_FIRST.test(url.pathname)) {
+    event.respondWith(
+      caches.match(req).then((cached) => cached || fetch(req).then((response) => save(req, response))),
+    );
+    return;
+  }
+
+  // "no-cache" makes the browser check with the server even when its own copy still looks fresh.
   event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) return cached;
-      return fetch(req).then((response) => {
-        if (!response || response.status !== 200 || response.type !== "basic") {
-          return response;
-        }
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(req, clone)).catch(() => {});
-        return response;
-      });
-    }),
+    fetch(req, { cache: "no-cache" })
+      .then((response) => save(req, response))
+      .catch(() => caches.match(req).then((cached) => cached || Response.error())),
   );
 });
