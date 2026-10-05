@@ -2158,32 +2158,6 @@
       }
     ]
   },
-  "optimized/images/paintings/IMG_2363-c1": {
-    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
-    "tiers": [
-      {
-        "w": 480,
-        "h": 288,
-        "avif": "optimized/images/paintings/IMG_2363-c1-t0.avif",
-        "webp": "optimized/images/paintings/IMG_2363-c1-t0.webp",
-        "jpg": "optimized/images/paintings/IMG_2363-c1-t0.jpg"
-      },
-      {
-        "w": 960,
-        "h": 577,
-        "avif": "optimized/images/paintings/IMG_2363-c1-t1.avif",
-        "webp": "optimized/images/paintings/IMG_2363-c1-t1.webp",
-        "jpg": "optimized/images/paintings/IMG_2363-c1-t1.jpg"
-      },
-      {
-        "w": 1600,
-        "h": 961,
-        "avif": "optimized/images/paintings/IMG_2363-c1-t2.avif",
-        "webp": "optimized/images/paintings/IMG_2363-c1-t2.webp",
-        "jpg": "optimized/images/paintings/IMG_2363-c1-t2.jpg"
-      }
-    ]
-  },
   "optimized/images/paintings/80806676686__27989063-88E1-4BE3-A7F4-89706AABC29D-c1": {
     "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
     "tiers": [
@@ -3013,6 +2987,32 @@
         "avif": "optimized/images/photo album/IMG_9279-t2.avif",
         "webp": "optimized/images/photo album/IMG_9279-t2.webp",
         "jpg": "optimized/images/photo album/IMG_9279-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 480,
+        "h": 281,
+        "avif": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t0.avif",
+        "webp": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t0.webp",
+        "jpg": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t0.jpg"
+      },
+      {
+        "w": 960,
+        "h": 563,
+        "avif": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t1.avif",
+        "webp": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t1.webp",
+        "jpg": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t1.jpg"
+      },
+      {
+        "w": 1600,
+        "h": 938,
+        "avif": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t2.avif",
+        "webp": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t2.webp",
+        "jpg": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t2.jpg"
       }
     ]
   }
