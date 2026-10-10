@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarrett Thompson · Projects</title>
   <link rel="stylesheet" href="css/tailwind-built.css?v=20260352" />
-  <link rel="stylesheet" href="css/terminal-site.css?v=20260915" />
+  <link rel="stylesheet" href="css/terminal-site.css?v=20261010" />
   <link rel="stylesheet" href="css/site-tune-overrides.css?v=20260381" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d0517" />
@@ -47,7 +47,7 @@
         <div id="projectsPortfolioSection">
           <div id="projectsAppCards" class="projects-portfolio-entries" aria-live="polite"></div>
           <p class="panel-kicker mt-8 mb-2 max-w-3xl">
-            Launch a GitHub Pages build inside this page, or open in a new tab. If a frame is empty, the repo may not have Pages enabled yet — use <strong>Repository</strong> or <strong>Open in new tab</strong>.
+            <strong>Launch</strong> runs a project inside this page; <strong>New tab</strong> opens it on its own. If a frame stays empty, that repo may not have GitHub Pages enabled yet — use <strong>Repo</strong> instead.
             breakComposer also lives on this site at <a class="project-link" href="breakcomposer/index.html">/breakcomposer/</a>.
           </p>
 
@@ -154,7 +154,7 @@
       {
         name: "shaderBoi",
         description:
-          "A live-visuals app for bars and venues — hosts Shadertoy-style GLSL shaders as animated backdrops and composites logos on top with recolor, outline, and raster-to-SVG vectorize tools. Microphone input drives brightness and bloom, shader switches crossfade, and scenes save as portable JSON. Use Launch app or click the image to open shaderBoi. Plain JavaScript and WebGL2, no framework.",
+          "A live-visuals app for bars and venues — hosts Shadertoy-style GLSL shaders as animated backdrops and composites logos on top with recolor, outline, and raster-to-SVG vectorize tools. Microphone input drives brightness and bloom, shader switches crossfade, and scenes save as portable JSON. Plain JavaScript and WebGL2, no framework.",
         tags: ["JavaScript", "WebGL2", "Web Audio"],
         repo: "shaderBoi",
         liveUrl: "https://thejrummer.art/shaderBoi/",
@@ -166,7 +166,7 @@
       {
         name: "soundGlitch",
         description:
-          "Microphone in, strange visuals out. Twenty-two feedback shader modes stacked across three blendable layers, each with a variation seed so no two looks repeat, and every change crossfades. The analyser tracks kick, snare and hat, bars and phrases, builds and drops, key, pitch, brightness and stereo width, and all of it drives the visuals; a dynamics control calms everything when the room gets quiet. Scenes, MIDI learn, OSC, a pop-out stage output and an untouched logo overlay make it playable at a show. Use Launch app or click the image to open soundGlitch, then START MIC. Plain JavaScript and WebGL2, no build step.",
+          "Microphone in, strange visuals out. Twenty-two feedback shader modes stacked across three blendable layers, each with a variation seed so no two looks repeat, and every change crossfades. The analyser tracks kick, snare and hat, bars and phrases, builds and drops, key, pitch, brightness and stereo width, and all of it drives the visuals; a dynamics control calms everything when the room gets quiet. Scenes, MIDI learn, OSC, a pop-out stage output and an untouched logo overlay make it playable at a show. Plain JavaScript and WebGL2, no build step.",
         tags: ["JavaScript", "WebGL2", "Web Audio"],
         repo: "soundGlitch",
         liveUrl: "https://thejrummer.art/soundGlitch/",
@@ -178,7 +178,7 @@
       {
         name: "Rackwright",
         description:
-          "Rack elevation planning for live production and AV installs — drag real products from a multi-brand library onto exact EIA-310 front and rear elevations. Devices occupy depth, not just rack units, so front and rear gear can share a U only when it actually fits. A loads panel tracks weight, centre of gravity, circuit draw, heat, and depth, and any spec not confirmed from a manufacturer source is flagged. Use Launch app or click the image to open Rackwright. Built with Next.js and TypeScript; elevations are printable SVG.",
+          "Rack elevation planning for live production and AV installs — drag real products from a multi-brand library onto exact EIA-310 front and rear elevations. Devices occupy depth, not just rack units, so front and rear gear can share a U only when it actually fits. A loads panel tracks weight, centre of gravity, circuit draw, heat, and depth, and any spec not confirmed from a manufacturer source is flagged. Built with Next.js and TypeScript; elevations are printable SVG.",
         tags: ["TypeScript", "Next.js", "SVG"],
         repo: "rackwright",
         liveUrl: "https://thejrummer.art/rackwright/",
@@ -190,7 +190,7 @@
       {
         name: "breakComposer",
         description:
-          "A browser-based composition tool for creating drum beats that converts a traditional piano roll into sheet music notation. Use Launch app or click the image to open breakComposer. Mobile users should rotate to landscape for the best experience. Built with React, VexFlow, and Tone.js.",
+          "A browser-based composition tool for creating drum beats that converts a traditional piano roll into sheet music notation. Mobile users should rotate to landscape for the best experience. Built with React, VexFlow, and Tone.js.",
         tags: ["TypeScript", "React", "Tone.js"],
         repo: "breakComposer",
         /* Same-origin: app ships inside this site. A separate thejrummer.art/breakcomposer/ project page often 404s if that repo has no Pages build. */
@@ -261,37 +261,45 @@
           .replace(/"/g, "&quot;");
       }
 
+      function monogram(name) {
+        const words = String(name || "").trim().split(/[\s_-]+/).filter(Boolean);
+        const letters = words.length > 1 ? words.slice(0, 2).map((w) => w[0]) : [String(name || "?").slice(0, 3)];
+        return letters.join("").toUpperCase();
+      }
+
       function renderCards() {
         cardsHost.innerHTML = "";
         PROJECTS.forEach((project) => {
           const article = document.createElement("article");
-          article.className = "projects-portfolio-entry";
+          article.className = "projects-card";
 
           const tags = Array.isArray(project.tags) ? project.tags : [];
           const tagsHtml = tags
             .map((tag) => `<span class="projects-app-tag">${escapeHtml(tag)}</span>`)
             .join("");
 
+          const appOpenHref = escapeHtml(project.embedUrl || project.liveUrl || "#");
+          const heroHref = escapeHtml(project.heroHref || project.embedUrl || project.liveUrl || "#");
+
+          const mediaBlock = project.heroSrc
+            ? `<a href="${heroHref}" class="projects-card__media" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(project.name)}"><img class="projects-card__img" src="${escapeHtml(project.heroSrc)}" alt="${escapeHtml(project.heroAlt || project.name)}" loading="lazy" decoding="async" /></a>`
+            : `<div class="projects-card__media projects-card__media--placeholder" aria-hidden="true"><span>${escapeHtml(monogram(project.name))}</span></div>`;
+
           const gh = project.githubUrl
-            ? `<a class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/45 text-primary-container/90 hover:bg-primary-container/12 transition-colors inline-block no-underline" href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer">Repository</a>`
+            ? `<a class="projects-app-btn projects-app-btn--ghost" href="${escapeHtml(project.githubUrl)}" target="_blank" rel="noopener noreferrer">Repo</a>`
             : "";
 
-          const appOpenHref = escapeHtml(project.embedUrl || project.liveUrl || "#");
-
-          const heroHref = escapeHtml(project.heroHref || project.embedUrl || project.liveUrl || "#");
-          const heroBlock =
-            project.heroSrc
-              ? `<a href="${heroHref}" class="projects-entry-hero-link project-link" target="_blank" rel="noopener noreferrer"><img class="projects-entry-hero" src="${escapeHtml(project.heroSrc)}" alt="${escapeHtml(project.heroAlt || project.name)}" width="420" height="200" loading="lazy" decoding="async" /></a>`
-              : "";
-
           article.innerHTML = `
-            <h2>${escapeHtml(project.name)}</h2>
-            ${heroBlock}
-            <p class="body-copy text-sm">${escapeHtml(project.description || "")}</p>
-            <div class="projects-app-tags">${tagsHtml}</div>
-            <div class="projects-app-actions flex flex-wrap gap-2">
-              <button class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/60 text-primary-container bg-primary-container/10 hover:bg-primary-container/20 transition-colors projects-app-launch" type="button">Launch app</button>
-              <a class="font-mono text-xs px-3 py-2 rounded border-2 border-primary-container/45 text-primary-container/90 hover:bg-primary-container/12 transition-colors inline-block no-underline" href="${appOpenHref}" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            ${mediaBlock}
+            <div class="projects-card__body">
+              <h2 class="projects-card__title">${escapeHtml(project.name)}</h2>
+              <p class="projects-card__desc body-copy">${escapeHtml(project.description || "")}</p>
+              <button class="projects-card__more" type="button" aria-expanded="false" hidden>More</button>
+              <div class="projects-app-tags">${tagsHtml}</div>
+            </div>
+            <div class="projects-card__actions">
+              <button class="projects-app-btn projects-app-launch" type="button">Launch</button>
+              <a class="projects-app-btn projects-app-btn--ghost" href="${appOpenHref}" target="_blank" rel="noopener noreferrer">New tab</a>
               ${gh}
             </div>
           `;
@@ -301,7 +309,26 @@
             launchBtn.addEventListener("click", () => launchProject(project));
           }
 
+          const moreBtn = article.querySelector(".projects-card__more");
+          const descEl = article.querySelector(".projects-card__desc");
+          if (moreBtn && descEl) {
+            moreBtn.addEventListener("click", () => {
+              const expanded = article.classList.toggle("is-expanded");
+              moreBtn.textContent = expanded ? "Less" : "More";
+              moreBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+            });
+          }
+
           cardsHost.appendChild(article);
+        });
+
+        // Only show "More" on cards whose description is actually clamped.
+        requestAnimationFrame(() => {
+          cardsHost.querySelectorAll(".projects-card").forEach((card) => {
+            const descEl = card.querySelector(".projects-card__desc");
+            const moreBtn = card.querySelector(".projects-card__more");
+            if (descEl && moreBtn && descEl.scrollHeight > descEl.clientHeight + 1) moreBtn.hidden = false;
+          });
         });
       }
 

@@ -2,13 +2,13 @@
 // fallback), so a publish can never leave a visitor with a new page and an old stylesheet or image
 // index. Only pictures, fonts and video are served from the saved copy first.
 // Bump CACHE_NAME on every publish so the saved pictures are refreshed too.
-const CACHE_NAME = "site-cache-v20261005b";
+const CACHE_NAME = "site-cache-v20261010a";
 const STATIC_ASSETS = [
   "/",
   "/index.html",
   "/projects.html",
   "/css/tailwind-built.css",
-  "/css/terminal-site.css?v=20260915",
+  "/css/terminal-site.css?v=20261010",
   "/css/site-tune-overrides.css?v=20260381",
   "/js/main.js",
   // JS modules — precached so repeat visits don't need a network round-trip for each import
