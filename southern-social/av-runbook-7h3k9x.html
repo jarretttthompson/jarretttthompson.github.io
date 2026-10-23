@@ -123,13 +123,14 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 .gotchas ul { margin: 0; padding-left: 18px; }
 .gotchas li { margin: 4px 0; }
 .pin { display: inline-flex; align-items: center; justify-content: center; width: 1.5em; height: 1.5em; border-radius: 50%; background: var(--amber); color: #0b0b0d;
-  font-family: var(--mono); font-weight: 700; font-size: .78em; line-height: 1; vertical-align: middle; position: relative; top: -.1em; margin: 0 .12em; }
+  font-family: var(--mono); font-weight: 700; font-size: .78em; line-height: 1; vertical-align: middle; position: relative; top: -.1em; margin: 0 .12em; flex: 0 0 auto; }
 .console { width: calc(100% + 44px); margin: 6px -22px 22px; cursor: zoom-in; }
 .console figcaption, .console .legend { margin-left: 22px; margin-right: 22px; }
 .console svg { width: 100%; height: auto; display: block; border-radius: 10px; }
 .console figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 8px; }
 .legend { list-style: none; padding: 0; margin: 10px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 16px; font-size: 14px; }
-.legend li { display: flex; align-items: center; gap: 8px; }
+.legend li { display: flex; align-items: flex-start; gap: 8px; }
+.legend .pin { flex: 0 0 auto; margin-top: .2em; }
 #zoom { display: none; position: fixed; inset: 0; background: rgba(5,2,10,.96); z-index: 50; overflow: auto; cursor: zoom-out; padding: 24px; }
 #zoom.on { display: block; }
 #zoom svg { width: max(100%, 1800px); height: auto; display: block; }
@@ -3226,17 +3227,16 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
       <header class="loc-head">
         <div class="loc-kicker">Patio</div>
         <h2>Outdoor PA</h2>
-        <div class="loc-device">Behringer X32 Compact, two QSC K12.2 speakers, QSC KS112 subwoofer, wireless mic and DI in the rolling rack</div>
+        <div class="loc-device">Behringer X32 Compact, two QSC K12.2 speakers, two QSC KS112 subwoofers, wireless mic and DI in the rolling rack</div>
       </header>
       
       <figure class="console" onclick="zoomFig(this)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -40 2640 1680" role="img" aria-label="Outdoor PA: X32 Compact top and rear, QSC K12.2 speaker rear panel, QSC KS112 subwoofer rear panel, and wiring">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-40 -40 2780 1780" role="img" aria-label="Outdoor PA: X32 Compact top and rear, two QSC K12.2 speakers, two QSC KS112 subwoofers, wired together">
 <defs>
 <radialGradient id="mk" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#5c5d62"/><stop offset=".7" stop-color="#232427"/><stop offset="1" stop-color="#0f0f11"/></radialGradient>
 <linearGradient id="cap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9eaed"/><stop offset=".5" stop-color="#b9bbc0"/><stop offset=".55" stop-color="#8c8e94"/><stop offset="1" stop-color="#d6d7db"/></linearGradient>
-<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9a9ba3"/></marker>
 </defs>
-<style>text{font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}.pin text{font-family:"Vulf Mono",ui-monospace,Menlo,monospace;font-weight:700}.cap{font-family:"Vulf Mono",ui-monospace,Menlo,monospace}</style>
+<style>text{font-family:"Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}.pin text{font-family:"Vulf Mono",ui-monospace,Menlo,monospace;font-weight:700}</style>
 <text x="0" y="-10" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">X32 COMPACT · TOP</text>
 <g transform="translate(0,10)">
 <rect x="0" y="0" width="1540" height="1000" rx="24" fill="#2a2b2e"/>
@@ -3433,11 +3433,12 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="180" y="640" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="197.0" y="653.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SOLO</text>
 <rect x="176" y="672" width="42" height="30" rx="3" fill="#0c0d10" stroke="#b7ffb0" stroke-width="1.5"/>
-<text x="197.0" y="692" font-size="9" fill="#b7ffb0" text-anchor="middle" font-weight="700" letter-spacing="0">Ch01</text>
+<text x="197.0" y="692" font-size="7" fill="#b7ffb0" text-anchor="middle" font-weight="700" letter-spacing="0">Acoustic</text>
 <rect x="180" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="197.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="194.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="183.0" y="894.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="183.0" y="794.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="166" y="736" width="62" height="228" rx="8" fill="none" stroke="#ffc857" stroke-width="5"/>
 <rect x="234" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="244" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="261.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3445,11 +3446,12 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="244" y="640" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="261.0" y="653.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SOLO</text>
 <rect x="240" y="672" width="42" height="30" rx="3" fill="#0c0d10" stroke="#b7ffb0" stroke-width="1.5"/>
-<text x="261.0" y="692" font-size="9" fill="#b7ffb0" text-anchor="middle" font-weight="700" letter-spacing="0">Ch02</text>
+<text x="261.0" y="692" font-size="9" fill="#b7ffb0" text-anchor="middle" font-weight="700" letter-spacing="0">Vocals</text>
 <rect x="244" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="261.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="258.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="247.0" y="854.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="247.0" y="794.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="230" y="736" width="62" height="228" rx="8" fill="none" stroke="#ffc857" stroke-width="5"/>
 <rect x="298" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="308" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="325.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3461,7 +3463,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="308" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="325.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="322.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="311.0" y="824.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="311.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="362" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="372" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="389.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3473,7 +3475,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="372" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="389.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="386.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="375.0" y="794.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="375.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="426" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="436" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="453.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3485,7 +3487,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="436" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="453.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="450.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="439.0" y="824.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="439.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="490" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="500" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="517.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3497,7 +3499,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="500" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="517.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="514.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="503.0" y="844.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="503.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="554" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="564" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="581.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3509,7 +3511,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="564" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="581.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="578.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="567.0" y="864.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="567.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="618" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="628" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="645.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3521,7 +3523,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="628" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="645.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="642.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="631.0" y="884.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="631.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="772" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="782" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="799.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3533,7 +3535,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="782" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="799.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="796.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="785.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="785.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="836" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="846" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="863.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3545,7 +3547,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="846" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="863.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="860.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="849.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="849.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="900" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="910" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="927.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3557,7 +3559,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="910" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="927.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="924.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="913.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="913.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="964" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="974" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="991.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3569,7 +3571,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="974" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="991.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="988.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="977.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="977.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="1028" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="1038" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1055.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3581,7 +3583,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="1038" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1055.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="1052.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="1041.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="1041.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="1092" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="1102" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1119.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3593,7 +3595,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="1102" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1119.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="1116.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="1105.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="1105.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="1156" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="1166" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1183.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3605,7 +3607,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="1166" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1183.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="1180.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="1169.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="1169.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="1220" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="1230" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1247.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3617,7 +3619,7 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="1230" y="712" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1247.0" y="725.16" font-size="6" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">MUTE</text>
 <rect x="1244.0" y="750" width="6" height="200" rx="3" fill="#07080a"/>
-<rect x="1233.0" y="834.0" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
+<rect x="1233.0" y="934" width="28" height="32" rx="4" fill="url(#cap)" stroke="#55575c"/>
 <rect x="1304" y="500" width="54" height="460" rx="4" fill="#1e1f22"/>
 <rect x="1314" y="508" width="34" height="22" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <text x="1331.0" y="520.8" font-size="5" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">SELECT</text>
@@ -3657,205 +3659,8 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="1402" y="942" width="34" height="24" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 <rect x="1448" y="942" width="34" height="24" rx="4" fill="#d9dadd" stroke="#0b0b0c" stroke-width="1.5"/>
 </g>
-<text x="1600" y="-10" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">K12.2 SPEAKER · REAR</text>
-<g transform="translate(1600,10)">
-<rect x="0" y="0" width="440" height="760" rx="30" fill="#141416"/>
-<rect x="20" y="20" width="400" height="720" rx="22" fill="#1d1d20" stroke="#2b2b2f" stroke-width="3"/>
-<rect x="60" y="40" width="130" height="60" rx="4" fill="#9fd8ff"/>
-<circle cx="230" cy="55" r="7" fill="#333"/><circle cx="230" cy="85" r="7" fill="#333"/><circle cx="330" cy="70" r="36" fill="#111" stroke="#333" stroke-width="3"/>
-<text x="95" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN A</text>
-<text x="95" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
-<circle cx="95" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
-<line x1="92.22162915732912" y1="184.24307595180468" x2="90.83244373599368" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
-<text x="61" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
-<text x="129" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
-<circle cx="147" cy="150" r="4" fill="#3cff5a"/><circle cx="147" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
-<text x="159" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
-<circle cx="147" cy="176" r="4" fill="#ffe14a"/><circle cx="147" cy="176" r="7" fill="#ffe14a" opacity=".3"/>
-<text x="159" y="180" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">MIC</text>
-<text x="210" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN B</text>
-<text x="210" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
-<circle cx="210" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
-<line x1="207.22162915732912" y1="184.24307595180468" x2="205.83244373599368" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
-<text x="176" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
-<text x="244" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
-<circle cx="262" cy="150" r="4" fill="#3cff5a"/><circle cx="262" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
-<text x="274" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
-<circle cx="262" cy="176" r="4" fill="#ffe14a"/><circle cx="262" cy="176" r="7" fill="#ffe14a" opacity=".3"/>
-<text x="274" y="180" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">HI-Z</text>
-<text x="325" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN C</text>
-<text x="325" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
-<circle cx="325" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
-<line x1="322.2216291573291" y1="184.24307595180468" x2="320.83244373599365" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
-<text x="291" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
-<text x="359" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+20</text>
-<circle cx="377" cy="150" r="4" fill="#3cff5a"/><circle cx="377" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
-<text x="389" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
-<text x="400" y="140" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">STEREO</text>
-<circle cx="395" cy="190" r="16" fill="#999" stroke="#555"/><circle cx="395" cy="190" r="5" fill="#111"/>
-<text x="400" y="172" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">C IN</text>
-<text x="110" y="282" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="700" letter-spacing="0">MIC / LINE</text>
-<text x="215" y="282" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="700" letter-spacing="0">HI-Z / LINE</text>
-<circle cx="110" cy="320" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="320" r="19" fill="#0a0a0b"/>
-<circle cx="104" cy="324" r="2.2" fill="#555"/>
-<circle cx="116" cy="324" r="2.2" fill="#555"/>
-<circle cx="110" cy="314" r="2.2" fill="#555"/>
-<rect x="103" y="290" width="14" height="6" rx="2" fill="#d8d9dd"/>
-<circle cx="110" cy="320" r="5" fill="#333" stroke="#777"/>
-<text x="150" y="316" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">A</text>
-<text x="150" y="328" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">IN</text>
-<circle cx="215" cy="320" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="215" cy="320" r="19" fill="#0a0a0b"/>
-<circle cx="209" cy="324" r="2.2" fill="#555"/>
-<circle cx="221" cy="324" r="2.2" fill="#555"/>
-<circle cx="215" cy="314" r="2.2" fill="#555"/>
-<rect x="208" y="290" width="14" height="6" rx="2" fill="#d8d9dd"/>
-<circle cx="215" cy="320" r="5" fill="#333" stroke="#777"/>
-<text x="255" y="316" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">B</text>
-<text x="255" y="328" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">IN</text>
-<path d="M140,352 v30 h-20" stroke="#8c8d93" stroke-width="3" fill="none"/><path d="M245,352 v30 h-20" stroke="#8c8d93" stroke-width="3" fill="none"/>
-<circle cx="110" cy="420" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="420" r="19" fill="#0a0a0b"/>
-<circle cx="104" cy="424" r="2.6" fill="#d9c27a"/>
-<circle cx="116" cy="424" r="2.6" fill="#d9c27a"/>
-<circle cx="110" cy="414" r="2.6" fill="#d9c27a"/>
-<circle cx="215" cy="420" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="215" cy="420" r="19" fill="#0a0a0b"/>
-<circle cx="209" cy="424" r="2.6" fill="#d9c27a"/>
-<circle cx="221" cy="424" r="2.6" fill="#d9c27a"/>
-<circle cx="215" cy="414" r="2.6" fill="#d9c27a"/>
-<circle cx="300" cy="310" r="4" fill="#ff3b3b"/><circle cx="300" cy="310" r="7" fill="#ff3b3b" opacity=".3"/>
-<text x="312" y="314" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">LIMITER</text>
-<circle cx="300" cy="338" r="4" fill="#555"/><circle cx="300" cy="338" r="7" fill="#555" opacity=".3"/>
-<text x="312" y="342" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
-<circle cx="110" cy="520" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="520" r="19" fill="#0a0a0b"/>
-<circle cx="104" cy="524" r="2.6" fill="#d9c27a"/>
-<circle cx="116" cy="524" r="2.6" fill="#d9c27a"/>
-<circle cx="110" cy="514" r="2.6" fill="#d9c27a"/>
-<text x="160" y="500" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">A B C</text>
-<path d="M150,506 v20 M160,506 v20 M170,506 v20 M150,526 h20" stroke="#8c8d93" stroke-width="2" fill="none"/>
-<text x="110" y="575" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">MIX OUT</text>
-<text x="110" y="590" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">(POST GAIN)</text>
-<rect x="190" y="540" width="54" height="44" rx="6" fill="#2b3bff" stroke="#0b0b0c" stroke-width="2"/>
-<path d="M202,550 h30 v24 l-6,6 h-18 l-6,-6 z" fill="#0a0a0b"/>
-<rect x="203" y="560" width="4" height="10" fill="#777"/>
-<rect x="215" y="554" width="4" height="10" fill="#777"/>
-<rect x="227" y="560" width="4" height="10" fill="#777"/>
-<text x="300" y="560" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">POWER</text>
-<text x="300" y="574" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">ON</text>
-<rect x="280" y="590" width="40" height="60" rx="4" fill="#111"/><rect x="290" y="600" width="20" height="18" fill="#333"/>
-<rect x="340" y="280" width="70" height="330" rx="4" fill="#0e0e10"/>
-<circle cx="352" cy="292" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="292" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="292" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="315" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="315" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="315" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="338" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="338" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="338" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="361" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="361" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="361" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="384" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="384" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="384" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="407" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="407" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="407" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="430" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="430" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="430" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="453" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="453" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="453" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="476" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="476" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="476" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="499" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="499" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="499" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="522" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="522" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="522" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="545" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="545" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="545" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="568" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="568" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="568" r="5" fill="#1f1f23"/>
-<circle cx="352" cy="591" r="5" fill="#1f1f23"/>
-<circle cx="374" cy="591" r="5" fill="#1f1f23"/>
-<circle cx="396" cy="591" r="5" fill="#1f1f23"/>
-<text x="110" y="640" font-size="8" fill="#8a8a92" text-anchor="middle" font-weight="400" letter-spacing="0">MODEL: K12.2</text>
-<text x="110" y="656" font-size="7" fill="#8a8a92" text-anchor="middle" font-weight="400" letter-spacing="0">QSC, LLC  Costa Mesa, CA</text>
-<text x="220.0" y="720" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="700" letter-spacing="0">QSC K12.2 · rear panel</text>
-</g>
-<text x="2100" y="-10" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">KS112 SUB · REAR</text>
-<g transform="translate(2100,10)">
-<rect x="0" y="0" width="440" height="760" rx="18" fill="#2a2a2c"/>
-<circle cx="60" cy="60" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="60" cy="60" r="12" fill="#333"/>
-<circle cx="380" cy="60" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="380" cy="60" r="12" fill="#333"/>
-<circle cx="60" cy="700" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="60" cy="700" r="12" fill="#333"/>
-<circle cx="380" cy="700" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="380" cy="700" r="12" fill="#333"/>
-<rect x="70" y="110" width="20" height="540" rx="8" fill="#111"/><rect x="350" y="110" width="20" height="540" rx="8" fill="#111"/>
-<rect x="100" y="250" width="240" height="280" rx="14" fill="#1a1a1d" stroke="#333" stroke-width="3"/>
-<text x="150" y="285" font-size="16" fill="#f2f2f2" text-anchor="middle" font-weight="900" letter-spacing="0">QSC</text>
-<text x="150" y="300" font-size="10" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">KS112</text>
-<text x="150" y="311" font-size="5" fill="#aaa" text-anchor="middle" font-weight="600" letter-spacing="0">2KW ACTIVE SUBWOOFER</text>
-<rect x="215" y="270" width="60" height="30" rx="3" fill="#8fd4a0"/><circle cx="290" cy="278" r="4" fill="#333"/><circle cx="290" cy="294" r="4" fill="#333"/><circle cx="318" cy="285" r="16" fill="#111" stroke="#333" stroke-width="2"/>
-<rect x="118" y="330" width="18" height="34" rx="3" fill="#111"/><rect x="122" y="334" width="10" height="14" fill="#444"/>
-<text x="158" y="345" font-size="6" fill="#ddd" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
-<text x="158" y="353" font-size="6" fill="#ddd" text-anchor="start" font-weight="600" letter-spacing="0">ON</text>
-<rect x="112" y="410" width="54" height="44" rx="6" fill="#2b3bff" stroke="#0b0b0c" stroke-width="2"/>
-<path d="M124,420 h30 v24 l-6,6 h-18 l-6,-6 z" fill="#0a0a0b"/>
-<rect x="125" y="430" width="4" height="10" fill="#777"/>
-<rect x="137" y="424" width="4" height="10" fill="#777"/>
-<rect x="149" y="430" width="4" height="10" fill="#777"/>
-<circle cx="195" cy="440" r="30" fill="#0e0e10" stroke="#333" stroke-width="2"/>
-<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(0 195 440)"/>
-<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(45 195 440)"/>
-<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(90 195 440)"/>
-<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(135 195 440)"/>
-<text x="245" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">GAIN</text>
-<text x="245" y="380" font-size="6" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">A+B</text>
-<text x="245" y="388" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
-<circle cx="245" cy="410" r="12" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
-<line x1="245.0" y1="408.0" x2="245.0" y2="400.0" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
-<text x="229" y="432" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
-<text x="262" y="432" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
-<circle cx="265" cy="378" r="4" fill="#3cff5a"/><circle cx="265" cy="378" r="7" fill="#3cff5a" opacity=".3"/>
-<text x="277" y="382" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
-<circle cx="245" cy="452" r="4" fill="#ff3b3b"/><circle cx="245" cy="452" r="7" fill="#ff3b3b" opacity=".3"/>
-<text x="257" y="456" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">LIMITER</text>
-<circle cx="245" cy="466" r="4" fill="#555"/><circle cx="245" cy="466" r="7" fill="#555" opacity=".3"/>
-<text x="257" y="470" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
-<text x="295" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">LINE IN</text>
-<text x="326" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">LINE IN</text>
-<circle cx="295" cy="400" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="295" cy="400" r="7" fill="#0a0a0b"/>
-<circle cx="289" cy="404" r="2.2" fill="#555"/>
-<circle cx="301" cy="404" r="2.2" fill="#555"/>
-<circle cx="295" cy="394" r="2.2" fill="#555"/>
-<rect x="288" y="382" width="14" height="6" rx="2" fill="#d8d9dd"/>
-<circle cx="295" cy="400" r="5" fill="#333" stroke="#777"/>
-<text x="311" y="392" font-size="6" fill="#ddd" text-anchor="middle" font-weight="800" letter-spacing="0">A</text>
-<circle cx="330" cy="400" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="330" cy="400" r="7" fill="#0a0a0b"/>
-<circle cx="324" cy="404" r="2.2" fill="#555"/>
-<circle cx="336" cy="404" r="2.2" fill="#555"/>
-<circle cx="330" cy="394" r="2.2" fill="#555"/>
-<rect x="323" y="382" width="14" height="6" rx="2" fill="#d8d9dd"/>
-<circle cx="330" cy="400" r="5" fill="#333" stroke="#777"/>
-<text x="346" y="392" font-size="6" fill="#ddd" text-anchor="middle" font-weight="800" letter-spacing="0">B</text>
-<circle cx="295" cy="455" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="295" cy="455" r="7" fill="#0a0a0b"/>
-<circle cx="289" cy="459" r="2.6" fill="#d9c27a"/>
-<circle cx="301" cy="459" r="2.6" fill="#d9c27a"/>
-<circle cx="295" cy="449" r="2.6" fill="#d9c27a"/>
-<circle cx="330" cy="455" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="330" cy="455" r="7" fill="#0a0a0b"/>
-<circle cx="324" cy="459" r="2.6" fill="#d9c27a"/>
-<circle cx="336" cy="459" r="2.6" fill="#d9c27a"/>
-<circle cx="330" cy="449" r="2.6" fill="#d9c27a"/>
-<text x="220" y="505" font-size="5" fill="#aaa" text-anchor="middle" font-weight="400" letter-spacing="0">QSC, LLC  1675 MacArthur Blvd, Costa Mesa, CA</text>
-<text x="220.0" y="740" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="700" letter-spacing="0">QSC KS112 sub · rear panel</text>
-</g>
-<text x="0" y="1060" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">X32 COMPACT · REAR</text>
-<g transform="translate(0,1080)">
+<text x="0" y="1100" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">X32 COMPACT · REAR</text>
+<g transform="translate(0,1120)">
 <rect x="0" y="0" width="1180" height="420" rx="18" fill="#2a2b2e"/>
 <rect x="200" y="0" width="300" height="40" rx="10" fill="#1a1a1d"/>
 <text x="350" y="26" font-size="16" fill="#f2f2f2" text-anchor="middle" font-weight="800" letter-spacing="0">behringer</text>
@@ -4045,96 +3850,505 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
 <rect x="880" y="300" width="60" height="26" fill="#111"/><rect x="950" y="300" width="60" height="26" fill="#111"/>
 <text x="945" y="344" font-size="7" fill="#111" text-anchor="middle" font-weight="600" letter-spacing="0">AES50  B — A</text>
 </g>
-<text x="1240" y="1060" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">WIRING</text>
-<rect x="1240" y="1080" width="220" height="90" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1350.0" y="1126.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">X32 Compact</text>
-<text x="1350.0" y="1147.0" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">on top of the rolling rack</text>
-<rect x="1560" y="1080" width="220" height="90" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1670.0" y="1126.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">Speaker 1</text>
-<text x="1670.0" y="1147.0" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">K12.2</text>
-<rect x="1880" y="1080" width="220" height="90" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1990.0" y="1126.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">Speaker 2</text>
-<text x="1990.0" y="1147.0" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">K12.2</text>
-<rect x="1720" y="1280" width="220" height="90" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1830.0" y="1326.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">Subwoofer</text>
-<text x="1830.0" y="1347.0" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">KS112</text>
-<path d="M1460,1125 L1560,1125" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<text x="1510.0" y="1115.0" font-size="12" fill="#d9d9de" text-anchor="middle" font-weight="400" letter-spacing="0">OUT 8 → A IN</text>
-<path d="M1780,1125 L1880,1125" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<text x="1830.0" y="1115.0" font-size="12" fill="#d9d9de" text-anchor="middle" font-weight="400" letter-spacing="0">A thru → A IN</text>
-<path d="M1670,1170 L1800,1280" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<text x="1735.0" y="1215.0" font-size="12" fill="#d9d9de" text-anchor="middle" font-weight="400" letter-spacing="0">MIX OUT → LINE IN A</text>
-<path d="M1990,1170 L1860,1280" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<text x="1925.0" y="1215.0" font-size="12" fill="#d9d9de" text-anchor="middle" font-weight="400" letter-spacing="0">MIX OUT → LINE IN B</text>
-<rect x="1240" y="1280" width="220" height="70" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1350.0" y="1316.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">DI box</text>
-<text x="1350.0" y="1337.0" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">rack drawer → IN 1</text>
-<rect x="1240" y="1380" width="220" height="70" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1350.0" y="1416.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">Wireless mic</text>
-<text x="1350.0" y="1437.0" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">rack unit → IN 2</text>
-<path d="M1350,1280 L1350,1170" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<path d="M1460,1415 L1490,1415" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<path d="M1490,1415 L1490,1170" stroke="#9a9ba3" stroke-width="4" fill="none" marker-end="url(#arr)"/>
-<rect x="1560" y="1410" width="540" height="60" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
-<text x="1830.0" y="1447.0" font-size="20" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">Power to: both speakers, the sub, the console, the wireless unit in the rack</text>
-<text x="1670" y="1540" font-size="14" fill="#d9d9de" text-anchor="start" font-weight="400" letter-spacing="0">Cable bag is stowed inside the rolling rack under the mixer.</text>
-<rect x="353" y="1283" width="54" height="54" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="1091" y="1185" width="50" height="50" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="1043" y="1185" width="50" height="50" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="63" y="1273" width="74" height="124" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="1677" y="297" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="1677" y="397" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="1677" y="497" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="1783" y="543" width="68" height="58" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="2374" y="389" width="42" height="42" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="2409" y="389" width="42" height="42" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="2205" y="413" width="68" height="58" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<rect x="2211" y="333" width="32" height="48" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<text x="1660" y="-10" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">SPEAKER 1 · K12.2 REAR</text>
+<g transform="translate(1660,10)">
+<rect x="0" y="0" width="440" height="760" rx="30" fill="#141416"/>
+<rect x="20" y="20" width="400" height="720" rx="22" fill="#1d1d20" stroke="#2b2b2f" stroke-width="3"/>
+<rect x="60" y="40" width="130" height="60" rx="4" fill="#9fd8ff"/>
+<circle cx="230" cy="55" r="7" fill="#333"/><circle cx="230" cy="85" r="7" fill="#333"/><circle cx="330" cy="70" r="36" fill="#111" stroke="#333" stroke-width="3"/>
+<text x="95" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN A</text>
+<text x="95" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="95" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="92.22162915732912" y1="184.24307595180468" x2="90.83244373599368" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="61" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="129" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
+<circle cx="147" cy="150" r="4" fill="#3cff5a"/><circle cx="147" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="159" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<circle cx="147" cy="176" r="4" fill="#ffe14a"/><circle cx="147" cy="176" r="7" fill="#ffe14a" opacity=".3"/>
+<text x="159" y="180" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">MIC</text>
+<text x="210" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN B</text>
+<text x="210" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="210" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="207.22162915732912" y1="184.24307595180468" x2="205.83244373599368" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="176" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="244" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
+<circle cx="262" cy="150" r="4" fill="#3cff5a"/><circle cx="262" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="274" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<circle cx="262" cy="176" r="4" fill="#ffe14a"/><circle cx="262" cy="176" r="7" fill="#ffe14a" opacity=".3"/>
+<text x="274" y="180" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">HI-Z</text>
+<text x="325" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN C</text>
+<text x="325" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="325" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="322.2216291573291" y1="184.24307595180468" x2="320.83244373599365" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="291" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="359" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+20</text>
+<circle cx="377" cy="150" r="4" fill="#3cff5a"/><circle cx="377" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="389" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<text x="400" y="140" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">STEREO</text>
+<circle cx="395" cy="190" r="16" fill="#999" stroke="#555"/><circle cx="395" cy="190" r="5" fill="#111"/>
+<text x="400" y="172" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">C IN</text>
+<text x="110" y="282" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="700" letter-spacing="0">MIC / LINE</text>
+<text x="215" y="282" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="700" letter-spacing="0">HI-Z / LINE</text>
+<circle cx="110" cy="320" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="320" r="19" fill="#0a0a0b"/>
+<circle cx="104" cy="324" r="2.2" fill="#555"/>
+<circle cx="116" cy="324" r="2.2" fill="#555"/>
+<circle cx="110" cy="314" r="2.2" fill="#555"/>
+<rect x="103" y="290" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="110" cy="320" r="5" fill="#333" stroke="#777"/>
+<text x="150" y="316" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">A</text>
+<text x="150" y="328" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">IN</text>
+<circle cx="215" cy="320" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="215" cy="320" r="19" fill="#0a0a0b"/>
+<circle cx="209" cy="324" r="2.2" fill="#555"/>
+<circle cx="221" cy="324" r="2.2" fill="#555"/>
+<circle cx="215" cy="314" r="2.2" fill="#555"/>
+<rect x="208" y="290" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="215" cy="320" r="5" fill="#333" stroke="#777"/>
+<text x="255" y="316" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">B</text>
+<text x="255" y="328" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">IN</text>
+<path d="M140,352 v30 h-20" stroke="#8c8d93" stroke-width="3" fill="none"/><path d="M245,352 v30 h-20" stroke="#8c8d93" stroke-width="3" fill="none"/>
+<circle cx="110" cy="420" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="420" r="19" fill="#0a0a0b"/>
+<circle cx="104" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="116" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="110" cy="414" r="2.6" fill="#d9c27a"/>
+<circle cx="215" cy="420" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="215" cy="420" r="19" fill="#0a0a0b"/>
+<circle cx="209" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="221" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="215" cy="414" r="2.6" fill="#d9c27a"/>
+<circle cx="300" cy="310" r="4" fill="#ff3b3b"/><circle cx="300" cy="310" r="7" fill="#ff3b3b" opacity=".3"/>
+<text x="312" y="314" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">LIMITER</text>
+<circle cx="300" cy="338" r="4" fill="#555"/><circle cx="300" cy="338" r="7" fill="#555" opacity=".3"/>
+<text x="312" y="342" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
+<circle cx="110" cy="520" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="520" r="19" fill="#0a0a0b"/>
+<circle cx="104" cy="524" r="2.6" fill="#d9c27a"/>
+<circle cx="116" cy="524" r="2.6" fill="#d9c27a"/>
+<circle cx="110" cy="514" r="2.6" fill="#d9c27a"/>
+<text x="160" y="500" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">A B C</text>
+<path d="M150,506 v20 M160,506 v20 M170,506 v20 M150,526 h20" stroke="#8c8d93" stroke-width="2" fill="none"/>
+<text x="110" y="575" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">MIX OUT</text>
+<text x="110" y="590" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">(POST GAIN)</text>
+<rect x="190" y="540" width="54" height="44" rx="6" fill="#2b3bff" stroke="#0b0b0c" stroke-width="2"/>
+<path d="M202,550 h30 v24 l-6,6 h-18 l-6,-6 z" fill="#0a0a0b"/>
+<rect x="203" y="560" width="4" height="10" fill="#777"/>
+<rect x="215" y="554" width="4" height="10" fill="#777"/>
+<rect x="227" y="560" width="4" height="10" fill="#777"/>
+<text x="300" y="560" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">POWER</text>
+<text x="300" y="574" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">ON</text>
+<rect x="280" y="590" width="40" height="60" rx="4" fill="#111"/><rect x="290" y="600" width="20" height="18" fill="#333"/>
+<rect x="340" y="280" width="70" height="330" rx="4" fill="#0e0e10"/>
+<circle cx="352" cy="292" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="292" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="292" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="315" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="315" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="315" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="338" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="338" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="338" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="361" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="361" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="361" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="384" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="384" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="384" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="407" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="407" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="407" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="430" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="430" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="430" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="453" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="453" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="453" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="476" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="476" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="476" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="499" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="499" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="499" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="522" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="522" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="522" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="545" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="545" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="545" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="568" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="568" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="568" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="591" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="591" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="591" r="5" fill="#1f1f23"/>
+<text x="110" y="640" font-size="8" fill="#8a8a92" text-anchor="middle" font-weight="400" letter-spacing="0">MODEL: K12.2</text>
+<text x="110" y="656" font-size="7" fill="#8a8a92" text-anchor="middle" font-weight="400" letter-spacing="0">QSC, LLC  Costa Mesa, CA</text>
+<text x="220.0" y="720" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="700" letter-spacing="0">Speaker 1 · K12.2</text>
+</g>
+<text x="2160" y="-10" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">SPEAKER 2 · K12.2 REAR</text>
+<g transform="translate(2160,10)">
+<rect x="0" y="0" width="440" height="760" rx="30" fill="#141416"/>
+<rect x="20" y="20" width="400" height="720" rx="22" fill="#1d1d20" stroke="#2b2b2f" stroke-width="3"/>
+<rect x="60" y="40" width="130" height="60" rx="4" fill="#9fd8ff"/>
+<circle cx="230" cy="55" r="7" fill="#333"/><circle cx="230" cy="85" r="7" fill="#333"/><circle cx="330" cy="70" r="36" fill="#111" stroke="#333" stroke-width="3"/>
+<text x="95" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN A</text>
+<text x="95" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="95" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="92.22162915732912" y1="184.24307595180468" x2="90.83244373599368" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="61" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="129" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
+<circle cx="147" cy="150" r="4" fill="#3cff5a"/><circle cx="147" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="159" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<circle cx="147" cy="176" r="4" fill="#ffe14a"/><circle cx="147" cy="176" r="7" fill="#ffe14a" opacity=".3"/>
+<text x="159" y="180" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">MIC</text>
+<text x="210" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN B</text>
+<text x="210" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="210" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="207.22162915732912" y1="184.24307595180468" x2="205.83244373599368" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="176" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="244" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
+<circle cx="262" cy="150" r="4" fill="#3cff5a"/><circle cx="262" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="274" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<circle cx="262" cy="176" r="4" fill="#ffe14a"/><circle cx="262" cy="176" r="7" fill="#ffe14a" opacity=".3"/>
+<text x="274" y="180" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">HI-Z</text>
+<text x="325" y="140" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">GAIN C</text>
+<text x="325" y="156" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="325" cy="200" r="26" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="322.2216291573291" y1="184.24307595180468" x2="320.83244373599365" y2="176.364613927707" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="291" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="359" y="240" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">+20</text>
+<circle cx="377" cy="150" r="4" fill="#3cff5a"/><circle cx="377" cy="150" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="389" y="154" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<text x="400" y="140" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">STEREO</text>
+<circle cx="395" cy="190" r="16" fill="#999" stroke="#555"/><circle cx="395" cy="190" r="5" fill="#111"/>
+<text x="400" y="172" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">C IN</text>
+<text x="110" y="282" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="700" letter-spacing="0">MIC / LINE</text>
+<text x="215" y="282" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="700" letter-spacing="0">HI-Z / LINE</text>
+<circle cx="110" cy="320" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="320" r="19" fill="#0a0a0b"/>
+<circle cx="104" cy="324" r="2.2" fill="#555"/>
+<circle cx="116" cy="324" r="2.2" fill="#555"/>
+<circle cx="110" cy="314" r="2.2" fill="#555"/>
+<rect x="103" y="290" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="110" cy="320" r="5" fill="#333" stroke="#777"/>
+<text x="150" y="316" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">A</text>
+<text x="150" y="328" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">IN</text>
+<circle cx="215" cy="320" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="215" cy="320" r="19" fill="#0a0a0b"/>
+<circle cx="209" cy="324" r="2.2" fill="#555"/>
+<circle cx="221" cy="324" r="2.2" fill="#555"/>
+<circle cx="215" cy="314" r="2.2" fill="#555"/>
+<rect x="208" y="290" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="215" cy="320" r="5" fill="#333" stroke="#777"/>
+<text x="255" y="316" font-size="10" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">B</text>
+<text x="255" y="328" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">IN</text>
+<path d="M140,352 v30 h-20" stroke="#8c8d93" stroke-width="3" fill="none"/><path d="M245,352 v30 h-20" stroke="#8c8d93" stroke-width="3" fill="none"/>
+<circle cx="110" cy="420" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="420" r="19" fill="#0a0a0b"/>
+<circle cx="104" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="116" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="110" cy="414" r="2.6" fill="#d9c27a"/>
+<circle cx="215" cy="420" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="215" cy="420" r="19" fill="#0a0a0b"/>
+<circle cx="209" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="221" cy="424" r="2.6" fill="#d9c27a"/>
+<circle cx="215" cy="414" r="2.6" fill="#d9c27a"/>
+<circle cx="300" cy="310" r="4" fill="#ff3b3b"/><circle cx="300" cy="310" r="7" fill="#ff3b3b" opacity=".3"/>
+<text x="312" y="314" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">LIMITER</text>
+<circle cx="300" cy="338" r="4" fill="#555"/><circle cx="300" cy="338" r="7" fill="#555" opacity=".3"/>
+<text x="312" y="342" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
+<circle cx="110" cy="520" r="26" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="110" cy="520" r="19" fill="#0a0a0b"/>
+<circle cx="104" cy="524" r="2.6" fill="#d9c27a"/>
+<circle cx="116" cy="524" r="2.6" fill="#d9c27a"/>
+<circle cx="110" cy="514" r="2.6" fill="#d9c27a"/>
+<text x="160" y="500" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">A B C</text>
+<path d="M150,506 v20 M160,506 v20 M170,506 v20 M150,526 h20" stroke="#8c8d93" stroke-width="2" fill="none"/>
+<text x="110" y="575" font-size="11" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">MIX OUT</text>
+<text x="110" y="590" font-size="8" fill="#e8e8ec" text-anchor="middle" font-weight="600" letter-spacing="0">(POST GAIN)</text>
+<rect x="190" y="540" width="54" height="44" rx="6" fill="#2b3bff" stroke="#0b0b0c" stroke-width="2"/>
+<path d="M202,550 h30 v24 l-6,6 h-18 l-6,-6 z" fill="#0a0a0b"/>
+<rect x="203" y="560" width="4" height="10" fill="#777"/>
+<rect x="215" y="554" width="4" height="10" fill="#777"/>
+<rect x="227" y="560" width="4" height="10" fill="#777"/>
+<text x="300" y="560" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">POWER</text>
+<text x="300" y="574" font-size="9" fill="#e8e8ec" text-anchor="middle" font-weight="800" letter-spacing="0">ON</text>
+<rect x="280" y="590" width="40" height="60" rx="4" fill="#111"/><rect x="290" y="600" width="20" height="18" fill="#333"/>
+<rect x="340" y="280" width="70" height="330" rx="4" fill="#0e0e10"/>
+<circle cx="352" cy="292" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="292" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="292" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="315" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="315" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="315" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="338" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="338" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="338" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="361" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="361" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="361" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="384" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="384" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="384" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="407" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="407" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="407" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="430" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="430" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="430" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="453" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="453" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="453" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="476" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="476" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="476" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="499" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="499" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="499" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="522" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="522" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="522" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="545" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="545" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="545" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="568" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="568" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="568" r="5" fill="#1f1f23"/>
+<circle cx="352" cy="591" r="5" fill="#1f1f23"/>
+<circle cx="374" cy="591" r="5" fill="#1f1f23"/>
+<circle cx="396" cy="591" r="5" fill="#1f1f23"/>
+<text x="110" y="640" font-size="8" fill="#8a8a92" text-anchor="middle" font-weight="400" letter-spacing="0">MODEL: K12.2</text>
+<text x="110" y="656" font-size="7" fill="#8a8a92" text-anchor="middle" font-weight="400" letter-spacing="0">QSC, LLC  Costa Mesa, CA</text>
+<text x="220.0" y="720" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="700" letter-spacing="0">Speaker 2 · K12.2</text>
+</g>
+<text x="1660" y="850" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">SUB 1 · KS112 REAR</text>
+<g transform="translate(1660,870)">
+<rect x="0" y="0" width="440" height="760" rx="18" fill="#2a2a2c"/>
+<circle cx="60" cy="60" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="60" cy="60" r="12" fill="#333"/>
+<circle cx="380" cy="60" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="380" cy="60" r="12" fill="#333"/>
+<circle cx="60" cy="700" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="60" cy="700" r="12" fill="#333"/>
+<circle cx="380" cy="700" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="380" cy="700" r="12" fill="#333"/>
+<rect x="70" y="110" width="20" height="540" rx="8" fill="#111"/><rect x="350" y="110" width="20" height="540" rx="8" fill="#111"/>
+<rect x="100" y="250" width="240" height="280" rx="14" fill="#1a1a1d" stroke="#333" stroke-width="3"/>
+<text x="150" y="285" font-size="16" fill="#f2f2f2" text-anchor="middle" font-weight="900" letter-spacing="0">QSC</text>
+<text x="150" y="300" font-size="10" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">KS112</text>
+<text x="150" y="311" font-size="5" fill="#aaa" text-anchor="middle" font-weight="600" letter-spacing="0">2KW ACTIVE SUBWOOFER</text>
+<rect x="215" y="270" width="60" height="30" rx="3" fill="#8fd4a0"/><circle cx="290" cy="278" r="4" fill="#333"/><circle cx="290" cy="294" r="4" fill="#333"/><circle cx="318" cy="285" r="16" fill="#111" stroke="#333" stroke-width="2"/>
+<rect x="118" y="330" width="18" height="34" rx="3" fill="#111"/><rect x="122" y="334" width="10" height="14" fill="#444"/>
+<text x="158" y="345" font-size="6" fill="#ddd" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
+<text x="158" y="353" font-size="6" fill="#ddd" text-anchor="start" font-weight="600" letter-spacing="0">ON</text>
+<rect x="112" y="410" width="54" height="44" rx="6" fill="#2b3bff" stroke="#0b0b0c" stroke-width="2"/>
+<path d="M124,420 h30 v24 l-6,6 h-18 l-6,-6 z" fill="#0a0a0b"/>
+<rect x="125" y="430" width="4" height="10" fill="#777"/>
+<rect x="137" y="424" width="4" height="10" fill="#777"/>
+<rect x="149" y="430" width="4" height="10" fill="#777"/>
+<circle cx="195" cy="440" r="30" fill="#0e0e10" stroke="#333" stroke-width="2"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(0 195 440)"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(45 195 440)"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(90 195 440)"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(135 195 440)"/>
+<text x="245" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">GAIN</text>
+<text x="245" y="380" font-size="6" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">A+B</text>
+<text x="245" y="388" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="245" cy="410" r="12" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="245.0" y1="408.0" x2="245.0" y2="400.0" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="229" y="432" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="262" y="432" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
+<circle cx="265" cy="378" r="4" fill="#3cff5a"/><circle cx="265" cy="378" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="277" y="382" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<circle cx="245" cy="452" r="4" fill="#ff3b3b"/><circle cx="245" cy="452" r="7" fill="#ff3b3b" opacity=".3"/>
+<text x="257" y="456" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">LIMITER</text>
+<circle cx="245" cy="466" r="4" fill="#555"/><circle cx="245" cy="466" r="7" fill="#555" opacity=".3"/>
+<text x="257" y="470" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
+<text x="295" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">LINE IN</text>
+<text x="326" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">LINE IN</text>
+<circle cx="295" cy="400" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="295" cy="400" r="7" fill="#0a0a0b"/>
+<circle cx="289" cy="404" r="2.2" fill="#555"/>
+<circle cx="301" cy="404" r="2.2" fill="#555"/>
+<circle cx="295" cy="394" r="2.2" fill="#555"/>
+<rect x="288" y="382" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="295" cy="400" r="5" fill="#333" stroke="#777"/>
+<text x="311" y="392" font-size="6" fill="#ddd" text-anchor="middle" font-weight="800" letter-spacing="0">A</text>
+<circle cx="330" cy="400" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="330" cy="400" r="7" fill="#0a0a0b"/>
+<circle cx="324" cy="404" r="2.2" fill="#555"/>
+<circle cx="336" cy="404" r="2.2" fill="#555"/>
+<circle cx="330" cy="394" r="2.2" fill="#555"/>
+<rect x="323" y="382" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="330" cy="400" r="5" fill="#333" stroke="#777"/>
+<text x="346" y="392" font-size="6" fill="#ddd" text-anchor="middle" font-weight="800" letter-spacing="0">B</text>
+<circle cx="295" cy="455" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="295" cy="455" r="7" fill="#0a0a0b"/>
+<circle cx="289" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="301" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="295" cy="449" r="2.6" fill="#d9c27a"/>
+<circle cx="330" cy="455" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="330" cy="455" r="7" fill="#0a0a0b"/>
+<circle cx="324" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="336" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="330" cy="449" r="2.6" fill="#d9c27a"/>
+<text x="220" y="505" font-size="5" fill="#aaa" text-anchor="middle" font-weight="400" letter-spacing="0">QSC, LLC  1675 MacArthur Blvd, Costa Mesa, CA</text>
+<text x="220.0" y="740" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="700" letter-spacing="0">Sub 1 · KS112</text>
+</g>
+<text x="2160" y="850" font-size="16" fill="#b9b9c0" text-anchor="start" font-weight="700" letter-spacing="2">SUB 2 · KS112 REAR</text>
+<g transform="translate(2160,870)">
+<rect x="0" y="0" width="440" height="760" rx="18" fill="#2a2a2c"/>
+<circle cx="60" cy="60" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="60" cy="60" r="12" fill="#333"/>
+<circle cx="380" cy="60" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="380" cy="60" r="12" fill="#333"/>
+<circle cx="60" cy="700" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="60" cy="700" r="12" fill="#333"/>
+<circle cx="380" cy="700" r="30" fill="#0e0e10" stroke="#3a3a3e" stroke-width="4"/><circle cx="380" cy="700" r="12" fill="#333"/>
+<rect x="70" y="110" width="20" height="540" rx="8" fill="#111"/><rect x="350" y="110" width="20" height="540" rx="8" fill="#111"/>
+<rect x="100" y="250" width="240" height="280" rx="14" fill="#1a1a1d" stroke="#333" stroke-width="3"/>
+<text x="150" y="285" font-size="16" fill="#f2f2f2" text-anchor="middle" font-weight="900" letter-spacing="0">QSC</text>
+<text x="150" y="300" font-size="10" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">KS112</text>
+<text x="150" y="311" font-size="5" fill="#aaa" text-anchor="middle" font-weight="600" letter-spacing="0">2KW ACTIVE SUBWOOFER</text>
+<rect x="215" y="270" width="60" height="30" rx="3" fill="#8fd4a0"/><circle cx="290" cy="278" r="4" fill="#333"/><circle cx="290" cy="294" r="4" fill="#333"/><circle cx="318" cy="285" r="16" fill="#111" stroke="#333" stroke-width="2"/>
+<rect x="118" y="330" width="18" height="34" rx="3" fill="#111"/><rect x="122" y="334" width="10" height="14" fill="#444"/>
+<text x="158" y="345" font-size="6" fill="#ddd" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
+<text x="158" y="353" font-size="6" fill="#ddd" text-anchor="start" font-weight="600" letter-spacing="0">ON</text>
+<rect x="112" y="410" width="54" height="44" rx="6" fill="#2b3bff" stroke="#0b0b0c" stroke-width="2"/>
+<path d="M124,420 h30 v24 l-6,6 h-18 l-6,-6 z" fill="#0a0a0b"/>
+<rect x="125" y="430" width="4" height="10" fill="#777"/>
+<rect x="137" y="424" width="4" height="10" fill="#777"/>
+<rect x="149" y="430" width="4" height="10" fill="#777"/>
+<circle cx="195" cy="440" r="30" fill="#0e0e10" stroke="#333" stroke-width="2"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(0 195 440)"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(45 195 440)"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(90 195 440)"/>
+<ellipse cx="195" cy="440" rx="26" ry="8" fill="none" stroke="#2a2a2e" transform="rotate(135 195 440)"/>
+<text x="245" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">GAIN</text>
+<text x="245" y="380" font-size="6" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">A+B</text>
+<text x="245" y="388" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">0dB</text>
+<circle cx="245" cy="410" r="12" fill="#2a2a2e" stroke="#0b0b0c" stroke-width="2"/>
+<line x1="245.0" y1="408.0" x2="245.0" y2="400.0" stroke="#f4f4f6" stroke-width="3" stroke-linecap="round"/>
+<text x="229" y="432" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">OFF</text>
+<text x="262" y="432" font-size="5" fill="#ddd" text-anchor="middle" font-weight="600" letter-spacing="0">+10</text>
+<circle cx="265" cy="378" r="4" fill="#3cff5a"/><circle cx="265" cy="378" r="7" fill="#3cff5a" opacity=".3"/>
+<text x="277" y="382" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">SIG</text>
+<circle cx="245" cy="452" r="4" fill="#ff3b3b"/><circle cx="245" cy="452" r="7" fill="#ff3b3b" opacity=".3"/>
+<text x="257" y="456" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">LIMITER</text>
+<circle cx="245" cy="466" r="4" fill="#555"/><circle cx="245" cy="466" r="7" fill="#555" opacity=".3"/>
+<text x="257" y="470" font-size="9" fill="#e8e8ec" text-anchor="start" font-weight="600" letter-spacing="0">POWER</text>
+<text x="295" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">LINE IN</text>
+<text x="326" y="372" font-size="6" fill="#ddd" text-anchor="middle" font-weight="700" letter-spacing="0">LINE IN</text>
+<circle cx="295" cy="400" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="295" cy="400" r="7" fill="#0a0a0b"/>
+<circle cx="289" cy="404" r="2.2" fill="#555"/>
+<circle cx="301" cy="404" r="2.2" fill="#555"/>
+<circle cx="295" cy="394" r="2.2" fill="#555"/>
+<rect x="288" y="382" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="295" cy="400" r="5" fill="#333" stroke="#777"/>
+<text x="311" y="392" font-size="6" fill="#ddd" text-anchor="middle" font-weight="800" letter-spacing="0">A</text>
+<circle cx="330" cy="400" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="330" cy="400" r="7" fill="#0a0a0b"/>
+<circle cx="324" cy="404" r="2.2" fill="#555"/>
+<circle cx="336" cy="404" r="2.2" fill="#555"/>
+<circle cx="330" cy="394" r="2.2" fill="#555"/>
+<rect x="323" y="382" width="14" height="6" rx="2" fill="#d8d9dd"/>
+<circle cx="330" cy="400" r="5" fill="#333" stroke="#777"/>
+<text x="346" y="392" font-size="6" fill="#ddd" text-anchor="middle" font-weight="800" letter-spacing="0">B</text>
+<circle cx="295" cy="455" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="295" cy="455" r="7" fill="#0a0a0b"/>
+<circle cx="289" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="301" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="295" cy="449" r="2.6" fill="#d9c27a"/>
+<circle cx="330" cy="455" r="14" fill="#1a1a1d" stroke="#8c8d93" stroke-width="2"/><circle cx="330" cy="455" r="7" fill="#0a0a0b"/>
+<circle cx="324" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="336" cy="459" r="2.6" fill="#d9c27a"/>
+<circle cx="330" cy="449" r="2.6" fill="#d9c27a"/>
+<text x="220" y="505" font-size="5" fill="#aaa" text-anchor="middle" font-weight="400" letter-spacing="0">QSC, LLC  1675 MacArthur Blvd, Costa Mesa, CA</text>
+<text x="220.0" y="740" font-size="13" fill="#b9b9c0" text-anchor="middle" font-weight="700" letter-spacing="0">Sub 2 · KS112</text>
+</g>
+<rect x="1250" y="1215" width="190" height="70" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
+<text x="1345.0" y="1250.0" font-size="18" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">DI box</text>
+<text x="1345.0" y="1270.0" font-size="12" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">from the rack drawer</text>
+<rect x="1250" y="1310" width="190" height="70" rx="10" fill="#26272b" stroke="#6a6b70" stroke-width="2"/>
+<text x="1345.0" y="1345.0" font-size="18" fill="#f2f2f2" text-anchor="middle" font-weight="700" letter-spacing="0">Wireless unit</text>
+<text x="1345.0" y="1365.0" font-size="12" fill="#b9b9c0" text-anchor="middle" font-weight="400" letter-spacing="0">in the rack</text>
+<path d="M380.0,1330.0 L380.0,1060 L1600,1060 L1600,330.0 L1744.0,330.0" stroke="#0b0b0d" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
+<path d="M380.0,1330.0 L380.0,1060 L1600,1060 L1600,330.0 L1744.0,330.0" stroke="#59c2ff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="380.0" cy="1330.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<circle cx="1744.0" cy="330.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<rect x="865.2" y="1045" width="249.59999999999997" height="30" rx="15" fill="#0b0b0d" stroke="#59c2ff" stroke-width="2"/>
+<text x="990" y="1065" font-size="14" fill="#e8f6ff" text-anchor="middle" font-weight="700" letter-spacing="0">XLR · OUT 8 → speaker 1 A IN</text>
+<path d="M1796.0,430.0 L1826.0,430.0 L1826.0,490.0 L2130,490.0 L2130,330.0 L2244.0,330.0" stroke="#0b0b0d" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
+<path d="M1796.0,430.0 L1826.0,430.0 L1826.0,490.0 L2130,490.0 L2130,330.0 L2244.0,330.0" stroke="#59c2ff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1796.0" cy="430.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<circle cx="2244.0" cy="330.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<rect x="1879.3" y="475.0" width="241.39999999999998" height="30" rx="15" fill="#0b0b0d" stroke="#59c2ff" stroke-width="2"/>
+<text x="2000" y="495.0" font-size="14" fill="#e8f6ff" text-anchor="middle" font-weight="700" letter-spacing="0">XLR · thru → speaker 2 A IN</text>
+<path d="M1770.0,556.0 L1770.0,815 L1955.0,815 L1955.0,1256.0" stroke="#0b0b0d" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
+<path d="M1770.0,556.0 L1770.0,815 L1955.0,815 L1955.0,1256.0" stroke="#59c2ff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1770.0" cy="556.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<circle cx="1955.0" cy="1256.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<rect x="1742.9" y="800" width="274.2" height="30" rx="15" fill="#0b0b0d" stroke="#59c2ff" stroke-width="2"/>
+<text x="1880" y="820" font-size="14" fill="#e8f6ff" text-anchor="middle" font-weight="700" letter-spacing="0">XLR · MIX OUT → sub 1 LINE IN A</text>
+<path d="M2270.0,556.0 L2270.0,815 L2455.0,815 L2455.0,1256.0" stroke="#0b0b0d" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
+<path d="M2270.0,556.0 L2270.0,815 L2455.0,815 L2455.0,1256.0" stroke="#59c2ff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="2270.0" cy="556.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<circle cx="2455.0" cy="1256.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<rect x="2242.9" y="800" width="274.2" height="30" rx="15" fill="#0b0b0d" stroke="#59c2ff" stroke-width="2"/>
+<text x="2380" y="820" font-size="14" fill="#e8f6ff" text-anchor="middle" font-weight="700" letter-spacing="0">XLR · MIX OUT → sub 2 LINE IN A</text>
+<path d="M1250,1250 L1134.0,1250.0" stroke="#0b0b0d" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
+<path d="M1250,1250 L1134.0,1250.0" stroke="#59c2ff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1250" cy="1250" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<circle cx="1134.0" cy="1250.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<path d="M1250,1345 L1200,1345 L1200,1200 L1068.0,1200 L1068.0,1232.0" stroke="#0b0b0d" stroke-width="11" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
+<path d="M1250,1345 L1200,1345 L1200,1200 L1068.0,1200 L1068.0,1232.0" stroke="#59c2ff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="1250" cy="1345" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<circle cx="1068.0" cy="1232.0" r="9" fill="#d9dadd" stroke="#0b0b0d" stroke-width="2"/>
+<text x="1345" y="1420" font-size="13" fill="#d9d9de" text-anchor="middle" font-weight="600" letter-spacing="0">DI → IN 1 · wireless → IN 2</text>
+<text x="1250" y="1500" font-size="14" fill="#d9d9de" text-anchor="start" font-weight="600" letter-spacing="0">Power: both speakers, both subs, the console, and the wireless unit in the rack.</text>
+<text x="1250" y="1526" font-size="14" fill="#d9d9de" text-anchor="start" font-weight="400" letter-spacing="0">The cable bag is stowed inside the rolling rack under the mixer.</text>
+<rect x="353" y="1323" width="54" height="54" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1091" y="1225" width="50" height="50" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1043" y="1225" width="50" height="50" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="63" y="1313" width="74" height="124" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1737" y="297" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="2237" y="297" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1737" y="397" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1737" y="497" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="2237" y="497" width="66" height="66" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1843" y="543" width="68" height="58" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="2343" y="543" width="68" height="58" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1934" y="1249" width="42" height="42" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="2434" y="1249" width="42" height="42" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1765" y="1273" width="68" height="58" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="1771" y="1193" width="32" height="48" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="2265" y="1273" width="68" height="58" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="2271" y="1193" width="32" height="48" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
 <rect x="83" y="503" width="54" height="44" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="163" y="743" width="68" height="234" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
+<rect x="227" y="743" width="68" height="234" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
 <rect x="1297" y="743" width="68" height="234" rx="12" fill="none" stroke="#ffc857" stroke-width="6"/>
-<g class="pin"><circle cx="330" cy="1280" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="330" y="1296" font-size="48" text-anchor="middle" fill="#0b0b0d">A</text></g>
-<g class="pin"><circle cx="1164" cy="1182" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="1164" y="1198" font-size="48" text-anchor="middle" fill="#0b0b0d">B</text></g>
-<g class="pin"><circle cx="40" cy="1270" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="40" y="1286" font-size="48" text-anchor="middle" fill="#0b0b0d">C</text></g>
-<g class="pin"><circle cx="1654" cy="294" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="1654" y="310" font-size="48" text-anchor="middle" fill="#0b0b0d">D</text></g>
-<g class="pin"><circle cx="1654" cy="466" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="1654" y="482" font-size="48" text-anchor="middle" fill="#0b0b0d">E</text></g>
-<g class="pin"><circle cx="1654" cy="566" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="1654" y="582" font-size="48" text-anchor="middle" fill="#0b0b0d">F</text></g>
-<g class="pin"><circle cx="1874" cy="604" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="1874" y="620" font-size="48" text-anchor="middle" fill="#0b0b0d">G</text></g>
-<g class="pin"><circle cx="2439" cy="386" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="2439" y="402" font-size="48" text-anchor="middle" fill="#0b0b0d">H</text></g>
-<g class="pin"><circle cx="2182" cy="410" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
-<text x="2182" y="426" font-size="48" text-anchor="middle" fill="#0b0b0d">I</text></g>
+<g class="pin"><circle cx="330" cy="1320" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="330" y="1336" font-size="48" text-anchor="middle" fill="#0b0b0d">A</text></g>
+<g class="pin"><circle cx="1068" cy="1278" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1068" y="1294" font-size="48" text-anchor="middle" fill="#0b0b0d">B</text></g>
+<g class="pin"><circle cx="40" cy="1310" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="40" y="1326" font-size="48" text-anchor="middle" fill="#0b0b0d">C</text></g>
+<g class="pin"><circle cx="1714" cy="294" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1714" y="310" font-size="48" text-anchor="middle" fill="#0b0b0d">D</text></g>
+<g class="pin"><circle cx="1714" cy="466" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1714" y="482" font-size="48" text-anchor="middle" fill="#0b0b0d">E</text></g>
+<g class="pin"><circle cx="1714" cy="566" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1714" y="582" font-size="48" text-anchor="middle" fill="#0b0b0d">F</text></g>
+<g class="pin"><circle cx="1934" cy="604" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1934" y="620" font-size="48" text-anchor="middle" fill="#0b0b0d">G</text></g>
+<g class="pin"><circle cx="1999" cy="1246" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1999" y="1262" font-size="48" text-anchor="middle" fill="#0b0b0d">H</text></g>
+<g class="pin"><circle cx="1742" cy="1270" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
+<text x="1742" y="1286" font-size="48" text-anchor="middle" fill="#0b0b0d">I</text></g>
 <g class="pin"><circle cx="60" cy="500" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
 <text x="60" y="516" font-size="48" text-anchor="middle" fill="#0b0b0d">J</text></g>
 <g class="pin"><circle cx="1388" cy="740" r="40" fill="#ffc857" stroke="#0b0b0d" stroke-width="7"/>
 <text x="1388" y="756" font-size="48" text-anchor="middle" fill="#0b0b0d">K</text></g>
 </svg>
-        <figcaption>Outdoor rig. X32 Compact top and rear, the K12.2 speaker&#x27;s rear panel, the KS112 sub&#x27;s rear panel, and how they connect. Tap to enlarge.</figcaption>
-        <ul class="legend"><li><span class="pin">A</span> OUT 8 on the back of the X32: feeds speaker 1</li><li><span class="pin">B</span> IN 1 and IN 2 on the back of the X32, the two rightmost on the top row: DI box into 1, wireless mic into 2</li><li><span class="pin">C</span> X32 power switch and inlet</li><li><span class="pin">D</span> Speaker A IN (mic/line combo jack)</li><li><span class="pin">E</span> Speaker A thru, directly below A IN: passes the signal on to speaker 2</li><li><span class="pin">F</span> Speaker MIX OUT (post gain): goes to the sub</li><li><span class="pin">G</span> Speaker power inlet</li><li><span class="pin">H</span> Sub LINE IN A and B: speaker 1 into A, speaker 2 into B</li><li><span class="pin">I</span> Sub power inlet and POWER ON switch</li><li><span class="pin">J</span> CH 1-8 layer on the X32: faders 1 (DI) and 2 (wireless)</li><li><span class="pin">K</span> Main fader</li></ul>
+        <figcaption>Outdoor rig. X32 Compact top and rear on the left, the two K12.2 speakers and the two KS112 subs on the right, with the XLR runs drawn jack to jack. Tap to enlarge.</figcaption>
+        <ul class="legend"><li><span class="pin">A</span> OUT 8 on the back of the X32: feeds speaker 1</li><li><span class="pin">B</span> IN 1 and IN 2 on the back of the X32, the two rightmost on the top row: DI box into 1, wireless mic into 2</li><li><span class="pin">C</span> X32 power switch and inlet</li><li><span class="pin">D</span> Speaker A IN (mic/line combo jack), on both speakers</li><li><span class="pin">E</span> Speaker 1&#x27;s A thru, directly below A IN: passes the signal on to speaker 2</li><li><span class="pin">F</span> MIX OUT (post gain) on each speaker: goes to that speaker&#x27;s sub</li><li><span class="pin">G</span> Speaker power inlets</li><li><span class="pin">H</span> Sub LINE IN A, on both subs</li><li><span class="pin">I</span> Sub power inlets and POWER ON switches</li><li><span class="pin">J</span> CH 1-8 layer on the X32: Acoustic (DI) on fader 1, Vocals (wireless mic) on fader 2</li><li><span class="pin">K</span> Main fader</li></ul>
       </figure>
       
       <article class="item">
         <h3>Power</h3>
         <div class="meta"><span><b>When</b> Setup</span><span><b>Who</b> Sub engineer</span></div>
-        <ol class="steps"><li>The cable bag is stowed inside the rolling rack. The mixer sits on top of that rack.</li><li>Run power to both speakers <span class="pin">G</span>, the sub <span class="pin">I</span>, and the console <span class="pin">C</span>.</li><li>Plug in the wireless unit in the rack as well.</li></ol>
+        <ol class="steps"><li>The cable bag is stowed inside the rolling rack. The mixer sits on top of that rack.</li><li>Run power to both speakers <span class="pin">G</span>, both subs <span class="pin">I</span>, and the console <span class="pin">C</span>.</li><li>Plug in the wireless unit in the rack as well.</li></ol>
         
       </article>
       <article class="item">
-        <h3>Speakers and sub</h3>
+        <h3>Speakers and subs</h3>
         <div class="meta"><span><b>When</b> Setup</span><span><b>Who</b> Sub engineer</span></div>
-        <ol class="steps"><li>XLR from <b>OUT 8</b> <span class="pin">A</span> on the back of the X32 to <b>A IN</b> <span class="pin">D</span> on the back of speaker 1.</li><li>XLR from the output directly below A IN on speaker 1, the thru <span class="pin">E</span>, to <b>A IN</b> <span class="pin">D</span> on speaker 2.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 1 to the sub's <b>LINE IN A</b> <span class="pin">H</span>.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 2 to the sub's <b>LINE IN B</b> <span class="pin">H</span>.</li></ol>
+        <ol class="steps"><li>XLR from <b>OUT 8</b> <span class="pin">A</span> on the back of the X32 to <b>A IN</b> <span class="pin">D</span> on the back of speaker 1.</li><li>XLR from the output directly below A IN on speaker 1, the thru <span class="pin">E</span>, to <b>A IN</b> <span class="pin">D</span> on speaker 2.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 1 to sub 1's <b>LINE IN A</b> <span class="pin">H</span>.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 2 to sub 2's <b>LINE IN A</b> <span class="pin">H</span>.</li></ol>
         
       </article>
       <article class="item">
         <h3>Wireless mic and DI</h3>
         <div class="meta"><span><b>When</b> Setup</span><span><b>Who</b> Sub engineer</span></div>
-        <ol class="steps"><li>Open the drawer in the rack. It holds the wireless microphone and a DI box.</li><li>Connect the DI box to <b>IN 1</b> <span class="pin">B</span> on the back of the mixer.</li><li>The wireless mic's cable is coiled inside the case and is already plugged into the back of the wireless unit. Plug its other end into <b>IN 2</b> <span class="pin">B</span>.</li><li>On the mixer, the <b>CH 1-8</b> layer <span class="pin">J</span> puts the DI on fader 1 and the wireless mic on fader 2. Bring up the main fader <span class="pin">K</span> to hear them.</li></ol>
+        <ol class="steps"><li>Open the drawer in the rack. It holds the wireless microphone and a DI box.</li><li>Connect the DI box to <b>IN 1</b> <span class="pin">B</span> on the back of the mixer.</li><li>The wireless mic's cable is coiled inside the case and is already plugged into the back of the wireless unit. Plug its other end into <b>IN 2</b> <span class="pin">B</span>.</li><li>On the mixer, the <b>CH 1-8</b> layer <span class="pin">J</span> puts <b>Acoustic</b> (the DI) on fader 1 and <b>Vocals</b> (the wireless mic) on fader 2. Bring up the main fader <span class="pin">K</span> to hear them.</li></ol>
         
       </article>
     </section>
@@ -4254,21 +4468,21 @@ nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-
         <div class="poster-where">Patio</div>
       </div>
       <h2 class="poster-title">OUTDOOR PA</h2>
-      <div class="poster-lead">X32 Compact, two K12.2 speakers, KS112 sub</div>
+      <div class="poster-lead">X32 Compact, two K12.2 speakers, two KS112 subs</div>
       
         <div class="pblock">
           <h3>Power</h3>
-          <ol class="steps"><li>The cable bag is stowed inside the rolling rack. The mixer sits on top of that rack.</li><li>Run power to both speakers <span class="pin">G</span>, the sub <span class="pin">I</span>, and the console <span class="pin">C</span>.</li><li>Plug in the wireless unit in the rack as well.</li></ol>
+          <ol class="steps"><li>The cable bag is stowed inside the rolling rack. The mixer sits on top of that rack.</li><li>Run power to both speakers <span class="pin">G</span>, both subs <span class="pin">I</span>, and the console <span class="pin">C</span>.</li><li>Plug in the wireless unit in the rack as well.</li></ol>
           
         </div>
         <div class="pblock">
-          <h3>Speakers and sub</h3>
-          <ol class="steps"><li>XLR from <b>OUT 8</b> <span class="pin">A</span> on the back of the X32 to <b>A IN</b> <span class="pin">D</span> on the back of speaker 1.</li><li>XLR from the output directly below A IN on speaker 1, the thru <span class="pin">E</span>, to <b>A IN</b> <span class="pin">D</span> on speaker 2.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 1 to the sub's <b>LINE IN A</b> <span class="pin">H</span>.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 2 to the sub's <b>LINE IN B</b> <span class="pin">H</span>.</li></ol>
+          <h3>Speakers and subs</h3>
+          <ol class="steps"><li>XLR from <b>OUT 8</b> <span class="pin">A</span> on the back of the X32 to <b>A IN</b> <span class="pin">D</span> on the back of speaker 1.</li><li>XLR from the output directly below A IN on speaker 1, the thru <span class="pin">E</span>, to <b>A IN</b> <span class="pin">D</span> on speaker 2.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 1 to sub 1's <b>LINE IN A</b> <span class="pin">H</span>.</li><li>XLR from <b>MIX OUT</b> <span class="pin">F</span> on speaker 2 to sub 2's <b>LINE IN A</b> <span class="pin">H</span>.</li></ol>
           
         </div>
         <div class="pblock">
           <h3>Wireless mic and DI</h3>
-          <ol class="steps"><li>Open the drawer in the rack. It holds the wireless microphone and a DI box.</li><li>Connect the DI box to <b>IN 1</b> <span class="pin">B</span> on the back of the mixer.</li><li>The wireless mic's cable is coiled inside the case and is already plugged into the back of the wireless unit. Plug its other end into <b>IN 2</b> <span class="pin">B</span>.</li><li>On the mixer, the <b>CH 1-8</b> layer <span class="pin">J</span> puts the DI on fader 1 and the wireless mic on fader 2. Bring up the main fader <span class="pin">K</span> to hear them.</li></ol>
+          <ol class="steps"><li>Open the drawer in the rack. It holds the wireless microphone and a DI box.</li><li>Connect the DI box to <b>IN 1</b> <span class="pin">B</span> on the back of the mixer.</li><li>The wireless mic's cable is coiled inside the case and is already plugged into the back of the wireless unit. Plug its other end into <b>IN 2</b> <span class="pin">B</span>.</li><li>On the mixer, the <b>CH 1-8</b> layer <span class="pin">J</span> puts <b>Acoustic</b> (the DI) on fader 1 and <b>Vocals</b> (the wireless mic) on fader 2. Bring up the main fader <span class="pin">K</span> to hear them.</li></ol>
           
         </div>
       <div class="poster-foot">
