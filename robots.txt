@@ -5,4 +5,7 @@ Allow: /
 Disallow: /mobile-preview.html
 Disallow: /terminal-experiment.html
 
+# Unlisted staff pages
+Disallow: /southern-social/
+
 Sitemap: https://jarretttthompson.github.io/sitemap.xml
