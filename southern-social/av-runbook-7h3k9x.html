@@ -10,74 +10,118 @@
 @font-face { font-family: "Vulf Mono"; src: url("../fonts/VulfMono-Regular.woff2") format("woff2"), url("../fonts/VulfMono-Regular.otf") format("opentype"); font-display: swap; }
 @font-face { font-family: "Vulf Sans"; src: url("../fonts/VulfSans-Regular.woff2") format("woff2"), url("../fonts/VulfSans-Regular.otf") format("opentype"); font-display: swap; }
 
+/* ---- tokens: mirrored from the site's terminal-site.css ---- */
 :root {
-  --bg: #0d0517;
-  --panel: #1a0b2e;
-  --panel-2: #22103b;
-  --line: #3a2159;
-  --text: #eedcff;
-  --muted: #b39cd6;
-  --cyan: #00ff9f;
-  --pink: #ff41af;
-  --amber: #ffc857;
-  --mono: "Vulf Mono", ui-monospace, Menlo, monospace;
-  --sans: "Vulf Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+  --neon-cyan: #00ff9f; --neon-pink: #ff41af; --deep-purple: #0d0517; --soft-purple: #1a0b2e;
+  --panel-band-1: #2d1b4d; --panel-band-2: #251540; --panel-band-3: #1b0b2f; --panel-band-4: #120422;
+  --text: #eedcff; --muted: #b39cd6; --amber: #ffc857;
+  --mono: "Vulf Mono", ui-monospace, Menlo, monospace; --sans: "Vulf Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+  --xp-shine: rgba(255,255,255,.2); --xp-shine-soft: rgba(255,255,255,.08); --xp-shadow-in: rgba(0,0,0,.55); --xp-shadow-soft: rgba(0,0,0,.35);
+  --xp-taskbar: linear-gradient(180deg, rgba(40,24,62,.9) 0%, rgba(12,6,24,.92) 100%);
+  --xp-nav-rail: linear-gradient(180deg, rgba(32,18,52,.75) 0%, rgba(0,0,0,.58) 100%);
+  --shell-radius-tl: 20px; --shell-radius-tr: 20px; --shell-radius-br: 16px; --shell-radius-bl: 16px;
+  --shell-frame-width: 4px; --shell-frame-color: rgba(0,255,159,.88);
+  --shell-frame-glow-a: rgba(0,255,159,.55); --shell-frame-glow-b: rgba(0,255,159,.32); --shell-frame-glow-c: rgba(0,255,159,.16); --shell-frame-pink-halo: rgba(255,65,175,.22);
+  --ui-border-width: 1px; --ui-border-color: rgba(0,255,159,.42); --ui-border-color-strong: rgba(0,255,159,.55);
+  --ui-border-glow-soft: rgba(0,255,159,.1); --ui-border-glow: rgba(0,255,159,.18);
+  --ui-border-pink: rgba(255,65,175,.32); --ui-border-pink-glow: rgba(255,65,175,.14);
 }
 * { box-sizing: border-box; }
-html { background: var(--bg); }
-body {
-  margin: 0; color: var(--text); background: var(--bg);
-  font-family: var(--sans); font-size: 17px; line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-a { color: var(--cyan); }
+html { background: var(--deep-purple); }
+body { margin: 0; min-height: 100vh; background: var(--deep-purple); color: var(--text); font-family: var(--sans); font-size: 17px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden; padding: 18px 10px 40px; }
+/* rotating blurred background, as on the site */
+body::before { content: ""; position: fixed; top: 50%; left: 50%; width: 320vw; height: 320vh; background: url("../images/background.png") center / cover no-repeat;
+  transform: translate(-50%,-50%); z-index: -2; pointer-events: none; animation: rot 300s linear infinite; filter: blur(5px); box-shadow: inset 0 0 180px 120px rgba(0,0,0,.82); }
+@keyframes rot { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+.crt-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 10;
+  background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,.1) 50%), linear-gradient(90deg, rgba(255,0,0,.02), rgba(0,255,0,.01), rgba(0,0,255,.02));
+  background-size: 100% 3px, 3px 100%; }
+a { color: var(--neon-cyan); }
 b { color: #fff; font-weight: 600; }
-.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 80px; }
 
-/* masthead */
-.mast { padding: 40px 0 24px; border-bottom: 1px solid var(--line); }
-.mast .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--pink); }
-.mast h1 { font-family: var(--mono); font-size: clamp(26px, 5vw, 38px); line-height: 1.1; margin: 8px 0 10px; color: var(--cyan); text-shadow: 0 0 18px rgba(0,255,159,.35); }
+/* ---- the window ---- */
+.site-main-window { position: relative; z-index: 20; width: 100%; max-width: 72rem; margin: 0 auto; display: flex; flex-direction: column; overflow: visible;
+  border-radius: var(--shell-radius-tl) var(--shell-radius-tr) var(--shell-radius-br) var(--shell-radius-bl);
+  background: linear-gradient(180deg, var(--panel-band-1) 0%, var(--panel-band-1) 25%, var(--panel-band-2) 25%, var(--panel-band-2) 50%, var(--panel-band-3) 50%, var(--panel-band-3) 75%, var(--panel-band-4) 75%, var(--panel-band-4) 100%);
+  box-shadow: inset 0 1px 0 var(--xp-shine), inset 0 -1px 0 rgba(0,0,0,.4), inset 0 0 32px rgba(255,65,175,.06); }
+.site-main-window::after { content: ""; position: absolute; inset: 0; z-index: 60; pointer-events: none; border-radius: inherit;
+  border: var(--shell-frame-width) solid var(--shell-frame-color);
+  box-shadow: 0 0 0 1px rgba(0,255,159,.35), 0 0 20px var(--shell-frame-glow-a), 0 0 44px var(--shell-frame-glow-b), 0 0 78px var(--shell-frame-glow-c), 0 0 56px var(--shell-frame-pink-halo), 0 12px 36px rgba(0,0,0,.48); }
+.lofi-static::before { content: ""; position: absolute; inset: 0; opacity: .035; pointer-events: none; z-index: 1; border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* title bar: photo + gradient, wordmark on the right (links home), plain link on the left */
+.site-shell-header { position: relative; z-index: 22; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; isolation: isolate; overflow: hidden;
+  border-top-left-radius: var(--shell-radius-tl); border-top-right-radius: var(--shell-radius-tr);
+  background: linear-gradient(180deg, rgba(2,0,8,.22) 0%, rgba(2,0,8,.42) 100%); border-bottom: 1px solid rgba(0,0,0,.45);
+  box-shadow: inset 0 1px 0 var(--xp-shine), inset 0 -1px 0 rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.25); }
+.site-shell-header::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; opacity: .96; filter: saturate(1.06) contrast(1.04);
+  background-image: linear-gradient(150deg, rgba(0,0,0,.74) 0%, rgba(18,6,32,.56) 42%, rgba(0,0,0,.72) 100%), url("../optimized/bg-images/bg-22.webp");
+  background-size: cover, 118% auto; background-position: center, 50% 50%; background-repeat: no-repeat; }
+.site-shell-header > * { position: relative; z-index: 1; }
+.home-link { font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: lowercase; text-decoration: none; color: var(--neon-cyan); white-space: nowrap;
+  padding: .45rem .85rem; border-radius: 999px; border: var(--ui-border-width) solid var(--ui-border-color);
+  background: linear-gradient(180deg, rgba(0,255,159,.14) 0%, rgba(0,0,0,.55) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 -1px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.35), 0 0 10px var(--ui-border-glow-soft); }
+.home-link:hover { filter: brightness(1.12); border-color: var(--ui-border-color-strong); box-shadow: 0 0 16px var(--ui-border-glow), 0 0 28px var(--ui-border-glow-soft); }
+.site-header-logo-wrap { margin-left: auto; display: flex; align-items: center; text-decoration: none;
+  filter: drop-shadow(0 0 4px rgba(255,65,175,.5)) drop-shadow(0 0 14px rgba(255,65,175,.28)); }
+.site-header-logo { position: relative; display: block; width: min(58vw, 280px); aspect-ratio: 319 / 86; max-height: 44px; background-color: var(--neon-pink);
+  -webkit-mask: url("../images/logo-jarrett-name.png") center right / contain no-repeat; mask: url("../images/logo-jarrett-name.png") center right / contain no-repeat; -webkit-mask-mode: alpha; mask-mode: alpha; }
+.site-header-logo::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 0%, transparent 40%, rgba(255,255,255,.5) 50%, rgba(255,240,252,.85) 52%, rgba(255,255,255,.45) 54%, transparent 62%, transparent 100%);
+  background-size: 240% 100%; background-position: 100% 50%;
+  -webkit-mask: url("../images/logo-jarrett-name.png") center right / contain no-repeat; mask: url("../images/logo-jarrett-name.png") center right / contain no-repeat; animation: sweep 2.75s linear infinite; }
+@keyframes sweep { 0% { background-position: 120% 50%; } 100% { background-position: -120% 50%; } }
+@media (prefers-reduced-motion: reduce) { .site-header-logo::after { animation: none; opacity: 0; } }
+
+/* nav rail with lowercase pills, sticky */
+nav.nav-boxes { position: sticky; top: 0; z-index: 22; display: flex; flex-wrap: wrap; gap: .45rem .65rem; align-items: center; width: 100%; padding: .55rem .85rem;
+  background: var(--xp-nav-rail); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,.45);
+  box-shadow: inset 0 1px 0 var(--xp-shine-soft), inset 0 -1px 0 rgba(0,0,0,.35); }
+nav.nav-boxes a, nav.nav-boxes button { font-family: var(--mono); font-size: clamp(9px, 1.8vw, 11px); font-weight: 700; text-transform: lowercase; letter-spacing: .06em; padding: .4rem .75rem; border-radius: 999px;
+  border: var(--ui-border-width) solid var(--ui-border-color); color: var(--neon-cyan); text-decoration: none; white-space: nowrap; cursor: pointer;
+  background: linear-gradient(180deg, rgba(0,255,159,.14) 0%, rgba(0,0,0,.55) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), inset 0 -1px 0 rgba(0,0,0,.4), 0 2px 4px rgba(0,0,0,.35), 0 0 10px var(--ui-border-glow-soft); transition: filter .15s, box-shadow .15s, border-color .15s; }
+nav.nav-boxes a:hover, nav.nav-boxes button:hover { filter: brightness(1.12); border-color: var(--ui-border-color-strong); box-shadow: inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(0,0,0,.35), 0 0 16px var(--ui-border-glow), 0 0 28px var(--ui-border-glow-soft); }
+nav.nav-boxes button.print { margin-left: auto; color: var(--neon-pink); border-color: var(--ui-border-pink); background: linear-gradient(180deg, rgba(255,65,175,.14) 0%, rgba(0,0,0,.55) 100%); box-shadow: 0 0 10px var(--ui-border-pink-glow); }
+
+/* content column */
+.site-shell-content { position: relative; z-index: 2; padding: 10px 16px 40px; }
+.wrap { max-width: 820px; margin: 0 auto; }
+.mast { padding: 30px 0 22px; }
+.mast .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--neon-pink); }
+.mast h1 { font-family: var(--mono); font-size: clamp(26px, 5vw, 38px); line-height: 1.1; margin: 8px 0 10px; color: var(--neon-cyan); text-shadow: 0 0 18px rgba(0,255,159,.35); }
 .mast p { margin: 0; color: var(--muted); }
 .mast .updated { font-family: var(--mono); font-size: 12px; margin-top: 10px; color: var(--muted); }
 
-/* jump nav */
-.jump { display: flex; flex-wrap: wrap; gap: 8px; padding: 18px 0; position: sticky; top: 0; background: linear-gradient(var(--bg) 85%, transparent); z-index: 5; }
-.jump a { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
-  border: 1px solid var(--line); padding: 7px 11px; border-radius: 6px; color: var(--text); background: var(--panel); }
-.jump a:hover { border-color: var(--cyan); color: var(--cyan); }
-.jump .print { margin-left: auto; border-color: var(--pink); color: var(--pink); cursor: pointer; background: transparent; font: inherit; }
-
-/* locations */
-.location { margin-top: 40px; scroll-margin-top: 70px; }
-.loc-head { border-left: 4px solid var(--cyan); padding-left: 14px; margin-bottom: 14px; }
-.loc-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--pink); }
+/* neon inner panels, as on the site */
+.neon-panel { position: relative; z-index: 2; background: linear-gradient(180deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,.52) 100%); border-radius: 12px; border: var(--ui-border-width) solid var(--ui-border-color-strong);
+  box-shadow: 0 4px 14px var(--xp-shadow-soft), 0 0 12px var(--ui-border-glow-soft), 0 0 28px var(--ui-border-glow), inset 0 1px 0 var(--xp-shine-soft), inset 0 -1px 0 var(--xp-shadow-in), inset 0 0 18px rgba(0,0,0,.2); }
+.neon-panel::after { content: ""; position: absolute; inset: -3px; border-radius: inherit; padding: 3px; background: linear-gradient(135deg, rgba(0,255,159,.25), rgba(255,65,175,.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; filter: blur(3px); z-index: -1; }
+.location { margin: 26px 0; padding: 22px 22px 10px; scroll-margin-top: 70px; }
+.loc-head { border-left: 4px solid var(--neon-cyan); padding-left: 14px; margin-bottom: 14px; }
+.loc-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--neon-pink); }
 .loc-head h2 { font-family: var(--mono); font-size: 26px; margin: 2px 0 2px; color: #fff; }
 .loc-device { color: var(--muted); font-family: var(--mono); font-size: 13px; }
 
-.item { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 14px 0; }
-.item h3 { margin: 0 0 6px; font-family: var(--mono); font-size: 18px; color: var(--cyan); }
+.item { background: linear-gradient(180deg, rgba(26,11,46,.9) 0%, rgba(13,5,23,.9) 100%); border: var(--ui-border-width) solid var(--ui-border-color); border-radius: 10px; padding: 18px 20px; margin: 14px 0;
+  box-shadow: inset 0 1px 0 var(--xp-shine-soft), inset 0 -1px 0 rgba(0,0,0,.4), 0 0 10px var(--ui-border-glow-soft); }
+.item h3 { margin: 0 0 6px; font-family: var(--mono); font-size: 18px; color: var(--neon-cyan); }
 .meta { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-bottom: 10px; }
 .meta b { color: var(--muted); font-weight: 400; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-right: 4px; }
 .steps { margin: 0; padding-left: 0; counter-reset: s; list-style: none; }
 .steps li { position: relative; padding: 8px 0 8px 44px; border-top: 1px solid rgba(255,255,255,.06); counter-increment: s; }
 .steps li:first-child { border-top: 0; }
-.steps li::before { content: counter(s); position: absolute; left: 0; top: 7px; width: 30px; height: 30px; border-radius: 50%;
-  display: grid; place-items: center; font-family: var(--mono); font-size: 14px; color: var(--bg); background: var(--cyan); }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 7px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 14px; color: var(--deep-purple);
+  background: linear-gradient(180deg, #4affc4 0%, var(--neon-cyan) 42%, #00b87a 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 0 10px var(--ui-border-glow); }
 .gotchas { margin-top: 14px; border: 1px dashed var(--amber); border-radius: 8px; padding: 10px 14px; background: rgba(255,200,87,.06); }
 .gotchas .label { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
 .gotchas ul { margin: 0; padding-left: 18px; }
 .gotchas li { margin: 4px 0; }
-
-.photo { margin: 16px 0 0; }
-.photo img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); display: block; }
-.diagram { margin: 18px 0 0; color: var(--cyan); }
-.diagram svg { width: 100%; height: auto; display: block; }
-.diagram figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 6px; }
-.poster .diagram { color: #111; }
-.poster .diagram figcaption { color: #555; }
-.photo figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 6px; }
-
 .pin { display: inline-flex; align-items: center; justify-content: center; width: 1.5em; height: 1.5em; border-radius: 50%; background: var(--amber); color: #0b0b0d;
   font-family: var(--mono); font-weight: 700; font-size: .78em; line-height: 1; vertical-align: middle; position: relative; top: -.1em; margin: 0 .12em; }
 .console { margin: 6px 0 22px; cursor: zoom-in; }
@@ -85,18 +129,22 @@ b { color: #fff; font-weight: 600; }
 .console figcaption { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 8px; }
 .legend { list-style: none; padding: 0; margin: 10px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 6px 16px; font-size: 14px; }
 .legend li { display: flex; align-items: center; gap: 8px; }
-@media (min-width: 1100px) { .console { width: 1040px; margin-left: calc((760px - 1040px) / 2); } }
 #zoom { display: none; position: fixed; inset: 0; background: rgba(5,2,10,.96); z-index: 50; overflow: auto; cursor: zoom-out; padding: 24px; }
 #zoom.on { display: block; }
 #zoom svg { width: max(100%, 1800px); height: auto; display: block; }
-.poster .pin { background: #111; color: #fff; }
 
-/* poster previews on screen */
-.posters-head { margin-top: 60px; border-top: 1px solid var(--line); padding-top: 30px; }
-.posters-head h2 { font-family: var(--mono); color: var(--pink); font-size: 22px; margin: 0 0 6px; }
+/* footer taskbar */
+.site-shell-footer { position: relative; z-index: 22; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 16px; flex-wrap: wrap;
+  border-bottom-left-radius: var(--shell-radius-bl); border-bottom-right-radius: var(--shell-radius-br); background: var(--xp-taskbar); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid var(--xp-shine-soft); box-shadow: inset 0 1px 0 var(--xp-shine), inset 0 -1px 0 rgba(0,0,0,.45), 0 -3px 14px rgba(0,0,0,.2); }
+.footer-line { font-family: var(--mono); font-size: 9px; letter-spacing: .12em; color: rgba(0,255,159,.55); }
+.footer-url { font-family: var(--mono); font-size: 9px; color: rgba(0,255,159,.45); text-decoration: none; }
+
+/* posters (screen preview) */
+.posters-head { margin-top: 40px; border-top: 1px solid rgba(0,255,159,.2); padding-top: 30px; }
+.posters-head h2 { font-family: var(--mono); color: var(--neon-pink); font-size: 22px; margin: 0 0 6px; }
 .posters-head p { color: var(--muted); margin: 0; }
-.poster { background: #fff; color: #111; margin: 24px 0; padding: 36px 40px; border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,.5);
-  font-family: var(--sans); aspect-ratio: 8.5 / 11; overflow: hidden; display: flex; flex-direction: column; }
+.poster { background: #fff; color: #111; margin: 24px 0; padding: 36px 40px; border-radius: 4px; box-shadow: 0 10px 40px rgba(0,0,0,.5); font-family: var(--sans); aspect-ratio: 8.5 / 11; overflow: hidden; display: flex; flex-direction: column; }
 .poster b { color: #000; }
 .poster-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: #555; border-bottom: 3px solid #111; padding-bottom: 8px; }
 .poster-title { font-family: var(--mono); font-size: 44px; line-height: 1; margin: 18px 0 4px; letter-spacing: .02em; }
@@ -104,13 +152,18 @@ b { color: #fff; font-weight: 600; }
 .pblock { margin-top: 14px; }
 .pblock h3 { font-family: var(--mono); font-size: 18px; margin: 0 0 6px; text-transform: uppercase; letter-spacing: .04em; }
 .poster .steps li { border-top-color: #ddd; font-size: 19px; padding: 7px 0 7px 46px; }
-.poster .steps li::before { background: #111; color: #fff; }
+.poster .steps li::before { background: #111; color: #fff; box-shadow: none; }
 .poster .gotchas { border-color: #111; background: #f3f3f3; }
 .poster .gotchas .label { color: #111; }
 .poster .gotchas li { font-size: 16px; }
+.poster .pin { background: #111; color: #fff; }
+.poster a { color: #111; }
 .poster-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid #ccc; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: #666; }
 
+@media (min-width: 1100px) { .console { width: 1040px; margin-left: calc((820px - 1040px) / 2); } }
 @media (max-width: 600px) {
+  body { padding: 10px 6px 30px; }
+  .location { padding: 16px 12px 6px; }
   .poster { padding: 22px 18px; aspect-ratio: auto; }
   .poster-title { font-size: 30px; }
   .poster .steps li { font-size: 16px; }
@@ -119,33 +172,39 @@ b { color: #fff; font-weight: 600; }
 /* print: posters only, one per sheet */
 @media print {
   @page { size: letter; margin: 0.5in; }
-  html, body { background: #fff; color: #000; }
-  .wrap { max-width: none; padding: 0; }
-  .mast, .jump, .runbook, .posters-head, #zoom { display: none !important; }
+  html, body { background: #fff; color: #000; padding: 0; }
+  body::before, .crt-overlay, .site-shell-header, nav.nav-boxes, .site-shell-footer, .mast, .runbook, .posters-head, #zoom { display: none !important; }
+  .site-main-window { background: none; box-shadow: none; max-width: none; }
+  .site-main-window::after, .lofi-static::before { display: none; }
+  .site-shell-content, .wrap { max-width: none; padding: 0; }
   .poster { box-shadow: none; border-radius: 0; margin: 0; padding: 0; aspect-ratio: auto; height: 10in; page-break-after: always; break-after: page; }
   .poster:last-child { page-break-after: auto; break-after: auto; }
-  .poster .steps li::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .poster .gotchas { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .poster .steps li::before, .poster .gotchas, .poster .pin { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="mast">
-    <div class="kicker">Staff only · unlisted</div>
-    <h1>Southern Social AV Setup</h1>
-    <p>Sound, lights, and haze. Staff copy. Not linked from the public site.</p>
-    <div class="updated">Updated 2026-10-22</div>
+<div class="crt-overlay" aria-hidden="true"></div>
+<main class="site-main-window lofi-static">
+  <header class="site-shell-header">
+    <a class="home-link" href="https://thejrummer.art/">← thejrummer.art</a>
+    <a class="site-header-logo-wrap" href="https://thejrummer.art/" aria-label="thejrummer.art, Jarrett T. Thompson"><span class="site-header-logo"></span></a>
   </header>
-
-  <nav class="jump">
+  <nav class="nav-boxes" aria-label="Sections">
     <a href="#lighting-console">Lighting Console</a><a href="#audio-console">Audio Console</a><a href="#tv-wall">TV Wall</a>
-    <button class="print" onclick="window.print()">Print posters</button>
+    <button class="print" onclick="window.print()">print posters</button>
   </nav>
-
-  <main class="runbook">
-    
-    <section class="location" id="lighting-console">
+  <div class="site-shell-content">
+    <div class="wrap">
+      <header class="mast">
+        <div class="kicker">Staff guide</div>
+        <h1>Southern Social AV Setup</h1>
+        <p>Sound, lights, haze, and the TV wall.</p>
+        <div class="updated">Updated 2026-10-22</div>
+      </header>
+      <div class="runbook">
+        
+    <section class="location neon-panel" id="lighting-console">
       <header class="loc-head">
         <div class="loc-kicker">Booth</div>
         <h2>Lighting Console</h2>
@@ -1522,15 +1581,11 @@ b { color: #fff; font-weight: 600; }
         <div class="meta"><span><b>When</b> Arrival / opening</span><span><b>Who</b> Anyone opening</span></div>
         <ol class="steps"><li>If the console is off, turn it on.</li><li>Load the show file <b>Southern Social Prime</b>.</li><li>Check the Bank display <span class="pin">A</span> reads <b>Bank 1</b>. If it does not, use the ∨ ∧ keys under it.</li><li>Push up all ten faders in Bank 1.</li></ol>
         <div class="gotchas"><div class="label">Watch out</div><ul><li>Fader 10 <span class="pin">B</span> is the <b>Pre-Show Blue</b> override. While it is up the lights are locked to blue and the color cannot be changed. Pull fader 10 down to release the colors.</li><li>To pick a static color, pull fader 10 <span class="pin">B</span> down, then press one of the color buttons <span class="pin">C</span> on the <b>Playback Buttons</b> page. Rows are fixture groups, columns are colors.</li></ul></div>
-        
-        
       </article>
       <article class="item">
         <h3>Hazers on at 9 PM</h3>
         <div class="meta"><span><b>When</b> 9:00 PM, one hour before show time</span><span><b>Who</b> Sub engineer or whoever is at the booth</span></div>
         <ol class="steps"><li>At 9 PM, open the <b>Playback Buttons</b> page on the touchscreen.</li><li>Press <b>Haze 5%</b> <span class="pin">D</span>. It reads 100% once it is running.</li></ol>
-        
-        
         
       </article>
       <article class="item">
@@ -1538,11 +1593,9 @@ b { color: #fff; font-weight: 600; }
         <div class="meta"><span><b>When</b> End of night</span><span><b>Who</b> Anyone closing</span></div>
         <ol class="steps"><li>Wait until the bar's work lights have been turned back on.</li><li>On the far-left column of the console, press <b>Snap</b> <span class="pin">E</span>.</li><li>Then press <b>Rel</b> <span class="pin">E</span>, right next to it.</li></ol>
         
-        
-        
       </article>
     </section>
-    <section class="location" id="audio-console">
+    <section class="location neon-panel" id="audio-console">
       <header class="loc-head">
         <div class="loc-kicker">Booth</div>
         <h2>Audio Console</h2>
@@ -2816,19 +2869,15 @@ b { color: #fff; font-weight: 600; }
         <div class="meta"><span><b>When</b> Open to close, whenever there is no act on</span><span><b>Who</b> Anyone at the booth</span></div>
         <ol class="steps"><li>Press <b>AUX IN USB</b> <span class="pin">A</span> in the Fader Layer block at the top right.</li><li>House music is the fourth fader from the left, labelled <b>iPad</b> <span class="pin">B</span>.</li><li>Make sure its <b>MUTE</b> button <span class="pin">C</span> is not lit, then set the level with the fader.</li></ol>
         
-        
-        
       </article>
       <article class="item">
         <h3>Game days: switching between TV and music</h3>
         <div class="meta"><span><b>When</b> Game days, at kickoff and every commercial break</span><span><b>Who</b> Whoever is assigned to the booth</span></div>
         <ol class="steps"><li>Make sure the left faders are on the <b>AUX IN USB</b> layer <span class="pin">A</span>. iPad <span class="pin">B</span> and Tv <span class="pin">D</span> sit side by side, fourth and fifth from the left.</li><li>Game on: pull the iPad fader <span class="pin">B</span> all the way down, then push the Tv fader <span class="pin">D</span> up to its level.</li><li>Commercials: pull the Tv fader <span class="pin">D</span> all the way down, then push the iPad fader <span class="pin">B</span> back up to its level.</li><li>Always bring the one that is playing down before bringing the other one up.</li></ol>
         <div class="gotchas"><div class="label">Watch out</div><ul><li>Only one of the two should be up at a time, or the game and the music will play over each other.</li><li>Both MUTE buttons should stay unlit. If a fader is up and nothing is coming out, check its MUTE first.</li></ul></div>
-        
-        
       </article>
     </section>
-    <section class="location" id="tv-wall">
+    <section class="location neon-panel" id="tv-wall">
       <header class="loc-head">
         <div class="loc-kicker">Booth and TV wall</div>
         <h2>TV Wall</h2>
@@ -3137,31 +3186,23 @@ b { color: #fff; font-weight: 600; }
         <div class="meta"><span><b>When</b> Game days</span><span><b>Who</b> Anyone</span></div>
         <ol class="steps"><li>Press <b>2</b> <span class="pin">F</span> on the VIDEO WALL INPUTS remote. Apple TV is <b>3</b> <span class="pin">H</span>.</li></ol>
         
-        
-        
       </article>
       <article class="item">
         <h3>Band graphics from a computer in the booth (input 1)</h3>
         <div class="meta"><span><b>When</b> Before the show</span><span><b>Who</b> Sub engineer</span></div>
         <ol class="steps"><li>Plug the band's graphics computer (PC or Mac) into <b>HDMI IN 1</b> <span class="pin">A</span> on the ATEM.</li><li>Press the big <b>1</b> button <span class="pin">C</span> on the ATEM so it lights red. That puts input 1 on the wall.</li><li>Check that <b>FTB</b> <span class="pin">E</span> is not flashing. If it is, the wall is faded to black: press FTB once to fade back in.</li><li>Press <b>4</b> <span class="pin">G</span> on the VIDEO WALL INPUTS remote.</li></ol>
         <div class="gotchas"><div class="label">Watch out</div><ul><li>If the wall shows nothing, check in this order: remote on 4, the right program button lit red on the ATEM, FTB not flashing, HDMI seated.</li></ul></div>
-        
-        
       </article>
       <article class="item">
         <h3>Band graphics from a computer on stage (input 2)</h3>
         <div class="meta"><span><b>When</b> Before the show</span><span><b>Who</b> Sub engineer</span></div>
         <ol class="steps"><li>Get the <b>OREI sender</b> from the basket behind the light board.</li><li>On stage, find the Ethernet cable dangling behind the <b>bottom-right TV</b> and plug it into the sender.</li><li>Plug the band's computer into the sender with an HDMI cable.</li><li>On the ATEM, press the big <b>2</b> button <span class="pin">D</span> so it lights red. The stage feed arrives on <b>HDMI IN 2</b> <span class="pin">B</span>.</li><li>Check that <b>FTB</b> <span class="pin">E</span> is not flashing, and that the remote is on <b>4</b> <span class="pin">G</span>.</li></ol>
         <div class="gotchas"><div class="label">Watch out</div><ul><li>Put the sender back in the basket behind the light board at the end of the night.</li></ul></div>
-        
-        
       </article>
       <article class="item">
         <h3>No graphics from the band? Use shaderBoi</h3>
         <div class="meta"><span><b>When</b> Before the show</span><span><b>Who</b> Sub engineer</span></div>
         <ol class="steps"><li>On the graphics computer, open <a href="https://thejrummer.art/shaderBoi/" target="_blank" rel="noopener">thejrummer.art/shaderBoi</a> in a browser and make it full screen.</li><li>Get a logo file from the band.</li><li>Drag and drop the logo onto the shaderBoi window.</li><li>Then follow the booth computer steps above (input 1).</li></ol>
-        
-        
         
       </article>
       <article class="item">
@@ -3169,17 +3210,14 @@ b { color: #fff; font-weight: 600; }
         <div class="meta"><span><b>When</b> Any time you swap or unplug a source</span><span><b>Who</b> Sub engineer</span></div>
         <ol class="steps"><li>Press <b>FTB</b> <span class="pin">E</span>. It flashes while the wall is black.</li><li>Make the change: swap the HDMI, switch program inputs, or set up the next computer.</li><li>Press <b>FTB</b> <span class="pin">E</span> again to fade back in.</li></ol>
         <div class="gotchas"><div class="label">Watch out</div><ul><li>Never pull the HDMI out of a live source. The wall flashes and glitches. Fade to black first, every time.</li></ul></div>
-        
-        
       </article>
     </section>
-  </main>
-
-  <div class="posters-head" id="posters">
-    <h2>Posters</h2>
-    <p>One per location, printed on letter paper and posted next to the gear. Use the Print posters button above; only the posters print.</p>
-  </div>
-  
+      </div>
+      <div class="posters-head" id="posters">
+        <h2>Posters</h2>
+        <p>One per location, printed on letter paper and posted next to the gear. Use the print posters button above; only the posters print.</p>
+      </div>
+      
     <section class="poster" id="poster-lighting-console">
       <div class="poster-top">
         <div class="poster-brand">Southern Social · AV</div>
@@ -3269,7 +3307,13 @@ b { color: #fff; font-weight: 600; }
         <span>Updated 2026-10-22</span>
       </div>
     </section>
-</div>
+    </div>
+  </div>
+  <footer class="site-shell-footer">
+    <div class="footer-line">Statesboro, GA · Music &amp; AV</div>
+    <a class="footer-url" href="https://thejrummer.art/">thejrummer.art</a>
+  </footer>
+</main>
 <div id="zoom" onclick="this.classList.remove('on'); this.innerHTML=''"></div>
 <script>
 function zoomFig(fig) { const z = document.getElementById('zoom'); z.innerHTML = fig.querySelector('svg').outerHTML; z.classList.add('on'); }
