@@ -1218,6 +1218,57 @@ body.terminal-site .spotify-embed.spotify-embed--album {
   min-height: 80px;
 }
 
+/* Music: album card — cover art beside the blurb, with a purchase link (Hard Fabric) */
+body.terminal-site .album-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin: 0.5rem 0 0.25rem;
+}
+body.terminal-site .album-card--follow {
+  margin-top: 1.4rem;
+}
+body.terminal-site .album-card__cover {
+  flex: 0 0 200px;
+  display: block;
+  border: var(--ui-border-width) solid var(--ui-border-color-strong);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 12px var(--ui-border-glow-soft);
+  transition: box-shadow 0.15s ease, filter 0.15s ease;
+}
+body.terminal-site .album-card__cover:hover,
+body.terminal-site .album-card__cover:focus-visible {
+  filter: brightness(1.08);
+  box-shadow: 0 0 16px var(--ui-border-glow), 0 0 28px var(--ui-border-glow-soft);
+}
+body.terminal-site .album-card__cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body.terminal-site .album-card__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+body.terminal-site .album-card__body p {
+  margin-top: 0;
+}
+body.terminal-site .album-card__buy {
+  margin-top: 0.6rem;
+  gap: 0.4rem;
+}
+@media (max-width: 640px) {
+  body.terminal-site .album-card {
+    flex-direction: column;
+  }
+  body.terminal-site .album-card__cover {
+    flex-basis: auto;
+    width: min(100%, 240px);
+  }
+}
+
 body.terminal-site .youtube-embed {
   display: block;
   margin: 0.75rem auto;
