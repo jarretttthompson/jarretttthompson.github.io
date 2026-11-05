@@ -3015,5 +3015,57 @@
         "jpg": "optimized/images/paintings/f67326d5-d38b-484d-882d-89a24b9c33a0-t2.jpg"
       }
     ]
+  },
+  "optimized/images/paintings/IMG_2616": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_2616-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2616-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2616-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_2616-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2616-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2616-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_2616-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2616-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2616-t2.jpg"
+      }
+    ]
+  },
+  "optimized/images/paintings/IMG_2493": {
+    "sizes": "(max-width: 480px) 88vw, (max-width: 768px) 55vw, (max-width: 1200px) 38vw, 360px",
+    "tiers": [
+      {
+        "w": 360,
+        "h": 480,
+        "avif": "optimized/images/paintings/IMG_2493-t0.avif",
+        "webp": "optimized/images/paintings/IMG_2493-t0.webp",
+        "jpg": "optimized/images/paintings/IMG_2493-t0.jpg"
+      },
+      {
+        "w": 720,
+        "h": 960,
+        "avif": "optimized/images/paintings/IMG_2493-t1.avif",
+        "webp": "optimized/images/paintings/IMG_2493-t1.webp",
+        "jpg": "optimized/images/paintings/IMG_2493-t1.jpg"
+      },
+      {
+        "w": 1200,
+        "h": 1600,
+        "avif": "optimized/images/paintings/IMG_2493-t2.avif",
+        "webp": "optimized/images/paintings/IMG_2493-t2.webp",
+        "jpg": "optimized/images/paintings/IMG_2493-t2.jpg"
+      }
+    ]
   }
 }
